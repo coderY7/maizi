@@ -6,7 +6,7 @@
 		</view>
 		<swiper :duration="1000" indicator-dots class="swiper" autoplay :interval="3000">
 			<swiper-item v-for="(image, index) in productData.images" :key="index" class="swiper-item">
-				<image :src="image.url" class="w-100 h-100"></image>
+				<image :src="image.url"></image>
 			</swiper-item>
 		</swiper>
 		<scroll-view scroll-y class="content">

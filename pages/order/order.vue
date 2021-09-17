@@ -10,6 +10,7 @@
 
 <!--            //原数据-->
             <view class="page-box">
+<!--  订单状态-->
               <view class="order" >
                 <view class="top">
                   <view class="left">
@@ -18,14 +19,9 @@
                   </view>
                   <view class="right">状态</view>
                 </view>
-                <view class="item">
-                  <view v-for="(item1,index) in Cart.cart" :key="index">
-                    <scroll-view scroll-x style="height: 100%;width: 100%;">
+                <view class="item" v-for="(item1,index) in Cart.cart" :key="index">
+                  <view>
                       <image :src="item1.image" mode="aspectFill"></image>
-
-
-                    </scroll-view>
-
                   </view>
                   <view class="right" >
                     <view>共3件</view>
@@ -44,6 +40,7 @@
               </view>
               <u-loadmore :status="loadStatus[0]" bgColor="#f2f2f2"></u-loadmore>
             </view>
+
           </scroll-view>
         </swiper-item>
 <!--        页面-->
