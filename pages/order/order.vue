@@ -28,7 +28,7 @@
 
                   </view>
                   <view class="right" >
-                    <view>共{{totalNum(res.goodsList)}}件</view>
+                    <view>共3件</view>
                   </view>
                 </view>
 
@@ -39,7 +39,7 @@
 <!--                    <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>-->
 <!--                  </text>-->
                   <view>总价格:</view>
-                  <view>¥ {{ priceInt(totalPrice(res.goodsList)) }}</view>
+                  <view>¥ 60</view>
                 </view>
               </view>
               <u-loadmore :status="loadStatus[0]" bgColor="#f2f2f2"></u-loadmore>

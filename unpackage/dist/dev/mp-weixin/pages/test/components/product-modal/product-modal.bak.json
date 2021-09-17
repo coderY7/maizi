@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "modal": "/components/modal/modal",
-    "actions": "/pages/test/components/actions/actions"
-  }
-}

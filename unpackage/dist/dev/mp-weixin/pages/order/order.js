@@ -128,17 +128,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var m0 = _vm.totalNum(_vm.res.goodsList)
-  var m1 = _vm.priceInt(_vm.totalPrice(_vm.res.goodsList))
-  _vm.$mp.data = Object.assign(
-    {},
-    {
-      $root: {
-        m0: m0,
-        m1: m1
-      }
-    }
-  )
 }
 var recyclableRender = false
 var staticRenderFns = []

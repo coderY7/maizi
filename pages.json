@@ -29,12 +29,6 @@
 			}
 		},
 		{
-			"path": "pages/test/index",
-			"style": {
-				"navigationBarTitleText": "test"
-			}
-		},
-		{
 			"path": "pages/pay/pay",
 			"style": {
 				"navigationBarTitleText": "确定订单"

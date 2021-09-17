@@ -4,7 +4,6 @@
     "pages/menu/menu",
     "pages/order/order",
     "pages/my/my",
-    "pages/test/index",
     "pages/pay/pay",
     "pages/payment/payment",
     "pages/vip/vip",
@@ -51,6 +50,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }
