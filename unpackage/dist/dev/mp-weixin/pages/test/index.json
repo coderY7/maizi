@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "test",
+  "usingComponents": {
+    "actions": "/pages/test/components/actions/actions",
+    "cart-bar": "/pages/test/components/cartbar/cartbar",
+    "product-modal": "/pages/test/components/product-modal/product-modal",
+    "cart-popup": "/pages/test/components/cart-popup/cart-popup",
+    "search": "/pages/test/components/search/search"
+  }
+}

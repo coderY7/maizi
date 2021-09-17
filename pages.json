@@ -1,0 +1,124 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [
+		{
+			"path": "pages/main/main",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		
+		{
+			"path": "pages/menu/menu",
+			"style": {
+				"navigationBarTitleText": "点餐"
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/test/index",
+			"style": {
+				"navigationBarTitleText": "test"
+			}
+		},
+		{
+			"path": "pages/pay/pay",
+			"style": {
+				"navigationBarTitleText": "确定订单"
+			}
+		},
+		{
+			"path": "pages/payment/payment",
+			"style": {
+				"navigationBarTitleText": "订单支付"
+			}
+		},
+        {
+            "path" : "pages/vip/vip",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "会员",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/roll/roll",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "卡卷",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/distribution/distribution",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/integrate/integrate",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "积分",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/main/main",
+				"iconPath": "static/tab/首页图标.png",
+				"selectedIconPath": "static/tab/首页图标2.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/menu/menu",
+				"iconPath": "static/tab/点餐图标.png",
+				"selectedIconPath": "static/tab/点餐图标2.png",
+				"text": "点餐"
+			},
+			{
+				"pagePath": "pages/order/order",
+				"iconPath": "static/tab/订单图标.png",
+				"selectedIconPath": "static/tab/订单图标2.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"iconPath": "static/tab/我的图标.png",
+				"selectedIconPath": "static/tab/我的图标2.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
