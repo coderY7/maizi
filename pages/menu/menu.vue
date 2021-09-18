@@ -1,11 +1,11 @@
 <template>
 	<view class="u-wrap">
 		<view class="u-search-box">
-			<view class="u-search-inner">
-				<u-icon name="search" color="#909399" :size="28"></u-icon>
-				<text class="u-search-text">搜索</text>
-			</view>
+      <u-search placeholder="搜索" ></u-search>
 		</view>
+    <view class="rolls">
+      <image src="../../static/menu/满减活动.png" style="width:100%;height:70rpx;"></image>
+    </view>
 		<view class="u-menu-wrap">
 			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
 			 :scroll-into-view="itemId">
@@ -102,8 +102,7 @@
         productsScrollTop: 0,
         showSearch: false,
         cartprice:'',
-        Cart:{},
-        table:''
+        Cart:{}
       }
     },
     onShow(){
@@ -121,8 +120,7 @@
       }
     },
     onLoad(options) {
-console.log(options.table)
-      this.table=options.table
+
     },
     onReady() {
       this.getMenuItemTop()
@@ -335,16 +333,15 @@ console.log(options.table)
         })
       },
       pay(){
-        uni.setStorageSync('cart',this.cart)
+        //uni.setStorageSync('cart',this.cart)
         //计算购物车总价
         this.cartprice= this.cart.reduce((acc, cur) => acc + cur.number * cur.price, 0)
-        uni.setStorageSync('cartprice',this.cartprice)
+        //uni.setStorageSync('cartprice',this.cartprice)
         //跳转支付
         this.Cart={
           cart:this.cart,
           cartprice:this.cartprice,
         }
-
         uni.setStorageSync('Cart',this.Cart)
         uni.navigateTo({
           url:`/pages/pay/pay?table=${this.table}`,
@@ -376,7 +373,7 @@ console.log(options.table)
 	}
 
 	.u-search-box {
-		padding: 18rpx 30rpx;
+
 	}
 
 	.u-menu-wrap {
@@ -384,21 +381,6 @@ console.log(options.table)
 		display: flex;
 		overflow: hidden;
 	}
-
-	.u-search-inner {
-		background-color: rgb(234, 234, 234);
-		border-radius: 100rpx;
-		display: flex;
-		align-items: center;
-		padding: 10rpx 16rpx;
-	}
-
-	.u-search-text {
-		font-size: 26rpx;
-		color: $u-tips-color;
-		margin-left: 10rpx;
-	}
-
 	.u-tab-view {
 		width: 200rpx;
 		height: 100%;

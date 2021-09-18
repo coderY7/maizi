@@ -1,8 +1,8 @@
 <template>
   <view class="content">
     <view class="unit1">
-      <text>{{ desk }}</text>
-      <text>{{ mode }}</text>
+      <text>{{ desk[0] }}</text>
+      <text>{{ desk[1] }}</text>
     </view>
     <view class="unit2">
       <view style="font-size: 20px;margin-bottom:14px;">支付金额</view>
@@ -10,12 +10,13 @@
       <view style="font-size:12px;color:#c1c1c1">支付剩余时间</view>
     </view>
     <view class="unit3">
-      <view class="unit3_left">
-        <text>微信支付</text>
-      </view>
-      <view class="unit3_right">
-        ✅
-      </view>
+     <radio-group @change="radioChange" class="unit3box">
+       <view class="unit3box_left">
+         <image src='../../static/pay/微信.png' style="height: 40rpx;width:40rpx;padding-right: 10rpx"></image>
+         <view>微信支付</view>
+       </view>
+         <radio class="radio" checked=true></radio>
+     </radio-group>
     </view>
     <view class="unit4">
       <u-button shape="circle" type="error" @click="pay(Cart)">确定支付</u-button>
@@ -34,7 +35,7 @@ export default {
     }
   },
   onLoad(options) {
-    this.desk=options.table;
+    this.desk=uni.getStorageSync('table');
     let Cart = uni.getStorageSync('Cart')
     this.price = Cart.cartprice
   },
@@ -93,14 +94,23 @@ page {
 
   .unit3 {
     margin-top: 80rpx;
-    border: 2rpx solid #ccc;
     border-radius: 40rpx;
-    box-shadow: 2rpx 2rpx 4rpx #ccc;
     background-color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30rpx;
+    width:100%;
+    .unit3box{
+      width:100%;
+      display: flex;
+      flex-direction:row;
+      padding:20rpx;
+      justify-content:space-between;
+      .unit3box_left{
+        display: flex;
+        flex-direction: row;
+      }
+    }
   }
 
   .unit4 {

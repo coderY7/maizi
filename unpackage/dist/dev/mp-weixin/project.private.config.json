@@ -21,7 +21,7 @@
         {
           "name": "点餐",
           "pathName": "pages/menu/menu",
-          "query": "table=大厅17桌",
+          "query": "",
           "scene": null
         },
         {
@@ -33,7 +33,7 @@
         {
           "name": "pages/main/main",
           "pathName": "pages/main/main",
-          "query": "table='大厅7桌'",
+          "query": "table=大厅7桌",
           "scene": null
         },
         {

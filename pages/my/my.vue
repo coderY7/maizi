@@ -5,11 +5,10 @@
       <view class="unit1box">
         <view class="unit1box_text">
           <u-button type="success" @click="login" v-if="!islogin">微信授权登录</u-button>
-
           <text style="font-size:20px" v-if="islogin">{{userInfo.nickName}}</text>
         </view>
         <view class="unit1box_code">
-          <u-icon name="scan" size="30px"></u-icon>
+          <u-icon name="scan" size="30px" @click="scan"></u-icon>
         </view>
       </view>
     </view>
@@ -37,9 +36,7 @@
     <text style="font-size:16px;color: red;margin:0 0 20rpx 0">0.00</text>
     <view>我的余额</view>
   </view>
-
   </view>
-
 </view>
 
     <view class="unit3">
@@ -67,27 +64,40 @@ export default {
       userInfo: {}
     }
   },
-  methods: {
-    login() {
-        this.$u.api.loginInfo({
-          email: '23680099@qq.com',
-          password: 'yh0717..'
-        }).then(res => {
-          uni.showToast({
-            title: '登录成功',
-            duration: 500
-          });
-          console.log('登录成功', res)
-          uni.setStorageSync('token',res.access_token)
-          uni.getUserInfo({
-            lang: 'en',
-          }).then((res) => {
-            console.log('weixin:',res,res[1].userInfo)
-            this.islogin=true
-            this.userInfo=res[1].userInfo
-          })
+  onShow:function(){
+      this.$u.api.loginInfo({
+        email: '23680099@qq.com',
+        password: 'yh0717..'
+      }).then(res => {
+        uni.showToast({
+          title: '登录成功',
+          duration: 500
+        });
+        console.log('登录成功', res)
+        uni.setStorageSync('token',res.access_token)
+        uni.getUserInfo({
+          lang: 'en',
+        }).then((res) => {
+          console.log('weixin:',res,res[1].userInfo)
+          this.islogin=true
+          this.userInfo=res[1].userInfo
         })
-      }
+      })
+
+  },
+  methods: {
+    //登录
+
+    //扫码
+    scan(){
+      uni.scanCode({
+        success: function (res) {
+          console.log('条码类型：' + res.scanType);
+          console.log('条码内容：' + res.result);
+        }
+      });
+    }
+
     }
 }
 </script>
@@ -108,8 +118,8 @@ page {
     width: 100%;
     align-items: center;
     image {
-      width: 150rpx;
-      height: 150rpx;
+      width: 140rpx;
+      height: 140rpx;
        margin:20rpx;
       border-radius: 50%;
     }
@@ -118,12 +128,11 @@ page {
       display: flex;
       margin-left: 20rpx;
       justify-content: space-between;
+      align-items: center;
       margin-top: 20rpx;
-
       .unit1box_text {
         display: flex;
         flex-direction: column;
-
       }
       .unit1box_code{
         display: flex;

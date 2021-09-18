@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uButton: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 182))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 173))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 126))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 117))
     }
   }
 } catch (e) {
@@ -214,9 +214,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -225,26 +222,38 @@ var _default =
       userInfo: {} };
 
   },
-  methods: {
-    login: function login() {var _this = this;
-      this.$u.api.loginInfo({
-        email: '23680099@qq.com',
-        password: 'yh0717..' }).
-      then(function (res) {
-        uni.showToast({
-          title: '登录成功',
-          duration: 500 });
+  onShow: function onShow() {var _this = this;
+    this.$u.api.loginInfo({
+      email: '23680099@qq.com',
+      password: 'yh0717..' }).
+    then(function (res) {
+      uni.showToast({
+        title: '登录成功',
+        duration: 500 });
 
-        console.log('登录成功', res);
-        uni.setStorageSync('token', res.access_token);
-        uni.getUserInfo({
-          lang: 'en' }).
-        then(function (res) {
-          console.log('weixin:', res, res[1].userInfo);
-          _this.islogin = true;
-          _this.userInfo = res[1].userInfo;
-        });
+      console.log('登录成功', res);
+      uni.setStorageSync('token', res.access_token);
+      uni.getUserInfo({
+        lang: 'en' }).
+      then(function (res) {
+        console.log('weixin:', res, res[1].userInfo);
+        _this.islogin = true;
+        _this.userInfo = res[1].userInfo;
       });
+    });
+
+  },
+  methods: {
+    //登录
+
+    //扫码
+    scan: function scan() {
+      uni.scanCode({
+        success: function success(res) {
+          console.log('条码类型：' + res.scanType);
+          console.log('条码内容：' + res.result);
+        } });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

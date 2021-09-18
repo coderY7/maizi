@@ -7,8 +7,6 @@
       <swiper class="swiper-box" :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
         <swiper-item class="swiper-item">
           <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
-
-<!--            //原数据-->
             <view class="page-box">
 <!--  订单状态-->
               <view class="order" >
@@ -40,107 +38,8 @@
               </view>
               <u-loadmore :status="loadStatus[0]" bgColor="#f2f2f2"></u-loadmore>
             </view>
-
           </scroll-view>
         </swiper-item>
-<!--        页面-->
-        <view>
-<!--&lt;!&ndash;        <swiper-item class="swiper-item">&ndash;&gt;-->
-<!--&lt;!&ndash;          <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">&ndash;&gt;-->
-<!--&lt;!&ndash;            <view class="page-box">&ndash;&gt;-->
-<!--&lt;!&ndash;              <view class="order" v-for="(res, index) in  orderList[1]" :key="res.id">&ndash;&gt;-->
-<!--&lt;!&ndash;                <view class="top">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="left">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="store">{{ res.store }}</view>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                  </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="right">{{ res.deal }}</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                <view class="item" v-for="(item, index) in res.goodsList" :key="index">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="content">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="title u-line-2">{{ item.title }}</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="type">{{ item.type }}</view>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                  </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="right">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="price">&ndash;&gt;-->
-<!--&lt;!&ndash;                      ￥{{ priceInt(item.price) }}&ndash;&gt;-->
-<!--&lt;!&ndash;                      <text class="decimal">.{{ priceDecimal(item.price) }}</text>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="number">x{{ item.number }}</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                <view class="total">&ndash;&gt;-->
-<!--&lt;!&ndash;                  共{{ totalNum(res.goodsList) }}件商品 合计:&ndash;&gt;-->
-<!--&lt;!&ndash;                  <text class="total-price">&ndash;&gt;-->
-<!--&lt;!&ndash;                    ￥{{ priceInt(totalPrice(res.goodsList)) }}.&ndash;&gt;-->
-<!--&lt;!&ndash;                    <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>&ndash;&gt;-->
-<!--&lt;!&ndash;                  </text>&ndash;&gt;-->
-<!--&lt;!&ndash;                </view>&ndash;&gt;-->
-
-<!--&lt;!&ndash;              </view>&ndash;&gt;-->
-<!--&lt;!&ndash;              <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>&ndash;&gt;-->
-<!--&lt;!&ndash;            </view>&ndash;&gt;-->
-<!--&lt;!&ndash;          </scroll-view>&ndash;&gt;-->
-<!--&lt;!&ndash;        </swiper-item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <swiper-item class="swiper-item">&ndash;&gt;-->
-<!--&lt;!&ndash;          <scroll-view scroll-y style="height: 100%;width: 100%;">&ndash;&gt;-->
-<!--&lt;!&ndash;            <view class="page-box">&ndash;&gt;-->
-<!--&lt;!&ndash;              <view>&ndash;&gt;-->
-<!--&lt;!&ndash;                <view class="centre">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <image src="https://cdn.uviewui.com/uview/template/taobao-order.png" mode=""></image>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="explain">&ndash;&gt;-->
-<!--&lt;!&ndash;                    您还没有相关的订单&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="tips">可以去看看有那些想买的</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="btn">随便逛逛</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                </view>&ndash;&gt;-->
-<!--&lt;!&ndash;              </view>&ndash;&gt;-->
-<!--&lt;!&ndash;            </view>&ndash;&gt;-->
-<!--&lt;!&ndash;          </scroll-view>&ndash;&gt;-->
-<!--&lt;!&ndash;        </swiper-item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <swiper-item class="swiper-item">&ndash;&gt;-->
-<!--&lt;!&ndash;          <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">&ndash;&gt;-->
-<!--&lt;!&ndash;            <view class="page-box">&ndash;&gt;-->
-<!--&lt;!&ndash;              <view class="order" v-for="(res, index) in  orderList[3]" :key="res.id">&ndash;&gt;-->
-<!--&lt;!&ndash;                <view class="top">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="left">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="store">{{ res.store }}</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="right">{{ res.deal }}</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                <view class="item" v-for="(item, index) in res.goodsList" :key="index">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="content">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="title u-line-2">{{ item.title }}</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="type">{{ item.type }}</view>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                  </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <view class="right">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="price">&ndash;&gt;-->
-<!--&lt;!&ndash;                      ￥{{ priceInt(item.price) }}&ndash;&gt;-->
-<!--&lt;!&ndash;                      <text class="decimal">.{{ priceDecimal(item.price) }}</text>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <view class="number">x{{ item.number }}</view>&ndash;&gt;-->
-<!--&lt;!&ndash;                  </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                </view>&ndash;&gt;-->
-<!--&lt;!&ndash;                <view class="total">&ndash;&gt;-->
-<!--&lt;!&ndash;                  共{{ totalNum(res.goodsList) }}件商品 合计:&ndash;&gt;-->
-<!--&lt;!&ndash;                  <text class="total-price">&ndash;&gt;-->
-<!--&lt;!&ndash;                    ￥{{ priceInt(totalPrice(res.goodsList)) }}.&ndash;&gt;-->
-<!--&lt;!&ndash;                    <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>&ndash;&gt;-->
-<!--&lt;!&ndash;                  </text>&ndash;&gt;-->
-<!--&lt;!&ndash;                </view>&ndash;&gt;-->
-
-<!--&lt;!&ndash;              </view>&ndash;&gt;-->
-<!--&lt;!&ndash;              <u-loadmore :status="loadStatus[3]" bgColor="#f2f2f2"></u-loadmore>&ndash;&gt;-->
-<!--&lt;!&ndash;            </view>&ndash;&gt;-->
-<!--&lt;!&ndash;          </scroll-view>&ndash;&gt;-->
-<!--&lt;!&ndash;        </swiper-item>&ndash;&gt;-->
-        </view>
       </swiper>
     </view>
   </view>
@@ -399,14 +298,12 @@ page {
   }
   .item {
     display: flex;
-
     justify-content: space-between;
     image{
       width:100rpx;
       height:100rpx;
     }
     .right{
-
     }
 
   }
@@ -426,20 +323,6 @@ page {
     height: 164rpx;
     border-radius: 50%;
     margin-bottom: 20rpx;
-  }
-  .tips {
-    font-size: 24rpx;
-    color: #999999;
-    margin-top: 20rpx;
-  }
-  .btn {
-    margin: 80rpx auto;
-    width: 200rpx;
-    border-radius: 32rpx;
-    line-height: 64rpx;
-    color: #ffffff;
-    font-size: 26rpx;
-    background: linear-gradient(270deg, rgba(249, 116, 90, 1) 0%, rgba(255, 158, 1, 1) 100%);
   }
 }
 .wrap {

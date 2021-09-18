@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -201,37 +201,21 @@ var _default =
 {
   data: function data() {
     return {
-      table: '',
-      list: [
-      {
-        name: '我的会员',
-        url: 'https://static01.imgkr.com/temp/fc86c86bbe58489a9d1aa1b33cee239b.png' },
-
-      {
-        name: '红包卡卷',
-        url: 'https://static01.imgkr.com/temp/a042aa60903b49a69079649ea7ac3ba1.png' },
-
-      {
-        name: '我的订单',
-        url: 'https://static01.imgkr.com/temp/0b96f9d48fb94fbd8b95119f4a254e27.png' }],
-
-
-      scan: [
-      {
-        name: '堂食点餐',
-        url: 'https://static01.imgkr.com/temp/ab098ba2015f4058a54778e51a893cf4.png' },
-
-      {
-        name: '美味外带',
-        url: 'https://static01.imgkr.com/temp/c1303ed0711a48a2844a816691ff4e63.png' }] };
-
-
+      table: '' };
 
   },
-  methods: {},
+  methods: {
+    navdine: function navdine() {
+      uni.setStorageSync('table', [this.table, '堂食']);
+    },
+    navbesides: function navbesides() {
+      uni.setStorageSync('table', [this.table, '外带']);
+    } },
+
   onLoad: function onLoad(options) {
     this.table = options.table;
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

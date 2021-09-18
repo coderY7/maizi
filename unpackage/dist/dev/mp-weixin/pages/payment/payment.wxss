@@ -82,9 +82,7 @@ page {
 }
 .content .unit3 {
   margin-top: 80rpx;
-  border: 2rpx solid #ccc;
   border-radius: 40rpx;
-  box-shadow: 2rpx 2rpx 4rpx #ccc;
   background-color: #fff;
   display: -webkit-box;
   display: -webkit-flex;
@@ -95,7 +93,30 @@ page {
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  padding: 30rpx;
+  width: 100%;
+}
+.content .unit3 .unit3box {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  padding: 20rpx;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.content .unit3 .unit3box .unit3box_left {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
 }
 .content .unit4 {
   position: absolute;

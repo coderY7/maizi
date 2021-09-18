@@ -98,7 +98,7 @@ page {
           justify-content: space-between;
 }
 .unit2 .unit2Nav .unit2_box .unit2_img {
-  width: 100rpx;
+  width: 90rpx;
   height: 100rpx;
 }
 .unit3 {

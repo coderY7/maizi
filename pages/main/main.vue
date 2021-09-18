@@ -33,14 +33,14 @@
     <!--    点餐-->
     <text>开始点餐</text>
     <view class="unit3">
-      <navigator class="unit3Nav" url="/pages/menu/menu?table=table" open-type="switchTab">
+      <navigator class="unit3Nav" url="/pages/menu/menu" open-type="switchTab" @click="navmenu">
         <view class="unit3_box">
           <image src="../../static/main/堂食点餐.png" class="unit3_img"></image>
           <text class="unit3_name">堂食点餐</text>
           <text>在线点单不排队</text>
         </view>
       </navigator>
-      <navigator class="unit3Nav" url="/pages/distribution/distribution">
+      <navigator class="unit3Nav" url="/pages/menu/menu"open-type="switchTab" @click="navbesides">
         <view class="unit3_box">
           <image src="../../static/main/img.png" class="unit3_img"></image>
           <text class="unit3_name">美味外带</text>
@@ -70,33 +70,16 @@ export default {
   data() {
     return {
       table:'',
-      list: [
-        {
-          name: '我的会员',
-          url: 'https://static01.imgkr.com/temp/fc86c86bbe58489a9d1aa1b33cee239b.png'
-        },
-        {
-          name: '红包卡卷',
-          url: 'https://static01.imgkr.com/temp/a042aa60903b49a69079649ea7ac3ba1.png'
-        },
-        {
-          name: '我的订单',
-          url: 'https://static01.imgkr.com/temp/0b96f9d48fb94fbd8b95119f4a254e27.png'
-        }
-      ],
-      scan: [
-        {
-          name: '堂食点餐',
-          url: 'https://static01.imgkr.com/temp/ab098ba2015f4058a54778e51a893cf4.png'
-        },
-        {
-          name: '美味外带',
-          url: 'https://static01.imgkr.com/temp/c1303ed0711a48a2844a816691ff4e63.png'
-        }
-      ]
     }
   },
-  methods: {},
+  methods: {
+navdine(){
+  uni.setStorageSync('table',[this.table,'堂食']);
+},
+ navbesides(){
+   uni.setStorageSync('table',[this.table,'外带']);
+ }
+  },
   onLoad(options) {
      this.table = options.table
   }
@@ -157,7 +140,7 @@ page {
     justify-content:space-between;
 
       .unit2_img{
-        width:100rpx;
+        width:90rpx;
         height:100rpx;
       }
     }
