@@ -205,7 +205,7 @@ var _default =
 
   },
   methods: {
-    navdine: function navdine() {
+    navmenu: function navmenu() {
       uni.setStorageSync('table', [this.table, '堂食']);
     },
     navbesides: function navbesides() {

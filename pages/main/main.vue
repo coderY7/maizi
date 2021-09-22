@@ -40,7 +40,7 @@
           <text>在线点单不排队</text>
         </view>
       </navigator>
-      <navigator class="unit3Nav" url="/pages/menu/menu"open-type="switchTab" @click="navbesides">
+      <navigator class="unit3Nav" url="/pages/menu/menu" open-type="switchTab" @click="navbesides">
         <view class="unit3_box">
           <image src="../../static/main/img.png" class="unit3_img"></image>
           <text class="unit3_name">美味外带</text>
@@ -73,7 +73,7 @@ export default {
     }
   },
   methods: {
-navdine(){
+navmenu(){
   uni.setStorageSync('table',[this.table,'堂食']);
 },
  navbesides(){

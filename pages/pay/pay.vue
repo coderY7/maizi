@@ -10,7 +10,7 @@
       </view>
       <view class="unit1_bottom">
         <text>用餐人数</text>
-        <view>2人</view>
+        <u-number-box v-model="attendance" @change="valChange" :min="1"></u-number-box>
       </view>
     </view>
 <!--    商品信息-->
@@ -76,11 +76,14 @@ export default {
       Cart:{},
       ShowPay:false,
       table:[],
-      cart:[]
-
+      attendance:1
     }
   },
   methods: {
+    //用餐人数
+    valChange(e){
+      this.attendance=e.value
+    },
     //加菜
 addmenu(){
   uni.navigateBack({
@@ -89,7 +92,7 @@ addmenu(){
 },
      pay(Cart){
 			uni.setStorageSync('Cart',this.Cart)
-      uni.setStorageSync('cart',this.cart)
+       uni.setStorageSync('Attendance',this.attendance)
 			uni.navigateTo({
 				url:`../payment/payment?table=${this.table}`
 			})
@@ -98,7 +101,6 @@ addmenu(){
   onLoad(options) {
     //获取购买商品数据
     this.Cart=uni.getStorageSync('Cart');
-    this.cart=uni.getStorageSync('cart');
     this.table=uni.getStorageSync('table')
   }
 }

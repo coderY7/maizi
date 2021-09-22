@@ -95,8 +95,11 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uNumberBox: function() {
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-number-box/u-number-box */ "node-modules/uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! uview-ui/components/u-number-box/u-number-box.vue */ 255))
+    },
     uButton: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 173))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 180))
     }
   }
 } catch (e) {
@@ -231,11 +234,14 @@ var _default =
       Cart: {},
       ShowPay: false,
       table: [],
-      cart: [] };
-
+      attendance: 1 };
 
   },
   methods: {
+    //用餐人数
+    valChange: function valChange(e) {
+      this.attendance = e.value;
+    },
     //加菜
     addmenu: function addmenu() {
       uni.navigateBack({
@@ -244,7 +250,7 @@ var _default =
     },
     pay: function pay(Cart) {
       uni.setStorageSync('Cart', this.Cart);
-      uni.setStorageSync('cart', this.cart);
+      uni.setStorageSync('Attendance', this.attendance);
       uni.navigateTo({
         url: "../payment/payment?table=".concat(this.table) });
 
@@ -253,7 +259,6 @@ var _default =
   onLoad: function onLoad(options) {
     //获取购买商品数据
     this.Cart = uni.getStorageSync('Cart');
-    this.cart = uni.getStorageSync('cart');
     this.table = uni.getStorageSync('table');
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
