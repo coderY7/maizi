@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     pay(Cart) {
-      uni.setStorageSync('Cart', this.Cart)
       //支付功能
     }
   }

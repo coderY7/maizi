@@ -98,13 +98,13 @@ var components
 try {
   components = {
     uTabsSwiper: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 159))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 169))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 166))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 176))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 173))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 183))
     }
   }
 } catch (e) {
@@ -128,6 +128,69 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l1 = _vm.__map(_vm.orderList[1], function(res, index) {
+    var $orig = _vm.__get_orig(res)
+
+    var l0 = _vm.__map(res.goodsList, function(item, index) {
+      var $orig = _vm.__get_orig(item)
+
+      var m0 = _vm.priceInt(item.price)
+      var m1 = _vm.priceDecimal(item.price)
+      return {
+        $orig: $orig,
+        m0: m0,
+        m1: m1
+      }
+    })
+
+    var m2 = _vm.totalNum(res.goodsList)
+    var m3 = _vm.priceInt(_vm.totalPrice(res.goodsList))
+    var m4 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
+    return {
+      $orig: $orig,
+      l0: l0,
+      m2: m2,
+      m3: m3,
+      m4: m4
+    }
+  })
+
+  var l3 = _vm.__map(_vm.orderList[3], function(res, index) {
+    var $orig = _vm.__get_orig(res)
+
+    var l2 = _vm.__map(res.goodsList, function(item, index) {
+      var $orig = _vm.__get_orig(item)
+
+      var m5 = _vm.priceInt(item.price)
+      var m6 = _vm.priceDecimal(item.price)
+      return {
+        $orig: $orig,
+        m5: m5,
+        m6: m6
+      }
+    })
+
+    var m7 = _vm.totalNum(res.goodsList)
+    var m8 = _vm.priceInt(_vm.totalPrice(res.goodsList))
+    var m9 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
+    return {
+      $orig: $orig,
+      l2: l2,
+      m7: m7,
+      m8: m8,
+      m9: m9
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l1: l1,
+        l3: l3
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -162,6 +225,102 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -334,14 +493,10 @@ var _default =
       dx: 0,
       loadStatus: ['loadmore', 'loadmore', 'loadmore', 'loadmore'],
       time: '',
-      Cart: {} };
+      Cart: [] };
 
   },
   onLoad: function onLoad() {
-    this.getOrderList(0);
-    this.getOrderList(1);
-    this.getOrderList(2);
-    this.getOrderList(3);
     this.Cart = uni.getStorageSync('Cart');
     //获取时间
     //   var datetime = new Date();
@@ -379,16 +534,27 @@ var _default =
         this.loadStatus.splice(this.current, 1, "loading");
         setTimeout(function () {
           _this.getOrderList(_this.current);
-        }, 1000);
+        }, 1200);
       }
     },
     // 页面数据
     getOrderList: function getOrderList(idx) {
-      for (var i = 0; i < 5; i++) {
-        var index = this.$u.random(0, this.dataList.length - 1);
-        var data = JSON.parse(JSON.stringify(this.dataList[index]));
-        data.id = this.$u.guid();
-        this.orderList[idx].push(data);
+      var index = this.$u.random(0, this.dataList.length - 1);
+      var data = JSON.parse(JSON.stringify(this.dataList[index]));
+      var data1 = JSON.parse(JSON.stringify(this.dataList[1]));
+      var data2 = JSON.parse(JSON.stringify(this.dataList[2]));
+      var data3 = JSON.parse(JSON.stringify(this.dataList[3]));
+      if (idx == '0') {
+        this.orderList[0].push(data);
+      }
+      if (idx == '1') {
+        this.orderList[1].push(data1);
+      }
+      if (idx == '2') {
+        this.orderList[2].push(data2);
+      }
+      if (idx == '3') {
+        this.orderList[3].push(data3);
       }
       this.loadStatus.splice(this.current, 1, "loadmore");
     },

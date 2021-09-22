@@ -3,6 +3,7 @@
     "pages/main/main",
     "pages/menu/menu",
     "pages/order/order",
+    "pages/order/order2",
     "pages/my/my",
     "pages/pay/pay",
     "pages/payment/payment",

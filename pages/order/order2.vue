@@ -8,27 +8,42 @@
         <swiper-item class="swiper-item">
           <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
             <view class="page-box">
-<!--  订单状态-->
-              <view class="order" >
+              <view class="order" v-for="(res, index) in orderList[0]" :key="res.id">
                 <view class="top">
                   <view class="left">
-                    <u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>
-                    <view class="store">时间</view>
+                    <u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
+                    <view class="store">{{ res.store }}</view>
+                    <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon>
                   </view>
-                  <view class="right">状态</view>
+                  <view class="right">{{ res.deal }}</view>
                 </view>
-                <view class="item" v-for="(item1,index) in Cart.cart" :key="index">
-                  <view>
-                      <image :src="item1.image" mode="aspectFill"></image>
+                <view class="item" v-for="(item, index) in res.goodsList" :key="index">
+                  <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>
+                  <view class="content">
+                    <view class="title u-line-2">{{ item.title }}</view>
+                    <view class="type">{{ item.type }}</view>
+                    <view class="delivery-time">发货时间 {{ item.deliveryTime }}</view>
                   </view>
-                  <view class="right" >
-                    <view>共3件</view>
+                  <view class="right">
+                    <view class="price">
+                      ￥{{ priceInt(item.price) }}
+                      <text class="decimal">.{{ priceDecimal(item.price) }}</text>
+                    </view>
+                    <view class="number">x{{ item.number }}</view>
                   </view>
                 </view>
-
                 <view class="total">
-                  <view>总价格:</view>
-                  <view>¥{{Cart.cartprice}}</view>
+                  共{{ totalNum(res.goodsList) }}件商品 合计:
+                  <text class="total-price">
+                    ￥{{ priceInt(totalPrice(res.goodsList)) }}.
+                    <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
+                  </text>
+                </view>
+                <view class="bottom">
+                  <view class="more"><u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon></view>
+                  <view class="logistics btn">查看物流</view>
+                  <view class="exchange btn">卖了换钱</view>
+                  <view class="evaluate btn">评价</view>
                 </view>
               </view>
               <u-loadmore :status="loadStatus[0]" bgColor="#f2f2f2"></u-loadmore>
@@ -69,7 +84,12 @@
                     <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
                   </text>
                 </view>
-
+                <view class="bottom">
+                  <view class="more"><u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon></view>
+                  <view class="logistics btn">查看物流</view>
+                  <view class="exchange btn">卖了换钱</view>
+                  <view class="evaluate btn">评价</view>
+                </view>
               </view>
               <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>
             </view>
@@ -249,16 +269,17 @@ export default {
       ],
       list: [
         {
-          name: '全部订单'
-        },
-        {
           name: '待付款'
         },
         {
-          name: '已完成'
+          name: '待发货'
         },
         {
-          name: '待退款',
+          name: '待收货'
+        },
+        {
+          name: '待评价',
+          count: 12
         }
       ],
       current: 0,
@@ -266,24 +287,13 @@ export default {
       tabsHeight: 0,
       dx: 0,
       loadStatus: ['loadmore','loadmore','loadmore','loadmore'],
-      time:'',
-      Cart:[]
     };
   },
   onLoad() {
-    this.Cart=uni.getStorageSync('Cart');
-    //获取时间
-    //   var datetime = new Date();
-    //   var year = datetime.getFullYear();
-    //   //此时的三元判断，实际上可以利用字符串的方法padStart去补全，使用方法String.prototype.padStart.call(xx,2,"0"),第一个参数补齐的元素，第二个参数表示补足两位，第三个参数表示用0去补齐
-    //   var month =datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1): datetime.getMonth() + 1;
-    //   var date =  datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-    //   var hour = datetime.getHours() < 10 ? "0" + datetime.getHours():datetime.getHours();
-    //   var minutes = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes():datetime.getMinutes();
-    //   var seconds = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds():datetime.getSeconds();
-    //   //times是定义的字符串，最后拼接出此时此刻的时间
-    //   this.times =  year+" / " + month+" /" + date+" / "+ hour+" : " + minutes+" : " + seconds ;
-    //   this.time=this.times
+    this.getOrderList(0);
+    this.getOrderList(1);
+    this.getOrderList(2);
+    this.getOrderList(3);
   },
   computed: {
     // 价格小数
@@ -313,25 +323,30 @@ export default {
     },
     // 页面数据
     getOrderList(idx) {
-      let index = this.$u.random(0, this.dataList.length - 1);
-      let data = JSON.parse(JSON.stringify(this.dataList[index]));
-      let data1 = JSON.parse(JSON.stringify(this.dataList[1]));
+      // for(let i = 0; i < 3; i++) {
+         let index = this.$u.random(0, this.dataList.length - 1);
+         let data = JSON.parse(JSON.stringify(this.dataList[index]));
+        let data1 = JSON.parse(JSON.stringify(this.dataList[1]));
       let data2 = JSON.parse(JSON.stringify(this.dataList[2]));
       let data3 = JSON.parse(JSON.stringify(this.dataList[3]));
-      if(idx=='0'){
-        this.orderList[0].push(data);
-      }
-      if(idx=='1'){
-        this.orderList[1].push(data1);
-      }
-      if(idx=='2'){
-        this.orderList[2].push(data2)
-      }
+
+      //data.id = this.$u.guid();
+        if(idx=='0'){
+          this.orderList[0].push(data);
+        }
+        if(idx=='1'){
+          this.orderList[1].push(data1);
+        }
+        if(idx=='2'){
+          this.orderList[2].push(data2)
+        }
       if(idx=='3'){
         this.orderList[3].push(data3);
       }
+      // }
       this.loadStatus.splice(this.current,1,"loadmore")
     },
+
     // 总价
     totalPrice(item) {
       let price = 0;
@@ -401,20 +416,71 @@ page {
   }
   .item {
     display: flex;
-    justify-content: space-between;
-    image{
-      width:100rpx;
-      height:100rpx;
+    margin: 20rpx 0 0;
+    .left {
+      margin-right: 20rpx;
+      image {
+        width: 200rpx;
+        height: 200rpx;
+        border-radius: 10rpx;
+      }
     }
-    .right{
+    .content {
+      .title {
+        font-size: 28rpx;
+        line-height: 50rpx;
+      }
+      .type {
+        margin: 10rpx 0;
+        font-size: 24rpx;
+        color: $u-tips-color;
+      }
+      .delivery-time {
+        color: #e5d001;
+        font-size: 24rpx;
+      }
     }
-
+    .right {
+      margin-left: 10rpx;
+      padding-top: 20rpx;
+      text-align: right;
+      .decimal {
+        font-size: 24rpx;
+        margin-top: 4rpx;
+      }
+      .number {
+        color: $u-tips-color;
+        font-size: 24rpx;
+      }
+    }
   }
   .total {
-   display: flex;
-
+    margin-top: 20rpx;
+    text-align: right;
+    font-size: 24rpx;
+    .total-price {
+      font-size: 32rpx;
+    }
+  }
+  .bottom {
+    display: flex;
+    margin-top: 40rpx;
+    padding: 0 10rpx;
     justify-content: space-between;
     align-items: center;
+    .btn {
+      line-height: 52rpx;
+      width: 160rpx;
+      border-radius: 26rpx;
+      border: 2rpx solid $u-border-color;
+      font-size: 26rpx;
+      text-align: center;
+      color: $u-type-info-dark;
+    }
+    .evaluate {
+      color: $u-type-warning-dark;
+      border-color: $u-type-warning-dark;
+    }
   }
 }
 .centre {
@@ -426,6 +492,20 @@ page {
     height: 164rpx;
     border-radius: 50%;
     margin-bottom: 20rpx;
+  }
+  .tips {
+    font-size: 24rpx;
+    color: #999999;
+    margin-top: 20rpx;
+  }
+  .btn {
+    margin: 80rpx auto;
+    width: 200rpx;
+    border-radius: 32rpx;
+    line-height: 64rpx;
+    color: #ffffff;
+    font-size: 26rpx;
+    background: linear-gradient(270deg, rgba(249, 116, 90, 1) 0%, rgba(255, 158, 1, 1) 100%);
   }
 }
 .wrap {
