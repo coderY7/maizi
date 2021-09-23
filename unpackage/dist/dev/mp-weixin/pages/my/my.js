@@ -222,30 +222,36 @@ var _default =
       userInfo: {} };
 
   },
-  onShow: function onShow() {var _this = this;
-    this.$u.api.loginInfo({
-      email: '23680099@qq.com',
-      password: 'yh0717..' }).
-    then(function (res) {
-      uni.showToast({
-        title: '登录成功',
-        duration: 500 });
-
-      console.log('登录成功', res);
-      uni.setStorageSync('token', res.access_token);
-      uni.getUserInfo({
-        lang: 'en' }).
-      then(function (res) {
-        console.log('weixin:', res, res[1].userInfo);
-        _this.islogin = true;
-        _this.userInfo = res[1].userInfo;
-      });
-    });
+  onLoad: function onLoad() {
 
   },
+  onShow: function onShow() {
+  },
   methods: {
-    //登录
+    //用户登录
+    login: function login() {var _this = this;
+      uni.getProvider({
+        service: 'oauth',
+        success: function success(res) {
+          if (~res.provider.indexOf('weixin')) {
+            uni.login({
+              provider: 'weixin',
+              success: function success(loginRes) {
+                console.log(JSON.stringify(loginRes));
+              } });
 
+          }
+        } });
+
+      //获取信息
+      uni.getUserProfile({
+        desc: "获取用户信息",
+        success: function success(res) {
+          _this.userInfo = res.userInfo;
+          _this.islogin = true;
+        } });
+
+    },
     //扫码
     scan: function scan() {
       uni.scanCode({

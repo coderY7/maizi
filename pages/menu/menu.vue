@@ -117,10 +117,19 @@
           icon:'error',
           duration: 500
         });
+      }else{
+
       }
     },
     onLoad(options) {
-
+      this.$u.api.categorys({
+        access_token:'',
+        vtype:'pos',
+        fdbh:'808001',
+        companyid:'800008'
+      }).then((res) => {
+        console.log(res)
+      })
     },
     onReady() {
       this.getMenuItemTop()

@@ -299,10 +299,19 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         icon: 'error',
         duration: 500 });
 
+    } else {
+
     }
   },
   onLoad: function onLoad(options) {
-
+    this.$u.api.categorys({
+      access_token: '',
+      vtype: 'pos',
+      fdbh: '808001',
+      companyid: '800008' }).
+    then(function (res) {
+      console.log(res);
+    });
   },
   onReady: function onReady() {
     this.getMenuItemTop();

@@ -52,6 +52,20 @@ var _default =
   methods: {
     pay: function pay(Cart) {
       //支付功能
+      uni.requestPayment({
+        provider: 'wxpay',
+        timeStamp: String(Date.now()),
+        nonceStr: 'A1B2C3D4E5',
+        package: 'prepay_id=wx20180101abcdefg',
+        signType: 'MD5',
+        paySign: '',
+        success: function success(res) {
+          console.log('success:' + JSON.stringify(res));
+        },
+        fail: function fail(err) {
+          console.log('fail:' + JSON.stringify(err));
+        } });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

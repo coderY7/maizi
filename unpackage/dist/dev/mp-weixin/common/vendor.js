@@ -10709,8 +10709,7 @@ var install = function install(Vue, vm) {
   // 此为自定义配置参数，具体参数见上方说明
   Vue.prototype.$u.http.setConfig(
   {
-    baseUrl: 'https://api.shop.eduwork.cn', // 请求的本域名
-
+    baseUrl: 'http://xx.com/mzsale/web', // 请求的本域名
     // 设置为json，返回后会对数据进行一次JSON.parse()
     dataType: 'json',
     showLoading: true, // 是否显示请求中的loading
@@ -10792,6 +10791,7 @@ var install = function install(Vue, vm) {
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 如果没有通过拦截器配置域名的话，可以在这里写上完整的URL(加上域名部分)
 var good = 'api/goods';
 var logins = 'api/auth/login';
+var category = '/catering/category';
 
 
 // 此处第二个参数vm，就是我们在页面使用的this，你可以通过vm获取vuex等操作，更多内容详见uView对拦截器的介绍部分：
@@ -10804,9 +10804,10 @@ var install = function install(Vue, vm) {
   // 此处使用了传入的params参数，一切自定义即可
   //登录数据
   var loginInfo = function loginInfo() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(logins, params);};
-
+  //菜单分类
+  var categorys = function categorys() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(category, params);};
   // 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-  vm.$u.api = { goods: goods, loginInfo: loginInfo };
+  vm.$u.api = { goods: goods, loginInfo: loginInfo, categorys: categorys };
 };var _default =
 
 {
