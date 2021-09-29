@@ -67,66 +67,6 @@ this.$u.api.pays({
 }).then(res => {
   console.log('付款：',res)
 })
-
-      //订单预结算
-      // this.$u.api.readytopays({
-      //       "access_token": this.token,
-      //       "xsdbh": "",//订单号
-      //       "fdbh": "808001",//分店号
-      //       "vipid": "",//会员号
-      //       "viplevel": "",//会员等级
-      //       "viprate": "",//会员折扣率
-      //       "syyid": "00268",//收银员工号
-      //       "posid": "80800101",//pos机
-      //       "counts": "2",//商品总数
-      //       "goodslist": [ //交易商品列表
-      //           {
-      //         "spsmm": "20210914000001",
-      //         "spbm": "110206158",
-      //         "price": "28.000",
-      //         "zxprice": "26.000",
-      //         "quantity": "1",
-      //         "flownum": "1",
-      //         "discount":"2.00",
-      //         "extlist":[
-      //           {
-      //             "ext_id":"10",
-      //             "ext_name":"中辣",
-      //             "ext_quantity":"0",
-      //             "ext_price":"0",
-      //             "ext_zxprice":"0"
-      //           }
-      //         ]
-      //          },
-      //         {
-      //         "spsmm": "2021092400004",
-      //         "spbm": "110206161",
-      //         "price": "32.00",
-      //         "zxprice": "33.000",
-      //         "quantity": "1",
-      //         "flownum": "2",
-      //         "discount":"1.0",
-      //         "extlist":[
-      //           {
-      //             "ext_id":"11",
-      //             "ext_name":"特辣",
-      //             "ext_quantity":"0",
-      //             "ext_price":"0",
-      //             "ext_zxprice":"0"
-      //           },
-      //           {
-      //             "ext_id":"14",
-      //             "ext_name":"加青菜",
-      //             "ext_quantity":"1",
-      //             "ext_price":"2",
-      //             "ext_zxprice":"2"
-      //           }
-      //         ]
-      //       }]
-      //     }).then(res=>{
-      //   console.log('预结算：',res)
-      // })
-
     }
   }
 }

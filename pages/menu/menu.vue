@@ -476,12 +476,13 @@
           access_token:this.token,
           vtype:"new",
           posid:"80800101",
-          tableid:"2",
+          tableid:"8",
           tablenumber:"3",
           tablewaiter:"00268",
           fdbh:this.fdbh,
         }).then((res)=>{
           console.log("生成订单：",res)
+          uni.setStorageSync('xsdbh', res.xsdbh);
         })
       }
   },

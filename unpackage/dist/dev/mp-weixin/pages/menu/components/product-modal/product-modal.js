@@ -374,7 +374,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
           }
         });
       });
-      this.choosedText = tempArr.join(' , ');
+      this.choosedText = tempArr.join(',');
 
       // let pitchs=[];
       // this.productData.dishesextlist.map(item => {
@@ -390,7 +390,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     // 加入购物车
     addToCart: function addToCart() {
       this.productData.choosedText = this.choosedText;
-      //this.productData.pitchs=this.pitch
+      this.productData.pitchs = this.pitch;
       var product = _objectSpread({}, this.productData);
       this.$emit('add-to-cart', product);
       console.log(product);

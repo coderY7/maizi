@@ -208,7 +208,7 @@ export default {
           }
         });
       });
-      this.choosedText = tempArr.join(' , ');
+      this.choosedText = tempArr.join(',');
 
       // let pitchs=[];
       // this.productData.dishesextlist.map(item => {
@@ -224,7 +224,7 @@ export default {
     // 加入购物车
     addToCart() {
      this.productData.choosedText=this.choosedText
-      //this.productData.pitchs=this.pitch
+      this.productData.pitchs=this.pitch
       const product = {...this.productData}
       this.$emit('add-to-cart', product)
       console.log(product)

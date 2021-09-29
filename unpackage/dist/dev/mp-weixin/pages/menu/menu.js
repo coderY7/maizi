@@ -649,12 +649,13 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         access_token: this.token,
         vtype: "new",
         posid: "80800101",
-        tableid: "2",
+        tableid: "8",
         tablenumber: "3",
         tablewaiter: "00268",
         fdbh: this.fdbh }).
       then(function (res) {
         console.log("生成订单：", res);
+        uni.setStorageSync('xsdbh', res.xsdbh);
       });
     } },
 
