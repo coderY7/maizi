@@ -25,12 +25,8 @@
 /* 透明度 */
 /* 文章场景相关 */
 .left.data-v-252a95b6 {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  align-items: center;
 }
 .left .detail-action.data-v-252a95b6 {
   height: 100%;
@@ -38,15 +34,9 @@
   background-color: #ffffff;
   box-shadow: 0 10rpx 10rpx 0 rgba(200, 199, 204, 0.2);
   position: relative;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   width: 100rpx;
   height: 100rpx;
   margin-top: -20rpx;
@@ -75,15 +65,9 @@
   color: #343434;
 }
 .right.data-v-252a95b6 {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   padding: 0 20rpx;
   border-radius: 0 !important;
   font-size: 36rpx;

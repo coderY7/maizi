@@ -3,7 +3,7 @@ const install = (Vue, vm) => {
     // 此为自定义配置参数，具体参数见上方说明
     Vue.prototype.$u.http.setConfig(
         {
-            baseUrl: 'http://xx.com/mzsale/web', // 请求的本域名
+            baseUrl: 'http://api.mzsale.cn/mzsale/web', // 请求的本域名
             // 设置为json，返回后会对数据进行一次JSON.parse()
             dataType: 'json',
             showLoading: true, // 是否显示请求中的loading
@@ -35,7 +35,8 @@ const install = (Vue, vm) => {
         // 所以哪怕您重新登录修改了Storage，下一次的请求将会是最新值
         // const token = uni.getStorageSync('token');
         // config.header.token = token;
-        config.header.Token = 'xxxxxx';
+        config.header.Token ='3040-024F-4D1F-C507-4AC2-CF0E-29EF-CC89';
+        uni.setStorageSync('token', config.header.Token);
 
         // 可以对某个url进行特别处理，此url参数为this.$u.get(url)中的url值
         if(config.url == '/user/login') config.header.noToken = true;

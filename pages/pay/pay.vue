@@ -75,8 +75,9 @@ export default {
     return {
       Cart:{},
       ShowPay:false,
-      table:[],
-      attendance:1
+      tableid:[],
+      attendance:'1',
+      token:''
     }
   },
   methods: {
@@ -91,17 +92,20 @@ addmenu(){
   });
 },
      pay(Cart){
-			uni.setStorageSync('Cart',this.Cart)
-       uni.setStorageSync('Attendance',this.attendance)
+       this.token = uni.getStorageSync('token');
+       uni.setStorageSync('Cart',this.Cart)
+        uni.setStorageSync('Attendance',this.attendance)
+       this.attendance = uni.getStorageSync('Attendance');
+
 			uni.navigateTo({
-				url:`../payment/payment?table=${this.table}`
+				url:`../payment/payment?tableid=${this.tableid}`
 			})
     }
   },
   onLoad(options) {
     //获取购买商品数据
     this.Cart=uni.getStorageSync('Cart');
-    this.table=uni.getStorageSync('table')
+    this.tableid=uni.getStorageSync('tableid')
   }
 }
 </script>

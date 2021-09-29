@@ -1,260 +1,474 @@
 <template>
-	<modal :show="visible" custom padding="0" width="90%" radius="18rpx">
-		<view class="header">
-			<image src="/static/index/menupopup_btn_share_normal.png"></image>
-			<image src="/static/index/round_close_btn.png" @tap="$emit('cancel')"></image>
-		</view>
-		<swiper :duration="1000" indicator-dots class="swiper" autoplay :interval="3000">
-			<swiper-item v-for="(image, index) in productData.images" :key="index" class="swiper-item">
-				<image :src="image.url"></image>
-			</swiper-item>
-		</swiper>
-		<scroll-view scroll-y class="content">
-			<view class="wrapper">
-				<view class="title">{{ productData.name }}</view>
-				<view class="labels">
-					<view class="label" v-for="(label, index) in productData.labels" :key="index" 
-						:style="{color: label.label_color, background: $util.hexToRgba(label.label_color, 0.2)}">
-						{{ label.name }}
-					</view>
-				</view>
-				<view class="mb-10">产品描述</view>
-				<view class="mb-20">{{ productData.description }}</view>
-				<view class="materials" v-for="(material, index) in productData.materials" :key="index">
-					<view class="group-name">{{ material.group_name }}</view>
-					<view class="values">
-						<view class="value" :class="{selected: value.is_selected}" @tap="changeMaterialSelected(index, key)"
-							  v-for="(value, key) in material.values" :key="key">
-							{{ value.name }}
-						</view>
-					</view>
-				</view>
-			</view>
-		</scroll-view>
-		<view class="bottom" :style="{height: !productData.is_single ? '250rpx' : '200rpx'}">
-			<view class="d-flex align-items-center">
-				<view class="price-and-materials">
-					<view class="price">￥{{ productData.price }}</view>
-					<view class="materials" v-show="getProductSelectedMaterials">{{ getProductSelectedMaterials }}</view>
-				</view>
-				<actions :number="productData.number" @add="add" @minus="minus"></actions>
-			</view>
-			<u-button type="warning" class="add-cart-btn" @click="addToCart">加入购物袋</u-button>
-		</view>
-	</modal>
+  <view>
+    <view class="mask-bg" @touchmove.stop.prevent :class="visible ? 'bg-show' : 'bg-hidden'">
+      <!-- #ifdef H5 -->
+      <view class="fake-area"></view>
+      <!-- #endif -->
+      <view class="main-area" :class="visible ? 'modal-show' : 'modal-hidden'">
+        <view class="modal-area">
+          <image src="/static/images/share.png" class="handle-btn" style="right: 86rpx;"  @tap="$emit('cancel')"></image>
+          <image src="/static/images/close.png" class="handle-btn" style="right: 20rpx;" @tap="closeModal"></image>
+          <view class="good-image-box"><image :src="productData ? imgurl+productData.big_img_path: '/static/images/default.png'" mode="widthFix"></image></view>
+          <scroll-view scroll-y="true">
+            <view class="scroll-inner_box">
+              <text class="good-name">{{ productData.spmc}}</text>
+              <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
+              <view>{{productData.description}}</view>
+              <view>
+                <!--              单独渲染-->
+                <!--              <view>-->
+                <!--                <text class="description-text">{{ productData.description || '' }}</text>-->
+                <!--                <view>{{productData.dishesextlist[0].groupname}}</view>-->
+                <!--                <view v-for="(item, index) in productData.dishesextlist[0].extitems" :key="item">-->
+                <!--                  {{item.ext_name}}-->
+                <!--                </view>-->
+                <!--                <view>{{productData.dishesextlist[1].groupname}}</view>-->
+                <!--                <view v-for="(item, index) in productData.dishesextlist[1].extitems" :key="item">-->
+                <!--                  {{item.ext_name}}-->
+                <!--                </view>-->
+                <!--                <view>{{productData.dishesextlist[2].groupname}}</view>-->
+                <!--                <view v-for="(item, index) in productData.dishesextlist[2].extitems" :key="item"-->
+                <!--                      @tap="chooseTag(index, index1)">-->
+                <!--                  {{item.ext_name}}-->
+                <!--                </view>-->
+                <!--                <view>{{productData.dishesextlist[3].groupname}}</view>-->
+                <!--                <view v-for="(item, index) in productData.dishesextlist[3].extitems" :key="item">-->
+                <!--                  {{item.ext_name}}-->
+                <!--                </view>-->
+                <!--              </view>-->
+              </view>
+              <view class="status-item" v-for="(item, index) in productData.dishesextlist" :key="item">
+                <view class="status-title">{{ item.groupname }}</view>
+                <view class="status-tags">
+                  <block v-for="(item1, index1) in item.extitems" :key="item1.ext_id + index1.toString()">
+                    <view
+                        class="tags-item2"
+                        :style="{
+												color: item1.isDefault ? activeTextColor : normalTextColor,
+												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
+											}"
+                        @tap="chooseTag(index, index1)"
+                    >
+                      {{ item1.ext_name }}
+                      <text
+                          class="tags-pri"
+                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                          v-if="item1.ext_price > 0"
+                          :class="{ 'active-text': item1.isDefault }"
+                      >
+                        ￥{{item1.ext_price}}
+                      </text>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+
+          <view class="bottom-btn-box">
+            <view class="status-box">
+              <view class="left-status">
+                <text class="pri-text" :style="{ color: activeBgColor }">￥{{ productData.shownPrice?productData.shownPrice:productData.nsjg }}</text>
+                <text class="status-text">{{ choosedText }}</text>
+              </view>
+              <actions :number="productData.number" @add="add" @minus="minus"></actions>
+            </view>
+            <view class="btn-box"><u-button :bgColor="activeBgColor" :textColor="activeTextColor" btnWidth="600rpx" @click="addToCart">加入购物袋</u-button></view>
+          </view>
+        </view>
+      </view>
+      <view class="fake-area2"></view>
+    </view>
+  </view>
 </template>
 
 <script>
-	import Modal from '@/components/modal/modal.vue'
-	import Actions from '../actions/actions.vue'
-	
-	export default {
-		name: 'ProductModal',
-		components: {
-			Modal,
-			Actions
-		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: false
-			},
-			product: {
-				type: Object,
-				default: () => {}
-			}
-		},
-		data() {
-			return {
-				productData: {}
-			}
-		},
-		watch: {
-			product(val) {
-				this.productData = JSON.parse(JSON.stringify(val))
-				this.$set(this.productData, 'number', 1)
-			}
-		},
-		computed: {
-			getProductSelectedMaterials() {
-				if(!this.productData.is_single && this.productData.materials) {
-					let materials = []
-					this.productData.materials.forEach(({values}) => {
-						values.forEach(value => {
-							if(value.is_selected) {
-								materials.push(value.name)
-							}
-						})
-					})
-					return materials.length ? materials.join('，') : ''
-				}
-				return ''
-			}
-		},
-		methods: {
-			changeMaterialSelected(index, key) {
-				const currentMaterial = this.productData.materials[index].values[key]
-				if(!currentMaterial.is_exclusive) {
-					if(currentMaterial.is_selected) return
-					this.productData.materials[index].values.forEach(value => this.$set(value, 'is_selected', 0))
-					currentMaterial.is_selected = 1
-					this.productData.number = 1
-				} else {
-					currentMaterial.is_selected = !currentMaterial.is_selected
-					this.productData.number = 1
-				}
-			},
-			add() {
-				this.productData.number += 1
-			},
-			minus() {
-				if(this.productData.number == 1) {
-					return
-				}
-				this.productData.number -= 1
-			},
-			addToCart() {
-				const product = {...this.productData, 'materials_text': this.getProductSelectedMaterials}
-				this.$emit('add-to-cart', product)
-			}
-		}
-	}
+import Actions from '../actions/actions.vue'
+export default {
+  props: {
+    visible: {
+      type: Boolean,
+      default: false
+    },
+    product: {
+      type: Object,
+      default: () => {
+        return {};
+      }
+    },
+    //底色
+    activeBgColor: {
+    	type: String,
+    	default: '#dba871'
+    },
+    normalBgColor: {
+    	type: String,
+    	default: '#efefef'
+    },
+    // 普通文字色
+    normalTextColor: {
+    	type: String,
+    	default: '#333333'
+    },
+    // 选中文字色
+    activeTextColor: {
+    	type: String,
+    	default: '#ffffff'
+    },
+    // 普通星星色
+    normalStarColor: {
+    	type: String,
+    	default: '#dba871'
+    },
+    // 选中星星色
+    activeStarColor: {
+    	type: String,
+    	default: '#fdf292'
+    }
+  },
+
+  components: {
+    Actions
+  },
+  watch: {
+    // visible(newValue, oldValue) {
+      // this.count = this.productData;
+      // this.shownPrice = this.productData.priNum;
+    // },
+    product(val) {
+      this.productData = JSON.parse(JSON.stringify(val));
+      console.log(this.productData);
+      this.$set(this.productData, 'number', 1);
+    }
+  },
+
+  data() {
+    return {
+      number: 1,
+      shownPrice: 0,
+      choosedText: '',
+      imgurl:"http://api.mzsale.cn/",
+      productData: {},
+      pitch:{} //选中项
+    };
+  },
+  updated() {
+    this.updateChoosedText();
+    this.calcOverprice()
+  },
+
+  methods: {
+    // 关闭modal
+    closeModal() {
+      this.$emit('cancel');
+    },
+    shareGoods() {
+      this.$emit('share', {});
+    },
+    // 计算总价（商品+加料）
+    calcOverprice() {
+      let pri =0;
+      this.productData.dishesextlist.forEach(item => {
+        item.extitems.forEach(item1 => {
+          if (item1.isDefault) {
+            pri += parseInt(item1.ext_price);
+          }
+        });
+      });
+      console.log(pri)
+      this.productData.shownPrice=this.productData.number * this.productData.nsjg + pri;
+      console.log(this.productData.shownPrice);
+    },
+    chooseTag(rowIndex, itemIndex) {
+      console.log(this.productData.dishesextlist[rowIndex].extitems[itemIndex])
+      // this.productData.dishesextlist[rowIndex].extitems.map(item => {
+      //   item.isDefault = false;
+      // });
+      this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
+      this.calcOverprice();
+    },
+    add() {
+      this.productData.number += 1
+      this.calcOverprice()
+    },
+    minus() {
+      if(this.productData.number == 1) {
+        return
+      }
+      this.productData.number -= 1
+      this.calcOverprice()
+    },
+    //更新
+    updateChoosedText() {
+      let tempArr = [];
+      this.productData.dishesextlist.map(item => {
+        item.extitems.map(item1 => {
+          if (item1.isDefault) {
+              tempArr.push(item1.ext_name);
+          }
+        });
+      });
+      this.choosedText = tempArr.join(' , ');
+
+      // let pitchs=[];
+      // this.productData.dishesextlist.map(item => {
+      //   item.extitems.map(item1 => {
+      //     if (item1.isDefault) {
+      //       pitchs.push(JSON.stringify(item1));
+      //     }
+      //   });
+      // });
+      // this.pitch=pitchs
+    },
+
+    // 加入购物车
+    addToCart() {
+     this.productData.choosedText=this.choosedText
+      //this.productData.pitchs=this.pitch
+      const product = {...this.productData}
+      this.$emit('add-to-cart', product)
+      console.log(product)
+    }
+  }
+};
 </script>
 
-<style lang="scss" scoped>
-	.header {
-		padding: 20rpx 30rpx;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		display: flex;
-		justify-content: flex-end;
-		z-index: 11;
-		
-		image {
-			width: 60rpx;
-			height: 60rpx;
-			
-			&:nth-child(1) {
-				margin-right: 30rpx;
-			}
-		}
-	}
-	
-	.swiper {
-		height: 426rpx;
-	}
-	
-	.content {
-		display: flex;
-		flex-direction: column;
-		font-size: $font-size-sm;
-		color: $text-color-assist;
-		min-height: 1vh;
-		max-height: calc(100vh - 100rpx - 426rpx - 250rpx);
-		
-		.wrapper {
-			width: 100%;
-			height: 100%;
-			overflow: hidden;
-			padding: 30rpx 30rpx 20rpx;
-		}
-		
-		.title {
-			font-size: $font-size-extra-lg;
-			color: $text-color-base;
-			font-weight: bold;
-			margin-bottom: 10rpx;
-		}
-		
-		.labels {
-			display: flex;
-			font-size: 20rpx;
-			margin-bottom: 10rpx;
-			overflow: hidden;
-			flex-wrap: wrap;
-			
-			.label {
-				max-width: 40%;
-				padding: 6rpx 10rpx;
-				margin-right: 10rpx;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-			}
-		}
-		
-		.materials {
-			width: 80%;
-			margin-bottom: 20rpx;
-			
-			.group-name {
-				padding: 10rpx 0;
-			}
-			
-			.values {
-				display: flex;
-				flex-wrap: wrap;
-				overflow: hidden;
-				
-				.value {
-					background-color: #f5f5f7;
-					color: $font-size-base;
-					padding: 10rpx 20rpx;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-					margin-right: 20rpx;
-					margin-bottom: 20rpx;
-					border-radius: $border-radius-lg;
-					
-					&.selected {
-						background-color: $color-primary;
-						color: $bg-color-white;
-					}
-				}
-			}
-		}
-	}
-	
-	.bottom {
-		padding: 20rpx 40rpx;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		border-top: 1rpx solid rgba($color: $border-color, $alpha: 0.3);
-		background-color: $bg-color-white;
-		position: relative;
-		z-index: 11;
-		
-		.price-and-materials {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-			overflow: hidden;
-			margin-right: 10rpx;
-			
-			.price {
-				color: $color-primary;
-				font-size: $font-size-extra-lg;
-				font-weight: bold;
-			}
-			
-			.materials {
-				font-size: $font-size-sm;
-				color: $text-color-assist;
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				-webkit-line-clamp: 2;
-				overflow: hidden;
-			}
-		}
-		
-		.add-cart-btn {
-			margin-top: 20rpx;
-			font-size: $font-size-lg;
-			border-radius: $border-radius-base;
-		}
-	}
+<style>
+.mask-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  transition: all 0.2s linear;
+}
+
+.modal-show {
+  visibility: visible;
+  transform: scale(1);
+}
+
+.bg-show {
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: visible;
+}
+
+.bg-hidden {
+  background-color: rgba(255, 255, 255, 0);
+  visibility: hidden;
+}
+
+.modal-hidden {
+  visibility: hidden;
+  transform: scale(0);
+}
+
+.fake-area {
+  width: 100%;
+  height: 128rpx;
+}
+
+.fake-area2 {
+  height: 98rpx;
+  width: 100%;
+}
+
+.main-area {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s linear;
+}
+
+.modal-area {
+  width: 88%;
+  background-color: #ffffff;
+  border-radius: 8rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.handle-btn {
+  width: 42rpx;
+  height: 42rpx;
+  display: block;
+  position: absolute;
+  top: 20rpx;
+  z-index: 99;
+}
+
+.bottom-btn-box {
+  width: 100%;
+}
+
+.btn-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+
+.status-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 30rpx 0 30rpx;
+  box-sizing: border-box;
+}
+
+.left-status {
+  display: flex;
+  flex-direction: column;
+}
+
+.pri-text {
+  font-size: 34rpx;
+}
+
+.status-text {
+  color: #9a9a9a;
+  font-size: 30rpx;
+  overflow: hidden;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.count-box {
+  display: flex;
+  align-items: center;
+}
+
+.count-box image {
+  width: 56rpx;
+  height: 56rpx;
+  display: block;
+}
+
+.count-box text {
+  display: inline-flex;
+  width: 60rpx;
+  height: 48rpx;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+}
+
+.good-image-box image {
+  width: 100%;
+  max-height: 440rpx;
+  display: block;
+}
+
+.scroll-inner_box {
+  padding: 10rpx 30rpx;
+  box-sizing: border-box;
+  /* #ifndef H5 */
+  max-height: 320rpx;
+  /* #endif */
+  /* #ifdef H5 */
+  max-height: 400rpx;
+  /* #endif */
+}
+
+.good-name {
+  font-size: 36rpx;
+}
+
+.tag-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #909090;
+  background-color: #dadada;
+  border-radius: 4rpx;
+  padding: 10rpx 20rpx;
+  transform: scale(0.8);
+  transform-origin: left;
+  margin-right: -20rpx;
+}
+
+.description-text {
+  display: inline-block;
+  color: #555555;
+  font-size: 28rpx;
+  line-height: 32rpx;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-title {
+  font-size: 28rpx;
+  color: #555555;
+  padding: 10rpx 0;
+  box-sizing: border-box;
+}
+
+.status-tags {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 24rpx;
+}
+
+.tags-item2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #333;
+  /* background-color: #efefef; */
+  border-radius: 4rpx;
+  padding: 10rpx 24rpx;
+  margin-right: 16rpx;
+  margin-bottom: 16rpx;
+  position: relative;
+}
+
+.tags-pri {
+  color: #dca371;
+  padding-left: 8rpx;
+  transform: scale(0.8);
+}
+
+.recommend {
+  position: absolute;
+  top: 4rpx;
+  right: 4rpx;
+  width: 24rpx;
+  height: 24rpx;
+  display: block;
+}
+
+.active-tag {
+  background-color: #dba871 !important;
+  color: #ffffff !important;
+}
+
+.active-text {
+  color: #ffffff;
+}
+.star-shrink {
+  transform: scale(0.7);
+  transform-origin: right;
+}
+.sign {
+  font-size: 46rpx !important;
+}
 </style>

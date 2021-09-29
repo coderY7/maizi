@@ -1,8 +1,8 @@
 <template>
   <view class="content">
     <view class="unit1">
-      <text>{{ desk[0] }}</text>
-      <text>{{ desk[1] }}</text>
+      <text>{{ tableid[0] }}</text>
+      <text>{{ tableid[1] }}</text>
     </view>
     <view class="unit2">
       <view style="font-size: 20px;margin-bottom:14px;">支付金额</view>
@@ -30,32 +30,103 @@ export default {
   data() {
     return {
       price: 0,
-      desk: '',
-      mode: ''
+      tableid:[],
+      mode: '',
+      xsdbh:'',//订单号
+      token: ''
     }
   },
   onLoad(options) {
-    this.desk=uni.getStorageSync('table');
-    let Cart = uni.getStorageSync('Cart')
-    this.price = Cart.cartprice
+    this.token=uni.getStorageSync('token');
+    this.tableid=uni.getStorageSync('tableid');
+    let Cart = uni.getStorageSync('Cart');
+    this.price = Cart.cartprice;
+    this.xsdbh=uni.getStorageSync('xsdbh');
   },
   methods: {
     pay(Cart) {
-      //支付功能
-      uni.requestPayment({
-        provider: 'wxpay',
-        timeStamp: String(Date.now()),
-        nonceStr: 'A1B2C3D4E5',
-        package: 'prepay_id=wx20180101abcdefg',
-        signType: 'MD5',
-        paySign: '',
-        success: function (res) {
-          console.log('success:' + JSON.stringify(res));
-        },
-        fail: function (err) {
-          console.log('fail:' + JSON.stringify(err));
-        }
-      });
+      //支付
+this.$u.api.pays({
+  access_token: this.token,
+  flow_no: this.xsdbh,//订单号
+  payno: "04",//收款方式
+  total: '',//应收总金额，分
+  payid: "",//付款码
+  paymm: "{$syyid}",//收银员编号
+  verifycode: "{$vipid}",//会员号
+  flag: {
+    regcode:'',//注册码
+    mz_openid:'',
+    FDBH:'',//分店
+    act_list_json: '',//活动商品列表Json字符串，从预结算接口获取
+    POSID:'',//收银机编号
+    ActMack:'' ,//微信优惠券标志，构成规则："SELFPORT"+门店编号,例如：SELFPORT0099
+    ystflowid:'' ,//赢商通请求流水，一般为空
+    sub_openid:''// 相对商户的openid，一般为空
+  }
+}).then(res => {
+  console.log('付款：',res)
+})
+
+      //订单预结算
+      // this.$u.api.readytopays({
+      //       "access_token": this.token,
+      //       "xsdbh": "",//订单号
+      //       "fdbh": "808001",//分店号
+      //       "vipid": "",//会员号
+      //       "viplevel": "",//会员等级
+      //       "viprate": "",//会员折扣率
+      //       "syyid": "00268",//收银员工号
+      //       "posid": "80800101",//pos机
+      //       "counts": "2",//商品总数
+      //       "goodslist": [ //交易商品列表
+      //           {
+      //         "spsmm": "20210914000001",
+      //         "spbm": "110206158",
+      //         "price": "28.000",
+      //         "zxprice": "26.000",
+      //         "quantity": "1",
+      //         "flownum": "1",
+      //         "discount":"2.00",
+      //         "extlist":[
+      //           {
+      //             "ext_id":"10",
+      //             "ext_name":"中辣",
+      //             "ext_quantity":"0",
+      //             "ext_price":"0",
+      //             "ext_zxprice":"0"
+      //           }
+      //         ]
+      //          },
+      //         {
+      //         "spsmm": "2021092400004",
+      //         "spbm": "110206161",
+      //         "price": "32.00",
+      //         "zxprice": "33.000",
+      //         "quantity": "1",
+      //         "flownum": "2",
+      //         "discount":"1.0",
+      //         "extlist":[
+      //           {
+      //             "ext_id":"11",
+      //             "ext_name":"特辣",
+      //             "ext_quantity":"0",
+      //             "ext_price":"0",
+      //             "ext_zxprice":"0"
+      //           },
+      //           {
+      //             "ext_id":"14",
+      //             "ext_name":"加青菜",
+      //             "ext_quantity":"1",
+      //             "ext_price":"2",
+      //             "ext_zxprice":"2"
+      //           }
+      //         ]
+      //       }]
+      //     }).then(res=>{
+      //   console.log('预结算：',res)
+      // })
+
     }
   }
 }
@@ -65,7 +136,7 @@ export default {
 
 <style lang="scss">
 page {
-  background: url(../../static/main/顶部底图.png) no-repeat;
+  background: url(../../static/main/dt.png) no-repeat;
   background-size: contain;
   background-color: #f3f2f4;
 

@@ -151,24 +151,24 @@ export default {
           id: 1,
           store: '夏日流星限定贩卖',
           deal: '交易成功',
-          goodsList: [
-            {
-              goodsUrl: '//img13.360buyimg.com/n7/jfs/t1/103005/7/17719/314825/5e8c19faEb7eed50d/5b81ae4b2f7f3bb7.jpg',
-              title: '【冬日限定】现货 原创jk制服女2020冬装新款小清新宽松软糯毛衣外套女开衫短款百搭日系甜美风',
-              type: '灰色;M',
-              deliveryTime: '付款后30天内发货',
-              price: '348.58',
-              number: 2
-            },
-            {
-              goodsUrl: '//img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg',
-              title: '【葡萄藤】现货 小清新学院风制服格裙百褶裙女短款百搭日系甜美风原创jk制服女2020新款',
-              type: '45cm;S',
-              deliveryTime: '付款后30天内发货',
-              price: '135.00',
-              number: 1
-            }
-          ]
+          // goodsList: [
+          //   {
+          //     goodsUrl: '//img13.360buyimg.com/n7/jfs/t1/103005/7/17719/314825/5e8c19faEb7eed50d/5b81ae4b2f7f3bb7.jpg',
+          //     title: '【冬日限定】现货 原创jk制服女2020冬装新款小清新宽松软糯毛衣外套女开衫短款百搭日系甜美风',
+          //     type: '灰色;M',
+          //     deliveryTime: '付款后30天内发货',
+          //     price: '348.58',
+          //     number: 2
+          //   },
+          //   {
+          //     goodsUrl: '//img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg',
+          //     title: '【葡萄藤】现货 小清新学院风制服格裙百褶裙女短款百搭日系甜美风原创jk制服女2020新款',
+          //     type: '45cm;S',
+          //     deliveryTime: '付款后30天内发货',
+          //     price: '135.00',
+          //     number: 1
+          //   }
+          // ]
         },
         {
           id: 2,
@@ -267,24 +267,33 @@ export default {
       dx: 0,
       loadStatus: ['loadmore','loadmore','loadmore','loadmore'],
       time:'',
-      Cart:[]
+      Cart:[],
+      token:''
     };
   },
   onLoad() {
     this.Cart=uni.getStorageSync('Cart');
-    //获取时间
-    //   var datetime = new Date();
-    //   var year = datetime.getFullYear();
-    //   //此时的三元判断，实际上可以利用字符串的方法padStart去补全，使用方法String.prototype.padStart.call(xx,2,"0"),第一个参数补齐的元素，第二个参数表示补足两位，第三个参数表示用0去补齐
-    //   var month =datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1): datetime.getMonth() + 1;
-    //   var date =  datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-    //   var hour = datetime.getHours() < 10 ? "0" + datetime.getHours():datetime.getHours();
-    //   var minutes = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes():datetime.getMinutes();
-    //   var seconds = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds():datetime.getSeconds();
-    //   //times是定义的字符串，最后拼接出此时此刻的时间
-    //   this.times =  year+" / " + month+" /" + date+" / "+ hour+" : " + minutes+" : " + seconds ;
-    //   this.time=this.times
   },
+  onShow(){
+    this.token = uni.getStorageSync('token');
+    this.Cart=uni.getStorageSync('Cart');
+    //查询桌台订单信息
+    this.$u.api.orders({
+      access_token:this.token,
+      vtype:'get',
+      tableid:'2',
+      fdbh:'808001'
+    }).then(res => {
+      console.log('查询订单：',res)
+    })
+  //查询桌台订单明细信息
+    this.$u.api.orders({
+      access_token:this.token,
+      vtype:'detail',
+      xsdbh:'',
+      fdbh:'808001'
+    })
+},
   computed: {
     // 价格小数
     priceDecimal() {
@@ -313,7 +322,7 @@ export default {
     },
     // 页面数据
     getOrderList(idx) {
-      let index = this.$u.random(0, this.dataList.length - 1);
+      //let index = this.$u.random(0, this.dataList.length - 1);
       let data = JSON.parse(JSON.stringify(this.dataList[index]));
       let data1 = JSON.parse(JSON.stringify(this.dataList[1]));
       let data2 = JSON.parse(JSON.stringify(this.dataList[2]));

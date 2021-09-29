@@ -13,19 +13,19 @@
     <view class="unit2">
       <navigator class="unit2Nav" url="/pages/vip/vip">
         <view class="unit2_box">
-          <image class="unit2_img" src="../../static/main/我的会员.png"></image>
+          <image class="unit2_img" src="../../static/main/hy.png"></image>
           <text>我的会员</text>
         </view>
       </navigator>
       <navigator class="unit2Nav" url="/pages/roll/roll">
         <view class="unit2_box">
-          <image class="unit2_img" src="../../static/main/红包卡卷.png"></image>
+          <image class="unit2_img" src="../../static/main/kj.png"></image>
           <text>红包卡卷</text>
         </view>
       </navigator>
       <navigator class="unit2Nav" url="/pages/order/order" open-type="switchTab">
         <view class="unit2_box">
-          <image class="unit2_img" src="../../static/main/我的订单.png"></image>
+          <image class="unit2_img" src="../../static/main/dindan.png"></image>
           <text>我的订单</text>
         </view>
       </navigator>
@@ -35,7 +35,7 @@
     <view class="unit3">
       <navigator class="unit3Nav" url="/pages/menu/menu" open-type="switchTab" @click="navmenu">
         <view class="unit3_box">
-          <image src="../../static/main/堂食点餐.png" class="unit3_img"></image>
+          <image src="../../static/main/scan.png" class="unit3_img"></image>
           <text class="unit3_name">堂食点餐</text>
           <text>在线点单不排队</text>
         </view>
@@ -51,13 +51,13 @@
 <!--    推荐-->
     <text>热门推荐</text>
     <view class="unit4">
-			<image src="../../static/main/标题底框.png"></image>
+			<image src="../../static/main/dk.png"></image>
 			<view class="unit4_text" style="font-size: 18px">
 				商品信息1
 			</view>
     </view>
     <view class="unit4">
-      <image src="../../static/main/标题底框.png"></image>
+      <image src="../../static/main/dk.png"></image>
       <view class="unit4_text" style="font-size: 18px">
         商品信息2
       </view>
@@ -69,19 +69,19 @@
 export default {
   data() {
     return {
-      table:'',
+      tableid:'',
     }
   },
   methods: {
 navmenu(){
-  uni.setStorageSync('table',[this.table,'堂食']);
+  uni.setStorageSync('tableid',[this.tableid,'堂食']);
 },
  navbesides(){
-   uni.setStorageSync('table',[this.table,'外带']);
+   uni.setStorageSync('tableid',[this.tableid,'外带']);
  }
   },
   onLoad(options) {
-     this.table = options.table
+     this.tableid = options.tableid
   }
 
 }
@@ -90,7 +90,7 @@ navmenu(){
 
 <style lang="scss">
 page {
-  background: url(../../static/main/顶部底图.png) no-repeat;
+  background: url(../../static/main/dt.png) no-repeat;
   background-size: contain;
   background-color: #f3f2f4;
 
@@ -105,7 +105,7 @@ page {
  align-items: center;
   justify-content: center;
  height:320rpx;
-  background: url('../../static/main/标题底框.png') no-repeat;
+  background: url('../../static/main/dk.png') no-repeat;
   background-size: 100%;
 
   image {

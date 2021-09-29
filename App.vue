@@ -11,7 +11,6 @@
 		},
     //全局数据
     globalData: {
-
     }
 	}
 </script>

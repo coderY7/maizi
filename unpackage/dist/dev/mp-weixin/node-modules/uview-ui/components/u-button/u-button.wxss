@@ -30,31 +30,19 @@
 .u-btn.data-v-3bf2dba7 {
   position: relative;
   border: 0;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: inline-flex;
   overflow: visible;
   line-height: 1;
 
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
 
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   padding: 0 40rpx;
   z-index: 1;
   box-sizing: border-box;
-  -webkit-transition: all 0.15s;
   transition: all 0.15s;
 }
 .u-btn--bold-border.data-v-3bf2dba7 {
@@ -164,7 +152,6 @@
   opacity: 0;
   -webkit-transform: scale(2);
           transform: scale(2);
-  -webkit-transition: opacity 1s linear, -webkit-transform 0.4s linear;
   transition: opacity 1s linear, -webkit-transform 0.4s linear;
   transition: opacity 1s linear, transform 0.4s linear;
   transition: opacity 1s linear, transform 0.4s linear, -webkit-transform 0.4s linear;
@@ -184,8 +171,6 @@
   line-height: 80rpx;
 }
 .u-size-medium.data-v-3bf2dba7 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: inline-flex;
   width: auto;
   font-size: 26rpx;
@@ -194,8 +179,6 @@
   padding: 0 80rpx;
 }
 .u-size-mini.data-v-3bf2dba7 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: inline-flex;
   width: auto;
   font-size: 22rpx;

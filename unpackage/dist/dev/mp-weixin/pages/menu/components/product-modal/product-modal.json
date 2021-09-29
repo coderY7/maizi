@@ -1,7 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "modal": "/components/modal/modal",
     "u-button": "/node-modules/uview-ui/components/u-button/u-button",
     "actions": "/pages/menu/components/actions/actions"
   }

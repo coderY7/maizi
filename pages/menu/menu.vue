@@ -9,38 +9,32 @@
 		<view class="u-menu-wrap">
 			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
 			 :scroll-into-view="itemId">
-				<view v-for="(item,index) in categories" :key="index" class="u-tab-item" :class="[current == index ? 'u-tab-item-active' : '']"
+				<view v-for="(item,index) in categorylist" :key="index" class="u-tab-item" :class="[current == index ? 'u-tab-item-active' : '']"
 				 @tap.stop="swichMenu(index)">
-					<text class="u-line-1">{{item.name}}</text>
+					<text class="u-line-1">{{item.category_desc}}</text>
 				</view>
 			</scroll-view>
 			<scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box" @scroll="rightScroll">
 				<view class="page-view">
-					<view class="class-item" :id="'item' + index" v-for="(item , index) in categories" :key="index">
-						<view class="item-title">
-							<text>{{item.name}}</text>
-						</view>
 						<view class="item-container">
-							<view class="thumb-box" v-for="(product, index1) in item.products" :key="index1"
+							<view class="thumb-box" v-for="(product, index1) in disheslist" :key="index1"
               @tap="showProductDetailModal(product)">
-								<image class="item-menu-image" :src="product.images[0].url" mode=""></image>
+								<image class="item-menu-image" :src="imgurl+product.small_img_path" mode=""></image>
 								<view class="item-menu-text">
-									<view style="font-size: 16px;">{{product.name}}</view>
-                  <view>月售：{{product.sales}}  好评度：{{product.praise}}</view>
-									<view>{{product.product}}</view>
+									<view style="font-size: 16px;">{{product.spmc}}</view>
 									<view class="price-btn">
-										<view style="font-size: 14px;color: #f4461c;">￥{{product.price}}</view>
+										<view style="font-size: 14px;color: #f4461c;">￥{{product.nsjg}}</view>
 <!--   选择-->
                     <actions :materials-btn="!product.is_single"
                              @materials="showProductDetailModal(product)"
-                             :number="productCartNum(product.id)"
+                             :number="productCartNum(product.spbm)"
                              @add="handleAddToCart(product)"
                              @minus="handleMinusFromCart(product)" />
 									</view>
 								</view>
 							</view>
 						</view>
-					</view>
+<!--					</view>-->
 				</view>
 			</scroll-view>
 		</view>
@@ -80,6 +74,7 @@
     },
     data() {
       return {
+        imgurl:"http://api.mzsale.cn/",
         scrollTop: 0, //tab标题的滚动条位置
         oldScrollTop: 0,
         current: 0, // 预设当前项的值
@@ -102,34 +97,67 @@
         productsScrollTop: 0,
         showSearch: false,
         cartprice:'',
-        Cart:{}
+        Cart:{},
+
+        categorylist:[],  //菜品分类
+        disheslist:[] ,    //菜品数据
+        category_id:[], //菜品分类ID
+        token:'',
+        fdbh:'808001',
+        companyid:'800008'
       }
     },
     onShow(){
-      if(!uni.getStorageSync('token')){
-        setTimeout(() => {
-          uni.switchTab({
-            url: '/pages/my/my'
-          });
-        },500)
-        uni.showToast({
-          title: '请先登录账号',
-          icon:'error',
-          duration: 500
-        });
-      }else{
-
-      }
+      // if(!uni.getStorageSync('token')){
+      //   setTimeout(() => {
+      //     uni.switchTab({
+      //       url: '/pages/my/my'
+      //     });
+      //   },500)
+      //   uni.showToast({
+      //     title: '请先登录账号',
+      //     icon:'error',
+      //     duration: 500
+      //   });
+      // }else{
+      //
+      // }
+      this.token = uni.getStorageSync('token');
+      this.$u.api.categorys({
+        access_token:this.token,
+        vtype:'pos',
+        fdbh:this.fdbh,
+        companyid:this.companyid,
+        parentid:"",
+        level:"3"
+      }).then((res)=> {
+        this.categorylist=res.categorylist
+        // for(var item of res.categorylist){
+        //     this.$u.api.caterings({
+        //       access_token:this.token,
+        //       vtype:"pos",
+        //       fdbh:"808001",
+        //       companyid:"800008",
+        //       categoryid:item.category_id,
+        //     }).then((res)=> {
+        //       console.log(res)
+        //     })
+        // }
+        //获取菜品数据
+        this.$u.api.caterings({
+          access_token:this.token,
+          vtype:"pos",
+          fdbh:this.fdbh,
+          companyid:this.companyid,
+          categoryid:this.categorylist[0].category_id
+        }).then((res) => {
+          console.log('菜单：',res)
+          this.disheslist=res.disheslist
+        })
+      })
     },
     onLoad(options) {
-      this.$u.api.categorys({
-        access_token:'',
-        vtype:'pos',
-        fdbh:'808001',
-        companyid:'800008'
-      }).then((res) => {
-        console.log(res)
-      })
+
     },
     onReady() {
       this.getMenuItemTop()
@@ -147,6 +175,86 @@
           this.current = index;
           this.leftMenuStatus(index);
         })
+
+        // 点击分类切换请求
+        if(index=='0'){
+          //获取菜品数据
+          this.$u.api.caterings({
+            access_token:this.token,
+            vtype:"pos",
+            fdbh:this.fdbh,
+            companyid:this.companyid,
+            categoryid:this.categorylist[0].category_id
+          }).then((res) => {
+            console.log(res)
+            this.disheslist=res.disheslist
+          })
+        }
+        if(index=='1'){
+          //获取菜品数据
+          this.$u.api.caterings({
+            access_token:this.token,
+            vtype:"pos",
+            fdbh:this.fdbh,
+            companyid:this.companyid,
+            categoryid:this.categorylist[1].category_id
+          }).then((res) => {
+            console.log(res)
+            this.disheslist=res.disheslist
+          })
+        }
+        if(index=='2'){
+          //获取菜品数据
+          this.$u.api.caterings({
+            access_token:this.token,
+            vtype:"pos",
+            fdbh:this.fdbh,
+            companyid:this.companyid,
+            categoryid:this.categorylist[2].category_id
+          }).then((res) => {
+            console.log(res)
+            this.disheslist=res.disheslist
+          })
+        }
+        if(index=='3'){
+          //获取菜品数据
+          this.$u.api.caterings({
+            access_token:this.token,
+            vtype:"pos",
+            fdbh:this.fdbh,
+            companyid:this.companyid,
+            categoryid:this.categorylist[3].category_id
+          }).then((res) => {
+            console.log(res)
+            this.disheslist=res.disheslist
+          })
+        }
+        if(index=='4'){
+          //获取菜品数据
+          this.$u.api.caterings({
+            access_token:this.token,
+            vtype:"pos",
+            fdbh:this.fdbh,
+            companyid:this.companyid,
+            categoryid:this.categorylist[4].category_id
+          }).then((res) => {
+            console.log(res)
+            this.disheslist=res.disheslist
+          })
+        }
+        if(index=='5'){
+          //获取菜品数据
+          this.$u.api.caterings({
+            access_token:this.token,
+            vtype:"pos",
+            fdbh:this.fdbh,
+            companyid:this.companyid,
+            categoryid:this.categorylist[5].category_id
+          }).then((res) => {
+            console.log(res)
+            this.disheslist=res.disheslist
+          })
+        }
       },
       // 获取一个目标元素的高度
       getElRect(elClass, dataVal) {
@@ -261,19 +369,18 @@
             return item.id === product.id
           }
         })
-
         if(index > -1) {
           this.cart[index].number += (product.number || 1)
           return
         }
-
+        console.log(product)
         this.cart.push({
-          id: product.id,
+          id: product.spbm,
           cate_id: product.category_id,
-          name: product.name,
-          price: product.price,
+          name: product.spmc,
+          price: product.shownPrice,
           number: product.number || 1,
-          image: product.images[0].url,
+          image: this.imgurl+product.small_img_path,
           is_single: product.is_single,
           materials_text: product.materials_text || ''
         })
@@ -291,8 +398,17 @@
           this.cart.splice(index, 1)
         }
       },
-      showProductDetailModal(product) {
-
+      //菜品详情页
+      async showProductDetailModal(product) {
+       await this.$u.api.dishess({
+          access_token:this.token,
+          vtype:"pos",
+         fdbh:this.fdbh,
+         companyid:this.companyid,
+          spbm:product.spbm,
+        }).then((res) => {
+          Object.assign(product,res)
+        })
         this.product = product
         this.productModalVisible = true
       },
@@ -300,7 +416,7 @@
         this.handleAddToCart(product)
         this.closeProductDetailModal()
       },
-      closeProductDetailModal() {
+      closeProductDetailModal(e) {
         this.productModalVisible = false
         this.product = {}
       },
@@ -355,8 +471,19 @@
         uni.navigateTo({
           url:`/pages/pay/pay?table=${this.table}`,
         })
+        //生成订单
+        this.$u.api.orders({
+          access_token:this.token,
+          vtype:"new",
+          posid:"80800101",
+          tableid:"2",
+          tablenumber:"3",
+          tablewaiter:"00268",
+          fdbh:this.fdbh,
+        }).then((res)=>{
+          console.log("生成订单：",res)
+        })
       }
-
   },
     computed:{
       productCartNum() {	//计算单个饮品添加到购物车的数量
@@ -380,11 +507,9 @@
 		display: flex;
 		flex-direction: column;
 	}
-
 	.u-search-box {
 
 	}
-
 	.u-menu-wrap {
 		flex: 1;
 		display: flex;

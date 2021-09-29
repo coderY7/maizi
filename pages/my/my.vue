@@ -72,23 +72,24 @@ export default {
   methods: {
     //用户登录
      login(){
-       uni.getProvider({
-         service: 'oauth',
-         success: function (res) {
-           if (~res.provider.indexOf('weixin')) {
-             uni.login({
-               provider: 'weixin',
-               success: (loginRes)=> {
-                 console.log(JSON.stringify(loginRes));
-               }
-             });
-           }
-         }
-       });
+       // uni.getProvider({
+       //   service: 'oauth',
+       //   success: function (res) {
+       //     if (~res.provider.indexOf('weixin')) {
+       //       uni.login({
+       //         provider: 'weixin',
+       //         success: (loginRes)=> {
+       //           console.log(JSON.stringify(loginRes));
+       //         }
+       //       });
+       //     }
+       //   }
+       // });
   //获取信息
   uni.getUserProfile({
     desc:"获取用户信息",
     success: (res)=>{
+      console.log(res)
       this.userInfo=res.userInfo
       this.islogin=true
     }
@@ -110,7 +111,7 @@ export default {
 
 <style lang="scss">
 page {
-  background: url(../../static/main/顶部底图.png) no-repeat;
+  background: url(../../static/main/dt.png) no-repeat;
   background-size: contain;
   background-color: #f3f2f4;
 }

@@ -33,7 +33,7 @@
         {
           "name": "pages/main/main",
           "pathName": "pages/main/main",
-          "query": "table=大厅7桌",
+          "query": "tableid=2",
           "scene": null
         },
         {
