@@ -21,7 +21,7 @@
 							<view class="right">
 								<view class="name-and-materials">
 									<view class="name">{{ item.name }}</view>
-									<view class="materials" v-if="item.materials_text">{{ item.materials_text }}</view>
+									<view class="materials">{{ item.choosedText }}</view>
 								</view>
 								<view class="price-and-actions">
 									<view class="price">￥{{ item.price }}</view>

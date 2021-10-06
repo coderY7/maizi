@@ -86,7 +86,6 @@
         arr: [],
         scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
         timer: null, // 定时器
-
         productModalVisible: false,//商品详情显示
         categories: categories,
         cart: [],
@@ -102,53 +101,28 @@
         categorylist:[],  //菜品分类
         disheslist:[] ,    //菜品数据
         category_id:[], //菜品分类ID
-        token:'',
-        fdbh:'808001',
-        companyid:'800008'
+        companyid:'800008',
+        counts:'',//商品数量
+        goodslist: []
       }
     },
     onShow(){
-      // if(!uni.getStorageSync('token')){
-      //   setTimeout(() => {
-      //     uni.switchTab({
-      //       url: '/pages/my/my'
-      //     });
-      //   },500)
-      //   uni.showToast({
-      //     title: '请先登录账号',
-      //     icon:'error',
-      //     duration: 500
-      //   });
-      // }else{
-      //
-      // }
       this.token = uni.getStorageSync('token');
       this.$u.api.categorys({
         access_token:this.token,
         vtype:'pos',
-        fdbh:this.fdbh,
-        companyid:this.companyid,
+        fdbh:uni.getStorageSync('fdbh'),
+        companyid:uni.getStorageSync('companyid'),
         parentid:"",
         level:"3"
       }).then((res)=> {
         this.categorylist=res.categorylist
-        // for(var item of res.categorylist){
-        //     this.$u.api.caterings({
-        //       access_token:this.token,
-        //       vtype:"pos",
-        //       fdbh:"808001",
-        //       companyid:"800008",
-        //       categoryid:item.category_id,
-        //     }).then((res)=> {
-        //       console.log(res)
-        //     })
-        // }
         //获取菜品数据
         this.$u.api.caterings({
           access_token:this.token,
           vtype:"pos",
-          fdbh:this.fdbh,
-          companyid:this.companyid,
+          fdbh:uni.getStorageSync('fdbh'),
+          companyid:uni.getStorageSync('companyid'),
           categoryid:this.categorylist[0].category_id
         }).then((res) => {
           console.log('菜单：',res)
@@ -157,7 +131,6 @@
       })
     },
     onLoad(options) {
-
     },
     onReady() {
       this.getMenuItemTop()
@@ -177,86 +150,21 @@
         })
 
         // 点击分类切换请求
-        if(index=='0'){
+        if(index){
           //获取菜品数据
           this.$u.api.caterings({
-            access_token:this.token,
+            access_token:uni.getStorageSync('token'),
             vtype:"pos",
-            fdbh:this.fdbh,
-            companyid:this.companyid,
-            categoryid:this.categorylist[0].category_id
-          }).then((res) => {
-            console.log(res)
-            this.disheslist=res.disheslist
-          })
-        }
-        if(index=='1'){
-          //获取菜品数据
-          this.$u.api.caterings({
-            access_token:this.token,
-            vtype:"pos",
-            fdbh:this.fdbh,
-            companyid:this.companyid,
-            categoryid:this.categorylist[1].category_id
-          }).then((res) => {
-            console.log(res)
-            this.disheslist=res.disheslist
-          })
-        }
-        if(index=='2'){
-          //获取菜品数据
-          this.$u.api.caterings({
-            access_token:this.token,
-            vtype:"pos",
-            fdbh:this.fdbh,
-            companyid:this.companyid,
-            categoryid:this.categorylist[2].category_id
-          }).then((res) => {
-            console.log(res)
-            this.disheslist=res.disheslist
-          })
-        }
-        if(index=='3'){
-          //获取菜品数据
-          this.$u.api.caterings({
-            access_token:this.token,
-            vtype:"pos",
-            fdbh:this.fdbh,
-            companyid:this.companyid,
-            categoryid:this.categorylist[3].category_id
-          }).then((res) => {
-            console.log(res)
-            this.disheslist=res.disheslist
-          })
-        }
-        if(index=='4'){
-          //获取菜品数据
-          this.$u.api.caterings({
-            access_token:this.token,
-            vtype:"pos",
-            fdbh:this.fdbh,
-            companyid:this.companyid,
-            categoryid:this.categorylist[4].category_id
-          }).then((res) => {
-            console.log(res)
-            this.disheslist=res.disheslist
-          })
-        }
-        if(index=='5'){
-          //获取菜品数据
-          this.$u.api.caterings({
-            access_token:this.token,
-            vtype:"pos",
-            fdbh:this.fdbh,
-            companyid:this.companyid,
-            categoryid:this.categorylist[5].category_id
+            fdbh:uni.getStorageSync('fdbh'),
+            companyid:uni.getStorageSync('companyid'),
+            categoryid:this.categorylist[index].category_id
           }).then((res) => {
             console.log(res)
             this.disheslist=res.disheslist
           })
         }
       },
-      // 获取一个目标元素的高度
+      //获取一个目标元素的高度
       getElRect(elClass, dataVal) {
         new Promise((resolve, reject) => {
           const query = uni.createSelectorQuery().in(this);
@@ -363,36 +271,48 @@
       //添加到购物车
       handleAddToCart(product) {
         const index = this.cart.findIndex(item => {
-          if(!product.is_single) {
-            return (item.id == product.id) && (item.materials_text == product.materials_text)
-          } else {
-            return item.id === product.id
-          }
+            return (item.spbm == product.spbm) && (item.choosedText == product.choosedText)
         })
         if(index > -1) {
           this.cart[index].number += (product.number || 1)
           return
         }
         console.log(product)
+        // this.goodslist.push({
+        //   price: product.zxprice,
+        //   extlist:product.extlist,
+        //   spsmm:product.spsmm,
+        //   zxprice:product.zxprice,
+        //   quantity: product.quantity,
+        //   flownum: product.flownum,
+        //   discount: product.discount,
+        //   spbm:product.spbm,
+        // })
+        // console.log(this.goodslist)
         this.cart.push({
           id: product.spbm,
           cate_id: product.category_id,
           name: product.spmc,
-          price: product.shownPrice,
           number: product.number || 1,
           image: this.imgurl+product.small_img_path,
           is_single: product.is_single,
-          materials_text: product.materials_text || ''
+          choosedText: product.choosedText || '',
+
+          goodslist:product.goodslist,
+          price: product.zxprice,
+          extlist:product.extlist,
+          spsmm:product.spsmm,
+          zxprice:product.zxprice,
+          quantity: product.quantity,
+          flownum: product.flownum,
+          discount: product.discount,
+          spbm:product.spbm,
         })
+
       },
       //从购物车减商品
       handleMinusFromCart(product) {
-        let index
-        if(product.is_single) {
-          index = this.cart.findIndex(item => item.id == product.id)
-        } else {
-          index = this.cart.findIndex(item => (item.id == product.id) && (item.materials_text == product.materials_text))
-        }
+         let index = this.cart.findIndex(item => (item.spbm == product.spbm) && (item.choosedText == product.choosedText))
         this.cart[index].number -= 1
         if(this.cart[index].number <= 0) {
           this.cart.splice(index, 1)
@@ -403,8 +323,8 @@
        await this.$u.api.dishess({
           access_token:this.token,
           vtype:"pos",
-         fdbh:this.fdbh,
-         companyid:this.companyid,
+         fdbh:uni.getStorageSync('fdbh'),
+         companyid:uni.getStorageSync('companyid'),
           spbm:product.spbm,
         }).then((res) => {
           Object.assign(product,res)
@@ -420,52 +340,59 @@
         this.productModalVisible = false
         this.product = {}
       },
-      openCartDetailsPopup() {
-        this.$refs['cartPopup'].open()
-      },
+      // openCartDetailsPopup() {
+      //   this.$refs['cartPopup'].open()
+      // },
       clearCart() {
         this.cart = []
       },
-      handleMenuSelected(id) {
-        this.productsScrollTop = this.categories.find(item => item.id == id).top
-        this.$nextTick(() => this.currentCategoryId = id)
-      },
-      productsScroll({detail}) {
-        const {scrollTop} = detail
-        let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
-        if(tabs.length > 0){
-          this.currentCategoryId = tabs[0].id
-        }
-      },
-      calcSize() {
-        let h = 0
-        let view = uni.createSelectorQuery().select('#ads')
-        view.fields({
-          size: true
-        }, data => {
-          h += Math.floor(data.height)
-        }).exec()
-
-        this.categories.forEach(item => {
-          let view = uni.createSelectorQuery().select(`#products-${item.id}`)
-          view.fields({
-            size: true
-          }, data => {
-            item.top = h
-            h += Math.floor(data.height)
-            item.bottom = h
-          }).exec()
-        })
-      },
+      // handleMenuSelected(id) {
+      //   this.productsScrollTop = this.categories.find(item => item.id == id).top
+      //   this.$nextTick(() => this.currentCategoryId = id)
+      // },
+      // productsScroll({detail}) {
+      //   const {scrollTop} = detail
+      //   let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
+      //   if(tabs.length > 0){
+      //     this.currentCategoryId = tabs[0].id
+      //   }
+      // },
+      // calcSize() {
+      //   let h = 0
+      //   let view = uni.createSelectorQuery().select('#ads')
+      //   view.fields({
+      //     size: true
+      //   }, data => {
+      //     h += Math.floor(data.height)
+      //   }).exec()
+      //
+      //   this.categories.forEach(item => {
+      //     let view = uni.createSelectorQuery().select(`#products-${item.id}`)
+      //     view.fields({
+      //       size: true
+      //     }, data => {
+      //       item.top = h
+      //       h += Math.floor(data.height)
+      //       item.bottom = h
+      //     }).exec()
+      //   })
+      // },
       pay(){
-        //uni.setStorageSync('cart',this.cart)
+        var goodslist = this.cart.reduce(function(previous,primary){
+          previous.push(primary.goodslist);
+          return previous;
+        },[]);
+        uni.setStorageSync('goodslist', goodslist)
         //计算购物车总价
         this.cartprice= this.cart.reduce((acc, cur) => acc + cur.number * cur.price, 0)
-        //uni.setStorageSync('cartprice',this.cartprice)
+        //计算商品数量
+        this.counts=this.cart.reduce((acc, cur) => acc + cur.number, 0)
+
         //跳转支付
         this.Cart={
           cart:this.cart,
           cartprice:this.cartprice,
+          counts:this.counts
         }
         uni.setStorageSync('Cart',this.Cart)
         uni.navigateTo({
@@ -476,10 +403,10 @@
           access_token:this.token,
           vtype:"new",
           posid:"80800101",
-          tableid:"8",
+          tableid:uni.getStorageSync('tableid')[0],
           tablenumber:"3",
           tablewaiter:"00268",
-          fdbh:this.fdbh,
+          fdbh:uni.getStorageSync('fdbh'),
         }).then((res)=>{
           console.log("生成订单：",res)
           uni.setStorageSync('xsdbh', res.xsdbh);

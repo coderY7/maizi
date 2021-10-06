@@ -25,7 +25,7 @@
           <view class="unit2box_text">
             <view class="unit2box_text1">
               <text>{{item.name}}</text>
-              <text style="color:#c2c2c2">{{item.materials_text}}</text>
+              <text style="color:#c2c2c2">{{item.choosedText}}</text>
               <text>*{{item.number}}</text>
             </view>
             <view>¥ {{item.price}}</view>
@@ -103,35 +103,16 @@ addmenu(){
 			})
        //订单预结算
        this.$u.api.readytopays({
-             "access_token": this.token,
-             "xsdbh":this.xsdbh,//订单号
-             "fdbh": "808001",//分店号
+             "access_token":uni.getStorageSync('token'),
+             "xsdbh":uni.getStorageSync('xsdbh'),//订单号
+             "fdbh": uni.getStorageSync('fdbh'),//分店号
              "vipid": "26512220",//会员号
              "viplevel": "HYJG",//会员等级
              "viprate": "1.0",//会员折扣率
              "syyid": "00268",//收银员工号
              "posid": "80800101",//pos机
-             "counts": "2",//商品总数
-             "goodslist": [ //交易商品列表
-                 {
-               "spsmm": "20210914000001",//子项-商品条码
-               "spbm": "110206158",//子项-商品编码
-               "price": "28.000",//子项-商品单价
-               "zxprice": "26.000",//子项-单品总金额（累加数量与附加属性金额）
-               "quantity": "1",//子项-商品数量
-               "flownum": "1",//子项-流水号
-               "discount":"2.00",//子项-单品优惠金额
-               "extlist":[
-                 {
-                   "ext_id":"10",
-                   "ext_name":"中辣",
-                   "ext_quantity":"0",
-                   "ext_price":"0",
-                   "ext_zxprice":"0"
-                 }
-               ]
-                },
-               ]
+             "counts": uni.getStorageSync('Cart').counts,//商品总数
+             "goodslist": uni.getStorageSync('goodslist')
            }).then(res=>{
          console.log('预结算：',res)
        })
