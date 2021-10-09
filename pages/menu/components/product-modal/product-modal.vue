@@ -39,6 +39,9 @@
               </view>
               <view class="status-item" v-for="(item, index) in productData.dishesextlist" :key="item">
                 <view class="status-title">{{ item.groupname }}</view>
+
+                <view v-if="item.extitems.ext_price">123</view>
+
                 <view class="status-tags">
                   <view v-for="(item1, index1) in item.extitems" :key="item1.ext_id + index1.toString()">
                     <view
@@ -131,10 +134,6 @@ export default {
     Actions
   },
   watch: {
-    // visible(newValue, oldValue) {
-      // this.count = this.productData;
-      // this.shownPrice = this.productData.priNum;
-    // },
     product(val) {
       this.productData = JSON.parse(JSON.stringify(val));
       console.log(this.productData);
@@ -186,14 +185,22 @@ ext_zxprice:'',
       console.log(this.productData.shownPrice);
     },
     chooseTag(rowIndex, itemIndex) {
+      if(rowIndex!=2){
+        console.log(rowIndex)
+        this.productData.dishesextlist[rowIndex].extitems.map(item => {
+          item.isDefault = false;
+        });
+        this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
+      }
       console.log(this.productData.dishesextlist[rowIndex].extitems[itemIndex])
       var users=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
       this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'ext_zxprice', '0');
-      users.ext_zxprice=users.ext_price * users.ext_quantity
+      users.ext_zxprice=users.ext_price *1
       this.pitch()
     },
     add() {
+      console.log(this)
       this.productData.number += 1
       this.calcOverprice()
     },
@@ -236,7 +243,7 @@ ext_zxprice:'',
     },
     // 加入购物车
     addToCart() {
-      this.productData.extlist.map(item => {
+  this.productData.extlist.map(item => {
           if (item.isDefault) {
            item.isDefault=undefined;
            item.ext_desc=undefined

@@ -280,17 +280,6 @@
           return
         }
         console.log(product)
-        // this.goodslist.push({
-        //   price: product.zxprice,
-        //   extlist:product.extlist,
-        //   spsmm:product.spsmm,
-        //   zxprice:product.zxprice,
-        //   quantity: product.quantity,
-        //   flownum: product.flownum,
-        //   discount: product.discount,
-        //   spbm:product.spbm,
-        // })
-        // console.log(this.goodslist)
         this.cart.push({
           id: product.spbm,
           cate_id: product.category_id,

@@ -35,7 +35,7 @@ const install = (Vue, vm) => {
         // 所以哪怕您重新登录修改了Storage，下一次的请求将会是最新值
         // const token = uni.getStorageSync('token');
         // config.header.token = token;
-        config.header.Token ='2A28-E3EC-8A8D-677F-DA7C-C7DB-66CB-ED0A';
+        config.header.Token ='DA69-52D7-EDBE-B551-AB72-4248-ADB3-A4EF';
         uni.setStorageSync('token', config.header.Token);
 
         // 可以对某个url进行特别处理，此url参数为this.$u.get(url)中的url值
