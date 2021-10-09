@@ -3,8 +3,11 @@
 		<view class="cart-popup">
 			<view class="header">
 				<view class="order-type">
-					<view class="font-weight-bold">购物车</view>
-					<view class="extra"></view>
+					<view class="font-weight-bold">
+            <view>请选择就餐人数</view>
+            <u-number-box v-model="value" @change="valChange"></u-number-box>
+          </view>
+
 				</view>
 				<view class="d-flex align-items-center" @tap="clear">
 					<image src="/static/common/delete.png" class="delete-btn"></image>
@@ -77,7 +80,11 @@ export default {
 			        }
 			    }
 			})
-		}
+		},
+    valChange(e) {
+      console.log('就餐人数为: ' + e.value)
+      uni.setStorageSync('tablenumber',e.value)
+    }
 	}
 };
 </script>

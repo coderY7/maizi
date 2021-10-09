@@ -148,6 +148,19 @@
           this.current = index;
           this.leftMenuStatus(index);
         })
+        if(index=='0'){
+          //获取菜品数据
+          this.$u.api.caterings({
+            access_token:uni.getStorageSync('token'),
+            vtype:"pos",
+            fdbh:uni.getStorageSync('fdbh'),
+            companyid:uni.getStorageSync('companyid'),
+            categoryid:this.categorylist[0].category_id
+          }).then((res) => {
+            console.log('获取菜品:',res)
+            this.disheslist=res.disheslist
+          })
+        }
 
         // 点击分类切换请求
         if(index){
@@ -159,7 +172,7 @@
             companyid:uni.getStorageSync('companyid'),
             categoryid:this.categorylist[index].category_id
           }).then((res) => {
-            console.log(res)
+            console.log('获取菜品:',res)
             this.disheslist=res.disheslist
           })
         }
@@ -398,13 +411,18 @@
           vtype:"new",
           posid:"80800101",
           tableid:uni.getStorageSync('tableid')[0],
-          tablenumber:"3",
+          tablenumber:uni.getStorageSync('tablenumber'),
           tablewaiter:"00268",
           fdbh:uni.getStorageSync('fdbh'),
-        }).then((res)=>{
+        }).then(
+            (res)=>{
           console.log("生成订单：",res)
           uni.setStorageSync('xsdbh', res.xsdbh);
-        })
+        },
+            (err)=>{
+              console.log('请选择就餐人数')
+            }
+        )
       }
   },
     computed:{

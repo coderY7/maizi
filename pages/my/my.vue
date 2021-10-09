@@ -81,17 +81,21 @@ export default {
              computerid:'aa309815'
            }).then((res)=>{
              console.log('用户验证成功：',res)
-              this.$u.api.logins({
-                vtype:'login',
-                companyid:uni.getStorageSync('companyid'),
-                userid:'00276',
-                password:'1234567',
-                fdbh:uni.getStorageSync('fdbh'),
-                computerid:'aa309815',
-                ipaddress:'192.168.31.162'
-              }).then((res)=>{
-                console.log('登录成功:',res)
-              })
+
+             uni.request({
+               url: 'https://api.weixin.qq.com/sns/oauth2/access_token',
+               data: {
+                 appid:'wxce7536522c50b683',
+                 secret:'81712e830ba1e6c1b48364b93503f575',
+                 code:uni.getStorageSync('code'),
+                 grant_type:'authorization_code'
+               },
+
+               success: (res) => {
+                 console.log(res);
+               }
+             });
+
            })
          },
          fail:(err)=>{

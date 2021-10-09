@@ -39,9 +39,6 @@
               </view>
               <view class="status-item" v-for="(item, index) in productData.dishesextlist" :key="item">
                 <view class="status-title">{{ item.groupname }}</view>
-
-                <view v-if="item.extitems.ext_price">123</view>
-
                 <view class="status-tags">
                   <view v-for="(item1, index1) in item.extitems" :key="item1.ext_id + index1.toString()">
                     <view
@@ -192,11 +189,11 @@ ext_zxprice:'',
         });
         this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
       }
-      console.log(this.productData.dishesextlist[rowIndex].extitems[itemIndex])
-      var users=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
-      this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
-      this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'ext_zxprice', '0');
-      users.ext_zxprice=users.ext_price *1
+
+      var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_zxprice=unity.ext_price *1
       this.pitch()
     },
     add() {

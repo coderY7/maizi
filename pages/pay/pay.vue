@@ -92,17 +92,14 @@ addmenu(){
     delta: 1
   });
 },
-     pay(Cart){
+    async pay(Cart){
        this.token = uni.getStorageSync('token');
        this.xsdbh=uni.getStorageSync('xsdbh');
        uni.setStorageSync('Cart',this.Cart)
         uni.setStorageSync('Attendance',this.attendance)
        this.attendance = uni.getStorageSync('Attendance');
-			uni.navigateTo({
-				url:`../payment/payment?tableid=${this.tableid}`
-			})
        //订单预结算
-       this.$u.api.readytopays({
+      await this.$u.api.readytopays({
              "access_token":uni.getStorageSync('token'),
              "xsdbh":uni.getStorageSync('xsdbh'),//订单号
              "fdbh": uni.getStorageSync('fdbh'),//分店号
@@ -116,6 +113,10 @@ addmenu(){
            }).then(res=>{
          console.log('预结算：',res)
          uni.setStorageSync('readytopays',res)
+       })
+
+       uni.navigateTo({
+         url:`../payment/payment?tableid=${this.tableid}`
        })
     }
   },

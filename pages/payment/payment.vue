@@ -6,7 +6,7 @@
     </view>
     <view class="unit2">
       <view style="font-size: 20px;margin-bottom:14px;">支付金额</view>
-      <view style="font-size:30px;color:#f4461c">¥{{ readytopays.paytotal}}</view>
+      <view style="font-size:30px;color:#f4461c">¥{{pay}}</view>
       <view style="font-size:12px;color:#c1c1c1">支付剩余时间</view>
     </view>
     <view class="unit3">
@@ -32,7 +32,8 @@ export default {
       tableid:'',
       xsdbh:'',//订单号
       token: '',
-      readytopays:''
+      readytopays:'',
+      pay:0
     }
   },
   onLoad(options) {
@@ -40,6 +41,7 @@ export default {
         this.xsdbh=uni.getStorageSync('xsdbh'),//订单号
         this.token=uni.getStorageSync('token'),
         this.readytopays=uni.getStorageSync('readytopays')
+    this.pay=parseInt(this.readytopays.paytotal).toFixed(2)
   },
   methods: {
     pay(Cart) {
