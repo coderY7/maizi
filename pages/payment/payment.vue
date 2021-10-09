@@ -6,7 +6,7 @@
     </view>
     <view class="unit2">
       <view style="font-size: 20px;margin-bottom:14px;">支付金额</view>
-      <view style="font-size:30px;color:#f4461c">¥{{ price }}</view>
+      <view style="font-size:30px;color:#f4461c">¥{{ readytopays.paytotal}}</view>
       <view style="font-size:12px;color:#c1c1c1">支付剩余时间</view>
     </view>
     <view class="unit3">
@@ -29,19 +29,17 @@ export default {
   name: "payment",
   data() {
     return {
-      price: 0,
-      tableid:[],
-      mode: '',
+      tableid:'',
       xsdbh:'',//订单号
-      token: ''
+      token: '',
+      readytopays:''
     }
   },
   onLoad(options) {
-    this.token=uni.getStorageSync('token');
-    this.tableid=uni.getStorageSync('tableid');
-    let Cart = uni.getStorageSync('Cart');
-    this.price = Cart.cartprice;
-    this.xsdbh=uni.getStorageSync('xsdbh');
+    this.tableid=uni.getStorageSync('tableid'),
+        this.xsdbh=uni.getStorageSync('xsdbh'),//订单号
+        this.token=uni.getStorageSync('token'),
+        this.readytopays=uni.getStorageSync('readytopays')
   },
   methods: {
     pay(Cart) {

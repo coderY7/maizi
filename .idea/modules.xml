@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../js_learn/.idea/js_learn.iml" filepath="$PROJECT_DIR$/../../js_learn/.idea/js_learn.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/scan.iml" filepath="$PROJECT_DIR$/.idea/scan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../规格测试/.idea/规格测试.iml" filepath="$PROJECT_DIR$/../../规格测试/.idea/规格测试.iml" />
     </modules>
   </component>
 </project>

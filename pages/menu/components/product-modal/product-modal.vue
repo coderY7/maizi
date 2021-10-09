@@ -40,7 +40,7 @@
               <view class="status-item" v-for="(item, index) in productData.dishesextlist" :key="item">
                 <view class="status-title">{{ item.groupname }}</view>
                 <view class="status-tags">
-                  <block v-for="(item1, index1) in item.extitems" :key="item1.ext_id + index1.toString()">
+                  <view v-for="(item1, index1) in item.extitems" :key="item1.ext_id + index1.toString()">
                     <view
                         class="tags-item2"
                         :style="{
@@ -59,7 +59,7 @@
                         ￥{{item1.ext_price}}
                       </text>
                     </view>
-                  </block>
+                  </view>
                 </view>
               </view>
             </view>
@@ -157,7 +157,7 @@ ext_zxprice:'',
   },
   updated() {
     this.updateChoosedText();
-    this.calcOverprice()
+
   },
 
   methods: {
@@ -174,21 +174,24 @@ ext_zxprice:'',
       this.productData.dishesextlist.forEach(item => {
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
+            console.log('单个属性',item1.ext_zxprice)
             pri += parseInt(item1.ext_price);
-            //pri= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
           }
         });
       });
-      this.productData.zxprice=this.productData.nsjg + pri
-      this.productData.shownPrice=this.productData.number * this.productData.nsjg + pri;
+      console.log('附加属性总价:',pri)
+      this.productData.price=this.productData.nsjg + pri
+      this.productData.zxprice=this.productData.nsjg+ pri
+      this.productData.shownPrice=this.productData.number * this.productData.price;
       console.log(this.productData.shownPrice);
     },
     chooseTag(rowIndex, itemIndex) {
       console.log(this.productData.dishesextlist[rowIndex].extitems[itemIndex])
+      var users=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
-      this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'ext_zxprice', this.ext_zxprice);
-      // this.productData.dishesextlist[rowIndex].extitems[itemIndex].ext_zxprice=ext_zxprice
-      this.calcOverprice();
+      this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'ext_zxprice', '0');
+      users.ext_zxprice=users.ext_price * users.ext_quantity
+      this.pitch()
     },
     add() {
       this.productData.number += 1
@@ -212,7 +215,7 @@ ext_zxprice:'',
         });
       });
       this.choosedText = tempArr.join(',');
-      this.pitch()
+
     },
    //选中
     pitch(){
@@ -220,13 +223,16 @@ ext_zxprice:'',
       this.productData.dishesextlist.map(item => {
         item.extitems.map(item1 => {
           if (item1.isDefault) {
+            console.log(this.ext_zxprice)
             pitch.push(item1);
           }
         });
       });
       this.productData.extlist=pitch
+
       //附加属性总价格
-      this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
+      //this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
+      this.calcOverprice();
     },
     // 加入购物车
     addToCart() {

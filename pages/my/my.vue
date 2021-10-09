@@ -41,15 +41,15 @@
 
     <view class="unit3">
       <navigator class="unit3Nav" url="/pages/vip/vip">
-          <image src="../../static/main/我的会员.png"></image>
+          <image src="../../static/main/hy.png"></image>
           <text>我的会员</text>
       </navigator>
       <navigator class="unit3Nav" url="/pages/roll/roll">
-          <image src="../../static/main/红包卡卷.png"></image>
+          <image src="../../static/main/kj.png"></image>
           <text>红包卡卷</text>
       </navigator>
       <navigator class="unit3Nav" url="/pages/order/order" open-type="switchTab">
-          <image src="../../static/main/我的订单.png"></image>
+          <image src="../../static/main/dt.png"></image>
           <text>我的订单</text>
       </navigator>
     </view>
@@ -72,6 +72,32 @@ export default {
   methods: {
     //用户登录
      login(){
+       uni.login({
+         provider: 'weixin',
+         success:  (res)=> {
+           uni.setStorageSync('code', res.code)
+           this.$u.api.userchecks({
+             userid:'00005',
+             computerid:'aa309815'
+           }).then((res)=>{
+             console.log('用户验证成功：',res)
+              this.$u.api.logins({
+                vtype:'login',
+                companyid:uni.getStorageSync('companyid'),
+                userid:'00276',
+                password:'1234567',
+                fdbh:uni.getStorageSync('fdbh'),
+                computerid:'aa309815',
+                ipaddress:'192.168.31.162'
+              }).then((res)=>{
+                console.log('登录成功:',res)
+              })
+           })
+         },
+         fail:(err)=>{
+           console.log('登录失败:',err)
+       }
+       });
        // uni.getProvider({
        //   service: 'oauth',
        //   success: function (res) {

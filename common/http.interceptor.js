@@ -35,7 +35,7 @@ const install = (Vue, vm) => {
         // 所以哪怕您重新登录修改了Storage，下一次的请求将会是最新值
         // const token = uni.getStorageSync('token');
         // config.header.token = token;
-        config.header.Token ='A8D9-C554-C0F5-5DD4-7FC9-DCD3-1318-EB76';
+        config.header.Token ='2A28-E3EC-8A8D-677F-DA7C-C7DB-66CB-ED0A';
         uni.setStorageSync('token', config.header.Token);
 
         // 可以对某个url进行特别处理，此url参数为this.$u.get(url)中的url值
@@ -59,7 +59,7 @@ const install = (Vue, vm) => {
             vm.$u.toast('验证失败，请重新登录');
             setTimeout(() => {
                 // 此为uView的方法，详见路由相关文档
-                vm.$u.route('/pages/user/login')
+                vm.$u.route('/pages/my/my')
             }, 1500)
             return false;
         } else {

@@ -274,6 +274,8 @@
             return (item.spbm == product.spbm) && (item.choosedText == product.choosedText)
         })
         if(index > -1) {
+          this.cart[index].goodslist.quantity+=1;
+          console.log(this.cart[index].goodslist.quantity)
           this.cart[index].number += (product.number || 1)
           return
         }
@@ -299,20 +301,22 @@
           choosedText: product.choosedText || '',
 
           goodslist:product.goodslist,
-          price: product.zxprice,
-          extlist:product.extlist,
-          spsmm:product.spsmm,
-          zxprice:product.zxprice,
-          quantity: product.quantity,
-          flownum: product.flownum,
-          discount: product.discount,
-          spbm:product.spbm,
+
+           price: product.zxprice,
+          // extlist:product.extlist,
+          // spsmm:product.spsmm,
+          // zxprice:product.zxprice,
+          // quantity: product.quantity,
+          // flownum: product.flownum,
+          // discount: product.discount,
+          // spbm:product.spbm,
         })
 
       },
       //从购物车减商品
       handleMinusFromCart(product) {
          let index = this.cart.findIndex(item => (item.spbm == product.spbm) && (item.choosedText == product.choosedText))
+        this.cart[index].goodslist.quantity-=1;
         this.cart[index].number -= 1
         if(this.cart[index].number <= 0) {
           this.cart.splice(index, 1)
@@ -378,10 +382,11 @@
       //   })
       // },
       pay(){
-        var goodslist = this.cart.reduce(function(previous,primary){
+        var goodslist = this.cart.reduce((previous,primary)=>{
           previous.push(primary.goodslist);
           return previous;
         },[]);
+
         uni.setStorageSync('goodslist', goodslist)
         //计算购物车总价
         this.cartprice= this.cart.reduce((acc, cur) => acc + cur.number * cur.price, 0)

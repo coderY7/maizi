@@ -115,6 +115,7 @@ addmenu(){
              "goodslist": uni.getStorageSync('goodslist')
            }).then(res=>{
          console.log('预结算：',res)
+         uni.setStorageSync('readytopays',res)
        })
     }
   },
