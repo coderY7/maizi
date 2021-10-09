@@ -100,13 +100,13 @@ export default {
 		justify-content: center;
 		width: 100rpx;
 		height: 100rpx;
-		margin-top: -20rpx;
+		margin-top: -40rpx;
 		margin-right: 20rpx;
 		margin-left: 20rpx;
 
 		.shopbag-btn {
-			width: 70rpx;
-			height: 70rpx;
+			width: 100%;
+			height: 100%;
 		}
 
 		.badge {

@@ -107,6 +107,9 @@
       }
     },
     onShow(){
+
+    },
+    onLoad(options) {
       this.token = uni.getStorageSync('token');
       this.$u.api.categorys({
         access_token:this.token,
@@ -116,6 +119,7 @@
         parentid:"",
         level:"3"
       }).then((res)=> {
+        console.log('左侧菜单:',res)
         this.categorylist=res.categorylist
         //获取菜品数据
         this.$u.api.caterings({
@@ -125,12 +129,10 @@
           companyid:uni.getStorageSync('companyid'),
           categoryid:this.categorylist[0].category_id
         }).then((res) => {
-          console.log('菜单：',res)
+          console.log('右侧菜单：',res)
           this.disheslist=res.disheslist
         })
       })
-    },
-    onLoad(options) {
     },
     onReady() {
       this.getMenuItemTop()
