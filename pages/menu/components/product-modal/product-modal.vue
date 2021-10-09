@@ -189,6 +189,9 @@ ext_zxprice:'',
         });
         this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
       }
+      if(this.productData.dishesextlist[rowIndex].extitems[itemIndex].isDefault){
+        console.log('取消')
+      }
 
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
