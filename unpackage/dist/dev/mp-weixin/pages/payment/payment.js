@@ -79,22 +79,36 @@ __webpack_require__.r(__webpack_exports__);
           access_token: this.token,
           flow_no: this.xsdbh, //订单号
           payno: "04", //收款方式
-          total: '', //应收总金额，分
+          total: this.readytopays.paytotal * 100, //应收总金额，分
           payid: "", //付款码
-          paymm: "{$syyid}", //收银员编号
-          verifycode: "{$vipid}", //会员号
+          paymm: "00268", //收银员编号
+          verifycode: this.readytopays.vipid, //会员号
           flag: {
             regcode: '', //注册码
             mz_openid: '',
-            FDBH: '', //分店
+            FDBH: uni.getStorageSync('fdbh'), //分店
             act_list_json: '', //活动商品列表Json字符串，从预结算接口获取
-            POSID: '', //收银机编号
+            POSID: '00268', //收银机编号
             ActMack: '', //微信优惠券标志，构成规则："SELFPORT"+门店编号,例如：SELFPORT0099
             ystflowid: '', //赢商通请求流水，一般为空
             sub_openid: '' // 相对商户的openid，一般为空
           } }).
         then(function (res) {
           console.log('付款：', res);
+          uni.requestPayment({
+            provider: 'wxpay',
+            timeStamp: String(Date.now()),
+            nonceStr: 'A1B2C3D4E5122', //随机字符串
+            package: 'prepay_id=', //统一下单接口返回的 prepay_id 参数值
+            signType: 'MD5',
+            paySign: '5580a266d5c162942ed278ff81d57d5b0c099817', //签名
+            success: function success(res) {
+              console.log('success:' + JSON.stringify(res));
+            },
+            fail: function fail(err) {
+              console.log('fail:' + JSON.stringify(err));
+            } });
+
         });
       } else {
         console.log('支付宝支付');

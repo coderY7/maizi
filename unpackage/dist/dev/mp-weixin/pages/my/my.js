@@ -233,9 +233,19 @@ var _default =
   methods: {
     //用户登录
     login: function login() {var _this = this;
+      //获取信息
+      uni.getUserProfile({
+        desc: "获取用户信息",
+        success: function success(res) {
+          console.log(res);
+          _this.userInfo = res.userInfo;
+          _this.islogin = true;
+        } });
+
       uni.login({
         provider: 'weixin',
         success: function success(res) {
+          console.log(res);
           uni.setStorageSync('code', res.code);
           _this.$u.api.userchecks({
             userid: '00005',
@@ -263,27 +273,7 @@ var _default =
           console.log('登录失败:', err);
         } });
 
-      // uni.getProvider({
-      //   service: 'oauth',
-      //   success: function (res) {
-      //     if (~res.provider.indexOf('weixin')) {
-      //       uni.login({
-      //         provider: 'weixin',
-      //         success: (loginRes)=> {
-      //           console.log(JSON.stringify(loginRes));
-      //         }
-      //       });
-      //     }
-      //   }
-      // });
-      //获取信息
-      uni.getUserProfile({
-        desc: "获取用户信息",
-        success: function success(res) {
-          console.log(res);
-          _this.userInfo = res.userInfo;
-          _this.islogin = true;
-        } });
+
 
     },
     //扫码
