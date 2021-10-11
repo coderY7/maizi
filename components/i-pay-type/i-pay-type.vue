@@ -9,7 +9,7 @@
 					<text :style="{'font-size':fontSize+'rpx'}">{{item.name}}</text>
 				</view>
 				<view class="i-pay-item-right">
-					<radio color='#232323' @checked :value="index.toString()" />
+					<radio color='#6DEC83' @checked :value="index.toString()" />
 				</view>
 			</label>
 		</radio-group>
