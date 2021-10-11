@@ -9,15 +9,7 @@
       <view style="font-size:30px;color:#f4461c">¥{{pay}}</view>
       <view style="font-size:12px;color:#c1c1c1">支付剩余时间</view>
     </view>
-<!--    <view class="unit3">-->
-<!--     <radio-group @change="radioChange" class="unit3box">-->
-<!--       <view class="unit3box_left">-->
-<!--         <image src='../../static/pay/微信.png' style="height: 40rpx;width:40rpx;padding-right: 10rpx"></image>-->
-<!--         <view>微信支付</view>-->
-<!--       </view>-->
-<!--         <radio class="radio" checked=true></radio>-->
-<!--     </radio-group>-->
-<!--    </view>-->
+
     <Paytype @change="btnchange" class="unit3"></Paytype>
 
     <view class="unit4">
@@ -132,27 +124,6 @@ page {
   .unit3 {
     margin-top:100rpx;
   }
-
-  //.unit3 {
-  //  margin-top: 80rpx;
-  //  border-radius: 40rpx;
-  //  background-color: #fff;
-  //  display: flex;
-  //  justify-content: space-between;
-  //  align-items: center;
-  //  width:100%;
-  //  .unit3box{
-  //    width:100%;
-  //    display: flex;
-  //    flex-direction:row;
-  //    padding:20rpx;
-  //    justify-content:space-between;
-  //    .unit3box_left{
-  //      display: flex;
-  //      flex-direction: row;
-  //    }
-  //  }
-  //}
 
   .unit4 {
     position: absolute;
