@@ -48,6 +48,11 @@ export default {
 		uniPopup,
 		actions
 	},
+  data() {
+    return{
+      value:1
+    }
+  },
 	props: {
 		cart: {
 			type: Array,
