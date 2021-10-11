@@ -1,11 +1,12 @@
 <template>
   <view class="content">
-    <view class="unit1" >
+    <u-button type="success" @click="login" v-if="!islogin">微信授权登录</u-button>
+    <view class="unit1" v-if="islogin">
       <image :src="userInfo.avatarUrl"></image>
       <view class="unit1box">
         <view class="unit1box_text">
-          <u-button type="success" @click="login" v-if="!islogin">微信授权登录</u-button>
-          <text style="font-size:20px" v-if="islogin">{{userInfo.nickName}}</text>
+
+          <text style="font-size:20px" >{{userInfo.nickName}}</text>
         </view>
         <view class="unit1box_code">
           <u-icon name="scan" size="30px" @click="scan"></u-icon>
@@ -53,6 +54,8 @@
           <text>我的订单</text>
       </navigator>
     </view>
+
+    <u-button type="warning" v-if="islogin" @click="quit" class="unit4" shape="square">退出登录</u-button>
   </view>
 </template>
 
@@ -133,6 +136,10 @@ export default {
           console.log('条码内容：' + res.result);
         }
       });
+    },
+    quit(){
+       this.islogin=!this.islogin
+       uni.setStorageSync('token', '')
     }
 
     }
@@ -233,6 +240,13 @@ page {
         height:80rpx;
       }
     }
+  }
+
+  .unit4{
+    position: fixed;
+    left: 30rpx;
+    right: 30rpx;
+    bottom: 10rpx;
   }
 }
 
