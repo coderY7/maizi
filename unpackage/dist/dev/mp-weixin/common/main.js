@@ -101,8 +101,8 @@ __webpack_require__.r(__webpack_exports__);
 {
   onLaunch: function onLaunch() {
     console.log('App Launch');
-    var token = uni.getStorageSync('token');
-    console.log(token);
+    uni.setStorageSync('appid', 'wxf2eea1f050d040ba');
+
   },
   onShow: function onShow() {
     console.log('App Show');

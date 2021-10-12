@@ -2,8 +2,8 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
-      let token=uni.getStorageSync('token')
-      console.log(token)
+uni.setStorageSync('appid','wxf2eea1f050d040ba')
+
 		},
 		onShow: function() {
 			console.log('App Show')
