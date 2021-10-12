@@ -118,6 +118,12 @@ addmenu(){
        uni.navigateTo({
          url:`../payment/payment?tableid=${this.tableid}`
        })
+
+
+
+
+
+
     }
   },
   onLoad(options) {

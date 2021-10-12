@@ -276,6 +276,12 @@ var _default =
                 uni.navigateTo({
                   url: "../payment/payment?tableid=".concat(_this.tableid) });case 8:case "end":return _context.stop();}}}, _callee);}))();
 
+
+
+
+
+
+
     } },
 
   onLoad: function onLoad(options) {

@@ -11307,11 +11307,14 @@ var pay = '/catering/pay';
 var query = '/catering/pay/query';
 var back = '/catering/pay/back';
 var usercheck = '/login/usercheck';
+var paydone = '/catering/paydone';
 
 
 // 此处第二个参数vm，就是我们在页面使用的this，你可以通过vm获取vuex等操作，更多内容详见uView对拦截器的介绍部分：
 // https://uviewui.com/js/http.html#%E4%BD%95%E8%B0%93%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA%EF%BC%9F
 var install = function install(Vue, vm) {
+  //订单完成
+  var paydones = function paydones() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(paydone, params);};
   //用户合法性验证
   var userchecks = function userchecks() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(usercheck, params);};
   //用户登录
@@ -11333,7 +11336,7 @@ var install = function install(Vue, vm) {
   //退款
   var backs = function backs() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(back, params);};
   // 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-  vm.$u.api = { userchecks: userchecks, logins: logins, categorys: categorys, caterings: caterings, dishess: dishess, orders: orders, readytopays: readytopays, pays: pays, querys: querys, backs: backs };
+  vm.$u.api = { paydones: paydones, userchecks: userchecks, logins: logins, categorys: categorys, caterings: caterings, dishess: dishess, orders: orders, readytopays: readytopays, pays: pays, querys: querys, backs: backs };
 };var _default =
 
 {

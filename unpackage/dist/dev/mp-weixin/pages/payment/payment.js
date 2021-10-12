@@ -168,6 +168,19 @@ __webpack_require__.r(__webpack_exports__);
               'success': function success(res) {
                 console.log('支付成功:', res);
                 //支付成功，立刻调用查单接口查询订单在后台是否成功
+                this.$u.api.paydones({
+                  access_token: uni.getStorageSync('token'),
+                  flow_no: uni.getStorageSync('xsdbh'),
+                  payno: '04',
+                  total: uni.getStorageSync('readytopays').paytotal,
+                  payid: '',
+                  syyid: uni.getStorageSync('openid'),
+                  fdbh: uni.getStorageSync('fdbh'),
+                  companyid: uni.getStorageSync('companyid') }).
+                then(function (res) {
+                  console.log('订单完成', res);
+                });
+
               },
               'fail': function fail(res) {
                 console.log('支付失败:', res);
