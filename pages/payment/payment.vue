@@ -140,11 +140,11 @@ btnchange(index){
               'signType': 'MD5',
               'paySign': ress.data.paySign,
               'success': function (res) {
-                console.log('支付成功。');
+                console.log('支付成功:',res);
                 //支付成功，立刻调用查单接口查询订单在后台是否成功
               },
               'fail': function (res) {
-                console.log('支付失败。');
+                console.log('支付失败:',res);
               },
               'complete': function (res) { }
             })

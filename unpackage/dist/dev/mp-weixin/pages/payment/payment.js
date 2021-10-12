@@ -24,7 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var paytype = function paytype() {__webpack_require__.e(/*! require.ensure | components/i-pay-type/i-pay-type */ "components/i-pay-type/i-pay-type").then((function () {return resolve(__webpack_require__(/*! ../../components/i-pay-type/i-pay-type */ 268));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var paytype = function paytype() {__webpack_require__.e(/*! require.ensure | components/i-pay-type/i-pay-type */ "components/i-pay-type/i-pay-type").then((function () {return resolve(__webpack_require__(/*! ../../components/i-pay-type/i-pay-type */ 205));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -166,11 +166,11 @@ __webpack_require__.r(__webpack_exports__);
               'signType': 'MD5',
               'paySign': ress.data.paySign,
               'success': function success(res) {
-                console.log('支付成功。');
+                console.log('支付成功:', res);
                 //支付成功，立刻调用查单接口查询订单在后台是否成功
               },
               'fail': function fail(res) {
-                console.log('支付失败。');
+                console.log('支付失败:', res);
               },
               'complete': function complete(res) {} });
 
