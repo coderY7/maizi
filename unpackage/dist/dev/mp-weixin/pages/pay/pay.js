@@ -269,19 +269,12 @@ var _default =
                   "counts": uni.getStorageSync('Cart').counts, //商品总数
                   "goodslist": uni.getStorageSync('goodslist') }).
                 then(function (res) {
-                  console.log('预结算：', res);
+                  console.log('预结算', res);
                   uni.setStorageSync('readytopays', res);
-                });case 7:
+                  uni.navigateTo({
+                    url: "../payment/payment?tableid=".concat(_this.tableid) });
 
-                uni.navigateTo({
-                  url: "../payment/payment?tableid=".concat(_this.tableid) });case 8:case "end":return _context.stop();}}}, _callee);}))();
-
-
-
-
-
-
-
+                });case 7:case "end":return _context.stop();}}}, _callee);}))();
     } },
 
   onLoad: function onLoad(options) {

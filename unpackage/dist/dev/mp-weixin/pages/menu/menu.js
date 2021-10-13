@@ -443,19 +443,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
                   }
                 }, 10);case 10:case "end":return _context4.stop();}}}, _callee4);}))();
     },
-    //显示商品详情
-    //   showProduct(product) {
-    //     this.productModalVisible = true
-    //    this.product={
-    //       name:product.name,
-    //      images:product.images,
-    //      labels:product.labels,
-    //      price:product.price,
-    //      number:product.number,
-    //      description:product.description,
-    //      materials:product.materials,
-    //    }
-    // },
     //添加到购物车
     handleAddToCart: function handleAddToCart(product) {
       var index = this.cart.findIndex(function (item) {

@@ -111,19 +111,12 @@ addmenu(){
              "counts": uni.getStorageSync('Cart').counts,//商品总数
              "goodslist": uni.getStorageSync('goodslist')
            }).then(res=>{
-         console.log('预结算：',res)
+         console.log('预结算',res)
          uni.setStorageSync('readytopays',res)
+        uni.navigateTo({
+          url:`../payment/payment?tableid=${this.tableid}`
+        })
        })
-
-       uni.navigateTo({
-         url:`../payment/payment?tableid=${this.tableid}`
-       })
-
-
-
-
-
-
     }
   },
   onLoad(options) {

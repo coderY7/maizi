@@ -270,19 +270,6 @@
           }
         }, 10)
       },
-      //显示商品详情
-    //   showProduct(product) {
-    //     this.productModalVisible = true
-    //    this.product={
-    //       name:product.name,
-    //      images:product.images,
-    //      labels:product.labels,
-    //      price:product.price,
-    //      number:product.number,
-    //      description:product.description,
-    //      materials:product.materials,
-    //    }
-    // },
       //添加到购物车
       handleAddToCart(product) {
         const index = this.cart.findIndex(item => {

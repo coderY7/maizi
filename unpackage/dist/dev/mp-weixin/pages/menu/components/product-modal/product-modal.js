@@ -107,33 +107,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l1 = _vm.__map(_vm.productData.dishesextlist, function(item, index) {
-    var $orig = _vm.__get_orig(item)
-
-    var l0 = _vm.__map(item.extitems, function(item1, index1) {
-      var $orig = _vm.__get_orig(item1)
-
-      var g0 = index1.toString()
-      return {
-        $orig: $orig,
-        g0: g0
-      }
-    })
-
-    return {
-      $orig: $orig,
-      l0: l0
-    }
-  })
-
-  _vm.$mp.data = Object.assign(
-    {},
-    {
-      $root: {
-        l1: l1
-      }
-    }
-  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -168,6 +141,126 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ../actions/actions.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -337,7 +430,9 @@ __webpack_require__.r(__webpack_exports__);
       zxprice: 0,
       extlist: [], //附加属性
       ext_zxprice: '',
-      flownum: '0' };
+      ext_quantity: '1',
+      flownum: '0',
+      value: '1' };
 
   },
   updated: function updated() {
@@ -346,17 +441,87 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   methods: {
-    checkboxChange: function checkboxChange(e) {
-      var items = this.items,
-      values = e.detail.value;
-      for (var i = 0, lenI = items.length; i < lenI; ++i) {
-        var item = items[i];
-        if (values.includes(item.value)) {
-          this.$set(item, 'checked', true);
-        } else {
-          this.$set(item, 'checked', false);
-        }
+    chooseTag: function chooseTag() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_zxprice = unity.ext_price * 1;
+      if (rowIndex != 2) {
+        console.log(rowIndex, itemIndex);
+        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
       }
+      this.pitch();
+    },
+
+    chooseTag1: function chooseTag1() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_zxprice = unity.ext_price * 1;
+      if (rowIndex != 2) {
+        console.log(rowIndex, itemIndex);
+        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      }
+      this.pitch();
+    },
+
+    chooseTag2: function chooseTag2() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_quantity = this.ext_quantity;
+      console.log(unity.ext_quantity);
+      unity.ext_zxprice = unity.ext_price * this.ext_quantity;
+      console.log(unity.ext_zxprice);
+      if (rowIndex != 2) {
+        console.log(rowIndex, itemIndex);
+        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      }
+      this.pitch();
+    },
+    valChange: function valChange(e) {
+      console.log('当前值为: ' + e.value);
+
+    },
+
+
+    chooseTag3: function chooseTag3() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_zxprice = unity.ext_price * 1;
+      if (rowIndex != 2) {
+        console.log(rowIndex, itemIndex);
+        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      }
+      this.pitch();
+    },
+
+    chooseTag4: function chooseTag4() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_zxprice = unity.ext_price * 1;
+      if (rowIndex != 2) {
+        console.log(rowIndex, itemIndex);
+        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      }
+      this.pitch();
     },
 
 
@@ -368,13 +533,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('share', {});
     },
     // 计算总价（商品+加料）
-    calcOverprice: function calcOverprice() {
+    calcOverprice: function calcOverprice() {var _this = this;
       var pri = 0;
       this.productData.dishesextlist.forEach(function (item) {
         item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
-            console.log('单个属性', item1.ext_zxprice);
-            pri += parseInt(item1.ext_price);
+            console.log('单个属性价格', item1.ext_zxprice * _this.ext_quantity);
+            pri += parseInt(item1.ext_price * _this.ext_quantity);
           }
         });
       });
@@ -384,20 +549,24 @@ __webpack_require__.r(__webpack_exports__);
       this.productData.shownPrice = this.productData.number * this.productData.price;
       console.log(this.productData.shownPrice);
     },
-    chooseTag: function chooseTag(rowIndex, itemIndex) {
-      if (rowIndex != 2) {
-        console.log(rowIndex);
-        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
-          item.isDefault = false;
-        });
-        this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
-      }
-      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
-      this.$set(unity, 'isDefault', true);
-      this.$set(unity, 'ext_zxprice', '0');
-      unity.ext_zxprice = unity.ext_price * 1;
-      this.pitch();
-    },
+
+    //原方法
+
+    // chooseTag(rowIndex, itemIndex) {
+    //   var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
+    //   this.$set(unity, 'isDefault', true);
+    //   this.$set(unity, 'ext_zxprice', '0');
+    //   unity.ext_zxprice=unity.ext_price * 1
+    //   if(rowIndex!=2){
+    //     console.log(rowIndex,itemIndex)
+    //     this.productData.dishesextlist[rowIndex].extitems.map(item => {
+    //       item.isDefault = false;
+    //     });
+    //     this.$set(unity, 'isDefault', true);
+    //   }
+    //   this.pitch()
+    // },
+
     add: function add() {
       this.productData.number += 1;
       this.calcOverprice();
@@ -432,6 +601,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       });
+      console.log(pitch);
       this.productData.extlist = pitch;
       //附加属性总价格
       //this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
