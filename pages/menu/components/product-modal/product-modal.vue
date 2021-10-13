@@ -64,19 +64,20 @@
               </view>
 
 
-              <view v-for="(item2, index) in productData.dishesextlist[2]">
-                <view>{{item2.groupname}}</view>
+              <view>
+                <view>{{productData.dishesextlist[2].groupname}}</view>
                 <view>
                   <checkbox-group @change="checkboxChange">
-                    <label v-for="item in item2.extitems" :key="item.value">
+                    <label v-for="item in productData.dishesextlist[2].extitems" :key="item.value">
                       <view>
                         <checkbox :value="item.value" :checked="item.checked" />
                       </view>
                       <view>{{item.ext_name}}</view>
+                      <u-number-box v-model="value" @change="valChange" v-if=""></u-number-box>
                     </label>
                   </checkbox-group>
                 </view>
-                </view>
+              </view>
 
 
 
@@ -176,6 +177,20 @@ ext_zxprice:'',
   },
 
   methods: {
+    checkboxChange: function (e) {
+      var items = this.items,
+          values = e.detail.value;
+      for (var i = 0, lenI = items.length; i < lenI; ++i) {
+        const item = items[i]
+        if (values.includes(item.value)) {
+          this.$set(item, 'checked', true)
+        } else {
+          this.$set(item, 'checked', false)
+        }
+      }
+    },
+
+
     // 关闭modal
     closeModal() {
       this.$emit('cancel');
@@ -208,8 +223,6 @@ ext_zxprice:'',
         });
         this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
       }
-
-
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
@@ -246,13 +259,11 @@ ext_zxprice:'',
       this.productData.dishesextlist.map(item => {
         item.extitems.map(item1 => {
           if (item1.isDefault) {
-            console.log(this.ext_zxprice)
             pitch.push(item1);
           }
         });
       });
       this.productData.extlist=pitch
-
       //附加属性总价格
       //this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
       this.calcOverprice();

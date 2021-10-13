@@ -79,6 +79,9 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uNumberBox: function() {
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-number-box/u-number-box */ "node-modules/uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! uview-ui/components/u-number-box/u-number-box.vue */ 198))
+    },
     uButton: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 191))
     }
@@ -269,6 +272,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   props: {
     visible: {
@@ -342,6 +346,20 @@ __webpack_require__.r(__webpack_exports__);
   },
 
   methods: {
+    checkboxChange: function checkboxChange(e) {
+      var items = this.items,
+      values = e.detail.value;
+      for (var i = 0, lenI = items.length; i < lenI; ++i) {
+        var item = items[i];
+        if (values.includes(item.value)) {
+          this.$set(item, 'checked', true);
+        } else {
+          this.$set(item, 'checked', false);
+        }
+      }
+    },
+
+
     // 关闭modal
     closeModal: function closeModal() {
       this.$emit('cancel');
@@ -374,8 +392,6 @@ __webpack_require__.r(__webpack_exports__);
         });
         this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
       }
-
-
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
@@ -407,18 +423,16 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     //选中
-    pitch: function pitch() {var _this = this;
+    pitch: function pitch() {
       var pitch = [];
       this.productData.dishesextlist.map(function (item) {
         item.extitems.map(function (item1) {
           if (item1.isDefault) {
-            console.log(_this.ext_zxprice);
             pitch.push(item1);
           }
         });
       });
       this.productData.extlist = pitch;
-
       //附加属性总价格
       //this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
       this.calcOverprice();
