@@ -62,6 +62,25 @@
                   </view>
                 </view>
               </view>
+
+
+              <view v-for="(item2, index) in productData.dishesextlist[2]">
+                <view>{{item2.groupname}}</view>
+                <view>
+                  <checkbox-group @change="checkboxChange">
+                    <label v-for="item in item2.extitems" :key="item.value">
+                      <view>
+                        <checkbox :value="item.value" :checked="item.checked" />
+                      </view>
+                      <view>{{item.ext_name}}</view>
+                    </label>
+                  </checkbox-group>
+                </view>
+                </view>
+
+
+
+
             </view>
           </scroll-view>
 
@@ -189,11 +208,7 @@ ext_zxprice:'',
         });
         this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
       }
-      if(this.productData.dishesextlist[rowIndex].extitems[itemIndex].isDefault){
-        console.log('取消')
 
-        this.productData.dishesextlist[rowIndex].extitems[itemIndex].isDefault=true;
-      }
 
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);

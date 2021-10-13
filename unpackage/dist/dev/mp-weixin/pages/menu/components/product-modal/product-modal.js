@@ -250,6 +250,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   props: {
     visible: {
@@ -355,11 +374,7 @@ __webpack_require__.r(__webpack_exports__);
         });
         this.$set(this.productData.dishesextlist[rowIndex].extitems[itemIndex], 'isDefault', true);
       }
-      if (this.productData.dishesextlist[rowIndex].extitems[itemIndex].isDefault) {
-        console.log('取消');
 
-        this.productData.dishesextlist[rowIndex].extitems[itemIndex].isDefault = true;
-      }
 
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
       this.$set(unity, 'isDefault', true);
