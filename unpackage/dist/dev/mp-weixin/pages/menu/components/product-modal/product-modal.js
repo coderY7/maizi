@@ -164,7 +164,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ../actions/actions.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ../actions/actions.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
 
 
 
@@ -368,7 +368,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.pitch();
     },
     add: function add() {
-      console.log(this);
       this.productData.number += 1;
       this.calcOverprice();
     },
@@ -408,32 +407,44 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       //附加属性总价格
       //this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
       this.calcOverprice();
+
+
     },
     // 加入购物车
     addToCart: function addToCart() {
-      this.productData.extlist.map(function (item) {
-        if (item.isDefault) {
-          item.isDefault = undefined;
-          item.ext_desc = undefined;
-        }
-      });
-      this.productData.choosedText = this.choosedText;
-      var goodslist = {
-        price: this.productData.nsjg,
-        extlist: this.productData.extlist,
-        spsmm: this.productData.spsmm,
-        zxprice: this.productData.zxprice,
-        quantity: this.productData.number,
-        flownum: this.flownum++,
-        discount: '2',
-        spbm: this.productData.spbm };
+      if (this.productData.extlist) {
+        this.productData.extlist.map(function (item) {
+          if (item.isDefault) {
+            item.isDefault = undefined;
+            item.ext_desc = undefined;
+          }
+        });
+        this.productData.choosedText = this.choosedText;
+        var goodslist = {
+          price: this.productData.nsjg,
+          extlist: this.productData.extlist,
+          spsmm: this.productData.spsmm,
+          zxprice: this.productData.zxprice,
+          quantity: this.productData.number,
+          flownum: this.flownum++,
+          discount: '2',
+          spbm: this.productData.spbm };
 
-      this.productData.goodslist = goodslist;
-      console.log(this.productData.goodslist);
-      var product = _objectSpread({}, this.productData);
-      this.$emit('add-to-cart', product);
-      console.log(product);
+        this.productData.goodslist = goodslist;
+        console.log(this.productData.goodslist);
+        var product = _objectSpread({}, this.productData);
+        this.$emit('add-to-cart', product);
+        console.log(product);
+      } else
+      {
+        uni.showToast({
+          icon: "loading",
+          title: '请选择规格',
+          duration: 1000 });
+
+      }
     } } };exports.default = _default2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

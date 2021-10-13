@@ -354,37 +354,7 @@
       clearCart() {
         this.cart = []
       },
-      // handleMenuSelected(id) {
-      //   this.productsScrollTop = this.categories.find(item => item.id == id).top
-      //   this.$nextTick(() => this.currentCategoryId = id)
-      // },
-      // productsScroll({detail}) {
-      //   const {scrollTop} = detail
-      //   let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
-      //   if(tabs.length > 0){
-      //     this.currentCategoryId = tabs[0].id
-      //   }
-      // },
-      // calcSize() {
-      //   let h = 0
-      //   let view = uni.createSelectorQuery().select('#ads')
-      //   view.fields({
-      //     size: true
-      //   }, data => {
-      //     h += Math.floor(data.height)
-      //   }).exec()
-      //
-      //   this.categories.forEach(item => {
-      //     let view = uni.createSelectorQuery().select(`#products-${item.id}`)
-      //     view.fields({
-      //       size: true
-      //     }, data => {
-      //       item.top = h
-      //       h += Math.floor(data.height)
-      //       item.bottom = h
-      //     }).exec()
-      //   })
-      // },
+
       pay(){
         var goodslist = this.cart.reduce((previous,primary)=>{
           previous.push(primary.goodslist);
@@ -404,9 +374,7 @@
           counts:this.counts
         }
         uni.setStorageSync('Cart',this.Cart)
-        uni.navigateTo({
-          url:`/pages/pay/pay?table=${this.table}`,
-        })
+
         //生成订单
         this.$u.api.orders({
           access_token:this.token,
@@ -418,12 +386,27 @@
           fdbh:uni.getStorageSync('fdbh'),
         }).then(
             (res)=>{
-          console.log("生成订单：",res)
-          uni.setStorageSync('xsdbh', res.xsdbh);
-        },
-            (err)=>{
-              console.log('请选择就餐人数')
-            }
+          console.log("订单：",res)
+              if(res.error_code=='500'){
+                console.log('清台')
+                this.$u.api.orders({
+                  access_token:uni.getStorageSync('token'),
+                  vtype:'clear',
+                  tableid:uni.getStorageSync('tableid')[0],
+                  fdbh:uni.getStorageSync('fdbh')
+                }).then((res)=>{
+                  console.log('清台成功：',res)
+                })
+              }
+              if(res.error_code=='0'){
+                console.log("生成订单")
+                uni.setStorageSync('xsdbh', res.xsdbh);
+                uni.navigateTo({
+                  url:`/pages/pay/pay?table=${this.table}`,
+                })
+              }
+
+        }
         )
       }
   },

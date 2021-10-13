@@ -527,38 +527,8 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
     clearCart: function clearCart() {
       this.cart = [];
     },
-    // handleMenuSelected(id) {
-    //   this.productsScrollTop = this.categories.find(item => item.id == id).top
-    //   this.$nextTick(() => this.currentCategoryId = id)
-    // },
-    // productsScroll({detail}) {
-    //   const {scrollTop} = detail
-    //   let tabs = this.categories.filter(item=> item.top <= scrollTop).reverse()
-    //   if(tabs.length > 0){
-    //     this.currentCategoryId = tabs[0].id
-    //   }
-    // },
-    // calcSize() {
-    //   let h = 0
-    //   let view = uni.createSelectorQuery().select('#ads')
-    //   view.fields({
-    //     size: true
-    //   }, data => {
-    //     h += Math.floor(data.height)
-    //   }).exec()
-    //
-    //   this.categories.forEach(item => {
-    //     let view = uni.createSelectorQuery().select(`#products-${item.id}`)
-    //     view.fields({
-    //       size: true
-    //     }, data => {
-    //       item.top = h
-    //       h += Math.floor(data.height)
-    //       item.bottom = h
-    //     }).exec()
-    //   })
-    // },
-    pay: function pay() {
+
+    pay: function pay() {var _this9 = this;
       var goodslist = this.cart.reduce(function (previous, primary) {
         previous.push(primary.goodslist);
         return previous;
@@ -577,8 +547,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         counts: this.counts };
 
       uni.setStorageSync('Cart', this.Cart);
-      uni.navigateTo({
-        url: "/pages/pay/pay?table=".concat(this.table) });
 
       //生成订单
       this.$u.api.orders({
@@ -591,18 +559,33 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         fdbh: uni.getStorageSync('fdbh') }).
       then(
       function (res) {
-        console.log("生成订单：", res);
-        uni.setStorageSync('xsdbh', res.xsdbh);
-      },
-      function (err) {
-        console.log('请选择就餐人数');
+        console.log("订单：", res);
+        if (res.error_code == '500') {
+          console.log('清台');
+          _this9.$u.api.orders({
+            access_token: uni.getStorageSync('token'),
+            vtype: 'clear',
+            tableid: uni.getStorageSync('tableid')[0],
+            fdbh: uni.getStorageSync('fdbh') }).
+          then(function (res) {
+            console.log('清台成功：', res);
+          });
+        }
+        if (res.error_code == '0') {
+          console.log("生成订单");
+          uni.setStorageSync('xsdbh', res.xsdbh);
+          uni.navigateTo({
+            url: "/pages/pay/pay?table=".concat(_this9.table) });
+
+        }
+
       });
 
     } },
 
   computed: {
-    productCartNum: function productCartNum() {var _this9 = this; //计算单个饮品添加到购物车的数量
-      return function (id) {return _this9.cart.reduce(function (acc, cur) {
+    productCartNum: function productCartNum() {var _this10 = this; //计算单个饮品添加到购物车的数量
+      return function (id) {return _this10.cart.reduce(function (acc, cur) {
           if (cur.id === id) {
             return acc += cur.number;
           }

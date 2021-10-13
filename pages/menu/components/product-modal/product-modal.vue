@@ -202,7 +202,6 @@ ext_zxprice:'',
       this.pitch()
     },
     add() {
-      console.log(this)
       this.productData.number += 1
       this.calcOverprice()
     },
@@ -242,31 +241,42 @@ ext_zxprice:'',
       //附加属性总价格
       //this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
       this.calcOverprice();
+
+
     },
     // 加入购物车
     addToCart() {
-  this.productData.extlist.map(item => {
+      if(this.productData.extlist){
+        this.productData.extlist.map(item => {
           if (item.isDefault) {
-           item.isDefault=undefined;
-           item.ext_desc=undefined
+            item.isDefault=undefined;
+            item.ext_desc=undefined
           }
-      });
-     this.productData.choosedText=this.choosedText
-      let goodslist={
-        price: this.productData.nsjg,
-        extlist:this.productData.extlist,
-        spsmm:this.productData.spsmm,
-        zxprice:this.productData.zxprice,
-        quantity:this.productData.number,
-        flownum: this.flownum++,
-        discount: '2',
-        spbm:this.productData.spbm,
+        });
+        this.productData.choosedText=this.choosedText
+        let goodslist={
+          price: this.productData.nsjg,
+          extlist:this.productData.extlist,
+          spsmm:this.productData.spsmm,
+          zxprice:this.productData.zxprice,
+          quantity:this.productData.number,
+          flownum: this.flownum++,
+          discount: '2',
+          spbm:this.productData.spbm,
+        }
+        this.productData.goodslist=goodslist;
+        console.log(this.productData.goodslist)
+        const product = {...this.productData}
+        this.$emit('add-to-cart', product)
+        console.log(product)
       }
-      this.productData.goodslist=goodslist;
-      console.log(this.productData.goodslist)
-      const product = {...this.productData}
-      this.$emit('add-to-cart', product)
-      console.log(product)
+      else {
+        uni.showToast({
+          icon:"loading",
+          title: '请选择规格',
+          duration: 1000
+        });
+      }
     }
   }
 };
