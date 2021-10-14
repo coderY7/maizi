@@ -141,9 +141,8 @@
                       >
                         ￥{{item1.ext_price}}
                       </text>
-                      <u-number-box v-model="value" @change="valChange" v-if="item1.isDefault" :min="1" :max="10" disabled-input="true"></u-number-box>
                     </view>
-
+                    <u-number-box v-model=item1.ext_quantity @change="valChange(JSON.stringify(item1))"  :min="0" :max="10" disabled-input="true"  @click="chooseTag2(item1, index1)"></u-number-box>
 
                   </view>
                 </view>
@@ -288,7 +287,7 @@ export default {
       zxprice:0,
       extlist:[],//附加属性
 ext_zxprice:'',
-      ext_quantity:'1',
+      ext_quantity:'0',
       flownum:'0',
       value:'1'
     };
@@ -330,25 +329,25 @@ ext_zxprice:'',
     },
 
     chooseTag2(rowIndex=2, itemIndex) {
+      console.log(this)
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
-      this.$set(unity, 'isDefault', true);
-      this.$set(unity, 'ext_zxprice', '0');
+      console.log(unity)
+      unity.isDefault =true
+      unity.ext_zxprice=0
+      console.log(unity)
+      // this.$set(unity, 'isDefault', true);
+      // this.$set(unity, 'ext_zxprice', '0');
       unity.ext_quantity=this.ext_quantity
       console.log(unity.ext_quantity)
-      unity.ext_zxprice=unity.ext_price * this.ext_quantity;
+      unity.ext_zxprice=unity.ext_price * unity.ext_quantity;
       console.log(unity.ext_zxprice)
-      if(rowIndex!=2){
-        console.log(rowIndex,itemIndex)
-        this.productData.dishesextlist[rowIndex].extitems.map(item => {
-          item.isDefault = false;
-        });
-        this.$set(unity, 'isDefault', true);
-      }
       this.pitch()
     },
-    valChange:function (e){
-      console.log('当前值为: ' + e.value)
-
+    valChange (item1){
+      console.log(this._data.ext_quantity)
+      this.ext_quantity=this._data.ext_quantity
+      console.log(this.ext_quantity)
+      //this.chooseTag2(2)
     },
 
 
@@ -396,8 +395,8 @@ ext_zxprice:'',
       this.productData.dishesextlist.forEach(item => {
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
-            console.log('单个属性价格',item1.ext_zxprice * this.ext_quantity)
-            pri += parseInt(item1.ext_price * this.ext_quantity);
+            console.log('单个属性价格',item1.ext_price * item1.ext_quantity)
+            pri += parseInt(item1.ext_price * item1.ext_quantity);
           }
         });
       });
@@ -451,6 +450,7 @@ ext_zxprice:'',
     },
    //选中
     pitch(){
+     this.valChange()
       let pitch=[];
       this.productData.dishesextlist.map(item => {
         item.extitems.map(item1 => {
