@@ -208,4 +208,20 @@
 .sign {
   font-size: 46rpx !important;
 }
+.list input{
+  margin: 0 10rpx;
+  width: 80rpx;
+  border: 1rpx solid #007AFF;
+}
+.list .list-list{
+  display: flex;
+  margin-top: 10rpx;
+}
+.list .Button{
+  background-color: #808080;
+  width: 50rpx;
+  height: 48rpx;
+  text-align: center;
+  line-height: 48rpx;
+}
 

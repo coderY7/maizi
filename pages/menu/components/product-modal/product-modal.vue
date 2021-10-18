@@ -94,35 +94,34 @@
                 </view>
               </view>
 
-              <view class="status-item">
-                <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
-                <view class="status-tags">
-                  <view v-for="(item1, index1) in productData.dishesextlist[1].extitems" :key="item1.ext_name + index1">
-                    <view
-                        class="tags-item2"
-                        :style="{
-												color: item1.isDefault ? activeTextColor : normalTextColor,
-												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
-											}"
-                        @tap="chooseTag1(item1, index1)"
-                    >
-                      {{ item1.ext_name }}
-                      <text
-                          class="tags-pri"
-                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                          v-if="item1.ext_price > 0"
-                          :class="{ 'active-text': item1.isDefault }"
-                      >
-                        ￥{{item1.ext_price}}
-                      </text>
+
+              <view class="list" v-for="(item,key) in productData.dishesextlist[1].extitems" :key="key">
+                <checkbox-group @change="checkboxChange(item,key)">
+                  <view style="display: flex;justify-content: space-between;">
+                    <view>
+                      <label class="radio">
+                        <checkbox :checked="item.isDefault"/>
+                      </label> {{item.ext_name}}：<text>{{item.ext_price}}</text>￥
+                    </view>
+                    <view class="list-list">
+                      <view class="Button" @click="plus(item,key)">+</view>
+                      <view class="number">{{item.ext_quantity}}</view>
+                      <view class="Button" @click="reduce(item,key)">-</view>
                     </view>
                   </view>
-                </view>
+                </checkbox-group>
               </view>
+
+<!--              <view class="botton">-->
+<!--                <label class="radio" @click="quanxuan">-->
+<!--                  <radio :checked="all"/><text>全选</text>-->
+<!--                </label>-->
+<!--                <view class="text">总价：<text>{{total}}</text>￥</view>-->
+<!--              </view>-->
 
               <view class="status-item">
                 <view class="status-title">{{ productData.dishesextlist[2].groupname }}</view>
-                <view>
+                <view class="status-tags">
                   <view v-for="(item1, index1) in productData.dishesextlist[2].extitems" :key="item1.ext_name + index1">
                     <view
                         class="tags-item2"
@@ -142,11 +141,10 @@
                         ￥{{item1.ext_price}}
                       </text>
                     </view>
-                    <u-number-box v-model=item1.ext_quantity @change="valChange(JSON.stringify(item1))"  :min="0" :max="10" disabled-input="true"  @click="chooseTag2(item1, index1)"></u-number-box>
-
                   </view>
                 </view>
               </view>
+
 
               <view class="status-item">
                 <view class="status-title">{{ productData.dishesextlist[3].groupname }}</view>
@@ -287,23 +285,54 @@ export default {
       zxprice:0,
       extlist:[],//附加属性
 ext_zxprice:'',
-      ext_quantity:'0',
+      ext_quantity:'1',
       flownum:'0',
       value:'1'
     };
   },
   updated() {
     this.updateChoosedText();
-
   },
-
+  onShow(){
+    let data=this.productData.dishesextlist[1].extitems
+    console.log('data',data)
+  },
   methods: {
+
+    checkboxChange(value,key){
+      var value=this.productData.dishesextlist[1].extitems[key]
+      console.log(value,key)
+      value.ext_quantity=1
+      if(value.isDefault==undefined){
+        value.isDefault=true
+        this.pitch()
+      }else if(value.isDefault){
+        value.isDefault=undefined
+        console.log(value)
+        this.pitch()
+      }
+    },
+    plus(value,key){
+      var value=this.productData.dishesextlist[1].extitems[key]
+      value.ext_quantity=Number(value.ext_quantity)+1
+      value.ext_zxprice=value.ext_price * value.ext_quantity;
+      this.pitch()
+    },
+    reduce(value,key){
+      var value=this.productData.dishesextlist[1].extitems[key]
+      value.ext_quantity=Number(value.ext_quantity)-1
+      value.ext_zxprice=value.ext_price * value.ext_quantity;
+      this.pitch()
+    },
+
+
     chooseTag(rowIndex=0, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
-      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'isDefault', 'true');
       this.$set(unity, 'ext_zxprice', '0');
+      console.log(unity)
       unity.ext_zxprice=unity.ext_price * 1
-      if(rowIndex!=2){
+      if(rowIndex!=1){
         console.log(rowIndex,itemIndex)
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
@@ -313,50 +342,45 @@ ext_zxprice:'',
       this.pitch()
     },
 
-    chooseTag1(rowIndex=1, itemIndex) {
-      var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
-      this.$set(unity, 'isDefault', true);
-      this.$set(unity, 'ext_zxprice', '0');
-      unity.ext_zxprice=unity.ext_price * 1
-      if(rowIndex!=2){
-        console.log(rowIndex,itemIndex)
-        this.productData.dishesextlist[rowIndex].extitems.map(item => {
-          item.isDefault = false;
-        });
-        this.$set(unity, 'isDefault', true);
-      }
-      this.pitch()
-    },
 
-    chooseTag2(rowIndex=2, itemIndex) {
-      console.log(this)
-      var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
+    chooseTag1(index1) {
+      var unity=this.productData.dishesextlist[1].extitems[index1]
       console.log(unity)
-      unity.isDefault =true
-      unity.ext_zxprice=0
+       this.$set(unity, 'isDefault', true);
+       this.$set(unity, 'ext_zxprice', '0');
       console.log(unity)
-      // this.$set(unity, 'isDefault', true);
-      // this.$set(unity, 'ext_zxprice', '0');
-      unity.ext_quantity=this.ext_quantity
-      console.log(unity.ext_quantity)
+      //unity.ext_quantity=this.ext_quantity
       unity.ext_zxprice=unity.ext_price * unity.ext_quantity;
       console.log(unity.ext_zxprice)
       this.pitch()
     },
-    valChange (item1){
-      console.log(this._data.ext_quantity)
-      this.ext_quantity=this._data.ext_quantity
-      console.log(this.ext_quantity)
-      //this.chooseTag2(2)
-    },
+   adds(item1){
+     item1.ext_quantity=this._data.ext_quantity
+     console.log(item1,this._data.ext_quantity)
+   },
 
+
+    chooseTag2(rowIndex=2, itemIndex) {
+      var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_zxprice=unity.ext_price * 1
+      if(rowIndex!=1){
+        console.log(rowIndex,itemIndex)
+        this.productData.dishesextlist[rowIndex].extitems.map(item => {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      }
+      this.pitch()
+    },
 
     chooseTag3(rowIndex=3, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_zxprice=unity.ext_price * 1
-      if(rowIndex!=2){
+      if(rowIndex!=1){
         console.log(rowIndex,itemIndex)
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
@@ -371,7 +395,7 @@ ext_zxprice:'',
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_zxprice=unity.ext_price * 1
-      if(rowIndex!=2){
+      if(rowIndex!=1){
         console.log(rowIndex,itemIndex)
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
@@ -405,6 +429,7 @@ ext_zxprice:'',
       this.productData.zxprice=this.productData.nsjg+ pri
       this.productData.shownPrice=this.productData.number * this.productData.price;
       console.log(this.productData.shownPrice);
+      this.updateChoosedText();
     },
 
     //原方法
@@ -450,8 +475,8 @@ ext_zxprice:'',
     },
    //选中
     pitch(){
-     this.valChange()
       let pitch=[];
+      console.log( this.productData.dishesextlist)
       this.productData.dishesextlist.map(item => {
         item.extitems.map(item1 => {
           if (item1.isDefault) {
@@ -461,8 +486,6 @@ ext_zxprice:'',
       });
       console.log(pitch)
       this.productData.extlist=pitch
-      //附加属性总价格
-      //this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
       this.calcOverprice();
 
 
@@ -742,5 +765,21 @@ ext_zxprice:'',
 }
 .sign {
   font-size: 46rpx !important;
+}
+.list input{
+  margin: 0 10upx;
+  width: 80upx;
+  border: 1upx solid #007AFF;
+}
+.list .list-list{
+  display: flex;
+  margin-top: 10upx;
+}
+.list .Button{
+  background-color: #808080;
+  width: 50upx;
+  height: 48upx;
+  text-align: center;
+  line-height: 48upx;
 }
 </style>

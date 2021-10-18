@@ -79,9 +79,6 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
-    uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-number-box/u-number-box */ "node-modules/uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! uview-ui/components/u-number-box/u-number-box.vue */ 198))
-    },
     uButton: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 191))
     }
@@ -107,27 +104,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.productData.dishesextlist[2].extitems, function(
-    item1,
-    index1
-  ) {
-    var $orig = _vm.__get_orig(item1)
-
-    var g0 = JSON.stringify(item1)
-    return {
-      $orig: $orig,
-      g0: g0
-    }
-  })
-
-  _vm.$mp.data = Object.assign(
-    {},
-    {
-      $root: {
-        l0: l0
-      }
-    }
-  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -162,8 +138,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ../actions/actions.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
-
-
 
 
 
@@ -450,23 +424,54 @@ __webpack_require__.r(__webpack_exports__);
       zxprice: 0,
       extlist: [], //附加属性
       ext_zxprice: '',
-      ext_quantity: '0',
+      ext_quantity: '1',
       flownum: '0',
       value: '1' };
 
   },
   updated: function updated() {
     this.updateChoosedText();
-
   },
-
+  onShow: function onShow() {
+    var data = this.productData.dishesextlist[1].extitems;
+    console.log('data', data);
+  },
   methods: {
+
+    checkboxChange: function checkboxChange(value, key) {
+      var value = this.productData.dishesextlist[1].extitems[key];
+      console.log(value, key);
+      value.ext_quantity = 1;
+      if (value.isDefault == undefined) {
+        value.isDefault = true;
+        this.pitch();
+      } else if (value.isDefault) {
+        value.isDefault = undefined;
+        console.log(value);
+        this.pitch();
+      }
+    },
+    plus: function plus(value, key) {
+      var value = this.productData.dishesextlist[1].extitems[key];
+      value.ext_quantity = Number(value.ext_quantity) + 1;
+      value.ext_zxprice = value.ext_price * value.ext_quantity;
+      this.pitch();
+    },
+    reduce: function reduce(value, key) {
+      var value = this.productData.dishesextlist[1].extitems[key];
+      value.ext_quantity = Number(value.ext_quantity) - 1;
+      value.ext_zxprice = value.ext_price * value.ext_quantity;
+      this.pitch();
+    },
+
+
     chooseTag: function chooseTag() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
-      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'isDefault', 'true');
       this.$set(unity, 'ext_zxprice', '0');
+      console.log(unity);
       unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 2) {
+      if (rowIndex != 1) {
         console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
@@ -476,50 +481,45 @@ __webpack_require__.r(__webpack_exports__);
       this.pitch();
     },
 
-    chooseTag1: function chooseTag1() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
-      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+
+    chooseTag1: function chooseTag1(index1) {
+      var unity = this.productData.dishesextlist[1].extitems[index1];
+      console.log(unity);
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
-      unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 2) {
-        console.log(rowIndex, itemIndex);
-        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
-          item.isDefault = false;
-        });
-        this.$set(unity, 'isDefault', true);
-      }
-      this.pitch();
-    },
-
-    chooseTag2: function chooseTag2() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
-      console.log(this);
-      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
       console.log(unity);
-      unity.isDefault = true;
-      unity.ext_zxprice = 0;
-      console.log(unity);
-      // this.$set(unity, 'isDefault', true);
-      // this.$set(unity, 'ext_zxprice', '0');
-      unity.ext_quantity = this.ext_quantity;
-      console.log(unity.ext_quantity);
+      //unity.ext_quantity=this.ext_quantity
       unity.ext_zxprice = unity.ext_price * unity.ext_quantity;
       console.log(unity.ext_zxprice);
       this.pitch();
     },
-    valChange: function valChange(item1) {
-      console.log(this._data.ext_quantity);
-      this.ext_quantity = this._data.ext_quantity;
-      console.log(this.ext_quantity);
-      //this.chooseTag2(2)
+    adds: function adds(item1) {
+      item1.ext_quantity = this._data.ext_quantity;
+      console.log(item1, this._data.ext_quantity);
     },
 
+
+    chooseTag2: function chooseTag2() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_zxprice = unity.ext_price * 1;
+      if (rowIndex != 1) {
+        console.log(rowIndex, itemIndex);
+        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      }
+      this.pitch();
+    },
 
     chooseTag3: function chooseTag3() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 2) {
+      if (rowIndex != 1) {
         console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
@@ -534,7 +534,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 2) {
+      if (rowIndex != 1) {
         console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
@@ -568,6 +568,7 @@ __webpack_require__.r(__webpack_exports__);
       this.productData.zxprice = this.productData.nsjg + pri;
       this.productData.shownPrice = this.productData.number * this.productData.price;
       console.log(this.productData.shownPrice);
+      this.updateChoosedText();
     },
 
     //原方法
@@ -613,8 +614,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     //选中
     pitch: function pitch() {
-      this.valChange();
       var pitch = [];
+      console.log(this.productData.dishesextlist);
       this.productData.dishesextlist.map(function (item) {
         item.extitems.map(function (item1) {
           if (item1.isDefault) {
@@ -624,8 +625,6 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log(pitch);
       this.productData.extlist = pitch;
-      //附加属性总价格
-      //this.ext_zxprice= this.productData.extlist.reduce((t, v) => t + v.ext_price * v.ext_quantity, 0);
       this.calcOverprice();
 
 
