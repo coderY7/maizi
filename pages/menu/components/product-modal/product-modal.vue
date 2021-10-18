@@ -95,15 +95,16 @@
               </view>
 
 
+              <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
               <view class="list" v-for="(item,key) in productData.dishesextlist[1].extitems" :key="key">
                 <checkbox-group @change="checkboxChange(item,key)">
                   <view style="display: flex;justify-content: space-between;">
                     <view>
                       <label class="radio">
                         <checkbox :checked="item.isDefault"/>
-                      </label> {{item.ext_name}}：<text>{{item.ext_price}}</text>￥
+                      </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
                     </view>
-                    <view class="list-list">
+                    <view class="list-list" v-if="item.isDefault">
                       <view class="Button" @click="plus(item,key)">+</view>
                       <view class="number">{{item.ext_quantity}}</view>
                       <view class="Button" @click="reduce(item,key)">-</view>
@@ -111,13 +112,6 @@
                   </view>
                 </checkbox-group>
               </view>
-
-<!--              <view class="botton">-->
-<!--                <label class="radio" @click="quanxuan">-->
-<!--                  <radio :checked="all"/><text>全选</text>-->
-<!--                </label>-->
-<!--                <view class="text">总价：<text>{{total}}</text>￥</view>-->
-<!--              </view>-->
 
               <view class="status-item">
                 <view class="status-title">{{ productData.dishesextlist[2].groupname }}</view>
@@ -320,6 +314,9 @@ ext_zxprice:'',
     },
     reduce(value,key){
       var value=this.productData.dishesextlist[1].extitems[key]
+      if(value.ext_quantity<=1){
+        return value.ext_quantity=1
+      }
       value.ext_quantity=Number(value.ext_quantity)-1
       value.ext_zxprice=value.ext_price * value.ext_quantity;
       this.pitch()
@@ -776,7 +773,7 @@ ext_zxprice:'',
   margin-top: 10upx;
 }
 .list .Button{
-  background-color: #808080;
+  background-color: #dca371;
   width: 50upx;
   height: 48upx;
   text-align: center;

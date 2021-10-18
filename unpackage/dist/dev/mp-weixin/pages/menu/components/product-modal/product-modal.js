@@ -354,12 +354,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
 {
   props: {
     visible: {
@@ -459,6 +453,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     reduce: function reduce(value, key) {
       var value = this.productData.dishesextlist[1].extitems[key];
+      if (value.ext_quantity <= 1) {
+        return value.ext_quantity = 1;
+      }
       value.ext_quantity = Number(value.ext_quantity) - 1;
       value.ext_zxprice = value.ext_price * value.ext_quantity;
       this.pitch();
