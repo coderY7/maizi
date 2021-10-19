@@ -329,6 +329,8 @@ ext_zxprice:'',
       this.$set(unity, 'isDefault', 'true');
       this.$set(unity, 'ext_zxprice', '0');
       console.log(unity)
+      unity.ext_quantity=1
+
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=1){
         console.log(rowIndex,itemIndex)
@@ -362,6 +364,8 @@ ext_zxprice:'',
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_quantity=1
+
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=1){
         console.log(rowIndex,itemIndex)
@@ -377,6 +381,8 @@ ext_zxprice:'',
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_quantity=1
+
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=1){
         console.log(rowIndex,itemIndex)
@@ -392,6 +398,7 @@ ext_zxprice:'',
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_quantity=1
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=1){
         console.log(rowIndex,itemIndex)

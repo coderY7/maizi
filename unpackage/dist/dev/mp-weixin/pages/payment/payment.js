@@ -179,11 +179,20 @@ __webpack_require__.r(__webpack_exports__);
                   companyid: uni.getStorageSync('companyid') }).
                 then(function (res) {
                   console.log('订单完成', res);
-                });
+                  uni.showToast({
+                    title: '标题',
+                    duration: 500,
+                    image: '../../static/pay/win.png' });
 
+                });
               },
               'fail': function fail(res) {
                 console.log('支付失败:', res);
+                uni.showToast({
+                  title: '标题',
+                  duration: 500,
+                  image: '../../static/pay/fail.png' });
+
               },
               'complete': function complete(res) {} });
 
@@ -199,13 +208,16 @@ __webpack_require__.r(__webpack_exports__);
 
       }
       if (this.payment == '1') {
-        console.log('支付宝支付');
+        uni.showToast({
+          title: '支付宝支付',
+          duration: 500 });
+
       }
       if (!this.payment) {
         uni.showToast({
           title: '请选择支付方式',
           icon: 'loading',
-          duration: 1000 });
+          duration: 100 });
 
       }
     } } };exports.default = _default;
