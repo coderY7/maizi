@@ -107,9 +107,6 @@
       }
     },
     onShow(){
-
-    },
-    onLoad(options) {
       this.token = uni.getStorageSync('token');
       this.$u.api.categorys({
         access_token:this.token,
@@ -133,6 +130,9 @@
           this.disheslist=res.disheslist
         })
       })
+    },
+    onLoad(options) {
+
     },
     onReady() {
       this.getMenuItemTop()
@@ -281,7 +281,6 @@
           this.cart[index].number += (product.number || 1)
           return
         }
-        console.log(product)
         this.cart.push({
           id: product.spbm,
           cate_id: product.category_id,
@@ -290,19 +289,10 @@
           image: this.imgurl+product.small_img_path,
           is_single: product.is_single,
           choosedText: product.choosedText || '',
-
           goodslist:product.goodslist,
-
-           price: product.zxprice,
-          // extlist:product.extlist,
-          // spsmm:product.spsmm,
-          // zxprice:product.zxprice,
-          // quantity: product.quantity,
-          // flownum: product.flownum,
-          // discount: product.discount,
-          // spbm:product.spbm,
+          price:  product.goodslist.price,
         })
-
+        console.log(product)
       },
       //从购物车减商品
       handleMinusFromCart(product) {
@@ -335,9 +325,6 @@
         this.productModalVisible = false
         this.product = {}
       },
-      // openCartDetailsPopup() {
-      //   this.$refs['cartPopup'].open()
-      // },
       clearCart() {
         this.cart = []
       },

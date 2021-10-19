@@ -279,10 +279,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       goodslist: [] };
 
   },
-  onShow: function onShow() {
-
-  },
-  onLoad: function onLoad(options) {var _this = this;
+  onShow: function onShow() {var _this = this;
     this.token = uni.getStorageSync('token');
     this.$u.api.categorys({
       access_token: this.token,
@@ -306,6 +303,9 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         _this.disheslist = res.disheslist;
       });
     });
+  },
+  onLoad: function onLoad(options) {
+
   },
   onReady: function onReady() {
     this.getMenuItemTop();
@@ -454,7 +454,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         this.cart[index].number += product.number || 1;
         return;
       }
-      console.log(product);
       this.cart.push({
         id: product.spbm,
         cate_id: product.category_id,
@@ -463,19 +462,10 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         image: this.imgurl + product.small_img_path,
         is_single: product.is_single,
         choosedText: product.choosedText || '',
-
         goodslist: product.goodslist,
+        price: product.goodslist.price });
 
-        price: product.zxprice
-        // extlist:product.extlist,
-        // spsmm:product.spsmm,
-        // zxprice:product.zxprice,
-        // quantity: product.quantity,
-        // flownum: product.flownum,
-        // discount: product.discount,
-        // spbm:product.spbm,
-      });
-
+      console.log(product);
     },
     //从购物车减商品
     handleMinusFromCart: function handleMinusFromCart(product) {
@@ -508,9 +498,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       this.productModalVisible = false;
       this.product = {};
     },
-    // openCartDetailsPopup() {
-    //   this.$refs['cartPopup'].open()
-    // },
     clearCart: function clearCart() {
       this.cart = [];
     },

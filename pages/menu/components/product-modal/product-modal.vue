@@ -299,6 +299,7 @@ ext_zxprice:'',
       value.ext_quantity=1
       if(value.isDefault==undefined){
         value.isDefault=true
+        value.ext_zxprice=value.ext_quantity * value.ext_price
         this.pitch()
       }else if(value.isDefault){
         value.isDefault=undefined
@@ -493,7 +494,7 @@ ext_zxprice:'',
         this.productData.extlist.map(item => {
           if (item.isDefault) {
             item.isDefault=undefined;
-            item.ext_desc=undefined
+            item.ext_desc=undefined;
           }
         });
         this.productData.choosedText=this.choosedText
@@ -504,7 +505,7 @@ ext_zxprice:'',
           zxprice:this.productData.zxprice,
           quantity:this.productData.number,
           flownum: this.flownum++,
-          discount: '2',
+          discount: '0',
           spbm:this.productData.spbm,
         }
         this.productData.goodslist=goodslist;
@@ -513,12 +514,29 @@ ext_zxprice:'',
         this.$emit('add-to-cart', product)
         console.log(product)
       }
-      else {
+      else {//未选择规格
         uni.showToast({
           icon:"loading",
           title: '请选择规格',
           duration: 1000
         });
+        this.productData.choosedText=this.choosedText
+        console.log(this.productData)
+        let goodslist={
+          price: this.productData.nsjg,
+          extlist:[],
+          spsmm:this.productData.spsmm,
+          zxprice:this.productData.zxprice,
+          quantity:this.productData.number,
+          flownum: this.flownum++,
+          discount: '0',
+          spbm:this.productData.spbm,
+        }
+        this.productData.goodslist=goodslist;
+        console.log(this.productData.goodslist)
+        const product = {...this.productData}
+        this.$emit('add-to-cart', product)
+        console.log(product)
       }
     }
   }
