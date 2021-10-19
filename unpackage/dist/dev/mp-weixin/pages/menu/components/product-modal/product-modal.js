@@ -665,7 +665,7 @@ __webpack_require__.r(__webpack_exports__);
           price: this.productData.nsjg,
           extlist: [],
           spsmm: this.productData.spsmm,
-          zxprice: this.productData.zxprice,
+          zxprice: this.productData.nsjg,
           quantity: this.productData.number,
           flownum: this.flownum++,
           discount: '0',

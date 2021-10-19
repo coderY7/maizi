@@ -290,7 +290,7 @@
           is_single: product.is_single,
           choosedText: product.choosedText || '',
           goodslist:product.goodslist,
-          price:  product.goodslist.price,
+          price:  product.goodslist.zxprice,
         })
         console.log(product)
       },
