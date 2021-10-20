@@ -157,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
           dataType: 'json',
           success: function success(ress) {
             console.info(ress);
-
+            //微信支付
             wx.requestPayment( //调用微信支付
             {
               'timeStamp': ress.data.timeStamp,
@@ -167,6 +167,12 @@ __webpack_require__.r(__webpack_exports__);
               'paySign': ress.data.paySign,
               'success': function success(res) {
                 console.log('支付成功:', res);
+                uni.showToast({
+                  title: '微信支付成功',
+                  duration: 500,
+                  image: '../../static/pay/win.png' });
+
+
                 //支付成功，立刻调用查单接口查询订单在后台是否成功
                 this.$u.api.paydones({
                   access_token: uni.getStorageSync('token'),
@@ -179,11 +185,6 @@ __webpack_require__.r(__webpack_exports__);
                   companyid: uni.getStorageSync('companyid') }).
                 then(function (res) {
                   console.log('订单完成', res);
-                  uni.showToast({
-                    title: '标题',
-                    duration: 500,
-                    image: '../../static/pay/win.png' });
-
                 });
               },
               'fail': function fail(res) {
