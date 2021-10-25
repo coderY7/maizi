@@ -516,17 +516,11 @@ ext_zxprice:'',
           spbm:this.productData.spbm,
         }
         this.productData.goodslist=goodslist;
-        console.log(this.productData.goodslist)
         const product = {...this.productData}
         this.$emit('add-to-cart', product)
         console.log(product)
       }
       else {//未选择规格
-        uni.showToast({
-          icon:"loading",
-          title: '请选择规格',
-          duration: 1000
-        });
         this.productData.choosedText=this.choosedText
         console.log(this.productData)
         let goodslist={
@@ -540,7 +534,6 @@ ext_zxprice:'',
           spbm:this.productData.spbm,
         }
         this.productData.goodslist=goodslist;
-        console.log(this.productData.goodslist)
         const product = {...this.productData}
         this.$emit('add-to-cart', product)
         console.log(product)

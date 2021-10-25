@@ -200,7 +200,6 @@ __webpack_require__.r(__webpack_exports__);
 
           },
           fail: function fail(error) {
-
             console.info("准备支付失败");
             console.info(error);
 

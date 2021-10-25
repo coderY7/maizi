@@ -308,20 +308,20 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
 
   },
   onReady: function onReady() {
-    this.getMenuItemTop();
+    //this.getMenuItemTop()
   },
   methods: {
     // 点击左边的栏目切换
     swichMenu: function swichMenu(index) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
-                _this2.arr.length == 0)) {_context.next = 3;break;}_context.next = 3;return (
-                  _this2.getMenuItemTop());case 3:if (!(
 
-                index == _this2.current)) {_context.next = 5;break;}return _context.abrupt("return");case 5:
-                _this2.scrollRightTop = _this2.oldScrollTop;
+
+
+                index == _this2.current)) {_context.next = 2;break;}return _context.abrupt("return");case 2:
+                //this.scrollRightTop = this.oldScrollTop;
                 _this2.$nextTick(function () {
-                  this.scrollRightTop = this.arr[index];
+                  //this.scrollRightTop = this.arr[index];
                   this.current = index;
-                  this.leftMenuStatus(index);
+                  //this.leftMenuStatus(index);
                 });
                 if (index == '0') {
                   //获取菜品数据
@@ -350,98 +350,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
                     console.log('获取菜品:', res);
                     _this2.disheslist = res.disheslist;
                   });
-                }case 9:case "end":return _context.stop();}}}, _callee);}))();
-    },
-    //获取一个目标元素的高度
-    getElRect: function getElRect(elClass, dataVal) {var _this3 = this;
-      new Promise(function (resolve, reject) {
-        var query = uni.createSelectorQuery().in(_this3);
-        query.select('.' + elClass).fields({
-          size: true },
-        function (res) {
-          // 如果节点尚未生成，res值为null，循环调用执行
-          if (!res) {
-            setTimeout(function () {
-              _this3.getElRect(elClass);
-            }, 10);
-            return;
-          }
-          _this3[dataVal] = res.height;
-          resolve();
-        }).exec();
-      });
-    },
-    // 观测元素相交状态
-    observer: function observer() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-                _this4.tabbar.map(function (val, index) {
-                  var observer = uni.createIntersectionObserver(_this4);
-                  // 检测右边scroll-view的id为itemxx的元素与right-box的相交状态
-                  // 如果跟.right-box底部相交，就动态设置左边栏目的活动状态
-                  observer.relativeTo('.right-box', {
-                    top: 0 }).
-                  observe('#item' + index, function (res) {
-                    if (res.intersectionRatio > 0) {
-                      var id = res.id.substring(4);
-                      _this4.leftMenuStatus(id);
-                    }
-                  });
-                });case 1:case "end":return _context2.stop();}}}, _callee2);}))();
-    },
-    // 设置左边菜单的滚动状态
-    leftMenuStatus: function leftMenuStatus(index) {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-                _this5.current = index;
-                // 如果为0，意味着尚未初始化
-                if (!(_this5.menuHeight == 0 || _this5.menuItemHeight == 0)) {_context3.next = 6;break;}_context3.next = 4;return (
-                  _this5.getElRect('menu-scroll-view', 'menuHeight'));case 4:_context3.next = 6;return (
-                  _this5.getElRect('u-tab-item', 'menuItemHeight'));case 6:
-
-                // 将菜单活动item垂直居中
-                _this5.scrollTop = index * _this5.menuItemHeight + _this5.menuItemHeight / 2 - _this5.menuHeight / 2;case 7:case "end":return _context3.stop();}}}, _callee3);}))();
-    },
-    // 获取右边菜单每个item到顶部的距离
-    getMenuItemTop: function getMenuItemTop() {var _this6 = this;
-      new Promise(function (resolve) {
-        var selectorQuery = uni.createSelectorQuery();
-        selectorQuery.selectAll('.class-item').boundingClientRect(function (rects) {
-          // 如果节点尚未生成，rects值为[](因为用selectAll，所以返回的是数组)，循环调用执行
-          if (!rects.length) {
-            setTimeout(function () {
-              _this6.getMenuItemTop();
-            }, 10);
-            return;
-          }
-          rects.forEach(function (rect) {
-            // 这里减去rects[0].top，是因为第一项顶部可能不是贴到导航栏(比如有个搜索框的情况)
-            _this6.arr.push(rect.top - rects[0].top);
-            resolve();
-          });
-        }).exec();
-      });
-    },
-    // 右边菜单滚动
-    rightScroll: function rightScroll(e) {var _this7 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
-                _this7.oldScrollTop = e.detail.scrollTop;if (!(
-                _this7.arr.length == 0)) {_context4.next = 4;break;}_context4.next = 4;return (
-                  _this7.getMenuItemTop());case 4:if (!
-
-                _this7.timer) {_context4.next = 6;break;}return _context4.abrupt("return");case 6:if (
-                _this7.menuHeight) {_context4.next = 9;break;}_context4.next = 9;return (
-                  _this7.getElRect('menu-scroll-view', 'menuHeight'));case 9:
-
-                setTimeout(function () {// 节流
-                  _this7.timer = null;
-                  // scrollHeight为右边菜单垂直中点位置
-                  var scrollHeight = e.detail.scrollTop + _this7.menuHeight / 2;
-                  for (var i = 0; i < _this7.arr.length; i++) {
-                    var height1 = _this7.arr[i];
-                    var height2 = _this7.arr[i + 1];
-                    // 如果不存在height2，意味着数据循环已经到了最后一个，设置左边菜单为最后一项即可
-                    if (!height2 || scrollHeight >= height1 && scrollHeight < height2) {
-                      _this7.leftMenuStatus(i);
-                      return;
-                    }
-                  }
-                }, 10);case 10:case "end":return _context4.stop();}}}, _callee4);}))();
+                }case 5:case "end":return _context.stop();}}}, _callee);}))();
     },
     //添加到购物车
     handleAddToCart: function handleAddToCart(product) {
@@ -477,9 +386,9 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       }
     },
     //菜品详情页
-    showProductDetailModal: function showProductDetailModal(product) {var _this8 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:_context5.next = 2;return (
-                  _this8.$u.api.dishess({
-                    access_token: _this8.token,
+    showProductDetailModal: function showProductDetailModal(product) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                  _this3.$u.api.dishess({
+                    access_token: _this3.token,
                     vtype: "pos",
                     fdbh: uni.getStorageSync('fdbh'),
                     companyid: uni.getStorageSync('companyid'),
@@ -487,8 +396,8 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
                   then(function (res) {
                     Object.assign(product, res);
                   }));case 2:
-                _this8.product = product;
-                _this8.productModalVisible = true;case 4:case "end":return _context5.stop();}}}, _callee5);}))();
+                _this3.product = product;
+                _this3.productModalVisible = true;case 4:case "end":return _context2.stop();}}}, _callee2);}))();
     },
     handleAddToCartInModal: function handleAddToCartInModal(product) {
       this.handleAddToCart(product);
@@ -502,7 +411,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       this.cart = [];
     },
 
-    pay: function pay() {var _this9 = this;
+    pay: function pay() {var _this4 = this;
       var goodslist = this.cart.reduce(function (previous, primary) {
         previous.push(primary.goodslist);
         return previous;
@@ -536,7 +445,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         console.log("订单：", res);
         if (res.error_code == '500') {
           console.log('清台');
-          _this9.$u.api.orders({
+          _this4.$u.api.orders({
             access_token: uni.getStorageSync('token'),
             vtype: 'clear',
             tableid: uni.getStorageSync('tableid')[0],
@@ -549,7 +458,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
           console.log("生成订单");
           uni.setStorageSync('xsdbh', res.xsdbh);
           uni.navigateTo({
-            url: "/pages/pay/pay?table=".concat(_this9.table) });
+            url: "/pages/pay/pay?table=".concat(_this4.table) });
 
         }
 
@@ -558,8 +467,8 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
     } },
 
   computed: {
-    productCartNum: function productCartNum() {var _this10 = this; //计算单个饮品添加到购物车的数量
-      return function (id) {return _this10.cart.reduce(function (acc, cur) {
+    productCartNum: function productCartNum() {var _this5 = this; //计算单个饮品添加到购物车的数量
+      return function (id) {return _this5.cart.reduce(function (acc, cur) {
           if (cur.id === id) {
             return acc += cur.number;
           }
