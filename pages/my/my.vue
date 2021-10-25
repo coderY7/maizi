@@ -130,7 +130,6 @@ export default {
        this.islogin=!this.islogin
        uni.setStorageSync('token', '')
     }
-
     }
 }
 </script>
