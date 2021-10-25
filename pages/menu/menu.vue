@@ -55,7 +55,7 @@
 	</view>
 </template>
 <script>
-	//import classifyData from '@/common/classify.data.js';
+
   import Actions from './components/actions/actions.vue'
   import CartBar from './components/cartbar/cartbar.vue'
   import ProductModal from './components/product-modal/product-modal.vue'

@@ -68,7 +68,6 @@ export default {
     }
   },
   onLoad:function(){
-
 },
   onShow:function(){
   },
@@ -84,37 +83,6 @@ export default {
            this.islogin=true
          }
        })
-       // uni.login({
-       //   provider: 'weixin',
-       //   success:  (res)=> {
-       //     console.log(res)
-       //     uni.setStorageSync('code', res.code)
-       //     this.$u.api.userchecks({
-       //       userid:'00005',
-       //       computerid:'aa309815'
-       //     }).then((res)=>{
-       //       console.log('用户验证成功：',res)
-       //
-       //       uni.request({
-       //         url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
-       //         data: {
-       //           appid:'wxf2eea1f050d040ba',
-       //           code:uni.getStorageSync('code'),
-       //         },
-       //         method: 'GET',
-       //         success: (res) => {
-       //           console.log('获取openid',res);
-       //         }
-       //       });
-       //
-       //     })
-       //   },
-       //   fail:(err)=>{
-       //     console.log('登录失败:',err)
-       // }
-       // });
-
-
        wx.login({
          timeout: 10000,
          success: function (res) {

@@ -476,7 +476,6 @@ ext_zxprice:'',
         });
       });
       this.choosedText = tempArr.join(',');
-
     },
    //选中
     pitch(){
