@@ -80,7 +80,7 @@
             <view class="page-box">
               <view>
                 <view class="centre">
-                  <image src="https://cdn.uviewui.com/uview/template/taobao-order.png" mode=""></image>
+                  <image src="../../static/order/tuidan.png" mode=""></image>
                   <view class="explain">
                     您还没有相关的订单
                     <view class="tips">可以去看看有那些想买的</view>
@@ -272,7 +272,6 @@ export default {
     };
   },
   onLoad() {
-    this.Cart=uni.getStorageSync('Cart');
   },
   onShow(){
     this.token = uni.getStorageSync('token');
@@ -286,13 +285,20 @@ export default {
     }).then(res => {
       console.log('查询订单：',res)
     })
-  //查询桌台订单明细信息
-    this.$u.api.orders({
-      access_token:this.token,
-      vtype:'detail',
-      xsdbh:'',
-      fdbh:'808001'
+    //支付成功订单接口
+    this.$u.api.searchs({
+      access_token:uni.getStorageSync('token'),
+      orderid:uni.getStorageSync('xsdbh'), //销单号
+      shopid:uni.getStorageSync('fdbh'),
+      posid:'00268',
+      syyid:'00268',
+      zktype:'ZK',
+      zkvalue:'',
+    }).then(res => {
+      console.log('支付成功订单：',res)
     })
+
+
 },
   computed: {
     // 价格小数

@@ -10,7 +10,8 @@
     "pages/vip/vip",
     "pages/roll/roll",
     "pages/distribution/distribution",
-    "pages/integrate/integrate"
+    "pages/integrate/integrate",
+    "pages/map/map"
   ],
   "subPackages": [],
   "window": {
@@ -52,6 +53,9 @@
     ]
   },
   "permission": {},
+  "uniStatistics": {
+    "enable": true
+  },
   "usingComponents": {},
   "sitemapLocation": "sitemap.json"
 }

@@ -10,6 +10,7 @@ let query='/catering/pay/query'
 let back='/catering/pay/back'
 let usercheck='/login/usercheck'
 let paydone='/catering/paydone'
+let search='/catering/order/search'
 
 
 // 此处第二个参数vm，就是我们在页面使用的this，你可以通过vm获取vuex等操作，更多内容详见uView对拦截器的介绍部分：
@@ -35,10 +36,12 @@ const install = (Vue, vm) => {
     let pays=(params={})=>vm.$u.post(pay,params)
     //付款结果
     let querys=(params={})=>vm.$u.post(query,params)
+    //支付成功订单
+    let searchs=(params={})=>vm.$u.post(search,params)
     //退款
     let backs=(params={})=>vm.$u.post(back,params)
     // 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-    vm.$u.api = {paydones,userchecks,logins,categorys,caterings,dishess,orders,readytopays,pays,querys,backs};
+    vm.$u.api = {searchs,paydones,userchecks,logins,categorys,caterings,dishess,orders,readytopays,pays,querys,backs};
 }
 
 export default {

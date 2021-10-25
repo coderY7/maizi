@@ -49,12 +49,12 @@
         <image src="../../static/main/我的会员.png" style="width:30rpx;height:40rpx"></image>
         <text>会员专享</text>
       </view>
-      <view style="color:#c2c2c2">不使用 ></view>
+      <view style="color:#c2c2c2">不可使用 ></view>
     </view>
     <view class="unit4">
         <view class="unit4_top">
           <view>订单备注</view>
-          <view style="color:#c2c2c2">口味，偏好等 ></view>
+          <input placeholder="           请输入备注信息" @input="remark"/>
         </view>
         <view class="unit4_bottom">
           <text>发票</text>
@@ -82,6 +82,11 @@ export default {
     }
   },
   methods: {
+    //备注
+    remark(event){
+      console.log('备注信息',event.detail.value)
+      uni.setStorageSync('beizhu',event.detail.value)
+    },
     //用餐人数
     valChange(e){
       this.attendance=e.value
