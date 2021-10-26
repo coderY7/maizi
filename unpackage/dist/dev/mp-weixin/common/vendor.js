@@ -9127,7 +9127,18 @@ new Router().route;exports.default = _default;
 
 /***/ }),
 
-/***/ 234:
+/***/ 24:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 25);
+
+/***/ }),
+
+/***/ 241:
 /*!*********************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/components/uni-popup/popup.js ***!
   \*********************************************************************************/
@@ -9135,7 +9146,7 @@ new Router().route;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 235));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 242));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -9162,7 +9173,7 @@ var config = {
 
 /***/ }),
 
-/***/ 235:
+/***/ 242:
 /*!***********************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/components/uni-popup/message.js ***!
   \***********************************************************************************/
@@ -9190,17 +9201,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         this.childrenMsg.close();
       }
     } } };exports.default = _default;
-
-/***/ }),
-
-/***/ 24:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 25);
 
 /***/ }),
 
