@@ -491,8 +491,6 @@ ext_zxprice:'',
       console.log(pitch)
       this.productData.extlist=pitch
       this.calcOverprice();
-
-
     },
     // 加入购物车
     addToCart() {
