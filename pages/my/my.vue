@@ -78,46 +78,39 @@ export default {
        uni.getUserProfile({
          desc:"获取用户信息",
          success: (res)=>{
-           console.log(res)
            this.userInfo=res.userInfo
            this.islogin=true
-         }
-       })
-       wx.login({
-         timeout: 10000,
-         success: function (res) {
-           console.log(res.code);
-
-           wx.request({
-             url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
-             data: {
-               appid: uni.getStorageSync('appid'),
-               code: res.code
-             },
-             method: 'GET',
-             dataType: 'json',
-             success: function (ress) {
-               console.info(ress);
-               if (ress.data[0].Result == "0") {
-                 wx.setStorageSync('openid', ress.data[0].openid);          //小程序openid
-                 wx.setStorageSync('unionid', ress.data[0].unionid);        //开放平台unionid,可能为空
-               }
-               else {
-                 console.log(ress.data[0].openid);
-               }
-
-             },
-             fail: function (error) {
-               console.info("获取用户openId失败");
-               console.info(error);
+           uni.login({
+             success:  (res)=> {
+               console.log(res)
+               uni.request({
+                 url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
+                 data: {
+                   appid: uni.getStorageSync('appid'),
+                   code: res.code
+                 },
+                 method: 'GET',
+                 dataType: 'json',
+                 success: (res) => {
+                   console.log(res)
+                   if (res.data[0].Result == "0") {
+                     uni.setStorageSync('openid', res.data[0].openid);          //小程序openid
+                     uni.setStorageSync('unionid', res.data[0].unionid);        //开放平台unionid,可能为空
+                   }
+                   else {
+                     console.log(res.data[0].openid);
+                   }
+                 },
+                 fail:(res)=>{
+                   console.info("获取用户openId失败");
+                   console.info(error);
+                 }
+               });
              }
            });
-
          }
-       });
-
+       })
 },
-    //扫码
     scan(){
       uni.scanCode({
         success: function (res) {

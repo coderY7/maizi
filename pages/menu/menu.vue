@@ -140,15 +140,9 @@
     methods: {
       // 点击左边的栏目切换
       async swichMenu(index) {
-        // if (this.arr.length == 0) {
-        //   //await this.getMenuItemTop();
-        // }
         if (index == this.current) return;
-        //this.scrollRightTop = this.oldScrollTop;
         this.$nextTick(function () {
-          //this.scrollRightTop = this.arr[index];
           this.current = index;
-          //this.leftMenuStatus(index);
         })
         if(index=='0'){
           //获取菜品数据
@@ -163,7 +157,6 @@
             this.disheslist=res.disheslist
           })
         }
-
         // 点击分类切换请求
         if(index){
           //获取菜品数据
@@ -243,13 +236,11 @@
           previous.push(primary.goodslist);
           return previous;
         },[]);
-
         uni.setStorageSync('goodslist', goodslist)
         //计算购物车总价
         this.cartprice= this.cart.reduce((acc, cur) => acc + cur.number * cur.price, 0)
         //计算商品数量
         this.counts=this.cart.reduce((acc, cur) => acc + cur.number, 0)
-
         //跳转支付
         this.Cart={
           cart:this.cart,
@@ -257,6 +248,8 @@
           counts:this.counts
         }
         uni.setStorageSync('Cart',this.Cart)
+
+
 
         //生成订单
         this.$u.api.orders({
@@ -271,15 +264,41 @@
             (res)=>{
           console.log("订单：",res)
               if(res.error_code=='500'){
-                console.log('清台')
-                this.$u.api.orders({
-                  access_token:uni.getStorageSync('token'),
-                  vtype:'clear',
-                  tableid:uni.getStorageSync('tableid')[0],
-                  fdbh:uni.getStorageSync('fdbh')
-                }).then((res)=>{
-                  console.log('清台成功：',res)
-                })
+                uni.showModal({
+                  title: '提示',
+                  content: '当前桌台已有人，是否清台',
+                  success:  (res)=> {
+                    if (res.confirm) {
+                      console.log('用户点击确定');
+                      //清台
+                      this.$u.api.orders({
+                        access_token:uni.getStorageSync('token'),
+                        vtype:'clear',
+                        tableid:uni.getStorageSync('tableid')[0],
+                        fdbh:uni.getStorageSync('fdbh')
+                      }).then((res)=>{
+                        console.log('清台成功：',res)
+                        this.$u.api.orders({
+                          access_token:this.token,
+                          vtype:"new",
+                          posid:"80800101",
+                          tableid:uni.getStorageSync('tableid')[0],
+                          tablenumber:uni.getStorageSync('tablenumber'),
+                          tablewaiter:"00268",
+                          fdbh:uni.getStorageSync('fdbh'),
+                        }).then(res=>{
+                          console.log("生成订单")
+                          uni.setStorageSync('xsdbh', res.xsdbh);
+                          uni.navigateTo({
+                            url:`/pages/pay/pay?table=${this.table}`,
+                          })
+                        })
+                      })
+                    } else if (res.cancel) {
+                      console.log('用户点击取消');
+                    }
+                  }
+                });
               }
               if(res.error_code=='0'){
                 console.log("生成订单")
@@ -288,7 +307,6 @@
                   url:`/pages/pay/pay?table=${this.table}`,
                 })
               }
-
         }
         )
       }

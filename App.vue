@@ -2,8 +2,9 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
-uni.setStorageSync('appid','wxf2eea1f050d040ba')
-
+      const accountInfo = uni.getAccountInfoSync();
+      console.log(accountInfo.miniProgram.appId);
+      uni.setStorageSync('appid', accountInfo.miniProgram.appId)
 		},
 		onShow: function() {
 			console.log('App Show')

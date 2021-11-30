@@ -76,6 +76,7 @@ export default {
   },
   methods: {
 navmenu(){
+  console.log('123')
   uni.setStorageSync('tableid',[this.tableid,'堂食']);
 },
  navbesides(){

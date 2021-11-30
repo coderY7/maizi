@@ -9,8 +9,8 @@
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 5);__webpack_require__(/*! @dcloudio/uni-stat */ 6);
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _menu = _interopRequireDefault(__webpack_require__(/*! ./pages/menu/menu.vue */ 56));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 3));
+var _menu = _interopRequireDefault(__webpack_require__(/*! ./pages/menu/menu.vue */ 56));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 createPage(_menu.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
@@ -96,7 +96,7 @@ var components
 try {
   components = {
     uSearch: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-search/u-search */ "node-modules/uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! uview-ui/components/u-search/u-search.vue */ 138))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-search/u-search */ "node-modules/uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! uview-ui/components/u-search/u-search.vue */ 136))
     }
   }
 } catch (e) {
@@ -234,7 +234,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/categories */ 61));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ./components/actions/actions.vue */ 145));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CartBar = function CartBar() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cartbar/cartbar */ "pages/menu/components/cartbar/cartbar").then((function () {return resolve(__webpack_require__(/*! ./components/cartbar/cartbar.vue */ 152));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ProductModal = function ProductModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ./components/product-modal/product-modal.vue */ 159));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ./components/cart-popup/cart-popup.vue */ 166));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Search = function Search() {__webpack_require__.e(/*! require.ensure | pages/menu/components/search/search */ "pages/menu/components/search/search").then((function () {return resolve(__webpack_require__(/*! ./components/search/search.vue */ 173));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/categories */ 61));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ./components/actions/actions.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CartBar = function CartBar() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cartbar/cartbar */ "pages/menu/components/cartbar/cartbar").then((function () {return resolve(__webpack_require__(/*! ./components/cartbar/cartbar.vue */ 150));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ProductModal = function ProductModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ./components/product-modal/product-modal.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ./components/cart-popup/cart-popup.vue */ 164));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Search = function Search() {__webpack_require__.e(/*! require.ensure | pages/menu/components/search/search */ "pages/menu/components/search/search").then((function () {return resolve(__webpack_require__(/*! ./components/search/search.vue */ 171));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 {
@@ -313,15 +313,9 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
   methods: {
     // 点击左边的栏目切换
     swichMenu: function swichMenu(index) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
-
-
-
                 index == _this2.current)) {_context.next = 2;break;}return _context.abrupt("return");case 2:
-                //this.scrollRightTop = this.oldScrollTop;
                 _this2.$nextTick(function () {
-                  //this.scrollRightTop = this.arr[index];
                   this.current = index;
-                  //this.leftMenuStatus(index);
                 });
                 if (index == '0') {
                   //获取菜品数据
@@ -336,7 +330,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
                     _this2.disheslist = res.disheslist;
                   });
                 }
-
                 // 点击分类切换请求
                 if (index) {
                   //获取菜品数据
@@ -416,13 +409,11 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         previous.push(primary.goodslist);
         return previous;
       }, []);
-
       uni.setStorageSync('goodslist', goodslist);
       //计算购物车总价
       this.cartprice = this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price;}, 0);
       //计算商品数量
       this.counts = this.cart.reduce(function (acc, cur) {return acc + cur.number;}, 0);
-
       //跳转支付
       this.Cart = {
         cart: this.cart,
@@ -430,6 +421,8 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         counts: this.counts };
 
       uni.setStorageSync('Cart', this.Cart);
+
+
 
       //生成订单
       this.$u.api.orders({
@@ -444,15 +437,41 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       function (res) {
         console.log("订单：", res);
         if (res.error_code == '500') {
-          console.log('清台');
-          _this4.$u.api.orders({
-            access_token: uni.getStorageSync('token'),
-            vtype: 'clear',
-            tableid: uni.getStorageSync('tableid')[0],
-            fdbh: uni.getStorageSync('fdbh') }).
-          then(function (res) {
-            console.log('清台成功：', res);
-          });
+          uni.showModal({
+            title: '提示',
+            content: '当前桌台已有人，是否清台',
+            success: function success(res) {
+              if (res.confirm) {
+                console.log('用户点击确定');
+                //清台
+                _this4.$u.api.orders({
+                  access_token: uni.getStorageSync('token'),
+                  vtype: 'clear',
+                  tableid: uni.getStorageSync('tableid')[0],
+                  fdbh: uni.getStorageSync('fdbh') }).
+                then(function (res) {
+                  console.log('清台成功：', res);
+                  _this4.$u.api.orders({
+                    access_token: _this4.token,
+                    vtype: "new",
+                    posid: "80800101",
+                    tableid: uni.getStorageSync('tableid')[0],
+                    tablenumber: uni.getStorageSync('tablenumber'),
+                    tablewaiter: "00268",
+                    fdbh: uni.getStorageSync('fdbh') }).
+                  then(function (res) {
+                    console.log("生成订单");
+                    uni.setStorageSync('xsdbh', res.xsdbh);
+                    uni.navigateTo({
+                      url: "/pages/pay/pay?table=".concat(_this4.table) });
+
+                  });
+                });
+              } else if (res.cancel) {
+                console.log('用户点击取消');
+              }
+            } });
+
         }
         if (res.error_code == '0') {
           console.log("生成订单");
@@ -461,7 +480,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
             url: "/pages/pay/pay?table=".concat(_this4.table) });
 
         }
-
       });
 
     } },
