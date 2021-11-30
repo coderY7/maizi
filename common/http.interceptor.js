@@ -35,11 +35,10 @@ const install = (Vue, vm) => {
         // 所以哪怕您重新登录修改了Storage，下一次的请求将会是最新值
         // const token = uni.getStorageSync('token');
         // config.header.token = token;
-        config.header.Token ='XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
-        uni.setStorageSync('token', config.header.Token);
+
 
         // 可以对某个url进行特别处理，此url参数为this.$u.get(url)中的url值
-        if(config.url == '/user/login') config.header.noToken = true;
+        //if(config.url == '/user/login') config.header.noToken = true;
         // 最后需要将config进行return
         return config;
         // 如果return一个false值，则会取消本次请求

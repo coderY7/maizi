@@ -15,7 +15,7 @@
     </view>
 <view class="unit2">
   <view class="unit2_top">
-    <view class="unit2_top_left">
+    <view class="unit2_top_left" style="padding-left: 20rpx">
       <image src="../../static/main/LOGO.png" style="height: 80rpx; width:80rpx;border-radius: 50%"></image>
       <text>麦子会员</text>
     </view>
@@ -23,7 +23,7 @@
       <u-button @click="vip" type="warning" size="mini" style="padding-right: 20rpx;">立即入会</u-button>
     </view>
   </view>
-  <view style="font-size: 20px;margin-top:10px;">我的资产</view>
+  <view style="font-size: 20px;margin-top:10px;margin-left: 20rpx;">我的资产</view>
   <view class="unit2_bottom">
    <view class="unit2_bottom_item">
      <text style="font-size:16px;color: red;margin:0 0 20rpx 0">20</text>
@@ -122,6 +122,7 @@ export default {
     quit(){
        this.islogin=!this.islogin
        uni.setStorageSync('token', '')
+      uni.setStorageSync('openid','')
     }
     }
 }
@@ -171,7 +172,7 @@ page {
     height: 350rpx;
     border:2rpx solid #ccc;
     border-radius: 20rpx;
-    box-shadow: 1rpx 5rpx 5rpx #ccc;
+    box-shadow: 2rpx 5rpx 5rpx #ccc;
     background-color: #fff;
     width:100%;
     .unit2_top{
@@ -208,7 +209,7 @@ page {
     margin-top: 100rpx;
     border:2rpx  #ccc;
     border-radius: 20rpx;
-    box-shadow: 2rpx 2rpx 4rpx #ccc;
+    box-shadow: 2rpx 5rpx 5rpx #ccc;
     background-color: #fff;
     .unit3Nav{
       flex:1;

@@ -208,7 +208,6 @@ var _default =
   },
   methods: {
     navmenu: function navmenu() {
-      console.log('123');
       uni.setStorageSync('tableid', [this.tableid, '堂食']);
     },
     navbesides: function navbesides() {
@@ -219,7 +218,13 @@ var _default =
     this.tableid = options.tableid;
     uni.setStorageSync('fdbh', this.fdbh);
     uni.setStorageSync('companyid', this.companyid);
+  },
+  onShow: function onShow() {
+    if (uni.getStorageSync('openid') == '') {
+      uni.switchTab({
+        url: '/pages/my/my' });
 
+    }
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

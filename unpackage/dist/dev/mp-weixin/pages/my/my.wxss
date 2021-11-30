@@ -67,7 +67,7 @@ page {
   height: 350rpx;
   border: 2rpx solid #ccc;
   border-radius: 20rpx;
-  box-shadow: 1rpx 5rpx 5rpx #ccc;
+  box-shadow: 2rpx 5rpx 5rpx #ccc;
   background-color: #fff;
   width: 100%;
 }
@@ -103,7 +103,7 @@ page {
   margin-top: 100rpx;
   border: 2rpx  #ccc;
   border-radius: 20rpx;
-  box-shadow: 2rpx 2rpx 4rpx #ccc;
+  box-shadow: 2rpx 5rpx 5rpx #ccc;
   background-color: #fff;
 }
 .content .unit3 .unit3Nav {

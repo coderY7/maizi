@@ -8,6 +8,8 @@
 		},
 		onShow: function() {
 			console.log('App Show')
+      var Token ='XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
+      uni.setStorageSync('token', Token);
 		},
 		onHide: function() {
 			console.log('App Hide')

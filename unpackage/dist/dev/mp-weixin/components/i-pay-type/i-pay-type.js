@@ -184,6 +184,7 @@ var _default2 =
   methods: {
     change: function change(e) {
       var index = parseInt(e.detail.value);
+      console.log(index);
       this.$emit("change", index, this.datas[index]);
     },
     itemClick: function itemClick(e) {

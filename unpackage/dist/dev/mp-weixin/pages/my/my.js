@@ -280,6 +280,7 @@ var _default =
     quit: function quit() {
       this.islogin = !this.islogin;
       uni.setStorageSync('token', '');
+      uni.setStorageSync('openid', '');
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

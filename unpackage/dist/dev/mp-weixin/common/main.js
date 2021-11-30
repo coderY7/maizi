@@ -111,6 +111,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   onShow: function onShow() {
     console.log('App Show');
+    var Token = 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
+    uni.setStorageSync('token', Token);
   },
   onHide: function onHide() {
     console.log('App Hide');

@@ -50,6 +50,7 @@
 		methods: {
 			change(e) {
 					let index= parseInt(e.detail.value)
+        console.log(index)
 				this.$emit("change",index, this.datas[index]);
 			},
 			itemClick(e) {

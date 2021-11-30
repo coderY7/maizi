@@ -127,7 +127,7 @@ __webpack_require__.r(__webpack_exports__);
       token: '',
       readytopays: '',
       pay: 0,
-      payment: '' };
+      payment: '0' };
 
   },
   components: {
@@ -147,42 +147,6 @@ __webpack_require__.r(__webpack_exports__);
     pays: function pays() {
       if (this.payment == '0') {
         console.log('微信支付');
-        // this.$u.api.pays({
-        //   access_token: this.token,
-        //   flow_no: this.xsdbh,//订单号
-        //   payno: "04",//收款方式
-        //   total: this.readytopays.paytotal*100,//应收总金额，分
-        //   payid: "",//付款码
-        //   paymm: "00268",//收银员编号
-        //   verifycode: this.readytopays.vipid,//会员号
-        //   flag: {
-        //     regcode:'',//注册码
-        //     mz_openid:'',
-        //     FDBH:uni.getStorageSync('fdbh'),//分店
-        //     act_list_json: '',//活动商品列表Json字符串，从预结算接口获取
-        //     POSID:'00268',//收银机编号
-        //     ActMack:"SELFPORT"+uni.getStorageSync('fdbh') ,//微信优惠券标志，构成规则："SELFPORT"+门店编号,例如：SELFPORT0099
-        //     ystflowid:'' ,//赢商通请求流水，一般为空
-        //     sub_openid:''// 相对商户的openid，一般为空
-        //   }
-        // }).then(res => {
-        //   console.log('付款：',res)
-        //   uni.requestPayment({
-        //     provider: 'wxpay',
-        //     timeStamp: String(Date.now()),
-        //     nonceStr: Math.random().toString(36).slice(-16),//随机字符串
-        //     package: 'prepay_id=',//统一下单接口返回的 prepay_id 参数值
-        //     signType: 'MD5',
-        //     paySign: '',//签名
-        //     success: function (res) {
-        //       console.log('success:' + JSON.stringify(res));
-        //     },
-        //     fail: function (err) {
-        //       console.log('fail:' + JSON.stringify(err));
-        //     }
-        //   });
-        // })
-
         var snvar = wx.getStorageSync('companyid'); //商家SN
         var fdbhvar = wx.getStorageSync('fdbh'); //分店编号
         wx.request({
@@ -241,9 +205,8 @@ __webpack_require__.r(__webpack_exports__);
                 console.log('支付成功:', res);
                 uni.showToast({
                   title: '微信支付成功',
-                  duration: 500,
+                  duration: 1000,
                   image: '../../static/pay/win.png' });
-
 
                 //支付成功，立刻调用查单接口查询订单在后台是否成功
                 this.$u.api.paydones({
@@ -262,8 +225,8 @@ __webpack_require__.r(__webpack_exports__);
               'fail': function fail(res) {
                 console.log('支付失败:', res);
                 uni.showToast({
-                  title: '标题',
-                  duration: 500,
+                  title: '微信支付失败',
+                  duration: 1000,
                   image: '../../static/pay/fail.png' });
 
               },
@@ -285,11 +248,11 @@ __webpack_require__.r(__webpack_exports__);
           duration: 500 });
 
       }
-      if (!this.payment) {
+      if (this.payment == '') {
         uni.showToast({
           title: '请选择支付方式',
           icon: 'loading',
-          duration: 100 });
+          duration: 1000 });
 
       }
     } } };exports.default = _default;

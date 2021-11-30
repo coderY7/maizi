@@ -76,7 +76,6 @@ export default {
   },
   methods: {
 navmenu(){
-  console.log('123')
   uni.setStorageSync('tableid',[this.tableid,'堂食']);
 },
  navbesides(){
@@ -87,7 +86,13 @@ navmenu(){
      this.tableid = options.tableid
     uni.setStorageSync('fdbh',this.fdbh);
     uni.setStorageSync('companyid',this.companyid);
-
+  },
+  onShow(){
+    if(uni.getStorageSync('openid')==''){
+      uni.switchTab({
+        url: '/pages/my/my'
+      });
+    }
   }
 
 }
