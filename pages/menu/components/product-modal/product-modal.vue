@@ -272,9 +272,7 @@ ext_zxprice:'',
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', 'true');
       this.$set(unity, 'ext_zxprice', '0');
-      console.log(unity)
       unity.ext_quantity=1
-
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=1){
         console.log(rowIndex,itemIndex)
@@ -286,23 +284,21 @@ ext_zxprice:'',
       this.pitch()
     },
 
-
-    chooseTag1(index1) {
-      var unity=this.productData.dishesextlist[1].extitems[index1]
-      console.log(unity)
-       this.$set(unity, 'isDefault', true);
-       this.$set(unity, 'ext_zxprice', '0');
-      console.log(unity)
-      //unity.ext_quantity=this.ext_quantity
-      unity.ext_zxprice=unity.ext_price * unity.ext_quantity;
-      console.log(unity.ext_zxprice)
-      this.pitch()
-    },
-   adds(item1){
-     item1.ext_quantity=this._data.ext_quantity
-     console.log(item1,this._data.ext_quantity)
-   },
-
+    // adds(item1){
+    //   item1.ext_quantity=this._data.ext_quantity
+    //   console.log(item1,this._data.ext_quantity)
+    // },
+    // chooseTag1(index1) {
+    //   var unity=this.productData.dishesextlist[1].extitems[index1]
+    //   console.log(unity)
+    //    this.$set(unity, 'isDefault', true);
+    //    this.$set(unity, 'ext_zxprice', '0');
+    //   console.log(unity)
+    //   //unity.ext_quantity=this.ext_quantity
+    //   unity.ext_zxprice=unity.ext_price * unity.ext_quantity;
+    //   console.log(unity.ext_zxprice)
+    //   this.pitch()
+    // },
 
     chooseTag2(rowIndex=2, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
@@ -368,16 +364,16 @@ ext_zxprice:'',
       this.productData.dishesextlist.forEach(item => {
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
-            console.log('单个属性价格',item1.ext_price * item1.ext_quantity)
+            // console.log('单个属性价格',item1.ext_price * item1.ext_quantity)
             pri += parseInt(item1.ext_price * item1.ext_quantity);
           }
         });
       });
-      console.log('附加属性总价:',pri)
+      console.log('属性总价:',pri)
       this.productData.price=this.productData.nsjg + pri
       this.productData.zxprice=this.productData.nsjg+ pri
       this.productData.shownPrice=this.productData.number * this.productData.price;
-      console.log(this.productData.shownPrice);
+      console.log('商品总价格',this.productData.shownPrice);
       this.updateChoosedText();
     },
 
@@ -407,7 +403,6 @@ ext_zxprice:'',
    //选中
     pitch(){
       let pitch=[];
-      console.log( this.productData.dishesextlist)
       this.productData.dishesextlist.forEach(item => {
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
