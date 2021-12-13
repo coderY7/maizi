@@ -395,8 +395,8 @@ ext_zxprice:'',
     //更新
     updateChoosedText() {
       let tempArr = [];
-      this.productData.dishesextlist.map(item => {
-        item.extitems.map(item1 => {
+      this.productData.dishesextlist.forEach(item => {
+        item.extitems.forEach(item1 => {
           if (item1.isDefault) {
               tempArr.push(item1.ext_name);
           }
@@ -408,8 +408,8 @@ ext_zxprice:'',
     pitch(){
       let pitch=[];
       console.log( this.productData.dishesextlist)
-      this.productData.dishesextlist.map(item => {
-        item.extitems.map(item1 => {
+      this.productData.dishesextlist.forEach(item => {
+        item.extitems.forEach(item1 => {
           if (item1.isDefault) {
             pitch.push(item1);
           }
@@ -422,12 +422,12 @@ ext_zxprice:'',
     // 加入购物车
     addToCart() {
       if(this.productData.extlist){
-        this.productData.extlist.map(item => {
-          // if (item.isDefault) {
-          //   item.isDefault=undefined;
-          //   item.ext_desc=undefined;
-          // }
-        });
+        // this.productData.extlist.map(item => {
+        //   if (item.isDefault) {
+        //     item.isDefault=undefined;
+        //     item.ext_desc=undefined;
+        //   }
+        // });
         this.productData.choosedText=this.choosedText
         let goodslist={
           price: this.productData.nsjg,

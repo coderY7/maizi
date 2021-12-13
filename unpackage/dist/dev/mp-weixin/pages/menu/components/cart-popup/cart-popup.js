@@ -140,7 +140,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniPopup = function uniPopup() {Promise.all(/*! require.ensure | components/uni-popup/uni-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-popup/uni-popup")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 234));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var actions = function actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ../actions/actions.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniPopup = function uniPopup() {Promise.all(/*! require.ensure | components/uni-popup/uni-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-popup/uni-popup")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 234));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var actions = function actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ../actions/actions.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var productModal = function productModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ../product-modal/product-modal */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+
+
+
+
 
 
 
@@ -188,7 +192,8 @@ __webpack_require__.r(__webpack_exports__);
 {
   components: {
     uniPopup: uniPopup,
-    actions: actions },
+    actions: actions,
+    productModal: productModal },
 
   data: function data() {
     return {

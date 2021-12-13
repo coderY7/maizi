@@ -4,7 +4,7 @@
       <u-search placeholder="搜索" ></u-search>
 		</view>
     <view class="rolls">
-      <image src="../../static/menu/满减活动.png" style="width:100%;height:70rpx;"></image>
+      <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image>
     </view>
 		<view class="u-menu-wrap">
 			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"

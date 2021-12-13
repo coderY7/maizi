@@ -46,7 +46,7 @@
     </view>
     <view class="unit3">
       <view class="unit3_left">
-        <image src="../../static/main/我的会员.png" style="width:30rpx;height:40rpx"></image>
+        <image src="../../static/main/hy.png" style="width:30rpx;height:40rpx"></image>
         <text>会员专享</text>
       </view>
       <view style="color:#c2c2c2">不可使用 ></view>

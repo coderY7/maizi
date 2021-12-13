@@ -534,8 +534,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     //更新
     updateChoosedText: function updateChoosedText() {
       var tempArr = [];
-      this.productData.dishesextlist.map(function (item) {
-        item.extitems.map(function (item1) {
+      this.productData.dishesextlist.forEach(function (item) {
+        item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
             tempArr.push(item1.ext_name);
           }
@@ -547,8 +547,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     pitch: function pitch() {
       var pitch = [];
       console.log(this.productData.dishesextlist);
-      this.productData.dishesextlist.map(function (item) {
-        item.extitems.map(function (item1) {
+      this.productData.dishesextlist.forEach(function (item) {
+        item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
             pitch.push(item1);
           }
@@ -561,12 +561,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     // 加入购物车
     addToCart: function addToCart() {
       if (this.productData.extlist) {
-        this.productData.extlist.map(function (item) {
-          // if (item.isDefault) {
-          //   item.isDefault=undefined;
-          //   item.ext_desc=undefined;
-          // }
-        });
+        // this.productData.extlist.map(item => {
+        //   if (item.isDefault) {
+        //     item.isDefault=undefined;
+        //     item.ext_desc=undefined;
+        //   }
+        // });
         this.productData.choosedText = this.choosedText;
         var goodslist = {
           price: this.productData.nsjg,

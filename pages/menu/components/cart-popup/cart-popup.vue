@@ -17,7 +17,9 @@
 			<scroll-view scroll-y class="content">
 				<view class="wrapper">
 					<view class="list">
+
 						<view class="item" v-for="(item, index) in cart" :key="index">
+
 							<view class="left">
 								<image :src="item.image" mode="widthFix" class="image"></image>
 							</view>
@@ -32,6 +34,7 @@
 								</view>
 							</view>
 						</view>
+
 					</view>
 				</view>
 			</scroll-view>
@@ -41,12 +44,14 @@
 
 <script>
 import uniPopup from '@/components/uni-popup/uni-popup.vue'
-import actions from '../actions/actions.vue'
+import actions from '../actions/actions.vue';
+import productModal from "../product-modal/product-modal";
 
 export default {
 	components: {
 		uniPopup,
-		actions
+		actions,
+    productModal
 	},
   data() {
     return{
