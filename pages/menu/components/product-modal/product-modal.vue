@@ -14,60 +14,6 @@
               <text class="good-name">{{ productData.spmc}}</text>
               <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
               <view>{{productData.description}}</view>
-              <view>
-                <!--              单独渲染-->
-                <!--              <view>-->
-                <!--                <text class="description-text">{{ productData.description || '' }}</text>-->
-                <!--                <view>{{productData.dishesextlist[0].groupname}}</view>-->
-                <!--                <view v-for="(item, index) in productData.dishesextlist[0].extitems" :key="item">-->
-                <!--                  {{item.ext_name}}-->
-                <!--                </view>-->
-                <!--                <view>{{productData.dishesextlist[1].groupname}}</view>-->
-                <!--                <view v-for="(item, index) in productData.dishesextlist[1].extitems" :key="item">-->
-                <!--                  {{item.ext_name}}-->
-                <!--                </view>-->
-                <!--                <view>{{productData.dishesextlist[2].groupname}}</view>-->
-                <!--                <view v-for="(item, index) in productData.dishesextlist[2].extitems" :key="item"-->
-                <!--                      @tap="chooseTag(index, index1)">-->
-                <!--                  {{item.ext_name}}-->
-                <!--                </view>-->
-                <!--                <view>{{productData.dishesextlist[3].groupname}}</view>-->
-                <!--                <view v-for="(item, index) in productData.dishesextlist[3].extitems" :key="item">-->
-                <!--                  {{item.ext_name}}-->
-                <!--                </view>-->
-                <!--              </view>-->
-              </view>
-<!--              <view class="status-item" v-for="(item, index) in productData.dishesextlist" :key="item">-->
-<!--                <view class="status-title">{{ item.groupname }}</view>-->
-<!--                <view class="status-tags">-->
-<!--                  <view v-for="(item1, index1) in item.extitems" :key="item1.ext_id + index1.toString()">-->
-<!--                    <view-->
-<!--                        class="tags-item2"-->
-<!--                        :style="{-->
-<!--												color: item1.isDefault ? activeTextColor : normalTextColor,-->
-<!--												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor-->
-<!--											}"-->
-<!--                        @tap="chooseTag(index, index1)"-->
-<!--                    >-->
-<!--                      {{ item1.ext_name }}-->
-<!--                      <text-->
-<!--                          class="tags-pri"-->
-<!--                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"-->
-<!--                          v-if="item1.ext_price > 0"-->
-<!--                          :class="{ 'active-text': item1.isDefault }"-->
-<!--                      >-->
-<!--                        ￥{{item1.ext_price}}-->
-<!--                      </text>-->
-<!--                    </view>-->
-<!--                  </view>-->
-<!--                </view>-->
-<!--              </view>-->
-
-
-
-
-
-
               <view class="status-item">
                 <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
                 <view class="status-tags">
@@ -93,8 +39,6 @@
                   </view>
                 </view>
               </view>
-
-
               <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
               <view class="list" v-for="(item,key) in productData.dishesextlist[1].extitems" :key="key">
                 <checkbox-group @change="checkboxChange(item,key)">
@@ -437,23 +381,6 @@ ext_zxprice:'',
       this.updateChoosedText();
     },
 
-    //原方法
-
-    // chooseTag(rowIndex, itemIndex) {
-    //   var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
-    //   this.$set(unity, 'isDefault', true);
-    //   this.$set(unity, 'ext_zxprice', '0');
-    //   unity.ext_zxprice=unity.ext_price * 1
-    //   if(rowIndex!=2){
-    //     console.log(rowIndex,itemIndex)
-    //     this.productData.dishesextlist[rowIndex].extitems.map(item => {
-    //       item.isDefault = false;
-    //     });
-    //     this.$set(unity, 'isDefault', true);
-    //   }
-    //   this.pitch()
-    // },
-
     add() {
       this.productData.number += 1
       this.calcOverprice()
@@ -517,7 +444,8 @@ ext_zxprice:'',
         this.$emit('add-to-cart', product)
         console.log(product)
       }
-      else {//未选择规格
+      //未选择规格
+      else {
         this.productData.choosedText=this.choosedText
         console.log(this.productData)
         let goodslist={

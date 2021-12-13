@@ -9,7 +9,6 @@
       </view>
     </view>
     <!--    会员-->
-
     <view class="unit2">
       <navigator class="unit2Nav" url="/pages/vip/vip">
         <view class="unit2_box">
@@ -88,13 +87,8 @@ navmenu(){
     uni.setStorageSync('companyid',this.companyid);
   },
   onShow(){
-    if(uni.getStorageSync('openid')==''){
-      uni.switchTab({
-        url: '/pages/my/my'
-      });
-    }
-  }
 
+  }
 }
 
 </script>
@@ -153,6 +147,7 @@ page {
       .unit2_img{
         width:90rpx;
         height:100rpx;
+        margin-bottom: 20rpx;
       }
     }
   }

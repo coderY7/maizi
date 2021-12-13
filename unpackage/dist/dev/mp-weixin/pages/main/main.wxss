@@ -72,6 +72,7 @@ page {
 .unit2 .unit2Nav .unit2_box .unit2_img {
   width: 90rpx;
   height: 100rpx;
+  margin-bottom: 20rpx;
 }
 .unit3 {
   margin-top: 20rpx;

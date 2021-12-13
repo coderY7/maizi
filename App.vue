@@ -8,7 +8,8 @@
 		},
 		onShow: function() {
 			console.log('App Show')
-      var Token ='XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
+      let Token ='XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
+
       uni.setStorageSync('token', Token);
 		},
 		onHide: function() {
@@ -16,6 +17,7 @@
 		},
     //全局数据
     globalData: {
+      text:'coderyh'
     }
 	}
 </script>

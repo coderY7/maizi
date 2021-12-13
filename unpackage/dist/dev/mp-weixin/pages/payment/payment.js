@@ -242,19 +242,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
       }
-      if (this.payment == '1') {
-        uni.showToast({
-          title: '支付宝支付',
-          duration: 500 });
-
-      }
-      if (this.payment == '') {
-        uni.showToast({
-          title: '请选择支付方式',
-          icon: 'loading',
-          duration: 1000 });
-
-      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

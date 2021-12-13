@@ -1,7 +1,6 @@
 <template>
 	<view>
     <u-tabs :list="list" :is-scroll="false" :current="current" @change="change"></u-tabs>
-
 	</view>
 </template>
 

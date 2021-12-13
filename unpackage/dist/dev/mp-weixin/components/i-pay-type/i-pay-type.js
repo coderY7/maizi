@@ -159,7 +159,7 @@ var _default2 =
 
     borderColor: {
       type: String,
-      default: '#fff' },
+      default: 'transparent' },
 
     datas: {
       type: Array,
@@ -168,14 +168,15 @@ var _default2 =
           name: '微信',
           id: 'wxpay',
           loading: false,
-          img: '../../static/pay/weixin.png' },
+          img: '../../static/pay/weixin.png' }
 
-        {
-          name: '支付宝',
-          id: 'alipay',
-          loading: false,
-          img: '../../static/pay/zhifubao.png' }];} } },
-
+        //  {
+        // name: '支付宝',
+        // id: 'alipay',
+        // loading: false,
+        // img: '../../static/pay/zhifubao.png',
+        // }
+        ];} } },
 
 
   data: function data() {

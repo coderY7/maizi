@@ -17,6 +17,12 @@
                     "pathName": "pages/main/main",
                     "query": "tableid=2",
                     "scene": null
+                },
+                {
+                    "name": "pages/map/map",
+                    "pathName": "pages/map/map",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

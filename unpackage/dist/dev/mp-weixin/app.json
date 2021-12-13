@@ -1,60 +1,61 @@
 {
-  "pages": [
-    "pages/main/main",
-    "pages/menu/menu",
-    "pages/order/order",
-    "pages/order/order2",
-    "pages/my/my",
-    "pages/pay/pay",
-    "pages/payment/payment",
-    "pages/vip/vip",
-    "pages/roll/roll",
-    "pages/distribution/distribution",
-    "pages/integrate/integrate",
-    "pages/map/map"
-  ],
-  "subPackages": [],
-  "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
-  },
-  "tabBar": {
-    "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/main/main",
-        "iconPath": "static/tab/首页图标.png",
-        "selectedIconPath": "static/tab/首页图标2.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/menu/menu",
-        "iconPath": "static/tab/点餐图标.png",
-        "selectedIconPath": "static/tab/点餐图标2.png",
-        "text": "点餐"
-      },
-      {
-        "pagePath": "pages/order/order",
-        "iconPath": "static/tab/订单图标.png",
-        "selectedIconPath": "static/tab/订单图标2.png",
-        "text": "订单"
-      },
-      {
-        "pagePath": "pages/my/my",
-        "iconPath": "static/tab/我的图标.png",
-        "selectedIconPath": "static/tab/我的图标2.png",
-        "text": "我的"
-      }
-    ]
-  },
-  "permission": {},
-  "uniStatistics": {
-    "enable": true
-  },
-  "usingComponents": {}
+    "pages": [
+        "pages/main/main",
+        "pages/menu/menu",
+        "pages/order/order",
+        "pages/order/order2",
+        "pages/my/my",
+        "pages/pay/pay",
+        "pages/payment/payment",
+        "pages/vip/vip",
+        "pages/roll/roll",
+        "pages/distribution/distribution",
+        "pages/integrate/integrate",
+        "pages/map/map"
+    ],
+    "subPackages": [],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "tabBar": {
+        "color": "#7A7E83",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/main/main",
+                "iconPath": "static/tab/main.png",
+                "selectedIconPath": "static/tab/main1.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/menu/menu",
+                "iconPath": "static/tab/menu.png",
+                "selectedIconPath": "static/tab/menu1.png",
+                "text": "点餐"
+            },
+            {
+                "pagePath": "pages/order/order",
+                "iconPath": "static/tab/order.png",
+                "selectedIconPath": "static/tab/order1.png",
+                "text": "订单"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "iconPath": "static/tab/my.png",
+                "selectedIconPath": "static/tab/my1.png",
+                "text": "我的"
+            }
+        ]
+    },
+    "permission": {},
+    "uniStatistics": {
+        "enable": true
+    },
+    "usingComponents": {},
+    "sitemapLocation": "sitemap.json"
 }

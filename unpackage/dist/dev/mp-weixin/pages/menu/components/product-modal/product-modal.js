@@ -298,62 +298,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {
   props: {
     visible: {
@@ -576,23 +520,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.updateChoosedText();
     },
 
-    //原方法
-
-    // chooseTag(rowIndex, itemIndex) {
-    //   var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
-    //   this.$set(unity, 'isDefault', true);
-    //   this.$set(unity, 'ext_zxprice', '0');
-    //   unity.ext_zxprice=unity.ext_price * 1
-    //   if(rowIndex!=2){
-    //     console.log(rowIndex,itemIndex)
-    //     this.productData.dishesextlist[rowIndex].extitems.map(item => {
-    //       item.isDefault = false;
-    //     });
-    //     this.$set(unity, 'isDefault', true);
-    //   }
-    //   this.pitch()
-    // },
-
     add: function add() {
       this.productData.number += 1;
       this.calcOverprice();
@@ -655,25 +582,26 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         var product = _objectSpread({}, this.productData);
         this.$emit('add-to-cart', product);
         console.log(product);
-      } else
-      {//未选择规格
-        this.productData.choosedText = this.choosedText;
-        console.log(this.productData);
-        var _goodslist = {
-          price: this.productData.nsjg,
-          extlist: [],
-          spsmm: this.productData.spsmm,
-          zxprice: this.productData.nsjg,
-          quantity: this.productData.number,
-          flownum: this.flownum++,
-          discount: '0',
-          spbm: this.productData.spbm };
-
-        this.productData.goodslist = _goodslist;
-        var _product = _objectSpread({}, this.productData);
-        this.$emit('add-to-cart', _product);
-        console.log(_product);
       }
+      //未选择规格
+      else {
+          this.productData.choosedText = this.choosedText;
+          console.log(this.productData);
+          var _goodslist = {
+            price: this.productData.nsjg,
+            extlist: [],
+            spsmm: this.productData.spsmm,
+            zxprice: this.productData.nsjg,
+            quantity: this.productData.number,
+            flownum: this.flownum++,
+            discount: '0',
+            spbm: this.productData.spbm };
+
+          this.productData.goodslist = _goodslist;
+          var _product = _objectSpread({}, this.productData);
+          this.$emit('add-to-cart', _product);
+          console.log(_product);
+        }
     } } };exports.default = _default2;
 
 /***/ }),

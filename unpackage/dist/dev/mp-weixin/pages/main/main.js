@@ -196,7 +196,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   data: function data() {
@@ -220,11 +219,7 @@ var _default =
     uni.setStorageSync('companyid', this.companyid);
   },
   onShow: function onShow() {
-    if (uni.getStorageSync('openid') == '') {
-      uni.switchTab({
-        url: '/pages/my/my' });
 
-    }
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

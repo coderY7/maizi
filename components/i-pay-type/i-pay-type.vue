@@ -25,7 +25,7 @@
 			},
 			borderColor:{
 				type:String,
-				default:'#fff'
+				default:'transparent'
 			},
 			datas: {
 				type: Array,
@@ -35,13 +35,14 @@
             id: 'wxpay',
             loading: false,
             img: '../../static/pay/weixin.png'
-          },
-          {
-					name: '支付宝',
-					id: 'alipay',
-					loading: false,
-					img: '../../static/pay/zhifubao.png',
-				}]
+          }
+         //  {
+					// name: '支付宝',
+					// id: 'alipay',
+					// loading: false,
+					// img: '../../static/pay/zhifubao.png',
+				 // }
+        ]
 			},
 		},
 		data() {
@@ -82,7 +83,9 @@
       background-color: #fff;
       padding:20rpx;
 
-			.i-pay-item-right {}
+			.i-pay-item-right {
+       
+      }
 
 			.i-pay-item-left {
 				padding-left: 5rpx;

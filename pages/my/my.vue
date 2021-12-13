@@ -1,23 +1,23 @@
 <template>
   <view class="content">
-    <u-button type="success" @click="login" v-if="!islogin">微信授权登录</u-button>
-    <view class="unit1" v-if="islogin">
+    <view class="unit1" >
       <image :src="userInfo.avatarUrl"></image>
       <view class="unit1box">
         <view class="unit1box_text">
-
-          <text style="font-size:20px" >{{userInfo.nickName}}</text>
+          <u-button type="success" @click="login" v-if="!islogin">微信授权登录</u-button>
+          <text style="font-size:20px" v-if="islogin">{{userInfo.nickName}}</text>
         </view>
         <view class="unit1box_code">
-          <u-icon name="scan" size="30px" @click="scan"></u-icon>
+          <u-icon name="scan" size="35px" @click="scan"></u-icon>
         </view>
       </view>
     </view>
+
 <view class="unit2">
   <view class="unit2_top">
     <view class="unit2_top_left" style="padding-left: 20rpx">
       <image src="../../static/main/LOGO.png" style="height: 80rpx; width:80rpx;border-radius: 50%"></image>
-      <text>麦子会员</text>
+      <text style="padding-left: 20rpx">麦子会员</text>
     </view>
     <view class="unit2_top_right">
       <u-button @click="vip" type="warning" size="mini" style="padding-right: 20rpx;">立即入会</u-button>
@@ -70,6 +70,15 @@ export default {
   onLoad:function(){
 },
   onShow:function(){
+    console.log(getApp().globalData.text)
+    getApp().globalData.text='123321'
+    if(uni.getStorageSync('openid')==''){
+      uni.showToast({
+        title: '请先微信登录',
+        duration: 2000,
+        icon:"none"
+      });
+    }
   },
   methods: {
     //用户登录
@@ -156,13 +165,8 @@ page {
       justify-content: space-between;
       align-items: center;
       margin-top: 20rpx;
-      .unit1box_text {
-        display: flex;
-        flex-direction: column;
-      }
+
       .unit1box_code{
-        display: flex;
-        align-items: center;
         margin-right: 20rpx;
       }
     }
@@ -220,6 +224,7 @@ page {
       image{
         width:80rpx;
         height:80rpx;
+        margin-bottom: 20rpx;
       }
     }
   }

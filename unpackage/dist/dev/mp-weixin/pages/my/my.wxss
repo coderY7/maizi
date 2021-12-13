@@ -53,13 +53,7 @@ page {
   align-items: center;
   margin-top: 20rpx;
 }
-.content .unit1 .unit1box .unit1box_text {
-  display: flex;
-  flex-direction: column;
-}
 .content .unit1 .unit1box .unit1box_code {
-  display: flex;
-  align-items: center;
   margin-right: 20rpx;
 }
 .content .unit2 {
@@ -116,6 +110,7 @@ page {
 .content .unit3 .unit3Nav image {
   width: 80rpx;
   height: 80rpx;
+  margin-bottom: 20rpx;
 }
 .content .unit4 {
   position: fixed;

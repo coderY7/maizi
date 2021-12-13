@@ -107,6 +107,7 @@
       }
     },
     onShow(){
+      console.log(getApp().globalData.text)
       this.token = uni.getStorageSync('token');
       this.$u.api.categorys({
         access_token:this.token,
@@ -130,6 +131,12 @@
           this.disheslist=res.disheslist
         })
       })
+      if(uni.getStorageSync('openid')==''){
+        console.log('跳转登录')
+        uni.switchTab({
+          url: '/pages/my/my'
+        });
+      }
     },
     onLoad(options) {
 

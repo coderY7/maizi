@@ -280,6 +280,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
 
   },
   onShow: function onShow() {var _this = this;
+    console.log(getApp().globalData.text);
     this.token = uni.getStorageSync('token');
     this.$u.api.categorys({
       access_token: this.token,
@@ -303,6 +304,12 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         _this.disheslist = res.disheslist;
       });
     });
+    if (uni.getStorageSync('openid') == '') {
+      console.log('跳转登录');
+      uni.switchTab({
+        url: '/pages/my/my' });
+
+    }
   },
   onLoad: function onLoad(options) {
 

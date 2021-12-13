@@ -1,7 +1,7 @@
 <template>
   <view class="content">
     <view class="unit1">
-      <text>{{ tableid[0] }}</text>
+      <text>桌台：{{ tableid[0] }}</text>
       <text>{{ tableid[1] }}</text>
     </view>
     <view class="unit2">
@@ -144,21 +144,7 @@ btnchange(index){
     });
 
               }
-  if(this.payment=='1'){
-    uni.showToast({
-      title: '支付宝支付',
-      duration: 500
-    });
-  }
-  if(this.payment==''){
-    uni.showToast({
-      title: '请选择支付方式',
-      icon: 'loading',
-      duration: 1000
-    });
-  }
 }
-
   }
 }
 
