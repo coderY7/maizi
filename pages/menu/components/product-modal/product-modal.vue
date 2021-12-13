@@ -423,10 +423,10 @@ ext_zxprice:'',
     addToCart() {
       if(this.productData.extlist){
         this.productData.extlist.map(item => {
-          if (item.isDefault) {
-            item.isDefault=undefined;
-            item.ext_desc=undefined;
-          }
+          // if (item.isDefault) {
+          //   item.isDefault=undefined;
+          //   item.ext_desc=undefined;
+          // }
         });
         this.productData.choosedText=this.choosedText
         let goodslist={

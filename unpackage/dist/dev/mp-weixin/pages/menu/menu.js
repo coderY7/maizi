@@ -374,7 +374,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         goodslist: product.goodslist,
         price: product.goodslist.zxprice });
 
-      console.log(product);
+      console.log('购物车中的商品：', this.cart);
     },
     //从购物车减商品
     handleMinusFromCart: function handleMinusFromCart(product) {

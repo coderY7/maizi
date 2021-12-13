@@ -9,7 +9,6 @@
 		onShow: function() {
 			console.log('App Show')
       let Token ='XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
-
       uni.setStorageSync('token', Token);
 		},
 		onHide: function() {

@@ -144,11 +144,12 @@ __webpack_require__.r(__webpack_exports__);
     btnchange: function btnchange(index) {
       this.payment = index;
     },
-    pays: function pays() {
+    pays: function pays() {var _this = this;
       if (this.payment == '0') {
         console.log('微信支付');
         var snvar = wx.getStorageSync('companyid'); //商家SN
         var fdbhvar = wx.getStorageSync('fdbh'); //分店编号
+        //获取商户信息
         wx.request({
           url: 'https://lite.ecsun.cn/api/init/' + snvar + '-' + fdbhvar,
           data: {},
@@ -223,11 +224,12 @@ __webpack_require__.r(__webpack_exports__);
                 });
               },
               'fail': function fail(res) {
-                console.log('支付失败:', res);
+                console.log('支付失败:', res, _this);
                 uni.showToast({
                   title: '微信支付失败',
                   duration: 1000,
                   image: '../../static/pay/fail.png' });
+
 
               },
               'complete': function complete(res) {} });
@@ -237,7 +239,6 @@ __webpack_require__.r(__webpack_exports__);
           fail: function fail(error) {
             console.info("准备支付失败");
             console.info(error);
-
           } });
 
 

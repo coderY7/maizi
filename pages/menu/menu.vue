@@ -201,7 +201,7 @@
           goodslist:product.goodslist,
           price:  product.goodslist.zxprice,
         })
-        console.log(product)
+        console.log('购物车中的商品：',this.cart)
       },
       //从购物车减商品
       handleMinusFromCart(product) {

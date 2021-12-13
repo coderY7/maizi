@@ -562,10 +562,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     addToCart: function addToCart() {
       if (this.productData.extlist) {
         this.productData.extlist.map(function (item) {
-          if (item.isDefault) {
-            item.isDefault = undefined;
-            item.ext_desc = undefined;
-          }
+          // if (item.isDefault) {
+          //   item.isDefault=undefined;
+          //   item.ext_desc=undefined;
+          // }
         });
         this.productData.choosedText = this.choosedText;
         var goodslist = {
