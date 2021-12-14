@@ -39,11 +39,12 @@ page {
   width: 100%;
   align-items: center;
 }
-.content .unit1 image {
+.content .unit1 .image {
   width: 140rpx;
   height: 140rpx;
   margin: 20rpx;
   border-radius: 50%;
+  overflow: hidden;
 }
 .content .unit1 .unit1box {
   flex: 1;

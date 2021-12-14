@@ -1,10 +1,14 @@
 <template>
   <view class="content">
     <view class="unit1" >
-      <image :src="userInfo.avatarUrl"></image>
+<!--      <image :src="userInfo.avatarUrl"></image>-->
+      <view class="image">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+
       <view class="unit1box">
         <view class="unit1box_text">
-          <u-button type="success" @click="login" v-if="!islogin">微信授权登录</u-button>
+          <u-button type="warning" @click="login" v-if="!islogin">微信授权登录</u-button>
           <text style="font-size:20px" v-if="islogin">{{userInfo.nickName}}</text>
         </view>
         <view class="unit1box_code">
@@ -152,11 +156,12 @@ page {
     height: 200rpx;
     width: 100%;
     align-items: center;
-    image {
+    .image {
       width: 140rpx;
       height: 140rpx;
        margin:20rpx;
       border-radius: 50%;
+      overflow: hidden;
     }
     .unit1box {
       flex: 1;

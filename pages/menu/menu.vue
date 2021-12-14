@@ -151,7 +151,7 @@
         this.$u.api.dishess({
           access_token:uni.getStorageSync('token'),
           vtype:'pos',
-          categoryid:10,
+          categoryid:122,
           spmc:e,
           fdbh:uni.getStorageSync('fdbh'),
           companyid:uni.getStorageSync('companyid')
