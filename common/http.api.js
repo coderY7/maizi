@@ -2,7 +2,8 @@
 let login='/login'
 let category= '/catering/category'
 let catering = '/catering/dishes'
-let dishes='/catering/dishes/ext'
+let dishes='/catering/dishes'
+let ext='/catering/dishes/ext'
 let order='/catering/order'
 let readytopay='/catering/readytopay'
 let pay='/catering/pay'
@@ -26,8 +27,10 @@ const install = (Vue, vm) => {
     let categorys = (params={})=>vm.$u.post(category,params)
     //菜品资料
     let caterings = (params={})=>vm.$u.post(catering,params)
-    //附加
+    //搜索
     let dishess=(params={})=>vm.$u.post(dishes,params)
+    //菜品属性
+    let exts=(params={})=>vm.$u.post(ext,params)
     //订单
     let orders=(params={})=>vm.$u.post(order,params)
     //订单预结算
@@ -41,7 +44,7 @@ const install = (Vue, vm) => {
     //退款
     let backs=(params={})=>vm.$u.post(back,params)
     // 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-    vm.$u.api = {searchs,paydones,userchecks,logins,categorys,caterings,dishess,orders,readytopays,pays,querys,backs};
+    vm.$u.api = {exts,searchs,paydones,userchecks,logins,categorys,caterings,dishess,orders,readytopays,pays,querys,backs};
 }
 
 export default {

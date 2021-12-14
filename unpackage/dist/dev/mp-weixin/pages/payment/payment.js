@@ -193,7 +193,7 @@ __webpack_require__.r(__webpack_exports__);
           method: 'GET',
           dataType: 'json',
           success: function success(ress) {
-            console.info(ress);
+            console.info('微信预支付', ress);
             //微信支付
             wx.requestPayment( //调用微信支付
             {
@@ -230,7 +230,19 @@ __webpack_require__.r(__webpack_exports__);
                   duration: 1000,
                   image: '../../static/pay/fail.png' });
 
-
+                //支付成功，立刻调用查单接口查询订单在后台是否成功
+                _this.$u.api.paydones({
+                  access_token: uni.getStorageSync('token'),
+                  flow_no: uni.getStorageSync('xsdbh'),
+                  payno: '04',
+                  total: uni.getStorageSync('readytopays').paytotal,
+                  payid: '',
+                  syyid: uni.getStorageSync('openid'),
+                  fdbh: uni.getStorageSync('fdbh'),
+                  companyid: uni.getStorageSync('companyid') }).
+                then(function (res) {
+                  console.log('订单完成', res);
+                });
               },
               'complete': function complete(res) {} });
 

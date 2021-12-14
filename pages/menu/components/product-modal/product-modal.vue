@@ -42,8 +42,8 @@
               <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
               <view class="list" v-for="(item,key) in productData.dishesextlist[1].extitems" :key="key">
                 <checkbox-group @change="checkboxChange(item,key)">
-                  <view style="display: flex;justify-content: space-between;">
-                    <view>
+                  <view style="display: flex;justify-content: space-between;align-items: center;">
+                    <view class="list-group">
                       <label class="radio">
                         <checkbox :checked="item.isDefault"/>
                       </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
@@ -355,6 +355,7 @@ ext_zxprice:'',
     closeModal() {
       this.$emit('cancel');
     },
+    //分享
     shareGoods() {
       this.$emit('share', {});
     },
@@ -379,14 +380,16 @@ ext_zxprice:'',
 
     add() {
       this.productData.number += 1
-      this.calcOverprice()
+
+      this.calcOverprice();
     },
     minus() {
       if(this.productData.number == 1) {
         return
       }
       this.productData.number -= 1
-      this.calcOverprice()
+      // this.calcOverprice()
+      this.pitch()
     },
     //更新
     updateChoosedText() {
@@ -712,9 +715,13 @@ ext_zxprice:'',
 }
 .list .Button{
   background-color: #dca371;
-  width: 50upx;
-  height: 48upx;
+  width: 45upx;
+  height: 45upx;
   text-align: center;
-  line-height: 48upx;
+  line-height: 45upx;
+  margin:0 15rpx;
+}
+.list-group{
+  margin-top: 10upx;
 }
 </style>

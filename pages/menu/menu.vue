@@ -1,7 +1,7 @@
 <template>
 	<view class="u-wrap">
 		<view class="u-search-box">
-      <u-search placeholder="搜索" ></u-search>
+      <u-search placeholder="搜索" @custom="custom"></u-search>
 		</view>
     <view class="rolls">
       <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image>
@@ -145,6 +145,21 @@
       //this.getMenuItemTop()
     },
     methods: {
+      //搜索
+      custom(e){
+        console.log(e)
+        this.$u.api.dishess({
+          access_token:uni.getStorageSync('token'),
+          vtype:'pos',
+          categoryid:10,
+          spmc:e,
+          fdbh:uni.getStorageSync('fdbh'),
+          companyid:uni.getStorageSync('companyid')
+        }).then((res) =>{
+          console.log('搜索')
+          console.log(res)
+        })
+      },
       // 点击左边的栏目切换
       async swichMenu(index) {
         if (index == this.current) return;
@@ -188,8 +203,9 @@
           this.cart[index].goodslist.quantity+=1;
           console.log(this.cart[index].goodslist.quantity)
           this.cart[index].number += (product.number || 1)
-          return
+            return
         }
+        console.log('2323')
         this.cart.push({
           id: product.spbm,
           cate_id: product.category_id,
@@ -214,7 +230,7 @@
       },
       //菜品详情页
       async showProductDetailModal(product) {
-       await this.$u.api.dishess({
+       await this.$u.api.exts({
           access_token:this.token,
           vtype:"pos",
          fdbh:uni.getStorageSync('fdbh'),
@@ -227,6 +243,7 @@
         this.productModalVisible = true
       },
       handleAddToCartInModal(product) {
+        console.log('选择的商品',product)
         this.handleAddToCart(product)
         this.closeProductDetailModal()
       },

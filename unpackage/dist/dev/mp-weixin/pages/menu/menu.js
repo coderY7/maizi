@@ -318,6 +318,21 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
     //this.getMenuItemTop()
   },
   methods: {
+    //搜索
+    custom: function custom(e) {
+      console.log(e);
+      this.$u.api.dishess({
+        access_token: uni.getStorageSync('token'),
+        vtype: 'pos',
+        categoryid: 10,
+        spmc: e,
+        fdbh: uni.getStorageSync('fdbh'),
+        companyid: uni.getStorageSync('companyid') }).
+      then(function (res) {
+        console.log('搜索');
+        console.log(res);
+      });
+    },
     // 点击左边的栏目切换
     swichMenu: function swichMenu(index) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
                 index == _this2.current)) {_context.next = 2;break;}return _context.abrupt("return");case 2:
@@ -363,6 +378,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         this.cart[index].number += product.number || 1;
         return;
       }
+      console.log('2323');
       this.cart.push({
         id: product.spbm,
         cate_id: product.category_id,
@@ -387,7 +403,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
     },
     //菜品详情页
     showProductDetailModal: function showProductDetailModal(product) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-                  _this3.$u.api.dishess({
+                  _this3.$u.api.exts({
                     access_token: _this3.token,
                     vtype: "pos",
                     fdbh: uni.getStorageSync('fdbh'),
@@ -400,6 +416,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
                 _this3.productModalVisible = true;case 4:case "end":return _context2.stop();}}}, _callee2);}))();
     },
     handleAddToCartInModal: function handleAddToCartInModal(product) {
+      console.log('选择的商品', product);
       this.handleAddToCart(product);
       this.closeProductDetailModal();
     },

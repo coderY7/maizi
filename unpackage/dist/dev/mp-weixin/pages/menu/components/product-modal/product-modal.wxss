@@ -219,9 +219,13 @@
 }
 .list .Button{
   background-color: #dca371;
-  width: 50rpx;
-  height: 48rpx;
+  width: 45rpx;
+  height: 45rpx;
   text-align: center;
-  line-height: 48rpx;
+  line-height: 45rpx;
+  margin:0 15rpx;
+}
+.list-group{
+  margin-top: 10rpx;
 }
 

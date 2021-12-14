@@ -494,6 +494,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     closeModal: function closeModal() {
       this.$emit('cancel');
     },
+    //分享
     shareGoods: function shareGoods() {
       this.$emit('share', {});
     },
@@ -518,6 +519,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
     add: function add() {
       this.productData.number += 1;
+
       this.calcOverprice();
     },
     minus: function minus() {
@@ -525,7 +527,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         return;
       }
       this.productData.number -= 1;
-      this.calcOverprice();
+      // this.calcOverprice()
+      this.pitch();
     },
     //更新
     updateChoosedText: function updateChoosedText() {

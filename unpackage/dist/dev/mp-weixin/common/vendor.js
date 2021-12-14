@@ -11361,7 +11361,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var login = '/login';
 var category = '/catering/category';
 var catering = '/catering/dishes';
-var dishes = '/catering/dishes/ext';
+var dishes = '/catering/dishes';
+var ext = '/catering/dishes/ext';
 var order = '/catering/order';
 var readytopay = '/catering/readytopay';
 var pay = '/catering/pay';
@@ -11385,8 +11386,10 @@ var install = function install(Vue, vm) {
   var categorys = function categorys() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(category, params);};
   //菜品资料
   var caterings = function caterings() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(catering, params);};
-  //附加
+  //搜索
   var dishess = function dishess() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(dishes, params);};
+  //菜品属性
+  var exts = function exts() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(ext, params);};
   //订单
   var orders = function orders() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(order, params);};
   //订单预结算
@@ -11400,7 +11403,7 @@ var install = function install(Vue, vm) {
   //退款
   var backs = function backs() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(back, params);};
   // 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-  vm.$u.api = { searchs: searchs, paydones: paydones, userchecks: userchecks, logins: logins, categorys: categorys, caterings: caterings, dishess: dishess, orders: orders, readytopays: readytopays, pays: pays, querys: querys, backs: backs };
+  vm.$u.api = { exts: exts, searchs: searchs, paydones: paydones, userchecks: userchecks, logins: logins, categorys: categorys, caterings: caterings, dishess: dishess, orders: orders, readytopays: readytopays, pays: pays, querys: querys, backs: backs };
 };var _default =
 
 {
