@@ -207,10 +207,10 @@ var _default =
   },
   methods: {
     navmenu: function navmenu() {
-      uni.setStorageSync('tableid', '堂食');
+      uni.setStorageSync('mode', '堂食');
     },
     navbesides: function navbesides() {
-      uni.setStorageSync('tableid', '外带');
+      uni.setStorageSync('mode', '外带');
     } },
 
   onLoad: function onLoad(options) {

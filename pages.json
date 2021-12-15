@@ -23,12 +23,6 @@
 			}
 		},
 		{
-			"path": "pages/order/order2",
-			"style": {
-				"navigationBarTitleText": "订单2"
-			}
-		},
-		{
 			"path": "pages/my/my",
 			"style": {
 				"navigationBarTitleText": "我的"

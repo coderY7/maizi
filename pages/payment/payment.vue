@@ -1,8 +1,8 @@
 <template>
   <view class="content">
     <view class="unit1">
-      <text>桌台：{{ tableid[0] }}</text>
-      <text>{{ tableid[1] }}</text>
+      <text>桌台号：{{tableid}}</text>
+      <text>就餐人数：{{tablenumber}}</text>
     </view>
     <view class="unit2">
       <view style="font-size: 20px;margin-bottom:14px;">支付金额</view>
@@ -29,7 +29,8 @@ export default {
       token: '',
       readytopays:'',
       pay:0,
-      payment:'0'
+      payment:'0',
+      tablenumber:''
     }
   },
   components: {
@@ -42,7 +43,12 @@ export default {
         this.readytopays=uni.getStorageSync('readytopays')
         this.pay=parseInt(this.readytopays.paytotal).toFixed(2)
   },
+  onShow(){
+    this.tablenumber=uni.getStorageSync('tablenumber')
+  },
   methods: {
+
+
 btnchange(index){
   this.payment=index
 },
@@ -104,7 +110,7 @@ btnchange(index){
               'package': ress.data.package,
               'signType': 'MD5',
               'paySign': ress.data.paySign,
-              'success': function (res) {
+              'success':(res)=> {
                 console.log('支付成功:',res);
                 uni.showToast({
                   title: '微信支付成功',
@@ -123,7 +129,7 @@ btnchange(index){
                   fdbh:uni.getStorageSync('fdbh'),
                   companyid:uni.getStorageSync('companyid')
                 }).then((res)=>{
-                  console.log('订单完成',res)
+                  console.log('订单支付完成',res)
                 })
               },
               'fail': res=> {
@@ -132,6 +138,22 @@ btnchange(index){
                   title: '微信支付失败',
                   duration: 1000,
                   image:'../../static/pay/fail.png'
+                })
+                //测试
+                //支付成功，立刻调用查单接口查询订单在后台是否成功
+                this.$u.api.paydones({
+                  access_token:uni.getStorageSync('token'),
+                  flow_no:uni.getStorageSync('xsdbh'),
+                  payno:'04',
+                  total:uni.getStorageSync('readytopays').paytotal,
+                  payid:'',
+                  syyid:uni.getStorageSync('syyid'),
+                  vipid:uni.getStorageSync('openid'),
+                  fdbh:uni.getStorageSync('fdbh'),
+                  companyid:uni.getStorageSync('companyid')
+                }).then((res)=>{
+                  console.log('订单支付完成',res)
+                  uni.setStorageSync('orders',res)
                 })
 
               },

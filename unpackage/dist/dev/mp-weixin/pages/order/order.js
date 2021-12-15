@@ -98,13 +98,13 @@ var components
 try {
   components = {
     uTabsSwiper: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 178))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 171))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 185))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 178))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 192))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 185))
     }
   }
 } catch (e) {
@@ -128,57 +128,69 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l1 = _vm.__map(_vm.orderList[1], function(res, index) {
-    var $orig = _vm.__get_orig(res)
+  var l0 = _vm.__map(_vm.orders.goodslist, function(item, index) {
+    var $orig = _vm.__get_orig(item)
 
-    var l0 = _vm.__map(res.goodsList, function(item, index) {
-      var $orig = _vm.__get_orig(item)
-
-      var m0 = _vm.priceInt(item.price)
-      var m1 = _vm.priceDecimal(item.price)
-      return {
-        $orig: $orig,
-        m0: m0,
-        m1: m1
-      }
-    })
-
-    var m2 = _vm.totalNum(res.goodsList)
-    var m3 = _vm.priceInt(_vm.totalPrice(res.goodsList))
-    var m4 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
+    var m0 = _vm.priceInt(item.quantity)
     return {
       $orig: $orig,
-      l0: l0,
-      m2: m2,
-      m3: m3,
-      m4: m4
+      m0: m0
     }
   })
 
-  var l3 = _vm.__map(_vm.orderList[3], function(res, index) {
+  var g0 = parseInt(_vm.orders.paytotal).toFixed(2)
+
+  var l2 = _vm.__map(_vm.orderList[1], function(res, index) {
     var $orig = _vm.__get_orig(res)
 
-    var l2 = _vm.__map(res.goodsList, function(item, index) {
+    var l1 = _vm.__map(res.goodsList, function(item, index) {
       var $orig = _vm.__get_orig(item)
 
-      var m5 = _vm.priceInt(item.price)
-      var m6 = _vm.priceDecimal(item.price)
+      var m1 = _vm.priceInt(item.price)
+      var m2 = _vm.priceDecimal(item.price)
       return {
         $orig: $orig,
-        m5: m5,
-        m6: m6
+        m1: m1,
+        m2: m2
       }
     })
 
-    var m7 = _vm.totalNum(res.goodsList)
-    var m8 = _vm.priceInt(_vm.totalPrice(res.goodsList))
-    var m9 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
+    var m3 = _vm.totalNum(res.goodsList)
+    var m4 = _vm.priceInt(_vm.totalPrice(res.goodsList))
+    var m5 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
     return {
       $orig: $orig,
-      l2: l2,
-      m7: m7,
+      l1: l1,
+      m3: m3,
+      m4: m4,
+      m5: m5
+    }
+  })
+
+  var l4 = _vm.__map(_vm.orderList[3], function(res, index) {
+    var $orig = _vm.__get_orig(res)
+
+    var l3 = _vm.__map(res.goodsList, function(item, index) {
+      var $orig = _vm.__get_orig(item)
+
+      var m6 = _vm.priceInt(item.price)
+      var m7 = _vm.priceDecimal(item.price)
+      return {
+        $orig: $orig,
+        m6: m6,
+        m7: m7
+      }
+    })
+
+    var m8 = _vm.totalNum(res.goodsList)
+    var m9 = _vm.priceInt(_vm.totalPrice(res.goodsList))
+    var m10 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
+    return {
+      $orig: $orig,
+      l3: l3,
       m8: m8,
-      m9: m9
+      m9: m9,
+      m10: m10
     }
   })
 
@@ -186,8 +198,10 @@ var render = function() {
     {},
     {
       $root: {
-        l1: l1,
-        l3: l3
+        l0: l0,
+        g0: g0,
+        l2: l2,
+        l4: l4
       }
     }
   )
@@ -367,6 +381,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -399,16 +417,7 @@ var _default =
       {
         id: 2,
         store: '江南皮革厂',
-        deal: '交易失败',
-        goodsList: [
-        {
-          goodsUrl: '//img14.360buyimg.com/n7/jfs/t1/60319/15/6105/406802/5d43f68aE9f00db8c/0affb7ac46c345e2.jpg',
-          title: '【冬日限定】现货 原创jk制服女2020冬装新款小清新宽松软糯毛衣外套女开衫短款百搭日系甜美风',
-          type: '粉色;M',
-          deliveryTime: '付款后7天内发货',
-          price: '128.05',
-          number: 1 }] },
-
+        deal: '交易失败' },
 
 
       {
@@ -475,10 +484,10 @@ var _default =
 
       list: [
       {
-        name: '全部订单' },
+        name: '已支付订单' },
 
       {
-        name: '待付款' },
+        name: '待出餐' },
 
       {
         name: '已完成' },
@@ -494,14 +503,17 @@ var _default =
       loadStatus: ['loadmore', 'loadmore', 'loadmore', 'loadmore'],
       time: '',
       Cart: [],
-      token: '' };
+      token: '',
+      orders: [],
+      imgurl: "http://api.mzsale.cn/" };
 
   },
   onLoad: function onLoad() {
   },
   onShow: function onShow() {
     this.token = uni.getStorageSync('token');
-    this.Cart = uni.getStorageSync('Cart');
+    //this.Cart=uni.getStorageSync('Cart');
+    this.orders = uni.getStorageSync('orders');
     //查询桌台订单信息
     this.$u.api.orders({
       access_token: this.token,

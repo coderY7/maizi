@@ -4,7 +4,7 @@
       <view class="unit1_top">
         <view class="unit1_top_left">
           <view>大厅区</view>
-          <view class="unit1_top_left2">{{table[0]}}</view>
+          <view class="unit1_top_left2">{{tableid}}</view>
         </view>
         <view>{{table[1]}}</view>
       </view>
@@ -37,7 +37,7 @@
             <view>满减优惠</view>
           </view>
           <view>
-            <text style="color:red">- ¥ 20</text>
+            <text style="color:red">- ¥ 0</text>
             <text style="color:#c4c4c4;margin-left:15rpx;"> ></text>
           </view>
         </view>
@@ -76,7 +76,7 @@ export default {
       Cart:{},
       ShowPay:false,
       tableid:[],
-      attendance:'1',
+      attendance:uni.getStorageSync('tablenumber'),
       token:'',
       xsdbh:''//订单号
     }
@@ -89,7 +89,7 @@ export default {
     },
     //用餐人数
     valChange(e){
-      this.attendance=e.value
+      uni.setStorageSync('tablenumber',e.value)
     },
     //加菜
 addmenu(){

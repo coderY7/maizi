@@ -96,7 +96,7 @@ var components
 try {
   components = {
     uSearch: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-search/u-search */ "node-modules/uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! uview-ui/components/u-search/u-search.vue */ 136))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-search/u-search */ "node-modules/uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! uview-ui/components/u-search/u-search.vue */ 129))
     }
   }
 } catch (e) {
@@ -234,7 +234,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/categories */ 61));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ./components/actions/actions.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CartBar = function CartBar() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cartbar/cartbar */ "pages/menu/components/cartbar/cartbar").then((function () {return resolve(__webpack_require__(/*! ./components/cartbar/cartbar.vue */ 150));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ProductModal = function ProductModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ./components/product-modal/product-modal.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ./components/cart-popup/cart-popup.vue */ 164));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Search = function Search() {__webpack_require__.e(/*! require.ensure | pages/menu/components/search/search */ "pages/menu/components/search/search").then((function () {return resolve(__webpack_require__(/*! ./components/search/search.vue */ 171));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/categories */ 61));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ./components/actions/actions.vue */ 136));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CartBar = function CartBar() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cartbar/cartbar */ "pages/menu/components/cartbar/cartbar").then((function () {return resolve(__webpack_require__(/*! ./components/cartbar/cartbar.vue */ 143));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ProductModal = function ProductModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ./components/product-modal/product-modal.vue */ 150));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ./components/cart-popup/cart-popup.vue */ 157));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Search = function Search() {__webpack_require__.e(/*! require.ensure | pages/menu/components/search/search */ "pages/menu/components/search/search").then((function () {return resolve(__webpack_require__(/*! ./components/search/search.vue */ 164));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 {
@@ -274,7 +274,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       categorylist: [], //菜品分类
       disheslist: [], //菜品数据
       category_id: [], //菜品分类ID
-      companyid: '800008',
+      companyid: uni.getStorageSync('companyid'),
       counts: '', //商品数量
       goodslist: [] };
 
@@ -288,7 +288,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       fdbh: uni.getStorageSync('fdbh'),
       companyid: uni.getStorageSync('companyid'),
       parentid: "",
-      level: "1" }).
+      level: "3" }).
     then(function (res) {
       console.log('左侧菜单:', res);
       _this.categorylist = res.categorylist;
@@ -318,6 +318,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
   },
   onReady: function onReady() {
     //this.getMenuItemTop()
+    console.log('onpeady');
   },
   methods: {
     //搜索
@@ -380,7 +381,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         this.cart[index].number += product.number || 1;
         return;
       }
-      console.log('2323');
       this.cart.push({
         id: product.spbm,
         cate_id: product.category_id,
@@ -454,10 +454,10 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       this.$u.api.orders({
         access_token: this.token,
         vtype: "new",
-        posid: "80800101",
-        tableid: uni.getStorageSync('tableid')[0],
+        posid: uni.getStorageSync('posid'),
+        tableid: uni.getStorageSync('tableid'),
         tablenumber: uni.getStorageSync('tablenumber'),
-        tablewaiter: "00268",
+        tablewaiter: uni.getStorageSync('syyid'),
         fdbh: uni.getStorageSync('fdbh') }).
       then(
       function (res) {

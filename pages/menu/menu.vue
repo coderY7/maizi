@@ -101,7 +101,7 @@
         categorylist:[],  //菜品分类
         disheslist:[] ,    //菜品数据
         category_id:[], //菜品分类ID
-        companyid:'800008',
+        companyid:uni.getStorageSync('companyid'),
         counts:'',//商品数量
         goodslist: []
       }
@@ -115,7 +115,7 @@
         fdbh:uni.getStorageSync('fdbh'),
         companyid:uni.getStorageSync('companyid'),
         parentid:"",
-        level:"1"
+        level:"3"
       }).then((res)=> {
         console.log('左侧菜单:',res)
         this.categorylist=res.categorylist
@@ -145,6 +145,7 @@
     },
     onReady() {
       //this.getMenuItemTop()
+      console.log('onpeady')
     },
     methods: {
       //搜索
@@ -207,7 +208,6 @@
           this.cart[index].number += (product.number || 1)
             return
         }
-        console.log('2323')
         this.cart.push({
           id: product.spbm,
           cate_id: product.category_id,
@@ -281,10 +281,10 @@
         this.$u.api.orders({
           access_token:this.token,
           vtype:"new",
-          posid:"80800101",
-          tableid:uni.getStorageSync('tableid')[0],
+          posid:uni.getStorageSync('posid'),
+          tableid:uni.getStorageSync('tableid'),
           tablenumber:uni.getStorageSync('tablenumber'),
-          tablewaiter:"00268",
+          tablewaiter:uni.getStorageSync('syyid'),
           fdbh:uni.getStorageSync('fdbh'),
         }).then(
             (res)=>{

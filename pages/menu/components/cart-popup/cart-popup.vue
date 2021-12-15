@@ -75,6 +75,7 @@ export default {
 			this.$emit('change', show)
 		},
 		add(item) {
+      console.log('item:',item)
 			this.$emit('add', item)
 		},
 		minus(item) {

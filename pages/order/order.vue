@@ -9,26 +9,30 @@
           <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
             <view class="page-box">
 <!--  订单状态-->
-              <view class="order" >
-                <view class="top">
-                  <view class="left">
-                    <u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>
-                    <view class="store">时间</view>
+              <view class="order">
+                <view class="store"><u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>：{{orders.xssj}}</view>
+
+                <view v-for="(item,index) in orders.goodslist" :key="index">
+                  <view class="top">
+                    <view class="left"></view>
+                    <view class="right"></view>
                   </view>
-                  <view class="right">状态</view>
-                </view>
-                <view class="item" v-for="(item1,index) in Cart.cart" :key="index">
-                  <view>
-                      <image :src="item1.image" mode="aspectFill"></image>
-                  </view>
-                  <view class="right" >
-                    <view>共3件</view>
+                  <view class="item">
+                    <view>
+                      <image :src="imgurl+item.small_img_path" mode="aspectFill"></image>
+                    </view>
+                    <view class="right">
+                      <view>共{{priceInt(item.quantity)}}件</view>
+                    </view>
                   </view>
                 </view>
 
+
+
+
                 <view class="total">
-                  <view>总价格:</view>
-                  <view>¥{{Cart.cartprice}}</view>
+                  <view>总价格:{{parseInt(orders.paytotal).toFixed(2)}}</view>
+                  <view></view>
                 </view>
               </view>
               <u-loadmore :status="loadStatus[0]" bgColor="#f2f2f2"></u-loadmore>
@@ -174,16 +178,7 @@ export default {
           id: 2,
           store: '江南皮革厂',
           deal: '交易失败',
-          goodsList: [
-            {
-              goodsUrl: '//img14.360buyimg.com/n7/jfs/t1/60319/15/6105/406802/5d43f68aE9f00db8c/0affb7ac46c345e2.jpg',
-              title: '【冬日限定】现货 原创jk制服女2020冬装新款小清新宽松软糯毛衣外套女开衫短款百搭日系甜美风',
-              type: '粉色;M',
-              deliveryTime: '付款后7天内发货',
-              price: '128.05',
-              number: 1
-            }
-          ]
+
         },
         {
           id: 3,
@@ -249,10 +244,10 @@ export default {
       ],
       list: [
         {
-          name: '全部订单'
+          name: '已支付订单'
         },
         {
-          name: '待付款'
+          name: '待出餐'
         },
         {
           name: '已完成'
@@ -268,14 +263,17 @@ export default {
       loadStatus: ['loadmore','loadmore','loadmore','loadmore'],
       time:'',
       Cart:[],
-      token:''
+      token:'',
+      orders:[],
+      imgurl:"http://api.mzsale.cn/",
     };
   },
   onLoad() {
   },
   onShow(){
-    this.token = uni.getStorageSync('token');
-    this.Cart=uni.getStorageSync('Cart');
+        this.token = uni.getStorageSync('token');
+    //this.Cart=uni.getStorageSync('Cart');
+    this.orders=uni.getStorageSync('orders');
     //查询桌台订单信息
     this.$u.api.orders({
       access_token:this.token,
@@ -391,7 +389,7 @@ page {
 
 <style lang="scss" scoped>
 .order {
-  width: 710rpx;
+  width: 700rpx;
   background-color: #ffffff;
   margin: 20rpx auto;
   border-radius: 20rpx;
@@ -417,6 +415,7 @@ page {
   .item {
     display: flex;
     justify-content: space-between;
+    margin: 10rpx 0;
     image{
       width:100rpx;
       height:100rpx;
