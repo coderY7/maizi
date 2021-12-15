@@ -118,7 +118,8 @@ btnchange(index){
                   payno:'04',
                   total:uni.getStorageSync('readytopays').paytotal,
                   payid:'',
-                  syyid:uni.getStorageSync('openid'),
+                  syyid:uni.getStorageSync('syyid'),
+                  vipid:uni.getStorageSync('openid'),
                   fdbh:uni.getStorageSync('fdbh'),
                   companyid:uni.getStorageSync('companyid')
                 }).then((res)=>{

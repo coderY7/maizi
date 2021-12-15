@@ -134,7 +134,6 @@ export default {
     },
     quit(){
        this.islogin=!this.islogin
-       uni.setStorageSync('token', '')
       uni.setStorageSync('openid','')
     }
     }

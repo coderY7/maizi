@@ -5,6 +5,7 @@
       const accountInfo = uni.getAccountInfoSync();
       console.log(accountInfo.miniProgram.appId);
       uni.setStorageSync('appid', accountInfo.miniProgram.appId)
+      uni.setStorageSync('syyid','')
 		},
 		onShow: function() {
 			console.log('App Show')

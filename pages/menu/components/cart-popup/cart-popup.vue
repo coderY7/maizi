@@ -9,9 +9,9 @@
           </view>
 
 				</view>
-				<view class="d-flex align-items-center" @tap="clear">
+				<view  @tap="clear">
 					<image src="/static/common/delete.png" class="delete-btn"></image>
-					<view>清空购物车</view>
+					<view>清空菜品</view>
 				</view>
 			</view>
 			<scroll-view scroll-y class="content">
@@ -82,7 +82,7 @@ export default {
 		},
 		clear() {
 			uni.showModal({
-			    content: '清空购物袋',
+			    content: '清空菜品',
 				confirmColor: '#DBA871',
 			    success: res => {
 			        if (res.confirm) {
