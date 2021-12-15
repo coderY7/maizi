@@ -133,19 +133,7 @@ btnchange(index){
                   duration: 1000,
                   image:'../../static/pay/fail.png'
                 })
-                //支付成功，立刻调用查单接口查询订单在后台是否成功
-                this.$u.api.paydones({
-                  access_token:uni.getStorageSync('token'),
-                  flow_no:uni.getStorageSync('xsdbh'),
-                  payno:'04',
-                  total:uni.getStorageSync('readytopays').paytotal,
-                  payid:'',
-                  syyid:uni.getStorageSync('openid'),
-                  fdbh:uni.getStorageSync('fdbh'),
-                  companyid:uni.getStorageSync('companyid')
-                }).then((res)=>{
-                  console.log('订单完成',res)
-                })
+
               },
               'complete': function (res) {}
             })

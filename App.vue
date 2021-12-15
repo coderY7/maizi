@@ -1,11 +1,14 @@
 <script>
-	export default {
+  export default {
 		onLaunch: function() {
 			console.log('App Launch')
       const accountInfo = uni.getAccountInfoSync();
       console.log(accountInfo.miniProgram.appId);
       uni.setStorageSync('appid', accountInfo.miniProgram.appId)
-      uni.setStorageSync('syyid','')
+      uni.setStorageSync('syyid','00268')
+      uni.setStorageSync('vipid','26512220')
+      uni.setStorageSync('posid','80800101')
+      uni.setStorageSync('tableid','10')
 		},
 		onShow: function() {
 			console.log('App Show')

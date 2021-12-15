@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "uni-popup": "/components/uni-popup/uni-popup",
-    "u-number-box": "/node-modules/uview-ui/components/u-number-box/u-number-box",
-    "actions": "/pages/menu/components/actions/actions"
-  }
-}

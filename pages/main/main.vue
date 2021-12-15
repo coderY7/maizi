@@ -75,10 +75,10 @@ export default {
   },
   methods: {
 navmenu(){
-  uni.setStorageSync('tableid',[this.tableid,'堂食']);
+  uni.setStorageSync('tableid','堂食');
 },
  navbesides(){
-   uni.setStorageSync('tableid',[this.tableid,'外带']);
+   uni.setStorageSync('tableid','外带');
  }
   },
   onLoad(options) {

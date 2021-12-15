@@ -105,16 +105,16 @@ addmenu(){
        this.attendance = uni.getStorageSync('Attendance');
        //订单预结算
       await this.$u.api.readytopays({
-             "access_token":uni.getStorageSync('token'),
-             "xsdbh":uni.getStorageSync('xsdbh'),//订单号
-             "fdbh": uni.getStorageSync('fdbh'),//分店号
-             "vipid": "26512220",//会员号
-             "viplevel": "HYJG",//会员等级
-             "viprate": "1.0",//会员折扣率
-             "syyid": "00268",//收银员工号
-             "posid": "80800101",//pos机
-             "counts": uni.getStorageSync('Cart').counts,//商品总数
-             "goodslist": uni.getStorageSync('goodslist')
+             access_token:uni.getStorageSync('token'),
+             xsdbh:uni.getStorageSync('xsdbh'),//订单号
+             fdbh: uni.getStorageSync('fdbh'),//分店号
+             vipid:uni.getStorageSync('vipid'),//会员号
+             viplevel: "HYJG",//会员等级
+             viprate: "1.0",//会员折扣率
+             syyid: uni.getStorageSync('syyid'),//收银员工号
+             posid: uni.getStorageSync('posid'),//pos机
+             counts: uni.getStorageSync('Cart').counts,//商品总数
+             goodslist: uni.getStorageSync('goodslist')
            }).then(res=>{
          console.log('预结算',res)
          uni.setStorageSync('readytopays',res)

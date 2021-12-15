@@ -1,7 +1,0 @@
-{
-  "defaultTitle": "卡卷",
-  "pullRefresh": false,
-  "usingComponents": {
-    "u-tabs": "/node-modules/uview-ui/components/u-tabs/u-tabs"
-  }
-}

@@ -108,6 +108,10 @@ __webpack_require__.r(__webpack_exports__);
     var accountInfo = uni.getAccountInfoSync();
     console.log(accountInfo.miniProgram.appId);
     uni.setStorageSync('appid', accountInfo.miniProgram.appId);
+    uni.setStorageSync('syyid', '00268');
+    uni.setStorageSync('vipid', '26512220');
+    uni.setStorageSync('posid', '80800101');
+    uni.setStorageSync('tableid', '10');
   },
   onShow: function onShow() {
     console.log('App Show');
