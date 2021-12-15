@@ -1,14 +1,15 @@
 <script>
   export default {
-		onLaunch: function() {
-			console.log('App Launch')
+		onLaunch: function(options) {
+      //获取桌台号
+      console.log('桌台号',options.query.tableid)
       const accountInfo = uni.getAccountInfoSync();
       console.log(accountInfo.miniProgram.appId);
       uni.setStorageSync('appid', accountInfo.miniProgram.appId)
       uni.setStorageSync('syyid','00268')
       uni.setStorageSync('vipid','26512220')
       uni.setStorageSync('posid','80800101')
-      uni.setStorageSync('tableid','10')
+      uni.setStorageSync('tableid',options.query.tableid)
 		},
 		onShow: function() {
 			console.log('App Show')

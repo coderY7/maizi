@@ -103,15 +103,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
-  onLaunch: function onLaunch() {
-    console.log('App Launch');
+  onLaunch: function onLaunch(options) {
+    //获取桌台号
+    console.log('桌台号', options.query.tableid);
     var accountInfo = uni.getAccountInfoSync();
     console.log(accountInfo.miniProgram.appId);
     uni.setStorageSync('appid', accountInfo.miniProgram.appId);
     uni.setStorageSync('syyid', '00268');
     uni.setStorageSync('vipid', '26512220');
     uni.setStorageSync('posid', '80800101');
-    uni.setStorageSync('tableid', '10');
+    uni.setStorageSync('tableid', options.query.tableid);
   },
   onShow: function onShow() {
     console.log('App Show');

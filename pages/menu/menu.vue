@@ -115,7 +115,7 @@
         fdbh:uni.getStorageSync('fdbh'),
         companyid:uni.getStorageSync('companyid'),
         parentid:"",
-        level:"3"
+        level:"1"
       }).then((res)=> {
         console.log('左侧菜单:',res)
         this.categorylist=res.categorylist
@@ -130,6 +130,8 @@
           console.log('右侧菜单：',res)
           this.disheslist=res.disheslist
         })
+      },(err)=>{
+        console.log('shibai')
       })
       if(uni.getStorageSync('openid')==''){
         console.log('跳转登录')

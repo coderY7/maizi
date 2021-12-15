@@ -288,7 +288,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       fdbh: uni.getStorageSync('fdbh'),
       companyid: uni.getStorageSync('companyid'),
       parentid: "",
-      level: "3" }).
+      level: "1" }).
     then(function (res) {
       console.log('左侧菜单:', res);
       _this.categorylist = res.categorylist;
@@ -303,6 +303,8 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         console.log('右侧菜单：', res);
         _this.disheslist = res.disheslist;
       });
+    }, function (err) {
+      console.log('shibai');
     });
     if (uni.getStorageSync('openid') == '') {
       console.log('跳转登录');
