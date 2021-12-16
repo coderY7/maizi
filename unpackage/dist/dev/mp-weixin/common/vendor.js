@@ -3137,7 +3137,7 @@ new Router().route;exports.default = _default;
 
 /***/ }),
 
-/***/ 232:
+/***/ 231:
 /*!*********************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/components/uni-popup/popup.js ***!
   \*********************************************************************************/
@@ -3145,7 +3145,7 @@ new Router().route;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 233));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 232));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -3172,7 +3172,7 @@ var config = {
 
 /***/ }),
 
-/***/ 233:
+/***/ 232:
 /*!***********************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/components/uni-popup/message.js ***!
   \***********************************************************************************/
@@ -18074,7 +18074,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/main/main": { "navigationBarTitleText": "首页", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/menu/menu": { "navigationBarTitleText": "点餐", "usingComponents": { "actions": "/pages/menu/components/actions/actions", "cart-bar": "/pages/menu/components/cartbar/cartbar", "product-modal": "/pages/menu/components/product-modal/product-modal", "cart-popup": "/pages/menu/components/cart-popup/cart-popup", "search": "/pages/menu/components/search/search" }, "usingAutoImportComponents": { "u-search": "/node-modules/uview-ui/components/u-search/u-search" } }, "pages/order/order": { "navigationBarTitleText": "订单", "usingComponents": {}, "usingAutoImportComponents": { "u-tabs-swiper": "/node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper", "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon", "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore" } }, "pages/order/order2": { "navigationBarTitleText": "订单2" }, "pages/my/my": { "navigationBarTitleText": "我的", "usingComponents": {}, "usingAutoImportComponents": { "u-button": "/node-modules/uview-ui/components/u-button/u-button", "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon" } }, "pages/pay/pay": { "navigationBarTitleText": "确定订单", "usingComponents": {}, "usingAutoImportComponents": { "u-number-box": "/node-modules/uview-ui/components/u-number-box/u-number-box", "u-button": "/node-modules/uview-ui/components/u-button/u-button" } }, "pages/payment/payment": { "navigationBarTitleText": "订单支付", "usingComponents": { "paytype": "/components/i-pay-type/i-pay-type" }, "usingAutoImportComponents": { "u-button": "/node-modules/uview-ui/components/u-button/u-button" } }, "pages/vip/vip": { "navigationBarTitleText": "会员", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/roll/roll": { "navigationBarTitleText": "卡卷", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": { "u-tabs": "/node-modules/uview-ui/components/u-tabs/u-tabs" } }, "pages/distribution/distribution": { "navigationBarTitleText": "", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/integrate/integrate": { "navigationBarTitleText": "积分", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/map/map": { "navigationBarTitleText": "", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/main/main": { "navigationBarTitleText": "首页" }, "pages/menu/menu": { "navigationBarTitleText": "点餐" }, "pages/order/order": { "navigationBarTitleText": "订单" }, "pages/my/my": { "navigationBarTitleText": "我的" }, "pages/pay/pay": { "navigationBarTitleText": "确定订单" }, "pages/payment/payment": { "navigationBarTitleText": "订单支付" }, "pages/vip/vip": { "navigationBarTitleText": "会员", "enablePullDownRefresh": false }, "pages/roll/roll": { "navigationBarTitleText": "卡卷", "enablePullDownRefresh": false }, "pages/distribution/distribution": { "navigationBarTitleText": "", "enablePullDownRefresh": false }, "pages/integrate/integrate": { "navigationBarTitleText": "积分", "enablePullDownRefresh": false }, "pages/map/map": { "navigationBarTitleText": "", "enablePullDownRefresh": false } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ })
 

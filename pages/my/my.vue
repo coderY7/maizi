@@ -8,7 +8,8 @@
 
       <view class="unit1box">
         <view class="unit1box_text">
-          <u-button type="warning" @click="login" v-if="!islogin">微信授权登录</u-button>
+          <!-- <u-button type="warning" @click="login" v-if="!islogin">微信授权登录</u-button> -->
+		  <open-data type="userNickName"></open-data>
           <text style="font-size:20px" v-if="islogin">{{userInfo.nickName}}</text>
         </view>
         <view class="unit1box_code">
@@ -59,7 +60,7 @@
       </navigator>
     </view>
 
-    <u-button type="warning" v-if="islogin" @click="quit" class="unit4" shape="square">退出登录</u-button>
+    <!-- <u-button type="warning" v-if="islogin" @click="quit" class="unit4" shape="square">退出登录</u-button> -->
   </view>
 </template>
 

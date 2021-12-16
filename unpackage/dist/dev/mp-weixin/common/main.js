@@ -118,6 +118,34 @@ __webpack_require__.r(__webpack_exports__);
     console.log('App Show');
     var Token = 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
     uni.setStorageSync('token', Token);
+    uni.login({
+      provider: 'weixin',
+      success: function success(res) {
+        console.log(res.code);
+        uni.request({
+          url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
+          data: {
+            appid: uni.getStorageSync('appid'),
+            code: res.code },
+
+          method: 'GET',
+          dataType: 'json',
+          success: function success(res) {
+            console.log(res);
+            if (res.data[0].Result == '0') {
+              uni.setStorageSync('openid', res.data[0].openid); //小程序openid
+              uni.setStorageSync('unionid', res.data[0].unionid); //开放平台unionid,可能为空
+            } else {
+              console.log(res.data[0].openid);
+            }
+          },
+          fail: function fail(res) {
+            console.info('获取用户openId失败');
+            console.info(error);
+          } });
+
+      } });
+
   },
   onHide: function onHide() {
     console.log('App Hide');

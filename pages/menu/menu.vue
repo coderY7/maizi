@@ -11,7 +11,7 @@
 			 :scroll-into-view="itemId">
 				<view v-for="(item,index) in categorylist" :key="index" class="u-tab-item" :class="[current == index ? 'u-tab-item-active' : '']"
 				 @tap.stop="swichMenu(index)">
-					<text class="u-line-1">{{item.category_desc}}</text>
+					<text class="u-line-1">{{item.category_name}}</text>
 				</view>
 			</scroll-view>
 			<scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box" @scroll="rightScroll">
