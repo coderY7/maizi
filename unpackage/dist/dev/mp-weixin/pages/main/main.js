@@ -200,9 +200,8 @@ var _default =
 {
   data: function data() {
     return {
-      tableid: '',
-      fdbh: '808001',
-      companyid: '800008' };
+      tableid: '' };
+
 
   },
   methods: {
@@ -215,8 +214,7 @@ var _default =
 
   onLoad: function onLoad(options) {
     this.tableid = options.tableid;
-    uni.setStorageSync('fdbh', this.fdbh);
-    uni.setStorageSync('companyid', this.companyid);
+
   },
   onShow: function onShow() {
 

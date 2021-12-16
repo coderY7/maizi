@@ -269,9 +269,9 @@ page{
     flex-direction:row-reverse;
     position:fixed;
     bottom:20rpx;
-    right:20rpx;
+    right:50rpx;
     .btn1{
-      margin-left:20rpx;
+      margin-left:30rpx;
     }
   }
 }

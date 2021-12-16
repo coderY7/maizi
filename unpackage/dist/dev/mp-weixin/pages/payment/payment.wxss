@@ -32,7 +32,7 @@ page {
 .content {
   display: flex;
   flex-direction: column;
-  margin: 150rpx 20rpx 0 20rpx;
+  margin: 150rpx 30rpx 0 30rpx;
   position: relativee;
 }
 .content .unit1 {

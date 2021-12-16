@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "点餐",
+  "FontSize": "500px",
   "usingComponents": {
     "u-search": "/node-modules/uview-ui/components/u-search/u-search",
     "actions": "/pages/menu/components/actions/actions",

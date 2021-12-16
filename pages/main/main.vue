@@ -69,8 +69,7 @@ export default {
   data() {
     return {
       tableid:'',
-      fdbh:'808001',
-      companyid:'800008'
+
     }
   },
   methods: {
@@ -83,8 +82,7 @@ navmenu(){
   },
   onLoad(options) {
      this.tableid = options.tableid
-    uni.setStorageSync('fdbh',this.fdbh);
-    uni.setStorageSync('companyid',this.companyid);
+
   },
   onShow(){
 

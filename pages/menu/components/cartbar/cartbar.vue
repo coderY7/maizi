@@ -8,7 +8,7 @@
 				</view>
 				<view class="price">￥{{ cartPrice }}</view>
 			</view>
-			<u-button type="warning" class="right" @click="pay">结算</u-button>
+			<u-button type="warning" class="right" @click="pay">下单</u-button>
 		</uni-transition>
 		<cart-popup :cart="cart" ref="cartPopup" @add="add" @minus="minus" @clear="clear"></cart-popup>
 	</view>

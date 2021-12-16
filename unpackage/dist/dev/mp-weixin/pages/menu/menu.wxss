@@ -106,9 +106,11 @@
 .item-menu-image.data-v-368aef34 {
   width: 150rpx;
   height: 150rpx;
+  border-radius: 20rpx;
 }
 .item-menu-text.data-v-368aef34 {
   flex: 1;
+  margin-left: 20rpx;
 }
 .item-menu-text .price-btn.data-v-368aef34 {
   display: flex;

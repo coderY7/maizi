@@ -114,12 +114,14 @@ __webpack_require__.r(__webpack_exports__);
     uni.setStorageSync('posid', '80800101');
     uni.setStorageSync('tableid', options.query.tableid);
     uni.setStorageSync('tablenumber', '1');
-
+    uni.setStorageSync('fdbh', '808001');
+    uni.setStorageSync('companyid', '800008');
   },
   onShow: function onShow() {
     console.log('App Show');
     var Token = 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
     uni.setStorageSync('token', Token);
+    //获取openid
     uni.login({
       provider: 'weixin',
       success: function success(res) {
@@ -147,6 +149,7 @@ __webpack_require__.r(__webpack_exports__);
           } });
 
       } });
+
 
   },
   onHide: function onHide() {

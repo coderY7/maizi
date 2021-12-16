@@ -289,43 +289,43 @@
         }).then(
             (res)=>{
           console.log("订单：",res)
-              if(res.error_code=='500'){
-                uni.showModal({
-                  title: '提示',
-                  content: '当前桌台已有人，是否清台',
-                  success:  (res)=> {
-                    if (res.confirm) {
-                      console.log('用户点击确定');
-                      //清台
-                      this.$u.api.orders({
-                        access_token:uni.getStorageSync('token'),
-                        vtype:'clear',
-                        tableid:uni.getStorageSync('tableid')[0],
-                        fdbh:uni.getStorageSync('fdbh')
-                      }).then((res)=>{
-                        console.log('清台成功：',res)
-                        this.$u.api.orders({
-                          access_token:this.token,
-                          vtype:"new",
-                          posid:"80800101",
-                          tableid:uni.getStorageSync('tableid')[0],
-                          tablenumber:uni.getStorageSync('tablenumber'),
-                          tablewaiter:"00268",
-                          fdbh:uni.getStorageSync('fdbh'),
-                        }).then(res=>{
-                          console.log("生成订单")
-                          uni.setStorageSync('xsdbh', res.xsdbh);
-                          uni.navigateTo({
-                            url:`/pages/pay/pay?table=${this.table}`,
-                          })
-                        })
-                      })
-                    } else if (res.cancel) {
-                      console.log('用户点击取消');
-                    }
-                  }
-                });
-              }
+              // if(res.error_code=='500'){
+              //   uni.showModal({
+              //     title: '提示',
+              //     content: '当前桌台已有人，是否清台',
+              //     success:  (res)=> {
+              //       if (res.confirm) {
+              //         console.log('用户点击确定');
+              //         //清台
+              //         this.$u.api.orders({
+              //           access_token:uni.getStorageSync('token'),
+              //           vtype:'clear',
+              //           tableid:uni.getStorageSync('tableid'),
+              //           fdbh:uni.getStorageSync('fdbh')
+              //         }).then((res)=>{
+              //           console.log('清台成功：',res)
+              //           this.$u.api.orders({
+              //             access_token:this.token,
+              //             vtype:"new",
+              //             posid:"80800101",
+              //             tableid:uni.getStorageSync('tableid'),
+              //             tablenumber:uni.getStorageSync('tablenumber'),
+              //             tablewaiter:"00268",
+              //             fdbh:uni.getStorageSync('fdbh'),
+              //           }).then(res=>{
+              //             console.log("生成订单")
+              //             uni.setStorageSync('xsdbh', res.xsdbh);
+              //             uni.navigateTo({
+              //               url:`/pages/pay/pay?table=${this.table}`,
+              //             })
+              //           })
+              //         })
+              //       } else if (res.cancel) {
+              //         console.log('用户点击取消');
+              //       }
+              //     }
+              //   });
+              // }
               if(res.error_code=='0'){
                 console.log("生成订单")
                 uni.setStorageSync('xsdbh', res.xsdbh);
@@ -453,10 +453,11 @@
 	.item-menu-image {
 		width: 150rpx;
 		height: 150rpx;
+    border-radius: 20rpx;
 	}
   .item-menu-text {
     flex:1;
-
+    margin-left: 20rpx;
     .price-btn{
       display: flex;
       justify-content: space-between;

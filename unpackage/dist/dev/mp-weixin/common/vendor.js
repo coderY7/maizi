@@ -11371,11 +11371,14 @@ var back = '/catering/pay/back';
 var usercheck = '/login/usercheck';
 var paydone = '/catering/paydone';
 var search = '/catering/order/search';
+var manage = '/cateing/region/manage';
 
 
 // 此处第二个参数vm，就是我们在页面使用的this，你可以通过vm获取vuex等操作，更多内容详见uView对拦截器的介绍部分：
 // https://uviewui.com/js/http.html#%E4%BD%95%E8%B0%93%E8%AF%B7%E6%B1%82%E6%8B%A6%E6%88%AA%EF%BC%9F
 var install = function install(Vue, vm) {
+  //开台
+  var manages = function manages() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(manage, params);};
   //订单完成
   var paydones = function paydones() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(paydone, params);};
   //用户合法性验证
@@ -11403,7 +11406,7 @@ var install = function install(Vue, vm) {
   //退款
   var backs = function backs() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};return vm.$u.post(back, params);};
   // 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-  vm.$u.api = { exts: exts, searchs: searchs, paydones: paydones, userchecks: userchecks, logins: logins, categorys: categorys, caterings: caterings, dishess: dishess, orders: orders, readytopays: readytopays, pays: pays, querys: querys, backs: backs };
+  vm.$u.api = { manages: manages, exts: exts, searchs: searchs, paydones: paydones, userchecks: userchecks, logins: logins, categorys: categorys, caterings: caterings, dishess: dishess, orders: orders, readytopays: readytopays, pays: pays, querys: querys, backs: backs };
 };var _default =
 
 {
@@ -18074,7 +18077,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/main/main": { "navigationBarTitleText": "首页" }, "pages/menu/menu": { "navigationBarTitleText": "点餐" }, "pages/order/order": { "navigationBarTitleText": "订单" }, "pages/my/my": { "navigationBarTitleText": "我的" }, "pages/pay/pay": { "navigationBarTitleText": "确定订单" }, "pages/payment/payment": { "navigationBarTitleText": "订单支付" }, "pages/vip/vip": { "navigationBarTitleText": "会员", "enablePullDownRefresh": false }, "pages/roll/roll": { "navigationBarTitleText": "卡卷", "enablePullDownRefresh": false }, "pages/distribution/distribution": { "navigationBarTitleText": "", "enablePullDownRefresh": false }, "pages/integrate/integrate": { "navigationBarTitleText": "积分", "enablePullDownRefresh": false }, "pages/map/map": { "navigationBarTitleText": "", "enablePullDownRefresh": false } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/main/main": { "navigationBarTitleText": "首页", "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/menu/menu": { "navigationBarTitleText": "点餐", "FontSize": "500px", "usingComponents": { "actions": "/pages/menu/components/actions/actions", "cart-bar": "/pages/menu/components/cartbar/cartbar", "product-modal": "/pages/menu/components/product-modal/product-modal", "cart-popup": "/pages/menu/components/cart-popup/cart-popup", "search": "/pages/menu/components/search/search" }, "usingAutoImportComponents": { "u-search": "/node-modules/uview-ui/components/u-search/u-search" } }, "pages/order/order": { "navigationBarTitleText": "订单", "usingComponents": {}, "usingAutoImportComponents": { "u-tabs-swiper": "/node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper", "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon", "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore" } }, "pages/my/my": { "navigationBarTitleText": "我的", "usingComponents": {}, "usingAutoImportComponents": { "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon", "u-button": "/node-modules/uview-ui/components/u-button/u-button" } }, "pages/pay/pay": { "navigationBarTitleText": "确定订单", "usingComponents": {}, "usingAutoImportComponents": { "u-number-box": "/node-modules/uview-ui/components/u-number-box/u-number-box", "u-button": "/node-modules/uview-ui/components/u-button/u-button" } }, "pages/payment/payment": { "navigationBarTitleText": "订单支付", "usingComponents": { "paytype": "/components/i-pay-type/i-pay-type" }, "usingAutoImportComponents": { "u-button": "/node-modules/uview-ui/components/u-button/u-button" } }, "pages/vip/vip": { "navigationBarTitleText": "会员", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/roll/roll": { "navigationBarTitleText": "卡卷", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": { "u-tabs": "/node-modules/uview-ui/components/u-tabs/u-tabs" } }, "pages/distribution/distribution": { "navigationBarTitleText": "", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/integrate/integrate": { "navigationBarTitleText": "积分", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": {} }, "pages/map/map": { "navigationBarTitleText": "", "enablePullDownRefresh": false, "usingComponents": {}, "usingAutoImportComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ })
 

@@ -13,7 +13,10 @@
 		{
 			"path": "pages/menu/menu",
 			"style": {
-				"navigationBarTitleText": "点餐"
+				"navigationBarTitleText": "点餐",
+				"mp-weixin": {
+					"FontSize":"500px"
+				}
 			}
 		},
 		{
