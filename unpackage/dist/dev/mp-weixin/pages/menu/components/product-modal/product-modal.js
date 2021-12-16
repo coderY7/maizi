@@ -298,6 +298,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
 {
   props: {
     visible: {
@@ -423,21 +431,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.pitch();
     },
 
-    // adds(item1){
-    //   item1.ext_quantity=this._data.ext_quantity
-    //   console.log(item1,this._data.ext_quantity)
-    // },
-    // chooseTag1(index1) {
-    //   var unity=this.productData.dishesextlist[1].extitems[index1]
-    //   console.log(unity)
-    //    this.$set(unity, 'isDefault', true);
-    //    this.$set(unity, 'ext_zxprice', '0');
-    //   console.log(unity)
-    //   //unity.ext_quantity=this.ext_quantity
-    //   unity.ext_zxprice=unity.ext_price * unity.ext_quantity;
-    //   console.log(unity.ext_zxprice)
-    //   this.pitch()
-    // },
+
 
     chooseTag2: function chooseTag2() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];

@@ -39,6 +39,14 @@
                   </view>
                 </view>
               </view>
+
+              <view v-for="(item,key) in productData.dishesextlist" :key="key"">
+              <view v-if="item.groupname == '加料'">
+
+            </view>
+            </view>
+
+
               <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
               <view class="list" v-for="(item,key) in productData.dishesextlist[1].extitems" :key="key">
                 <checkbox-group @change="checkboxChange(item,key)">
@@ -284,21 +292,7 @@ ext_zxprice:'',
       this.pitch()
     },
 
-    // adds(item1){
-    //   item1.ext_quantity=this._data.ext_quantity
-    //   console.log(item1,this._data.ext_quantity)
-    // },
-    // chooseTag1(index1) {
-    //   var unity=this.productData.dishesextlist[1].extitems[index1]
-    //   console.log(unity)
-    //    this.$set(unity, 'isDefault', true);
-    //    this.$set(unity, 'ext_zxprice', '0');
-    //   console.log(unity)
-    //   //unity.ext_quantity=this.ext_quantity
-    //   unity.ext_zxprice=unity.ext_price * unity.ext_quantity;
-    //   console.log(unity.ext_zxprice)
-    //   this.pitch()
-    // },
+
 
     chooseTag2(rowIndex=2, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
