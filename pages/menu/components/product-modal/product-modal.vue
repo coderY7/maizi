@@ -14,41 +14,9 @@
               <text class="good-name">{{ productData.spmc}}</text>
               <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
               <view>{{productData.description}}</view>
-              <view class="status-item">
-                <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
-                <view class="status-tags">
-                  <view v-for="(item1, index1) in productData.dishesextlist[0].extitems" :key="item1.ext_name + index1">
-                    <view
-                        class="tags-item2"
-                        :style="{
-												color: item1.isDefault ? activeTextColor : normalTextColor,
-												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
-											}"
-                        @tap="chooseTag(item1, index1)"
-                    >
-                      {{ item1.ext_name }}
-                      <text
-                          class="tags-pri"
-                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                          v-if="item1.ext_price > 0"
-                          :class="{ 'active-text': item1.isDefault }"
-                      >
-                        ￥{{item1.ext_price}}
-                      </text>
-                    </view>
-                  </view>
-                </view>
-              </view>
 
-              <view v-for="(item,key) in productData.dishesextlist" :key="key"">
-              <view v-if="item.groupname == '加料'">
-
-            </view>
-            </view>
-
-
-              <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
-              <view class="list" v-for="(item,key) in productData.dishesextlist[1].extitems" :key="key">
+              <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
+              <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
                 <checkbox-group @change="checkboxChange(item,key)">
                   <view style="display: flex;justify-content: space-between;align-items: center;">
                     <view class="list-group">
@@ -64,6 +32,34 @@
                   </view>
                 </checkbox-group>
               </view>
+
+
+              <view class="status-item">
+                <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
+                <view class="status-tags">
+                  <view v-for="(item1, index1) in productData.dishesextlist[1].extitems" :key="item1.ext_name + index1">
+                    <view
+                        class="tags-item2"
+                        :style="{
+												color: item1.isDefault ? activeTextColor : normalTextColor,
+												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
+											}"
+                        @tap="chooseTag1(item1, index1)"
+                    >
+                      {{ item1.ext_name }}
+                      <text
+                          class="tags-pri"
+                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                          v-if="item1.ext_price > 0"
+                          :class="{ 'active-text': item1.isDefault }"
+                      >
+                        ￥{{item1.ext_price}}
+                      </text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+
 
               <view class="status-item">
                 <view class="status-title">{{ productData.dishesextlist[2].groupname }}</view>
@@ -130,6 +126,32 @@
 												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
 											}"
                         @tap="chooseTag4(item1, index1)"
+                    >
+                      {{ item1.ext_name }}
+                      <text
+                          class="tags-pri"
+                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                          v-if="item1.ext_price > 0"
+                          :class="{ 'active-text': item1.isDefault }"
+                      >
+                        ￥{{item1.ext_price}}
+                      </text>
+                    </view>
+                  </view>
+                </view>
+              </view>
+
+              <view class="status-item">
+                <view class="status-title">{{ productData.dishesextlist[5].groupname }}</view>
+                <view class="status-tags">
+                  <view v-for="(item1, index1) in productData.dishesextlist[5].extitems" :key="item1.ext_name + index1">
+                    <view
+                        class="tags-item2"
+                        :style="{
+												color: item1.isDefault ? activeTextColor : normalTextColor,
+												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
+											}"
+                        @tap="chooseTag5(item1, index1)"
                     >
                       {{ item1.ext_name }}
                       <text
@@ -217,12 +239,30 @@ export default {
     product(val) {
       this.productData = JSON.parse(JSON.stringify(val));
       console.log(this.productData);
+
+      this.MultiSelectindex=this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')
+      console.log(this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料'))
+      this.MultiSelect=this.productData.dishesextlist[this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')]
+      console.log(this.MultiSelect)
+      this.productData.dishesextlist.splice(0,0,this.MultiSelect)
+
+      var hash = {};
+      let arr = this.productData.dishesextlist.reduce(function(item, next) {
+        hash[next.groupname] ? '' : hash[next.groupname] = true && item.push(next);
+        return item
+      }, [])
+      console.log(arr);
+      this.productData.dishesextlist=arr
+
       this.$set(this.productData, 'number', 1);
+      console.log(this.productData.dishesextlist)
     }
   },
 
   data() {
     return {
+      MultiSelectindex:'',
+      MultiSelect:{},
       number: 1,
       shownPrice: 0,
       choosedText: '',
@@ -244,9 +284,8 @@ ext_zxprice:'',
     console.log('data',data)
   },
   methods: {
-
     checkboxChange(value,key){
-      var value=this.productData.dishesextlist[1].extitems[key]
+      var value=this.productData.dishesextlist[0].extitems[key]
       console.log(value,key)
       value.ext_quantity=1
       if(value.isDefault==undefined){
@@ -260,13 +299,13 @@ ext_zxprice:'',
       }
     },
     plus(value,key){
-      var value=this.productData.dishesextlist[1].extitems[key]
+      var value=this.productData.dishesextlist[0].extitems[key]
       value.ext_quantity=Number(value.ext_quantity)+1
       value.ext_zxprice=value.ext_price * value.ext_quantity;
       this.pitch()
     },
     reduce(value,key){
-      var value=this.productData.dishesextlist[1].extitems[key]
+      var value=this.productData.dishesextlist[0].extitems[key]
       if(value.ext_quantity<=1){
         return value.ext_quantity=1
       }
@@ -276,13 +315,13 @@ ext_zxprice:'',
     },
 
 
-    chooseTag(rowIndex=0, itemIndex) {
+    chooseTag1(rowIndex=1, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', 'true');
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_quantity=1
       unity.ext_zxprice=unity.ext_price * 1
-      if(rowIndex!=1){
+      if(rowIndex!=0){
         console.log(rowIndex,itemIndex)
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
@@ -291,9 +330,6 @@ ext_zxprice:'',
       }
       this.pitch()
     },
-
-
-
     chooseTag2(rowIndex=2, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
@@ -301,7 +337,7 @@ ext_zxprice:'',
       unity.ext_quantity=1
 
       unity.ext_zxprice=unity.ext_price * 1
-      if(rowIndex!=1){
+      if(rowIndex!=0){
         console.log(rowIndex,itemIndex)
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
@@ -310,7 +346,6 @@ ext_zxprice:'',
       }
       this.pitch()
     },
-
     chooseTag3(rowIndex=3, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
@@ -318,7 +353,7 @@ ext_zxprice:'',
       unity.ext_quantity=1
 
       unity.ext_zxprice=unity.ext_price * 1
-      if(rowIndex!=1){
+      if(rowIndex!=0){
         console.log(rowIndex,itemIndex)
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
@@ -327,14 +362,28 @@ ext_zxprice:'',
       }
       this.pitch()
     },
-
     chooseTag4(rowIndex=4, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_quantity=1
       unity.ext_zxprice=unity.ext_price * 1
-      if(rowIndex!=1){
+      if(rowIndex!=0){
+        console.log(rowIndex,itemIndex)
+        this.productData.dishesextlist[rowIndex].extitems.map(item => {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      }
+      this.pitch()
+    },
+    chooseTag5(rowIndex=5, itemIndex) {
+      var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_quantity=1
+      unity.ext_zxprice=unity.ext_price * 1
+      if(rowIndex!=0){
         console.log(rowIndex,itemIndex)
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;

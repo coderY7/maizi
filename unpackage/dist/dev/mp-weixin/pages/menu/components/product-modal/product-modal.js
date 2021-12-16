@@ -306,6 +306,28 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   props: {
     visible: {
@@ -356,12 +378,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     product: function product(val) {
       this.productData = JSON.parse(JSON.stringify(val));
       console.log(this.productData);
+
+      this.MultiSelectindex = this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料');
+      console.log(this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料'));
+      this.MultiSelect = this.productData.dishesextlist[this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料')];
+      console.log(this.MultiSelect);
+      this.productData.dishesextlist.splice(0, 0, this.MultiSelect);
+
+      var hash = {};
+      var arr = this.productData.dishesextlist.reduce(function (item, next) {
+        hash[next.groupname] ? '' : hash[next.groupname] =  true && item.push(next);
+        return item;
+      }, []);
+      console.log(arr);
+      this.productData.dishesextlist = arr;
+
       this.$set(this.productData, 'number', 1);
+      console.log(this.productData.dishesextlist);
     } },
 
 
   data: function data() {
     return {
+      MultiSelectindex: '',
+      MultiSelect: {},
       number: 1,
       shownPrice: 0,
       choosedText: '',
@@ -383,9 +423,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     console.log('data', data);
   },
   methods: {
-
     checkboxChange: function checkboxChange(value, key) {
-      var value = this.productData.dishesextlist[1].extitems[key];
+      var value = this.productData.dishesextlist[0].extitems[key];
       console.log(value, key);
       value.ext_quantity = 1;
       if (value.isDefault == undefined) {
@@ -399,13 +438,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       }
     },
     plus: function plus(value, key) {
-      var value = this.productData.dishesextlist[1].extitems[key];
+      var value = this.productData.dishesextlist[0].extitems[key];
       value.ext_quantity = Number(value.ext_quantity) + 1;
       value.ext_zxprice = value.ext_price * value.ext_quantity;
       this.pitch();
     },
     reduce: function reduce(value, key) {
-      var value = this.productData.dishesextlist[1].extitems[key];
+      var value = this.productData.dishesextlist[0].extitems[key];
       if (value.ext_quantity <= 1) {
         return value.ext_quantity = 1;
       }
@@ -415,13 +454,13 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     },
 
 
-    chooseTag: function chooseTag() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+    chooseTag1: function chooseTag1() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
       this.$set(unity, 'isDefault', 'true');
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_quantity = 1;
       unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 1) {
+      if (rowIndex != 0) {
         console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
@@ -430,9 +469,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       }
       this.pitch();
     },
-
-
-
     chooseTag2: function chooseTag2() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
       this.$set(unity, 'isDefault', true);
@@ -440,7 +476,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       unity.ext_quantity = 1;
 
       unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 1) {
+      if (rowIndex != 0) {
         console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
@@ -449,7 +485,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       }
       this.pitch();
     },
-
     chooseTag3: function chooseTag3() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
       this.$set(unity, 'isDefault', true);
@@ -457,7 +492,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       unity.ext_quantity = 1;
 
       unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 1) {
+      if (rowIndex != 0) {
         console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
@@ -466,14 +501,28 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       }
       this.pitch();
     },
-
     chooseTag4: function chooseTag4() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 4;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
       this.$set(unity, 'isDefault', true);
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_quantity = 1;
       unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 1) {
+      if (rowIndex != 0) {
+        console.log(rowIndex, itemIndex);
+        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      }
+      this.pitch();
+    },
+    chooseTag5: function chooseTag5() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+      this.$set(unity, 'isDefault', true);
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_quantity = 1;
+      unity.ext_zxprice = unity.ext_price * 1;
+      if (rowIndex != 0) {
         console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
