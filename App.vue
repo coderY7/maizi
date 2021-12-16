@@ -10,7 +10,9 @@ export default {
 		uni.setStorageSync('vipid', '26512220');
 		uni.setStorageSync('posid', '80800101');
 		uni.setStorageSync('tableid', options.query.tableid);
-	},
+    uni.setStorageSync('tablenumber','1')
+
+  },
 	onShow: function() {
 		console.log('App Show');
 		let Token = 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';

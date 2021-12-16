@@ -113,6 +113,8 @@ __webpack_require__.r(__webpack_exports__);
     uni.setStorageSync('vipid', '26512220');
     uni.setStorageSync('posid', '80800101');
     uni.setStorageSync('tableid', options.query.tableid);
+    uni.setStorageSync('tablenumber', '1');
+
   },
   onShow: function onShow() {
     console.log('App Show');
