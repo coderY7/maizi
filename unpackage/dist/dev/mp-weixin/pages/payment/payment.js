@@ -250,7 +250,7 @@ __webpack_require__.r(__webpack_exports__);
             submchid: submchidvar,
             billnum: billnumvar,
             total_fee: total_feevar,
-            cardid: cardidvar || '',
+            cardid: '',
             nums: Math.random() },
 
           method: 'GET',
@@ -285,7 +285,9 @@ __webpack_require__.r(__webpack_exports__);
                   companyid: uni.getStorageSync('companyid') }).
                 then(function (res) {
                   console.log('订单支付完成', res);
+                  uni.setStorageSync('orders', res);
                 });
+
               },
               'fail': function fail(res) {
                 console.log('支付失败:', res, _this);

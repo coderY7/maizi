@@ -95,7 +95,7 @@ btnchange(index){
         submchid: submchidvar,
         billnum: billnumvar,
         total_fee: total_feevar,
-         cardid: cardidvar||'',
+         cardid: '',
         nums: Math.random()
       },
       method: 'GET',
@@ -130,7 +130,9 @@ btnchange(index){
                   companyid:uni.getStorageSync('companyid')
                 }).then((res)=>{
                   console.log('订单支付完成',res)
+                  uni.setStorageSync('orders',res)
                 })
+
               },
               'fail': res=> {
                 console.log('支付失败:',res,this);
