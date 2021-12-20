@@ -15,23 +15,54 @@
               <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
               <view>{{productData.description}}</view>
 
-              <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
-              <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
-                <checkbox-group @change="checkboxChange(item,key)">
-                  <view style="display: flex;justify-content: space-between;align-items: center;">
-                    <view class="list-group">
-                      <label class="radio">
-                        <checkbox :checked="item.isDefault"/>
-                      </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
+              <view v-if="MultiSelectindex!=-1">
+                <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
+                <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
+                  <checkbox-group @change="checkboxChange(item,key)">
+                    <view style="display: flex;justify-content: space-between;align-items: center;">
+                      <view class="list-group">
+                        <label class="radio">
+                          <checkbox :checked="item.isDefault"/>
+                        </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
+                      </view>
+                      <view class="list-list" v-if="item.isDefault">
+                        <view class="Button" @click="plus(item,key)">+</view>
+                        <view class="number">{{item.ext_quantity}}</view>
+                        <view class="Button" @click="reduce(item,key)">-</view>
+                      </view>
                     </view>
-                    <view class="list-list" v-if="item.isDefault">
-                      <view class="Button" @click="plus(item,key)">+</view>
-                      <view class="number">{{item.ext_quantity}}</view>
-                      <view class="Button" @click="reduce(item,key)">-</view>
+                  </checkbox-group>
+                </view>
+              </view>
+
+                <view v-else>
+                  <view class="status-item">
+                    <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
+                    <view class="status-tags">
+                      <view v-for="(item1, index1) in productData.dishesextlist[0].extitems" :key="item1.ext_name + index1">
+                        <view
+                            class="tags-item2"
+                            :style="{
+												color: item1.isDefault ? activeTextColor : normalTextColor,
+												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
+											}"
+                            @tap="chooseTag0(item1, index1)"
+                        >
+                          {{ item1.ext_name }}
+                          <text
+                              class="tags-pri"
+                              :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                              v-if="item1.ext_price > 0"
+                              :class="{ 'active-text': item1.isDefault }"
+                          >
+                            ￥{{item1.ext_price}}
+                          </text>
+                        </view>
+                      </view>
                     </view>
                   </view>
-                </checkbox-group>
-              </view>
+                </view>
+
 
 
               <view class="status-item">
@@ -239,20 +270,23 @@ export default {
     product(val) {
       this.productData = JSON.parse(JSON.stringify(val));
       console.log(this.productData);
-
       this.MultiSelectindex=this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')
-      console.log(this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料'))
-      this.MultiSelect=this.productData.dishesextlist[this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')]
-      console.log(this.MultiSelect)
-      this.productData.dishesextlist.splice(0,0,this.MultiSelect)
+      console.log(this.MultiSelectindex);
+      if(this.MultiSelectindex  ==-1){
+        console.log('-111')
+      }else {
+        this.MultiSelect=this.productData.dishesextlist[this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')]
+        this.productData.dishesextlist.splice(0,0,this.MultiSelect)
 
-      var hash = {};
-      let arr = this.productData.dishesextlist.reduce(function(item, next) {
-        hash[next.groupname] ? '' : hash[next.groupname] = true && item.push(next);
-        return item
-      }, [])
-      console.log(arr);
-      this.productData.dishesextlist=arr
+        var hash = {};
+        let arr = this.productData.dishesextlist.reduce(function(item, next) {
+          hash[next.groupname] ? '' : hash[next.groupname] = true && item.push(next);
+          return item
+        }, [])
+        console.log(arr);
+        this.productData.dishesextlist=arr
+      }
+
 
       this.$set(this.productData, 'number', 1);
       console.log(this.productData.dishesextlist)
@@ -314,6 +348,19 @@ ext_zxprice:'',
       this.pitch()
     },
 
+    chooseTag0(rowIndex=0, itemIndex) {
+      var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
+      this.$set(unity, 'isDefault', 'true');
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_quantity=1
+      unity.ext_zxprice=unity.ext_price * 1
+        console.log(rowIndex,itemIndex)
+        this.productData.dishesextlist[rowIndex].extitems.map(item => {
+          item.isDefault = false;
+        });
+        this.$set(unity, 'isDefault', true);
+      this.pitch()
+    },
 
     chooseTag1(rowIndex=1, itemIndex) {
       var unity=this.productData.dishesextlist[rowIndex].extitems[itemIndex]
@@ -393,7 +440,6 @@ ext_zxprice:'',
       this.pitch()
     },
 
-
     // 关闭modal
     closeModal() {
       this.$emit('cancel');
@@ -437,6 +483,7 @@ ext_zxprice:'',
     //更新
     updateChoosedText() {
       let tempArr = [];
+
       this.productData.dishesextlist.forEach(item => {
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
@@ -449,7 +496,9 @@ ext_zxprice:'',
    //选中
     pitch(){
       let pitch=[];
+      console.log(this.productData.dishesextlist)
       this.productData.dishesextlist.forEach(item => {
+        console.log(item.ext_name)
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
             pitch.push(item1);

@@ -5,7 +5,7 @@
 				<view class="order-type">
 					<view class="font-weight-bold">
             <view>请选择就餐人数</view>
-            <u-number-box v-model="value" @change="valChange"></u-number-box>
+            <u-number-box v-model="value" @change="valChange" :min="1"></u-number-box>
           </view>
 
 				</view>
@@ -171,13 +171,14 @@ export default {
 				flex-shrink: 0;
 				display: flex;
 				align-items: center;
-				
 				.image {
 					width: 180rpx;
+
 				}
 			}
 			
 			.right {
+        padding-left: 20rpx;
 				flex: 1;
 				display: flex;
 				flex-direction: column;

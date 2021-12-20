@@ -328,6 +328,37 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   props: {
     visible: {
@@ -378,20 +409,23 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     product: function product(val) {
       this.productData = JSON.parse(JSON.stringify(val));
       console.log(this.productData);
-
       this.MultiSelectindex = this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料');
-      console.log(this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料'));
-      this.MultiSelect = this.productData.dishesextlist[this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料')];
-      console.log(this.MultiSelect);
-      this.productData.dishesextlist.splice(0, 0, this.MultiSelect);
+      console.log(this.MultiSelectindex);
+      if (this.MultiSelectindex == -1) {
+        console.log('-111');
+      } else {
+        this.MultiSelect = this.productData.dishesextlist[this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料')];
+        this.productData.dishesextlist.splice(0, 0, this.MultiSelect);
 
-      var hash = {};
-      var arr = this.productData.dishesextlist.reduce(function (item, next) {
-        hash[next.groupname] ? '' : hash[next.groupname] =  true && item.push(next);
-        return item;
-      }, []);
-      console.log(arr);
-      this.productData.dishesextlist = arr;
+        var hash = {};
+        var arr = this.productData.dishesextlist.reduce(function (item, next) {
+          hash[next.groupname] ? '' : hash[next.groupname] =  true && item.push(next);
+          return item;
+        }, []);
+        console.log(arr);
+        this.productData.dishesextlist = arr;
+      }
+
 
       this.$set(this.productData, 'number', 1);
       console.log(this.productData.dishesextlist);
@@ -453,6 +487,19 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.pitch();
     },
 
+    chooseTag0: function chooseTag0() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
+      var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
+      this.$set(unity, 'isDefault', 'true');
+      this.$set(unity, 'ext_zxprice', '0');
+      unity.ext_quantity = 1;
+      unity.ext_zxprice = unity.ext_price * 1;
+      console.log(rowIndex, itemIndex);
+      this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
+        item.isDefault = false;
+      });
+      this.$set(unity, 'isDefault', true);
+      this.pitch();
+    },
 
     chooseTag1: function chooseTag1() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
       var unity = this.productData.dishesextlist[rowIndex].extitems[itemIndex];
@@ -532,7 +579,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.pitch();
     },
 
-
     // 关闭modal
     closeModal: function closeModal() {
       this.$emit('cancel');
@@ -576,6 +622,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     //更新
     updateChoosedText: function updateChoosedText() {
       var tempArr = [];
+
       this.productData.dishesextlist.forEach(function (item) {
         item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
@@ -588,7 +635,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     //选中
     pitch: function pitch() {
       var pitch = [];
+      console.log(this.productData.dishesextlist);
       this.productData.dishesextlist.forEach(function (item) {
+        console.log(item.ext_name);
         item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
             pitch.push(item1);

@@ -222,7 +222,7 @@ page {
 
   .unit4 {
     position: absolute;
-    bottom: 30rpx;
+    bottom: 40rpx;
     right: 30rpx;
     left: 30rpx;
 
