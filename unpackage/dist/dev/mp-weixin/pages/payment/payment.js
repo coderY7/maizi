@@ -222,6 +222,7 @@ __webpack_require__.r(__webpack_exports__);
           success: function success(ress) {
             console.info(ress);
             if (ress.data.result == "success") {
+              console.log('获取商家商户号信息', ress);
               wx.setStorageSync('subappid', ress.data.wxpaylist.appid); //商家公众号子appid
               wx.setStorageSync('submchid', ress.data.wxpaylist.submchid); //商家支付子商户号
             } else

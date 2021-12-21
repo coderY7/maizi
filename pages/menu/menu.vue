@@ -217,7 +217,8 @@
           is_single: product.is_single,
           choosedText: product.choosedText || '',
           goodslist:product.goodslist,
-          price:  product.goodslist.zxprice,
+          price:  product.goodslist.price,
+          zxprice:product.goodslist.zxprice
         })
         console.log('购物车中的商品：',this.cart)
       },
@@ -264,7 +265,7 @@
         },[]);
         uni.setStorageSync('goodslist', goodslist)
         //计算购物车总价
-        this.cartprice= this.cart.reduce((acc, cur) => acc + cur.number * cur.price, 0)
+        this.cartprice=this.cart.reduce((acc, cur) => acc + cur.number * cur.price+cur.zxprice-cur.price, 0)
         //计算商品数量
         this.counts=this.cart.reduce((acc, cur) => acc + cur.number, 0)
         //跳转支付

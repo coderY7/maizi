@@ -21,7 +21,7 @@
 						<view class="item" v-for="(item, index) in cart" :key="index">
 
 							<view class="left">
-								<image :src="item.image" mode="widthFix" class="image"></image>
+								<image :src="item.image"></image>
 							</view>
 							<view class="right">
 								<view class="name-and-materials">
@@ -29,7 +29,7 @@
 									<view class="materials">{{ item.choosedText }}</view>
 								</view>
 								<view class="price-and-actions">
-									<view class="price">￥{{ item.price }}</view>
+									<view class="price">￥{{ item.zxprice }}</view>
 									<actions :number="item.number" @add="add(item)" @minus="minus(item)"></actions>
 								</view>
 							</view>
@@ -150,7 +150,7 @@ export default {
 	.list {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 30rpx;
+		//margin-bottom: 30rpx;
 		
 		.item {
 			display: flex;
@@ -162,18 +162,18 @@ export default {
 				content: ' ';
 				position: absolute;
 				bottom: 0;
-				left: 180rpx;
+				left: 0;
 				right: 0;
 				border-bottom: 1rpx solid rgba($color: $border-color, $alpha: 0.6);
 			}
 			
 			.left {
-				flex-shrink: 0;
+				//flex-shrink: 0;
 				display: flex;
 				align-items: center;
-				.image {
-					width: 180rpx;
-
+				image {
+          height:150rpx;
+          width:200rpx;
 				}
 			}
 			

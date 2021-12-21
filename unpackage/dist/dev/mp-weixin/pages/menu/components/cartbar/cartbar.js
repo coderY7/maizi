@@ -174,10 +174,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   computed: {
     cartNum: function cartNum() {//计算购物车总数
+      console.log('购物车属性', this.cart);
       return this.cart.reduce(function (acc, cur) {return acc + cur.number;}, 0);
     },
     cartPrice: function cartPrice() {//计算购物车总价
-      return this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price;}, 0);
+      var cartPrice = this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price + cur.zxprice - cur.price;}, 0);
+      return cartPrice;
     } },
 
   data: function data() {

@@ -599,17 +599,17 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         });
       });
       console.log('属性总价:', pri);
-      this.productData.price = this.productData.nsjg + pri;
+      this.productData.price = this.productData.nsjg;
       this.productData.zxprice = this.productData.nsjg + pri;
-      this.productData.shownPrice = this.productData.number * this.productData.price;
+      this.productData.shownPrice = this.productData.number * this.productData.price + pri;
       console.log('商品总价格', this.productData.shownPrice);
       this.updateChoosedText();
     },
 
     add: function add() {
       this.productData.number += 1;
-
       this.calcOverprice();
+
     },
     minus: function minus() {
       if (this.productData.number == 1) {
