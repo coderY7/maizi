@@ -1,8 +1,8 @@
 {
   "component": true,
   "usingComponents": {
-    "uni-transition": "/components/uni-transition/uni-transition",
     "u-button": "/node-modules/uview-ui/components/u-button/u-button",
+    "uni-transition": "/components/uni-transition/uni-transition",
     "cart-popup": "/pages/menu/components/cart-popup/cart-popup"
   }
 }

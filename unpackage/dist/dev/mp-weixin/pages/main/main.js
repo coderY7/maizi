@@ -209,7 +209,26 @@ var _default =
       uni.setStorageSync('mode', '堂食');
     },
     navbesides: function navbesides() {
+      uni.showToast({
+        title: '该功能暂不支持，敬请期待',
+        duration: 2000,
+        icon: 'none' });
+
       uni.setStorageSync('mode', '外带');
+    },
+    vip: function vip() {
+      uni.showToast({
+        title: '该功能暂不支持，敬请期待',
+        duration: 2000,
+        icon: 'none' });
+
+    },
+    roll: function roll() {
+      uni.showToast({
+        title: '该功能暂不支持，敬请期待',
+        duration: 2000,
+        icon: 'none' });
+
     } },
 
   onLoad: function onLoad(options) {

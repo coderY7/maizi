@@ -2,8 +2,5 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <includedPredefinedLibrary name="HTTP Response Handler" />
-    <includedPredefinedLibrary name="qq-mini-program-api" />
-    <includedPredefinedLibrary name="wechat-mini-program-api" />
-    <excludedPredefinedLibrary name="maizi/node_modules" />
   </component>
 </project>

@@ -15,13 +15,13 @@
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarTitleText": "扫码点餐",
+    "navigationBarBackgroundColor": "#FEB121",
+    "backgroundColor": "#ffffff"
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#F19E38",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
@@ -55,6 +55,5 @@
   "uniStatistics": {
     "enable": true
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }
