@@ -46,11 +46,11 @@
 </view>
 
     <view class="unit3">
-      <navigator class="unit3Nav" url="/pages/vip/vip">
+      <navigator class="unit3Nav" url="" @click="vip">
           <image src="../../static/main/hy.png"></image>
           <text>我的会员</text>
       </navigator>
-      <navigator class="unit3Nav" url="/pages/roll/roll">
+      <navigator class="unit3Nav" url="" @click="roll">
           <image src="../../static/main/kj.png"></image>
           <text>红包卡卷</text>
       </navigator>
@@ -136,8 +136,23 @@ export default {
     quit(){
        this.islogin=!this.islogin
       uni.setStorageSync('openid','')
+    },
+    vip(){
+      uni.showToast({
+        title: '该功能暂不支持，敬请期待',
+        duration: 2000,
+        icon:'none'
+      });
+    },
+    roll(){
+      uni.showToast({
+        title: '该功能暂不支持，敬请期待',
+        duration: 2000,
+        icon:'none'
+      });
     }
     }
+
 }
 </script>
 
@@ -148,7 +163,7 @@ page {
   background-color: #f3f2f4;
 }
 .content {
-  margin: 50rpx 20rpx 0 20rpx;
+  margin: 40rpx 40rpx 0 40rpx;
 
   .unit1 {
     display: flex;

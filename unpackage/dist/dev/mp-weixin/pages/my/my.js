@@ -294,6 +294,20 @@ var _default =
     quit: function quit() {
       this.islogin = !this.islogin;
       uni.setStorageSync('openid', '');
+    },
+    vip: function vip() {
+      uni.showToast({
+        title: '该功能暂不支持，敬请期待',
+        duration: 2000,
+        icon: 'none' });
+
+    },
+    roll: function roll() {
+      uni.showToast({
+        title: '该功能暂不支持，敬请期待',
+        duration: 2000,
+        icon: 'none' });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

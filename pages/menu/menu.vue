@@ -359,6 +359,7 @@
 		/* #endif */
 		display: flex;
 		flex-direction: column;
+    margin:10rpx 40rpx 0 40rpx;
 	}
 	.u-search-box {
 

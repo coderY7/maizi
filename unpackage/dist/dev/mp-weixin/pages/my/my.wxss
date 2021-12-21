@@ -30,7 +30,7 @@ page {
   background-color: #f3f2f4;
 }
 .content {
-  margin: 50rpx 20rpx 0 20rpx;
+  margin: 40rpx 40rpx 0 40rpx;
 }
 .content .unit1 {
   display: flex;

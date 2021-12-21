@@ -2,10 +2,10 @@
   <view id="content">
     <!-- 店铺 -->
     <view class="unit1">
-      <image mode="" src="../../static/main/LOGO.png" style="width: 150rpx;height: 150rpx;"></image>
+      <image mode="" src="../../static/main/LOGO.png" style="width: 130rpx;height: 130rpx;margin-left: 40rpx"></image>
       <view class="unit1_text">
-        <text class="name">麦子旗航店</text>
-        <text>天府新谷主店</text>
+        <view class="name">麦子旗航店</view>
+        <text style="margin-top: 20rpx;opacity: 0.6">天府新谷主店</text>
       </view>
     </view>
     <!--    会员-->
@@ -115,10 +115,12 @@ page {
   background: url(../../static/main/dt.png) no-repeat;
   background-size: contain;
   background-color: #f3f2f4;
+
 }
 
 #content {
-  margin: 130rpx 40rpx 0 40rpx;
+  margin: 110rpx 40rpx 0 40rpx;
+
 }
 #name{
   margin-left:10rpx;
@@ -134,7 +136,9 @@ page {
   justify-content: center;
  height:320rpx;
   background: url('../../static/main/dk.png') no-repeat;
+  margin:0 auto;
   background-size: 100%;
+  width:calc(100% - 14rpx);
 
   image {
     width: 30%;
@@ -147,7 +151,8 @@ page {
     flex-direction: column;
     margin-left: 100rpx;
     .name {
-      font-size: 20px;
+      margin: 20 rpx 0;
+      font-size: 25px;
     }
   }
 }
@@ -199,19 +204,19 @@ page {
   margin: 0 20rpx;
 
   .unit3_box {
-    margin:30rpx 0;
+    margin:20rpx 0;
     display: flex;
     align-items: center;
     flex-direction: column;
     .unit3_img {
-      width: 200rpx;
-      height: 200rpx;
+      width: 180rpx;
+      height: 180rpx;
     }
     .unit3_name{
 font-size: 20px;
     }
     .unit3_min{
-      padding-top:15rpx;
+      padding-top:10rpx;
       opacity: 0.6;
     }
   }
@@ -219,12 +224,13 @@ font-size: 20px;
 }
 .unit4{
 	position: relative;
-	width: 100%;
-	height: 300rpx;
-	margin-bottom: 20rpx;
+	width: calc(100% - 40rpx);
+	height: 260rpx;
+  margin:0 auto;
+  margin-bottom: 30rpx;
   border-radius: 40rpx;
   image{
-		width: 100%;
+    width: 100%;
 		height: 100%;
     border-radius: 40rpx;
     overflow:hidden;
