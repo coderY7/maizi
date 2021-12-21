@@ -17,6 +17,12 @@
           "pathName": "pages/main/main",
           "query": "tableid=92",
           "scene": null
+        },
+        {
+          "name": "支付",
+          "pathName": "pages/payment/payment",
+          "query": "",
+          "scene": null
         }
       ]
     }

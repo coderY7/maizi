@@ -223,8 +223,8 @@ __webpack_require__.r(__webpack_exports__);
             console.info(ress);
             if (ress.data.result == "success") {
               console.log('获取商家商户号信息', ress);
-              wx.setStorageSync('subappid', ress.data.wxpaylist.appid); //商家公众号子appid
-              wx.setStorageSync('submchid', ress.data.wxpaylist.submchid); //商家支付子商户号
+              uni.setStorageSync('subappid', ress.data.wxpaylist.appid); //商家公众号子appid
+              uni.setStorageSync('submchid', ress.data.wxpaylist.submchid); //商家支付子商户号
             } else
             {
               console.log(ress.data.message);
@@ -236,21 +236,16 @@ __webpack_require__.r(__webpack_exports__);
           } });
 
 
-        var appidvar = wx.getStorageSync('appid'); //小程序appid
-        var openidvar = wx.getStorageSync('openid'); //小程序openid
-        var submchidvar = wx.getStorageSync('submchid'); //商家支付子商户号
-        var billnumvar = wx.getStorageSync('xsdbh'); //本次交易订单号
-        var total_feevar = wx.getStorageSync('readytopays').paytotal; //本次交易应付总额
-        var cardidvar = wx.getStorageSync('cardid'); //会员线下会员号
+        var cardidvar = uni.getStorageSync('cardid'); //会员线下会员号
 
         wx.request({ //请求支付必要参数，发起预支付请求
           url: 'https://wx.ecsun.cn/AjacService/LiteReadyToPay2.ashx',
           data: {
-            subappid: appidvar,
-            openid: openidvar,
-            submchid: submchidvar,
-            billnum: billnumvar,
-            total_fee: total_feevar,
+            subappid: uni.getStorageSync('appid'), //小程序appid
+            openid: uni.getStorageSync('openid'), //小程序openid
+            submchid: uni.getStorageSync('submchid'), //商家支付子商户号
+            billnum: uni.getStorageSync('xsdbh'), //本次交易订单号
+            total_fee: uni.getStorageSync('readytopays').paytotal, //本次交易应付总额
             cardid: '',
             nums: Math.random() },
 
