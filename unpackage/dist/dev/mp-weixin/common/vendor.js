@@ -3137,7 +3137,7 @@ new Router().route;exports.default = _default;
 
 /***/ }),
 
-/***/ 231:
+/***/ 238:
 /*!*********************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/components/uni-popup/popup.js ***!
   \*********************************************************************************/
@@ -3145,7 +3145,7 @@ new Router().route;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 232));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 239));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -3172,7 +3172,7 @@ var config = {
 
 /***/ }),
 
-/***/ 232:
+/***/ 239:
 /*!***********************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/components/uni-popup/message.js ***!
   \***********************************************************************************/

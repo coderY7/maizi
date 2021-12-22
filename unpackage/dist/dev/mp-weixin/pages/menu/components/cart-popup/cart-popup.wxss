@@ -51,10 +51,16 @@
   color: #DBA871;
   margin-left: 10rpx;
 }
+.header .delete-right.data-v-24088e46 {
+  margin-right: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .header .delete-btn.data-v-24088e46 {
   width: 46rpx;
   height: 46rpx;
-  margin-right: 10rpx;
 }
 .content.data-v-24088e46 {
   max-height: calc(100vh - 600rpx);

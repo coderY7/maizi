@@ -215,7 +215,7 @@
             </view>
           </view>
         </view>
-        <view class="fake-area2"></view>
+<!--        <view class="fake-area2"></view>-->
 <!--      </view>-->
 <!--    </view>-->
 
@@ -627,7 +627,7 @@ ext_zxprice:'',
   height: 42rpx;
   display: block;
   position: absolute;
-  top: 20rpx;
+  top: 60rpx;
   z-index: 99;
 }
 

@@ -7,10 +7,11 @@
             <view>请选择就餐人数</view>
             <u-number-box v-model="value" @change="valChange" :min="1"></u-number-box>
           </view>
-
 				</view>
-				<view  @tap="clear">
-					<image src="/static/common/delete.png" class="delete-btn"></image>
+				<view  @tap="clear" class="delete-right">
+          <view>
+            <image src="/static/common/delete.png" class="delete-btn"></image>
+          </view>
 					<view>清空菜品</view>
 				</view>
 			</view>
@@ -130,11 +131,17 @@ export default {
 			margin-left: 10rpx;
 		}
 	}
-	
+	.delete-right{
+    margin-right: 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 	.delete-btn {
 		width: 46rpx;
 		height: 46rpx;
-		margin-right: 10rpx;
+
 	}
 }
 

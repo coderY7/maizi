@@ -57,7 +57,7 @@
   height: 42rpx;
   display: block;
   position: absolute;
-  top: 20rpx;
+  top: 60rpx;
   z-index: 99;
 }
 .bottom-btn-box {

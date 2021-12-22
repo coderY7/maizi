@@ -24,6 +24,9 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.cartbox.data-v-252a95b6 {
+  background-color: #ffffff;
+}
 .left.data-v-252a95b6 {
   display: flex;
   align-items: center;
@@ -66,7 +69,7 @@
 }
 .right.data-v-252a95b6 {
   display: flex;
-  justify-content: center;
+  margin-right: 70rpx;
   align-items: center;
   padding: 0 20rpx;
   border-radius: 0 !important;

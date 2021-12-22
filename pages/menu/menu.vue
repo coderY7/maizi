@@ -382,7 +382,7 @@
 
 	.u-tab-item {
 		height: 110rpx;
-		background: #f6f6f6;
+		background: #fff;
 		box-sizing: border-box;
 		display: flex;
 		align-items: center;

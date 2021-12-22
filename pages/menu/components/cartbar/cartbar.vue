@@ -46,12 +46,12 @@ export default {
 				'position': 'fixed',
 				'bottom': 0,
 				// #ifdef H5
-				'bottom': 'var(--window-bottom)',
+				// 'bottom': 'var(--window-bottom)',
 				// #endif
 				'width': '100%',
 				'z-index': '995',
 				'height': '100rpx',
-				'background-color': '#f0f0f1',
+				'background-color': '#fff',
 				'border-bottom': '2rpx solid #c8c7cc',
 				'display': 'flex',
 				'justify-content': 'space-between',
@@ -87,6 +87,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cartbox{
+  background-color:#ffffff;
+}
 .left {
 	display: flex;
 	align-items: center;
@@ -134,7 +137,7 @@ export default {
 
 .right {
 	display: flex;
-	justify-content: center;
+	margin-right:70rpx;
 	align-items: center;
 	padding: 0 20rpx;
 	border-radius: 0 !important;
