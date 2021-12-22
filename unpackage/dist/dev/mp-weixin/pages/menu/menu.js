@@ -97,6 +97,9 @@ try {
   components = {
     uSearch: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-search/u-search */ "node-modules/uview-ui/components/u-search/u-search").then(__webpack_require__.bind(null, /*! uview-ui/components/u-search/u-search.vue */ 128))
+    },
+    uMask: function() {
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-mask/u-mask */ "node-modules/uview-ui/components/u-mask/u-mask").then(__webpack_require__.bind(null, /*! uview-ui/components/u-mask/u-mask.vue */ 282))
     }
   }
 } catch (e) {
@@ -234,6 +237,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/categories */ 61));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ./components/actions/actions.vue */ 135));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CartBar = function CartBar() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cartbar/cartbar */ "pages/menu/components/cartbar/cartbar").then((function () {return resolve(__webpack_require__(/*! ./components/cartbar/cartbar.vue */ 142));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ProductModal = function ProductModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ./components/product-modal/product-modal.vue */ 149));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ./components/cart-popup/cart-popup.vue */ 156));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Search = function Search() {__webpack_require__.e(/*! require.ensure | pages/menu/components/search/search */ "pages/menu/components/search/search").then((function () {return resolve(__webpack_require__(/*! ./components/search/search.vue */ 163));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
@@ -247,6 +252,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
 
   data: function data() {
     return {
+      show: false,
       imgurl: "http://api.mzsale.cn/",
       scrollTop: 0, //tab标题的滚动条位置
       oldScrollTop: 0,
@@ -259,7 +265,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       arr: [],
       scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
       timer: null, // 定时器
-      productModalVisible: false, //商品详情显示
       categories: _categories.default,
       cart: [],
       product: {},
@@ -270,7 +275,6 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       showSearch: false,
       cartprice: '',
       Cart: {},
-
       categorylist: [], //菜品分类
       disheslist: [], //菜品数据
       category_id: [], //菜品分类ID
@@ -304,7 +308,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         _this.disheslist = res.disheslist;
       });
     }, function (err) {
-      console.log('shibai');
+      console.log('获取菜单失败', err);
     });
     if (uni.getStorageSync('openid') == '') {
       console.log('跳转登录');
@@ -321,6 +325,10 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
     console.log('onpeady');
   },
   methods: {
+    shows: function shows() {
+      this.show = false;
+      console.log('关闭');
+    },
     //搜索
     custom: function custom(e) {
       console.log(e);
@@ -349,7 +357,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
                     vtype: "pos",
                     fdbh: uni.getStorageSync('fdbh'),
                     companyid: uni.getStorageSync('companyid'),
-                    categoryid: _this2.categorylist[0].category_id }).
+                    categoryid: _this2.categorylist[index].category_id }).
                   then(function (res) {
                     console.log('获取菜品:', res);
                     _this2.disheslist = res.disheslist;
@@ -416,7 +424,8 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
                     Object.assign(product, res);
                   }));case 2:
                 _this3.product = product;
-                _this3.productModalVisible = true;case 4:case "end":return _context2.stop();}}}, _callee2);}))();
+
+                _this3.show = true;case 4:case "end":return _context2.stop();}}}, _callee2);}))();
     },
     handleAddToCartInModal: function handleAddToCartInModal(product) {
       console.log('选择的商品', product);
@@ -424,7 +433,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       this.closeProductDetailModal();
     },
     closeProductDetailModal: function closeProductDetailModal(e) {
-      this.productModalVisible = false;
+      this.show = false;
       this.product = {};
     },
     clearCart: function clearCart() {

@@ -76,38 +76,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
-var components
-try {
-  components = {
-    uButton: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 191))
-    }
-  }
-} catch (e) {
-  if (
-    e.message.indexOf("Cannot find module") !== -1 &&
-    e.message.indexOf(".vue") !== -1
-  ) {
-    console.error(e.message)
-    console.error("1. 排查组件名称拼写是否正确")
-    console.error(
-      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
-    )
-    console.error(
-      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
-    )
-  } else {
-    throw e
-  }
-}
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-}
-var recyclableRender = false
+var render = function () {}
 var staticRenderFns = []
-render._withStripped = true
+var recyclableRender
+var components
 
 
 
@@ -359,11 +331,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
 {
   props: {
-    visible: {
-      type: Boolean,
-      default: false },
 
     product: {
       type: Object,
@@ -434,6 +407,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   data: function data() {
     return {
+      show: true,
       MultiSelectindex: '',
       MultiSelect: {},
       number: 1,
@@ -582,6 +556,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     // 关闭modal
     closeModal: function closeModal() {
       this.$emit('cancel');
+      console.log('12321');
     },
     //分享
     shareGoods: function shareGoods() {
@@ -637,7 +612,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       var pitch = [];
       console.log(this.productData.dishesextlist);
       this.productData.dishesextlist.forEach(function (item) {
-        console.log(item.ext_name);
+        console.log(item);
         item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
             pitch.push(item1);

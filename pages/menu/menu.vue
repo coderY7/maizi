@@ -39,11 +39,13 @@
 			</scroll-view>
 		</view>
     <!-- 商品详情 modal begin -->
-    <product-modal :product="product"
-                   :visible="productModalVisible"
-                   @cancel="closeProductDetailModal"
-                   @add-to-cart="handleAddToCartInModal"
-    />
+    <u-mask :show="show" @click="shows">
+        <product-modal :product="product"
+                       @cancel="closeProductDetailModal"
+                       @add-to-cart="handleAddToCartInModal"
+        />
+    </u-mask>
+
     <!-- 购物车栏 begin -->
     <cart-bar :cart="cart"
               @add="handleAddToCart"
@@ -74,6 +76,7 @@
     },
     data() {
       return {
+        show: false,
         imgurl:"http://api.mzsale.cn/",
         scrollTop: 0, //tab标题的滚动条位置
         oldScrollTop: 0,
@@ -86,7 +89,6 @@
         arr: [],
         scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
         timer: null, // 定时器
-        productModalVisible: false,//商品详情显示
         categories: categories,
         cart: [],
         product: {},
@@ -97,7 +99,6 @@
         showSearch: false,
         cartprice:'',
         Cart:{},
-
         categorylist:[],  //菜品分类
         disheslist:[] ,    //菜品数据
         category_id:[], //菜品分类ID
@@ -131,7 +132,7 @@
           this.disheslist=res.disheslist
         })
       },(err)=>{
-        console.log('shibai')
+        console.log('获取菜单失败',err)
       })
       if(uni.getStorageSync('openid')==''){
         console.log('跳转登录')
@@ -148,6 +149,10 @@
       console.log('onpeady')
     },
     methods: {
+      shows(){
+        this.show=false
+        console.log('关闭')
+      },
       //搜索
       custom(e){
         console.log(e)
@@ -176,7 +181,7 @@
             vtype:"pos",
             fdbh:uni.getStorageSync('fdbh'),
             companyid:uni.getStorageSync('companyid'),
-            categoryid:this.categorylist[0].category_id
+            categoryid:this.categorylist[index].category_id
           }).then((res) => {
             console.log('获取菜品:',res)
             this.disheslist=res.disheslist
@@ -243,7 +248,8 @@
           Object.assign(product,res)
         })
         this.product = product
-        this.productModalVisible = true
+
+        this.show=true
       },
       handleAddToCartInModal(product) {
         console.log('选择的商品',product)
@@ -251,7 +257,7 @@
         this.closeProductDetailModal()
       },
       closeProductDetailModal(e) {
-        this.productModalVisible = false
+        this.show=false
         this.product = {}
       },
       clearCart() {

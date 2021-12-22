@@ -1,39 +1,39 @@
-<template>
-  <view>
-    <view class="mask-bg" @touchmove.stop.prevent :class="visible ? 'bg-show' : 'bg-hidden'">
-      <!-- #ifdef H5 -->
-      <view class="fake-area"></view>
-      <!-- #endif -->
-      <view class="main-area" :class="visible ? 'modal-show' : 'modal-hidden'">
-        <view class="modal-area">
-          <image src="/static/images/share.png" class="handle-btn" style="right: 86rpx;"  @tap="$emit('cancel')"></image>
-          <image src="/static/images/close.png" class="handle-btn" style="right: 20rpx;" @tap="closeModal"></image>
-          <view class="good-image-box"><image :src="productData ? imgurl+productData.big_img_path: '/static/images/default.png'" mode="widthFix"></image></view>
-          <scroll-view scroll-y="true">
-            <view class="scroll-inner_box">
-              <text class="good-name">{{ productData.spmc}}</text>
-              <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
-              <view>{{productData.description}}</view>
+<template >
+    <view>
+<!--      <view class="mask-bg" >-->
+        <!-- #ifdef H5 -->
 
-              <view v-if="MultiSelectindex!=-1">
-                <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
-                <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
-                  <checkbox-group @change="checkboxChange(item,key)">
-                    <view style="display: flex;justify-content: space-between;align-items: center;">
-                      <view class="list-group">
-                        <label class="radio">
-                          <checkbox :checked="item.isDefault"/>
-                        </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
+        <!-- #endif -->
+<!--        <view class="main-area" >-->
+          <view class="modal-area" @tap.stop>
+            <image src="/static/images/share.png" class="handle-btn" style="right: 86rpx;"  @tap="$emit('cancel')"></image>
+            <image src="/static/images/close.png" class="handle-btn" style="right: 20rpx;" @tap="closeModal"></image>
+            <view class="good-image-box"><image :src="productData ? imgurl+productData.big_img_path: '/static/images/default.png'" mode="widthFix"></image></view>
+            <scroll-view scroll-y="true">
+              <view class="scroll-inner_box">
+                <text class="good-name">{{ productData.spmc}}</text>
+                <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
+                <view>{{productData.description}}</view>
+
+                <view v-if="MultiSelectindex!=-1">
+                  <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
+                  <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
+                    <checkbox-group @change="checkboxChange(item,key)">
+                      <view style="display: flex;justify-content: space-between;align-items: center;">
+                        <view class="list-group">
+                          <label class="radio">
+                            <checkbox :checked="item.isDefault"/>
+                          </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
+                        </view>
+                        <view class="list-list" v-if="item.isDefault">
+                          <view class="Button" @click="plus(item,key)">+</view>
+                          <view class="number">{{item.ext_quantity}}</view>
+                          <view class="Button" @click="reduce(item,key)">-</view>
+                        </view>
                       </view>
-                      <view class="list-list" v-if="item.isDefault">
-                        <view class="Button" @click="plus(item,key)">+</view>
-                        <view class="number">{{item.ext_quantity}}</view>
-                        <view class="Button" @click="reduce(item,key)">-</view>
-                      </view>
-                    </view>
-                  </checkbox-group>
+                    </checkbox-group>
+                  </view>
                 </view>
-              </view>
 
                 <view v-else>
                   <view class="status-item">
@@ -65,167 +65,168 @@
 
 
 
-              <view class="status-item">
-                <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
-                <view class="status-tags">
-                  <view v-for="(item1, index1) in productData.dishesextlist[1].extitems" :key="item1.ext_name + index1">
-                    <view
-                        class="tags-item2"
-                        :style="{
+                <view class="status-item">
+                  <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
+                  <view class="status-tags">
+                    <view v-for="(item1, index1) in productData.dishesextlist[1].extitems" :key="item1.ext_name + index1">
+                      <view
+                          class="tags-item2"
+                          :style="{
 												color: item1.isDefault ? activeTextColor : normalTextColor,
 												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
 											}"
-                        @tap="chooseTag1(item1, index1)"
-                    >
-                      {{ item1.ext_name }}
-                      <text
-                          class="tags-pri"
-                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                          v-if="item1.ext_price > 0"
-                          :class="{ 'active-text': item1.isDefault }"
+                          @tap="chooseTag1(item1, index1)"
                       >
-                        ￥{{item1.ext_price}}
-                      </text>
+                        {{ item1.ext_name }}
+                        <text
+                            class="tags-pri"
+                            :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                            v-if="item1.ext_price > 0"
+                            :class="{ 'active-text': item1.isDefault }"
+                        >
+                          ￥{{item1.ext_price}}
+                        </text>
+                      </view>
                     </view>
                   </view>
                 </view>
-              </view>
 
 
-              <view class="status-item">
-                <view class="status-title">{{ productData.dishesextlist[2].groupname }}</view>
-                <view class="status-tags">
-                  <view v-for="(item1, index1) in productData.dishesextlist[2].extitems" :key="item1.ext_name + index1">
-                    <view
-                        class="tags-item2"
-                        :style="{
+                <view class="status-item">
+                  <view class="status-title">{{ productData.dishesextlist[2].groupname }}</view>
+                  <view class="status-tags">
+                    <view v-for="(item1, index1) in productData.dishesextlist[2].extitems" :key="item1.ext_name + index1">
+                      <view
+                          class="tags-item2"
+                          :style="{
 												color: item1.isDefault ? activeTextColor : normalTextColor,
 												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
 											}"
-                        @tap="chooseTag2(item1, index1)"
-                    >
-                      {{ item1.ext_name }}
-                      <text
-                          class="tags-pri"
-                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                          v-if="item1.ext_price > 0"
-                          :class="{ 'active-text': item1.isDefault }"
+                          @tap="chooseTag2(item1, index1)"
                       >
-                        ￥{{item1.ext_price}}
-                      </text>
+                        {{ item1.ext_name }}
+                        <text
+                            class="tags-pri"
+                            :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                            v-if="item1.ext_price > 0"
+                            :class="{ 'active-text': item1.isDefault }"
+                        >
+                          ￥{{item1.ext_price}}
+                        </text>
+                      </view>
                     </view>
                   </view>
                 </view>
-              </view>
 
 
-              <view class="status-item">
-                <view class="status-title">{{ productData.dishesextlist[3].groupname }}</view>
-                <view class="status-tags">
-                  <view v-for="(item1, index1) in productData.dishesextlist[3].extitems" :key="item1.ext_name + index1">
-                    <view
-                        class="tags-item2"
-                        :style="{
+                <view class="status-item">
+                  <view class="status-title">{{ productData.dishesextlist[3].groupname }}</view>
+                  <view class="status-tags">
+                    <view v-for="(item1, index1) in productData.dishesextlist[3].extitems" :key="item1.ext_name + index1">
+                      <view
+                          class="tags-item2"
+                          :style="{
 												color: item1.isDefault ? activeTextColor : normalTextColor,
 												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
 											}"
-                        @tap="chooseTag3(item1, index1)"
-                    >
-                      {{ item1.ext_name }}
-                      <text
-                          class="tags-pri"
-                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                          v-if="item1.ext_price > 0"
-                          :class="{ 'active-text': item1.isDefault }"
+                          @tap="chooseTag3(item1, index1)"
                       >
-                        ￥{{item1.ext_price}}
-                      </text>
+                        {{ item1.ext_name }}
+                        <text
+                            class="tags-pri"
+                            :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                            v-if="item1.ext_price > 0"
+                            :class="{ 'active-text': item1.isDefault }"
+                        >
+                          ￥{{item1.ext_price}}
+                        </text>
+                      </view>
                     </view>
                   </view>
                 </view>
-              </view>
 
 
-              <view class="status-item">
-                <view class="status-title">{{ productData.dishesextlist[4].groupname }}</view>
-                <view class="status-tags">
-                  <view v-for="(item1, index1) in productData.dishesextlist[4].extitems" :key="item1.ext_name + index1">
-                    <view
-                        class="tags-item2"
-                        :style="{
+                <view class="status-item">
+                  <view class="status-title">{{ productData.dishesextlist[4].groupname }}</view>
+                  <view class="status-tags">
+                    <view v-for="(item1, index1) in productData.dishesextlist[4].extitems" :key="item1.ext_name + index1">
+                      <view
+                          class="tags-item2"
+                          :style="{
 												color: item1.isDefault ? activeTextColor : normalTextColor,
 												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
 											}"
-                        @tap="chooseTag4(item1, index1)"
-                    >
-                      {{ item1.ext_name }}
-                      <text
-                          class="tags-pri"
-                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                          v-if="item1.ext_price > 0"
-                          :class="{ 'active-text': item1.isDefault }"
+                          @tap="chooseTag4(item1, index1)"
                       >
-                        ￥{{item1.ext_price}}
-                      </text>
+                        {{ item1.ext_name }}
+                        <text
+                            class="tags-pri"
+                            :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                            v-if="item1.ext_price > 0"
+                            :class="{ 'active-text': item1.isDefault }"
+                        >
+                          ￥{{item1.ext_price}}
+                        </text>
+                      </view>
                     </view>
                   </view>
                 </view>
-              </view>
 
-              <view class="status-item">
-                <view class="status-title">{{ productData.dishesextlist[5].groupname }}</view>
-                <view class="status-tags">
-                  <view v-for="(item1, index1) in productData.dishesextlist[5].extitems" :key="item1.ext_name + index1">
-                    <view
-                        class="tags-item2"
-                        :style="{
+                <view class="status-item">
+                  <view class="status-title">{{ productData.dishesextlist[5].groupname }}</view>
+                  <view class="status-tags">
+                    <view v-for="(item1, index1) in productData.dishesextlist[5].extitems" :key="item1.ext_name + index1">
+                      <view
+                          class="tags-item2"
+                          :style="{
 												color: item1.isDefault ? activeTextColor : normalTextColor,
 												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
 											}"
-                        @tap="chooseTag5(item1, index1)"
-                    >
-                      {{ item1.ext_name }}
-                      <text
-                          class="tags-pri"
-                          :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                          v-if="item1.ext_price > 0"
-                          :class="{ 'active-text': item1.isDefault }"
+                          @tap="chooseTag5(item1, index1)"
                       >
-                        ￥{{item1.ext_price}}
-                      </text>
+                        {{ item1.ext_name }}
+                        <text
+                            class="tags-pri"
+                            :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                            v-if="item1.ext_price > 0"
+                            :class="{ 'active-text': item1.isDefault }"
+                        >
+                          ￥{{item1.ext_price}}
+                        </text>
+                      </view>
                     </view>
                   </view>
                 </view>
-              </view>
 
+              </view>
+            </scroll-view>
+
+            <view class="bottom-btn-box">
+              <view class="status-box">
+                <view class="left-status">
+                  <text class="pri-text" :style="{ color: activeBgColor }">￥{{ productData.shownPrice?productData.shownPrice:productData.nsjg }}</text>
+                  <text class="status-text">{{ choosedText }}</text>
+                </view>
+                <actions :number="productData.number" @add="add" @minus="minus"></actions>
+              </view>
+              <view class="btn-box">
+                <u-button type="warning" :bgColor="activeBgColor" :textColor="activeTextColor" btnWidth="600rpx" @click="addToCart">加入购物袋</u-button>
+              </view>
             </view>
-          </scroll-view>
-
-          <view class="bottom-btn-box">
-            <view class="status-box">
-              <view class="left-status">
-                <text class="pri-text" :style="{ color: activeBgColor }">￥{{ productData.shownPrice?productData.shownPrice:productData.nsjg }}</text>
-                <text class="status-text">{{ choosedText }}</text>
-              </view>
-              <actions :number="productData.number" @add="add" @minus="minus"></actions>
-            </view>
-            <view class="btn-box"><u-button :bgColor="activeBgColor" :textColor="activeTextColor" btnWidth="600rpx" @click="addToCart">加入购物袋</u-button></view>
           </view>
         </view>
-      </view>
-      <view class="fake-area2"></view>
-    </view>
-  </view>
+        <view class="fake-area2"></view>
+<!--      </view>-->
+<!--    </view>-->
+
+
 </template>
 
 <script>
 import Actions from '../actions/actions.vue'
 export default {
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
+
     product: {
       type: Object,
       default: () => {
@@ -295,6 +296,7 @@ export default {
 
   data() {
     return {
+      show:true,
       MultiSelectindex:'',
       MultiSelect:{},
       number: 1,
@@ -443,6 +445,7 @@ ext_zxprice:'',
     // 关闭modal
     closeModal() {
       this.$emit('cancel');
+      console.log('12321')
     },
     //分享
     shareGoods() {
@@ -498,7 +501,7 @@ ext_zxprice:'',
       let pitch=[];
       console.log(this.productData.dishesextlist)
       this.productData.dishesextlist.forEach(item => {
-        console.log(item.ext_name)
+        console.log(item)
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
             pitch.push(item1);
@@ -567,7 +570,7 @@ ext_zxprice:'',
   bottom: 0;
   display: flex;
   flex-direction: column;
-  z-index: 999;
+  z-index: -1;
   transition: all 0.2s linear;
 }
 
@@ -577,7 +580,6 @@ ext_zxprice:'',
 }
 
 .bg-show {
-  background-color: rgba(0, 0, 0, 0.5);
   visibility: visible;
 }
 
@@ -615,6 +617,8 @@ ext_zxprice:'',
   background-color: #ffffff;
   border-radius: 8rpx;
   overflow: hidden;
+  margin: 0 auto;
+  margin-top:60rpx;
   position: relative;
 }
 
@@ -692,7 +696,7 @@ ext_zxprice:'',
 
 .good-image-box image {
   width: 100%;
-  max-height: 440rpx;
+  max-height: 450rpx;
   display: block;
 }
 
@@ -700,11 +704,8 @@ ext_zxprice:'',
   padding: 10rpx 30rpx;
   box-sizing: border-box;
   /* #ifndef H5 */
-  max-height: 320rpx;
-  /* #endif */
-  /* #ifdef H5 */
-  max-height: 400rpx;
-  /* #endif */
+  max-height: 450rpx;
+
 }
 
 .good-name {
