@@ -26,9 +26,9 @@
                           </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
                         </view>
                         <view class="list-list" v-if="item.isDefault">
-                          <view class="Button" @click="plus(item,key)">+</view>
-                          <view class="number">{{item.ext_quantity}}</view>
                           <view class="Button" @click="reduce(item,key)">-</view>
+                          <view class="number">{{item.ext_quantity}}</view>
+                          <view class="Button" @click="plus(item,key)">+</view>
                         </view>
                       </view>
                     </checkbox-group>
@@ -807,12 +807,13 @@ ext_zxprice:'',
   margin-top: 10upx;
 }
 .list .Button{
-  background-color: #dca371;
+  background-color: #DBA871FF;
   width: 45upx;
   height: 45upx;
   text-align: center;
   line-height: 45upx;
   margin:0 15rpx;
+  border-radius: 50%;
 }
 .list-group{
   margin-top: 10upx;

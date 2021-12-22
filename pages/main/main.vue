@@ -232,7 +232,9 @@ font-size: 20px;
   image{
     width: 100%;
 		height: 100%;
-    border-radius: 40rpx;
+    border-radius: 50rpx;
+    box-shadow: 10rpx 10rpx 10rpx #ccc;
+
     overflow:hidden;
   }
 	.unit4_text{

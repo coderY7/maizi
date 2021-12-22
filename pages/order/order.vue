@@ -26,10 +26,6 @@
                     </view>
                   </view>
                 </view>
-
-
-
-
                 <view class="total">
                   <view>总价格:{{parseInt(orders.paytotal).toFixed(2)}}</view>
                   <view></view>
