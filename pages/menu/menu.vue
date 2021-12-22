@@ -1,7 +1,7 @@
 <template>
 	<view class="u-wrap">
 		<view class="u-search-box">
-      <u-search placeholder="搜索" @custom="custom"></u-search>
+      <u-search  @custom="custom" :show-action="false"></u-search>
 		</view>
     <view class="rolls">
       <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image>
@@ -21,7 +21,8 @@
               @tap="showProductDetailModal(product)">
 								<image class="item-menu-image" :src="imgurl+product.small_img_path" mode=""></image>
 								<view class="item-menu-text">
-									<view style="font-size: 16px;">{{product.spmc}}</view>
+                  <view style="font-size: 16px;">{{product.spmc}}</view>
+
 									<view class="price-btn">
 										<view style="font-size: 14px;color: #f4461c;">￥{{product.nsjg}}</view>
 <!--   选择-->
@@ -419,13 +420,13 @@
 	}
 
 	.page-view {
-		padding: 16rpx;
-	}
+		padding: 16rpx 0 0 16rpx;
+
+  }
 
 	.class-item {
 		margin-bottom: 30rpx;
 		background-color: #fff;
-		padding: 16rpx;
 		border-radius: 8rpx;
 	}
 
@@ -469,6 +470,7 @@
     .price-btn{
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
   }

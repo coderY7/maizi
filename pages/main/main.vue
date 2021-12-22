@@ -125,7 +125,7 @@ page {
 #name{
   margin-left:10rpx;
   font-size: 20px;
-  border-left: 15rpx solid #feb121;
+  border-left: 10rpx solid #feb121;
   padding-left:20rpx;
   margin:30rpx 0 30rpx 20rpx;
 }

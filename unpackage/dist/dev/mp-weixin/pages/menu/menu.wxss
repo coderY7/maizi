@@ -73,12 +73,11 @@
   background-color: #fafafa;
 }
 .page-view.data-v-368aef34 {
-  padding: 16rpx;
+  padding: 16rpx 0 0 16rpx;
 }
 .class-item.data-v-368aef34 {
   margin-bottom: 30rpx;
   background-color: #fff;
-  padding: 16rpx;
   border-radius: 8rpx;
 }
 .class-item.data-v-368aef34:last-child {
@@ -116,5 +115,6 @@
 .item-menu-text .price-btn.data-v-368aef34 {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
