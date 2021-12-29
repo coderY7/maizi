@@ -6,7 +6,7 @@
         <!-- #endif -->
 <!--        <view class="main-area" >-->
           <view class="modal-area" @tap.stop>
-            <image src="/static/images/share.png" class="handle-btn" style="right: 86rpx;"  @tap="$emit('cancel')"></image>
+<!--            <image src="/static/images/share.png" class="handle-btn" style="right: 86rpx;"  @tap="$emit('cancel')"></image>-->
             <image src="/static/images/close.png" class="handle-btn" style="right: 20rpx;" @tap="closeModal"></image>
             <view class="good-image-box"><image :src="productData ? imgurl+productData.big_img_path: '/static/images/default.png'" mode="widthFix"></image></view>
             <scroll-view scroll-y="true">
@@ -26,9 +26,13 @@
                           </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
                         </view>
                         <view class="list-list" v-if="item.isDefault">
-                          <view class="Button" @click="reduce(item,key)">-</view>
+<!--                          <view class="Button" @click="reduce(item,key)">-</view>-->
+                          <image src="/static/common/round_minus.png" class="Button" @click="reduce(item,key)"></image>
+
                           <view class="number">{{item.ext_quantity}}</view>
-                          <view class="Button" @click="plus(item,key)">+</view>
+<!--                          <view class="Button" @click="plus(item,key)">+</view>-->
+                          <image src="/static/common/round_add_normal.png" class="Button" @click="plus(item,key)"></image>
+
                         </view>
                       </view>
                     </checkbox-group>
@@ -614,20 +618,21 @@ ext_zxprice:'',
 
 .modal-area {
   width: 88%;
-  background-color: #ffffff;
+  background-color: #eee;
   border-radius: 8rpx;
   overflow: hidden;
   margin: 0 auto;
   margin-top:60rpx;
   position: relative;
+  border-radius: 20rpx;
 }
 
 .handle-btn {
-  width: 42rpx;
-  height: 42rpx;
+  width: 52rpx;
+  height: 52rpx;
   display: block;
   position: absolute;
-  top: 60rpx;
+  top: 20rpx;
   z-index: 99;
 }
 

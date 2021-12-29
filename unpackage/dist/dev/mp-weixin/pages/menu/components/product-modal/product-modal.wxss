@@ -45,19 +45,20 @@
 }
 .modal-area {
   width: 88%;
-  background-color: #ffffff;
+  background-color: #eee;
   border-radius: 8rpx;
   overflow: hidden;
   margin: 0 auto;
   margin-top:60rpx;
   position: relative;
+  border-radius: 20rpx;
 }
 .handle-btn {
-  width: 42rpx;
-  height: 42rpx;
+  width: 52rpx;
+  height: 52rpx;
   display: block;
   position: absolute;
-  top: 60rpx;
+  top: 20rpx;
   z-index: 99;
 }
 .bottom-btn-box {

@@ -1,5 +1,4 @@
 {
-  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -15,13 +14,7 @@
         {
           "name": "pages/main/main",
           "pathName": "pages/main/main",
-          "query": "tableid=93",
-          "scene": null
-        },
-        {
-          "name": "支付",
-          "pathName": "pages/payment/payment",
-          "query": "",
+          "query": "tableid=71",
           "scene": null
         }
       ]

@@ -25,27 +25,21 @@
 /* 透明度 */
 /* 文章场景相关 */
 .u-search.data-v-1a326067 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   flex: 1;
 }
 .u-content.data-v-1a326067 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   padding: 0 18rpx;
   flex: 1;
 }
 .u-clear-icon.data-v-1a326067 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
 }
 .u-input.data-v-1a326067 {
@@ -58,10 +52,8 @@
 .u-close-wrap.data-v-1a326067 {
   width: 40rpx;
   height: 100%;
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   justify-content: center;
   border-radius: 50%;
