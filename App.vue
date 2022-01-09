@@ -22,7 +22,6 @@ export default {
     uni.login({
       provider: 'weixin',
       success: (res) => {
-        console.log(res.code);
         uni.request({
           url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
           data: {

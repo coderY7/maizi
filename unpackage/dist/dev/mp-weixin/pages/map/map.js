@@ -135,7 +135,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-var _default =
+
+var QQMapWX = __webpack_require__(/*! ../../common/qqmap-wx-jssdk.min */ 282);var _default =
 {
   data: function data() {
     return {
@@ -145,12 +146,28 @@ var _default =
       longitude: 116.39742,
       covers: [{
         latitude: 39.909,
-        longitude: 116.39742 },
+        longitude: 116.39742 }] };
 
-      {
-        latitude: 39.90,
-        longitude: 116.39 }] };
 
+  },
+  onShow: function onShow() {
+    console.log('显示地图1');
+    wx.chooseLocation({
+      success: function success(res) {
+        var tencentMap = new QQMapWX({
+          key: 'OYVBZ-YWJ3J-UTEFB-KILGE-2WYX6-GEB2D' });
+
+        tencentMap.reverseGeocoder({
+          location: {
+            longitude: res.longitude,
+            latitude: res.latitude },
+
+          success: function success(res) {
+            console.log('获取地图详细位置', res.result.address);
+          } });
+
+
+      } });
 
 
   },

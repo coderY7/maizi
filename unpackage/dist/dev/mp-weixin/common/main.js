@@ -125,7 +125,6 @@ __webpack_require__.r(__webpack_exports__);
     uni.login({
       provider: 'weixin',
       success: function success(res) {
-        console.log(res.code);
         uni.request({
           url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
           data: {
