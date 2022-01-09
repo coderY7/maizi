@@ -240,7 +240,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/categories */ 61));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ./components/actions/actions.vue */ 142));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CartBar = function CartBar() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cartbar/cartbar */ "pages/menu/components/cartbar/cartbar").then((function () {return resolve(__webpack_require__(/*! ./components/cartbar/cartbar.vue */ 149));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ProductModal = function ProductModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ./components/product-modal/product-modal.vue */ 156));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ./components/cart-popup/cart-popup.vue */ 163));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Search = function Search() {__webpack_require__.e(/*! require.ensure | pages/menu/components/search/search */ "pages/menu/components/search/search").then((function () {return resolve(__webpack_require__(/*! ./components/search/search.vue */ 170));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/categories */ 61));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var Actions = function Actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ./components/actions/actions.vue */ 142));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var CartBar = function CartBar() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cartbar/cartbar */ "pages/menu/components/cartbar/cartbar").then((function () {return resolve(__webpack_require__(/*! ./components/cartbar/cartbar.vue */ 149));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var ProductModal = function ProductModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ./components/product-modal/product-modal.vue */ 156));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ./components/cart-popup/cart-popup.vue */ 163));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 {
@@ -248,8 +248,8 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
     Actions: Actions,
     CartBar: CartBar,
     ProductModal: ProductModal,
-    cartPopup: cartPopup,
-    Search: Search },
+    cartPopup: cartPopup },
+
 
   data: function data() {
     return {
@@ -288,7 +288,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
     console.log(getApp().globalData.text);
     this.token = uni.getStorageSync('token');
     this.$u.api.categorys({
-      access_token: this.token,
+      access_token: uni.getStorageSync('token'),
       vtype: 'pos',
       fdbh: uni.getStorageSync('fdbh'),
       companyid: uni.getStorageSync('companyid'),
@@ -299,7 +299,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
       _this.categorylist = res.categorylist;
       //获取菜品数据
       _this.$u.api.caterings({
-        access_token: _this.token,
+        access_token: uni.getStorageSync('token'),
         vtype: "pos",
         fdbh: uni.getStorageSync('fdbh'),
         companyid: uni.getStorageSync('companyid'),
@@ -472,7 +472,7 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
         fdbh: uni.getStorageSync('fdbh') }).
       then(
       function (res) {
-        console.log("订单：", res);
+        console.log("生成订单：", res);
         // if(res.error_code=='500'){
         //   uni.showModal({
         //     title: '提示',

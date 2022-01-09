@@ -26,7 +26,6 @@ export default {
     return {
       tableid:'',
       xsdbh:'',//订单号
-      token: '',
       readytopays:'',
       pay:0,
       payment:'0',
@@ -39,7 +38,7 @@ export default {
   onLoad(options) {
     this.tableid=uni.getStorageSync('tableid'),
         this.xsdbh=uni.getStorageSync('xsdbh'),//订单号
-        this.token=uni.getStorageSync('token'),
+
         this.readytopays=uni.getStorageSync('readytopays')
         this.pay=parseInt(this.readytopays.paytotal).toFixed(2)
   },

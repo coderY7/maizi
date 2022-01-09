@@ -77,7 +77,6 @@ export default {
       ShowPay:false,
       tableid:[],
       attendance:uni.getStorageSync('tablenumber'),
-      token:'',
       xsdbh:''//订单号
     }
   },

@@ -1,7 +1,7 @@
 <template>
 	<view class="u-wrap">
 		<view class="u-search-box">
-      <u-search  @custom="custom" :show-action="false"></u-search>
+      <u-search  @custom="custom"></u-search>
 		</view>
     <view class="rolls">
       <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image>
@@ -63,7 +63,7 @@
   import CartBar from './components/cartbar/cartbar.vue'
   import ProductModal from './components/product-modal/product-modal.vue'
   import cartPopup from './components/cart-popup/cart-popup.vue'
-  import Search from './components/search/search.vue'
+  //import Search from './components/search/search.vue'
   import categories from "../../common/categories";
 
 
@@ -73,7 +73,7 @@
       CartBar,
       ProductModal,
       cartPopup,
-      Search
+
     },
     data() {
       return {
@@ -112,7 +112,7 @@
       console.log(getApp().globalData.text)
       this.token = uni.getStorageSync('token');
       this.$u.api.categorys({
-        access_token:this.token,
+        access_token:uni.getStorageSync('token'),
         vtype:'pos',
         fdbh:uni.getStorageSync('fdbh'),
         companyid:uni.getStorageSync('companyid'),
@@ -123,7 +123,7 @@
         this.categorylist=res.categorylist
         //获取菜品数据
         this.$u.api.caterings({
-          access_token:this.token,
+          access_token:uni.getStorageSync('token'),
           vtype:"pos",
           fdbh:uni.getStorageSync('fdbh'),
           companyid:uni.getStorageSync('companyid'),
@@ -296,7 +296,7 @@
           fdbh:uni.getStorageSync('fdbh'),
         }).then(
             (res)=>{
-          console.log("订单：",res)
+          console.log("生成订单：",res)
               // if(res.error_code=='500'){
               //   uni.showModal({
               //     title: '提示',
@@ -362,7 +362,7 @@
 	.u-wrap {
 		height: calc(100vh);
 		/* #ifdef H5 */
-		height: calc(100vh - var(--window-top));
+		//height: calc(100vh - var(--window-top));
 		/* #endif */
 		display: flex;
 		flex-direction: column;
