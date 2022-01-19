@@ -99,7 +99,6 @@ addmenu(){
     async pay(Cart){
        this.token = uni.getStorageSync('token');
        this.xsdbh=uni.getStorageSync('xsdbh');
-       uni.setStorageSync('Cart',this.Cart)
         uni.setStorageSync('Attendance',this.attendance)
        this.attendance = uni.getStorageSync('Attendance');
        //订单预结算

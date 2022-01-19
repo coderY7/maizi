@@ -182,7 +182,7 @@ __webpack_require__.r(__webpack_exports__);
       tableid: '',
       xsdbh: '', //订单号
       readytopays: '',
-      pay: 0,
+      pay: uni.getStorageSync('Cart').cartprice,
       payment: '0',
       tablenumber: '' };
 
@@ -194,7 +194,7 @@ __webpack_require__.r(__webpack_exports__);
     this.tableid = uni.getStorageSync('tableid'),
     this.xsdbh = uni.getStorageSync('xsdbh'), //订单号
     this.readytopays = uni.getStorageSync('readytopays');
-    this.pay = parseInt(this.readytopays.paytotal).toFixed(2);
+    //this.pay=parseInt(this.readytopays.paytotal).toFixed(2)
   },
   onShow: function onShow() {
     this.tablenumber = uni.getStorageSync('tablenumber');

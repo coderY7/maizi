@@ -257,11 +257,10 @@ var _default =
     pay: function pay(Cart) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 _this.token = uni.getStorageSync('token');
                 _this.xsdbh = uni.getStorageSync('xsdbh');
-                uni.setStorageSync('Cart', _this.Cart);
                 uni.setStorageSync('Attendance', _this.attendance);
                 _this.attendance = uni.getStorageSync('Attendance');
                 //订单预结算
-                _context.next = 7;return _this.$u.api.readytopays({
+                _context.next = 6;return _this.$u.api.readytopays({
                   access_token: uni.getStorageSync('token'),
                   xsdbh: uni.getStorageSync('xsdbh'), //订单号
                   fdbh: uni.getStorageSync('fdbh'), //分店号
@@ -278,7 +277,7 @@ var _default =
                   uni.navigateTo({
                     url: "../payment/payment?tableid=".concat(_this.tableid) });
 
-                });case 7:case "end":return _context.stop();}}}, _callee);}))();
+                });case 6:case "end":return _context.stop();}}}, _callee);}))();
     } },
 
   onLoad: function onLoad(options) {
