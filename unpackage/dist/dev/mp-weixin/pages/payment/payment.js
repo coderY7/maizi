@@ -226,7 +226,7 @@ __webpack_require__.r(__webpack_exports__);
               openid: uni.getStorageSync('openid'), //小程序openid
               submchid: uni.getStorageSync('submchid'), //商家支付子商户号
               billnum: uni.getStorageSync('xsdbh'), //本次交易订单号
-              total_fee: uni.getStorageSync('readytopays').paytotal, //本次交易应付总额
+              total_fee: uni.getStorageSync('Cart').cartprice, //本次交易应付总额
               cardid: '',
               nums: Math.random() },
 

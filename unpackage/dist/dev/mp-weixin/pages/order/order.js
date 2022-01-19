@@ -100,11 +100,11 @@ try {
     uTabsSwiper: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 171))
     },
-    uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 178))
-    },
     uLoadmore: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 185))
+    },
+    uIcon: function() {
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 178))
     }
   }
 } catch (e) {
@@ -128,7 +128,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.orders.goodslist, function(item, index) {
+  var l0 = _vm.__map(_vm.goodslist, function(item, index) {
     var $orig = _vm.__get_orig(item)
 
     var m0 = _vm.priceInt(item.quantity)
@@ -138,7 +138,7 @@ var render = function() {
     }
   })
 
-  var g0 = parseInt(_vm.orders.paytotal).toFixed(2)
+  var m1 = parseFloat(_vm.orders.paytotal)
 
   var l2 = _vm.__map(_vm.orderList[1], function(res, index) {
     var $orig = _vm.__get_orig(res)
@@ -146,24 +146,24 @@ var render = function() {
     var l1 = _vm.__map(res.goodsList, function(item, index) {
       var $orig = _vm.__get_orig(item)
 
-      var m1 = _vm.priceInt(item.price)
-      var m2 = _vm.priceDecimal(item.price)
+      var m2 = _vm.priceInt(item.price)
+      var m3 = _vm.priceDecimal(item.price)
       return {
         $orig: $orig,
-        m1: m1,
-        m2: m2
+        m2: m2,
+        m3: m3
       }
     })
 
-    var m3 = _vm.totalNum(res.goodsList)
-    var m4 = _vm.priceInt(_vm.totalPrice(res.goodsList))
-    var m5 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
+    var m4 = _vm.totalNum(res.goodsList)
+    var m5 = _vm.priceInt(_vm.totalPrice(res.goodsList))
+    var m6 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
     return {
       $orig: $orig,
       l1: l1,
-      m3: m3,
       m4: m4,
-      m5: m5
+      m5: m5,
+      m6: m6
     }
   })
 
@@ -172,7 +172,7 @@ var render = function() {
     {
       $root: {
         l0: l0,
-        g0: g0,
+        m1: m1,
         l2: l2
       }
     }
@@ -315,6 +315,7 @@ var _default =
       Cart: [],
       token: '',
       orders: [],
+      goodslist: [],
       imgurl: "http://api.mzsale.cn/" };
 
   },
@@ -325,12 +326,14 @@ var _default =
     //查询桌台订单信息
     this.$u.api.orders({
       access_token: uni.getStorageSync('token'),
-      vtype: 'get',
-      tableid: '2',
-      fdbh: uni.getStorageSync('fdbh') }).
+      vtype: 'detail',
+      //tableid:uni.getStorageSync('tableid'),
+      fdbh: uni.getStorageSync('fdbh'),
+      xsdbh: uni.getStorageSync('xsdbh') }).
     then(function (res) {
-      console.log('查询订单：', res);
-      _this.dataList = res.dataList;
+      console.log('查询桌台订单明细：', res);
+      _this.goodslist = res.goodslist;
+      _this.orders = res;
     });
     //支付成功订单接口
     this.$u.api.searchs({

@@ -10,9 +10,9 @@
             <view class="page-box">
 <!--  订单状态-->
               <view class="order">
-                <view class="store"><u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>：{{orders.xssj}}</view>
+<!--                <view class="store"><u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>：{{orders.xssj}}</view>-->
 
-                <view v-for="(item,index) in orders.goodslist" :key="index">
+                <view v-for="(item,index) in goodslist" :key="index">
                   <view class="top">
                     <view class="left"></view>
                     <view class="right"></view>
@@ -27,7 +27,7 @@
                   </view>
                 </view>
                 <view class="total">
-                  <view>总价格:{{parseInt(orders.paytotal).toFixed(2)}}</view>
+                  <view>总价格:{{parseFloat(orders.paytotal)}}</view>
                   <view></view>
                 </view>
               </view>
@@ -103,6 +103,7 @@ export default {
       Cart:[],
       token:'',
       orders:[],
+      goodslist:[],
       imgurl:"http://api.mzsale.cn/",
     };
   },
@@ -113,12 +114,14 @@ export default {
     //查询桌台订单信息
     this.$u.api.orders({
       access_token:uni.getStorageSync('token'),
-      vtype:'get',
-      tableid:'2',
+      vtype:'detail',
+      //tableid:uni.getStorageSync('tableid'),
       fdbh:uni.getStorageSync('fdbh'),
+      xsdbh:uni.getStorageSync('xsdbh')
     }).then(res => {
-      console.log('查询订单：',res)
-      this.dataList=res.dataList
+      console.log('查询桌台订单明细：',res)
+      this.goodslist=res.goodslist
+      this.orders=res
     })
     //支付成功订单接口
     this.$u.api.searchs({
