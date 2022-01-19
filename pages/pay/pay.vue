@@ -116,7 +116,7 @@ addmenu(){
              goodslist: uni.getStorageSync('goodslist')
            }).then(res=>{
          console.log('预结算',res)
-         uni.setStorageSync('readytopays',res)
+         uni.setStorageSync('unfinished',res.goodslist)
         uni.navigateTo({
           url:`../payment/payment?tableid=${this.tableid}`
         })

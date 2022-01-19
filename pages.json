@@ -6,7 +6,8 @@
 		{
 			"path": "pages/main/main",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"navigationStyle":"custom"
 			}
 		},
 		
@@ -28,7 +29,8 @@
 		{
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"navigationStyle":"custom"
 			}
 		},
 		{
@@ -94,6 +96,7 @@
 		"selectedColor": "#F19E38",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
+		"iconWidth": "30px",
 		"list": [
 			{
 				"pagePath": "pages/main/main",

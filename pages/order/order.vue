@@ -32,6 +32,7 @@
                 </view>
               </view>
             </view>
+            <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>
           </scroll-view>
         </swiper-item>
         <swiper-item class="swiper-item">
@@ -117,6 +118,7 @@ export default {
       fdbh:uni.getStorageSync('fdbh'),
     }).then(res => {
       console.log('查询订单：',res)
+      this.dataList=res.dataList
     })
     //支付成功订单接口
     this.$u.api.searchs({
@@ -128,7 +130,7 @@ export default {
       zktype:'ZK',
       zkvalue:'',
     }).then(res => {
-      console.log('支付成功订单：',res)
+      //console.log('支付成功订单：',res)
     })
 
 

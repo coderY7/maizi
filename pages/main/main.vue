@@ -119,7 +119,7 @@ page {
 }
 
 #content {
-  margin: 110rpx 40rpx 0 40rpx;
+  margin: 180rpx 40rpx 0 40rpx;
 
 }
 #name{

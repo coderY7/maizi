@@ -2,11 +2,11 @@
   "navigationBarTitleText": "点餐",
   "FontSize": "500px",
   "usingComponents": {
-    "u-search": "/node-modules/uview-ui/components/u-search/u-search",
     "u-mask": "/node-modules/uview-ui/components/u-mask/u-mask",
     "actions": "/pages/menu/components/actions/actions",
     "cart-bar": "/pages/menu/components/cartbar/cartbar",
     "product-modal": "/pages/menu/components/product-modal/product-modal",
-    "cart-popup": "/pages/menu/components/cart-popup/cart-popup"
+    "cart-popup": "/pages/menu/components/cart-popup/cart-popup",
+    "search": "/pages/menu/components/search/search"
   }
 }

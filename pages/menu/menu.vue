@@ -1,7 +1,12 @@
 <template>
 	<view class="u-wrap">
 		<view class="u-search-box">
-      <u-search  @custom="custom"></u-search>
+     
+	  				<!-- <view class="search-input" @tap="showSearch=true">
+	  					<image src="/static/images/common/search-icon.png" class="search-icon"></image>
+	  					<view>搜索</view>
+	  				</view>
+	  			 -->
 		</view>
     <view class="rolls">
       <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image>
@@ -54,7 +59,7 @@
               @clear="clearCart"
               @pay="pay"
     />
-
+		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
 	</view>
 </template>
 <script>
@@ -63,7 +68,7 @@
   import CartBar from './components/cartbar/cartbar.vue'
   import ProductModal from './components/product-modal/product-modal.vue'
   import cartPopup from './components/cart-popup/cart-popup.vue'
-  //import Search from './components/search/search.vue'
+  import Search from './components/search/search.vue'
   import categories from "../../common/categories";
 
 
@@ -73,7 +78,7 @@
       CartBar,
       ProductModal,
       cartPopup,
-
+Search
     },
     data() {
       return {
@@ -283,8 +288,6 @@
         }
         uni.setStorageSync('Cart',this.Cart)
 
-
-
         //生成订单
         this.$u.api.orders({
           access_token:this.token,
@@ -297,10 +300,15 @@
         }).then(
             (res)=>{
           console.log("生成订单：",res)
-              // if(res.error_code=='500'){
-              //   uni.showModal({
-              //     title: '提示',
-              //     content: '当前桌台已有人，是否清台',
+               if(res.error_code=='2'){
+                 uni.showToast({
+                   title: res.message,
+                   duration: 2000,
+                   icon:'none'
+                 });
+                 // uni.showModal({
+                 //   title: '提示',
+                 //  content: '当前桌台已有人，是否清台',
               //     success:  (res)=> {
               //       if (res.confirm) {
               //         console.log('用户点击确定');
@@ -333,7 +341,7 @@
               //       }
               //     }
               //   });
-              // }
+               }
               if(res.error_code=='0'){
                 console.log("生成订单")
                 uni.setStorageSync('xsdbh', res.xsdbh);

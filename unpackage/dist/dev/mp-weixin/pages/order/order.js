@@ -98,13 +98,13 @@ var components
 try {
   components = {
     uTabsSwiper: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 170))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 171))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 177))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 178))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 184))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 185))
     }
   }
 } catch (e) {
@@ -291,6 +291,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -319,7 +320,7 @@ var _default =
   },
   onLoad: function onLoad() {
   },
-  onShow: function onShow() {
+  onShow: function onShow() {var _this = this;
     this.orders = uni.getStorageSync('orders');
     //查询桌台订单信息
     this.$u.api.orders({
@@ -329,6 +330,7 @@ var _default =
       fdbh: uni.getStorageSync('fdbh') }).
     then(function (res) {
       console.log('查询订单：', res);
+      _this.dataList = res.dataList;
     });
     //支付成功订单接口
     this.$u.api.searchs({
@@ -340,7 +342,7 @@ var _default =
       zktype: 'ZK',
       zkvalue: '' }).
     then(function (res) {
-      console.log('支付成功订单：', res);
+      //console.log('支付成功订单：',res)
     });
 
 
@@ -362,12 +364,12 @@ var _default =
     } },
 
   methods: {
-    reachBottom: function reachBottom() {var _this = this;
+    reachBottom: function reachBottom() {var _this2 = this;
       // 此tab为空数据
       if (this.current != 2) {
         this.loadStatus.splice(this.current, 1, "loading");
         setTimeout(function () {
-          _this.getOrderList(_this.current);
+          _this2.getOrderList(_this2.current);
         }, 1200);
       }
     },

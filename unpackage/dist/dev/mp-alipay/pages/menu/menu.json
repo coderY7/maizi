@@ -1,0 +1,11 @@
+{
+  "defaultTitle": "点餐",
+  "usingComponents": {
+    "u-mask": "/node-modules/uview-ui/components/u-mask/u-mask",
+    "actions": "/pages/menu/components/actions/actions",
+    "cart-bar": "/pages/menu/components/cartbar/cartbar",
+    "product-modal": "/pages/menu/components/product-modal/product-modal",
+    "cart-popup": "/pages/menu/components/cart-popup/cart-popup",
+    "search": "/pages/menu/components/search/search"
+  }
+}

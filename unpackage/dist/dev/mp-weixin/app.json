@@ -24,6 +24,7 @@
     "selectedColor": "#F19E38",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
+    "iconWidth": "30px",
     "list": [
       {
         "pagePath": "pages/main/main",
@@ -59,6 +60,5 @@
   "uniStatistics": {
     "enable": true
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

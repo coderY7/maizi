@@ -96,7 +96,7 @@ var components
 try {
   components = {
     uButton: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 191))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 192))
     }
   }
 } catch (e) {
@@ -153,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var paytype = function paytype() {__webpack_require__.e(/*! require.ensure | components/i-pay-type/i-pay-type */ "components/i-pay-type/i-pay-type").then((function () {return resolve(__webpack_require__(/*! ../../components/i-pay-type/i-pay-type */ 205));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var paytype = function paytype() {__webpack_require__.e(/*! require.ensure | components/i-pay-type/i-pay-type */ "components/i-pay-type/i-pay-type").then((function () {return resolve(__webpack_require__(/*! ../../components/i-pay-type/i-pay-type */ 206));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 
@@ -193,7 +193,6 @@ __webpack_require__.r(__webpack_exports__);
   onLoad: function onLoad(options) {
     this.tableid = uni.getStorageSync('tableid'),
     this.xsdbh = uni.getStorageSync('xsdbh'), //订单号
-
     this.readytopays = uni.getStorageSync('readytopays');
     this.pay = parseInt(this.readytopays.paytotal).toFixed(2);
   },
@@ -206,120 +205,110 @@ __webpack_require__.r(__webpack_exports__);
     btnchange: function btnchange(index) {
       this.payment = index;
     },
-    pays: function pays() {var _this = this;
-      if (this.payment == '0') {
-        console.log('微信支付');
-        var snvar = wx.getStorageSync('companyid'); //商家SN
-        var fdbhvar = wx.getStorageSync('fdbh'); //分店编号
-        //获取商户信息
-        wx.request({
-          url: 'https://lite.ecsun.cn/api/init/' + snvar + '-' + fdbhvar,
-          data: {},
+    pays: function pays() {
+      console.log('微信支付');
+      var snvar = uni.getStorageSync('companyid'); //商家SN
+      var fdbhvar = uni.getStorageSync('fdbh'); //分店编号
+      //获取商户信息
+      uni.request({
+        url: 'https://lite.ecsun.cn/api/init/' + snvar + '-' + fdbhvar,
+        method: 'GET',
+        dataType: 'json',
+        success: function success(ress) {var _this = this;
+          console.log('获取商家商户号信息', ress);
+          uni.setStorageSync('subappid', ress.data.wxpaylist.appid); //商家公众号子appid
+          uni.setStorageSync('submchid', ress.data.wxpaylist.submchid); //商家支付子商户号
 
-          method: 'GET',
-          dataType: 'json',
-          success: function success(ress) {
-            console.info(ress);
-            if (ress.data.result == "success") {
-              console.log('获取商家商户号信息', ress);
-              uni.setStorageSync('subappid', ress.data.wxpaylist.appid); //商家公众号子appid
-              uni.setStorageSync('submchid', ress.data.wxpaylist.submchid); //商家支付子商户号
-            } else
-            {
-              console.log(ress.data.message);
-            }
-          },
-          fail: function fail(error) {
-            console.info("获取门店初始信息失败");
-            console.info(error);
-          } });
+          uni.request({ //请求支付必要参数，发起预支付请求
+            url: 'https://wx.ecsun.cn/AjacService/LiteReadyToPay2.ashx',
+            data: {
+              subappid: uni.getStorageSync('appid'), //小程序appid
+              openid: uni.getStorageSync('openid'), //小程序openid
+              submchid: uni.getStorageSync('submchid'), //商家支付子商户号
+              billnum: uni.getStorageSync('xsdbh'), //本次交易订单号
+              total_fee: uni.getStorageSync('readytopays').paytotal, //本次交易应付总额
+              cardid: '',
+              nums: Math.random() },
 
+            method: 'GET',
+            dataType: 'json',
+            success: function success(ress) {
+              console.info('微信预支付', ress);
+              //微信支付
+              wx.requestPayment( //调用微信支付
+              {
+                'timeStamp': ress.data.timeStamp,
+                'nonceStr': ress.data.nonceStr,
+                'package': ress.data.package,
+                'signType': 'MD5',
+                'paySign': ress.data.paySign,
+                'success': function success(res) {
+                  console.log('支付成功:', res);
+                  uni.showToast({
+                    title: '微信支付成功',
+                    duration: 1000,
+                    image: '../../static/pay/win.png' });
 
-        var cardidvar = uni.getStorageSync('cardid'); //会员线下会员号
+                  //支付成功，立刻调用查单接口查询订单在后台是否成功
+                  _this.$u.api.paydones({
+                    access_token: uni.getStorageSync('token'),
+                    flow_no: uni.getStorageSync('xsdbh'),
+                    payno: '04',
+                    total: uni.getStorageSync('readytopays').paytotal,
+                    payid: '',
+                    syyid: uni.getStorageSync('syyid'),
+                    vipid: uni.getStorageSync('openid'),
+                    fdbh: uni.getStorageSync('fdbh'),
+                    companyid: uni.getStorageSync('companyid') }).
+                  then(function (res) {
+                    console.log('订单支付完成', res);
+                    uni.setStorageSync('orders', res);
+                  });
 
-        wx.request({ //请求支付必要参数，发起预支付请求
-          url: 'https://wx.ecsun.cn/AjacService/LiteReadyToPay2.ashx',
-          data: {
-            subappid: uni.getStorageSync('appid'), //小程序appid
-            openid: uni.getStorageSync('openid'), //小程序openid
-            submchid: uni.getStorageSync('submchid'), //商家支付子商户号
-            billnum: uni.getStorageSync('xsdbh'), //本次交易订单号
-            total_fee: uni.getStorageSync('readytopays').paytotal, //本次交易应付总额
-            cardid: '',
-            nums: Math.random() },
+                },
+                'fail': function fail(res) {
+                  console.log('支付失败:', res, _this);
+                  uni.showToast({
+                    title: '微信支付失败',
+                    duration: 1000,
+                    image: '../../static/pay/fail.png' });
 
-          method: 'GET',
-          dataType: 'json',
-          success: function success(ress) {
-            console.info('微信预支付', ress);
-            //微信支付
-            wx.requestPayment( //调用微信支付
-            {
-              'timeStamp': ress.data.timeStamp,
-              'nonceStr': ress.data.nonceStr,
-              'package': ress.data.package,
-              'signType': 'MD5',
-              'paySign': ress.data.paySign,
-              'success': function success(res) {
-                console.log('支付成功:', res);
-                uni.showToast({
-                  title: '微信支付成功',
-                  duration: 1000,
-                  image: '../../static/pay/win.png' });
+                  //测试
+                  //支付成功，立刻调用查单接口查询订单在后台是否成功
+                  _this.$u.api.paydones({
+                    access_token: uni.getStorageSync('token'),
+                    flow_no: uni.getStorageSync('xsdbh'),
+                    payno: '04',
+                    total: uni.getStorageSync('readytopays').paytotal,
+                    payid: '',
+                    syyid: uni.getStorageSync('syyid'),
+                    vipid: uni.getStorageSync('openid'),
+                    fdbh: uni.getStorageSync('fdbh'),
+                    companyid: uni.getStorageSync('companyid') }).
+                  then(function (res) {
+                    console.log('订单支付完成', res);
+                    uni.setStorageSync('orders', res);
+                  });
 
-                //支付成功，立刻调用查单接口查询订单在后台是否成功
-                _this.$u.api.paydones({
-                  access_token: uni.getStorageSync('token'),
-                  flow_no: uni.getStorageSync('xsdbh'),
-                  payno: '04',
-                  total: uni.getStorageSync('readytopays').paytotal,
-                  payid: '',
-                  syyid: uni.getStorageSync('syyid'),
-                  vipid: uni.getStorageSync('openid'),
-                  fdbh: uni.getStorageSync('fdbh'),
-                  companyid: uni.getStorageSync('companyid') }).
-                then(function (res) {
-                  console.log('订单支付完成', res);
-                  uni.setStorageSync('orders', res);
-                });
-
-              },
-              'fail': function fail(res) {
-                console.log('支付失败:', res, _this);
-                uni.showToast({
-                  title: '微信支付失败',
-                  duration: 1000,
-                  image: '../../static/pay/fail.png' });
-
-                //测试
-                //支付成功，立刻调用查单接口查询订单在后台是否成功
-                _this.$u.api.paydones({
-                  access_token: uni.getStorageSync('token'),
-                  flow_no: uni.getStorageSync('xsdbh'),
-                  payno: '04',
-                  total: uni.getStorageSync('readytopays').paytotal,
-                  payid: '',
-                  syyid: uni.getStorageSync('syyid'),
-                  vipid: uni.getStorageSync('openid'),
-                  fdbh: uni.getStorageSync('fdbh'),
-                  companyid: uni.getStorageSync('companyid') }).
-                then(function (res) {
-                  console.log('订单支付完成', res);
-                  uni.setStorageSync('orders', res);
-                });
-
-              },
-              'complete': function complete(res) {} });
+                },
+                'complete': function complete(res) {} });
 
 
-          },
-          fail: function fail(error) {
-            console.info("准备支付失败");
-            console.info(error);
-          } });
+            },
+            fail: function fail(error) {
+              console.info("准备支付失败");
+              console.info(error);
+            } });
+
+        },
+        fail: function fail(error) {
+          console.info("获取门店初始信息失败");
+          console.info(error);
+        } });
 
 
-      }
+
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
