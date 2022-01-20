@@ -3,6 +3,9 @@
   "FontSize": "500px",
   "usingComponents": {
     "u-mask": "/node-modules/uview-ui/components/u-mask/u-mask",
+    "u-popup": "/node-modules/uview-ui/components/u-popup/u-popup",
+    "u-number-box": "/node-modules/uview-ui/components/u-number-box/u-number-box",
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
     "actions": "/pages/menu/components/actions/actions",
     "cart-bar": "/pages/menu/components/cartbar/cartbar",
     "product-modal": "/pages/menu/components/product-modal/product-modal",

@@ -9,7 +9,7 @@
           <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
             <view class="page-box">
 <!--  订单状态-->
-              <view class="order">
+              <view class="order" v-if="orders">
 <!--                <view class="store"><u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>：{{orders.xssj}}</view>-->
 
                 <view v-for="(item,index) in goodslist" :key="index">
@@ -102,7 +102,7 @@ export default {
       time:'',
       Cart:[],
       token:'',
-      orders:[],
+      orders:'',
       goodslist:[],
       imgurl:"http://api.mzsale.cn/",
     };

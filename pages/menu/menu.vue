@@ -1,5 +1,6 @@
 <template>
 	<view class="u-wrap">
+
 		<view class="u-search-box">
      
 	  				<!-- <view class="search-input" @tap="showSearch=true">
@@ -8,10 +9,12 @@
 	  				</view>
 	  			 -->
 		</view>
+
     <view class="rolls">
       <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image>
     </view>
-		<view class="u-menu-wrap">
+
+    <view class="u-menu-wrap">
 			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
 			 :scroll-into-view="itemId">
 				<view v-for="(item,index) in categorylist" :key="index" class="u-tab-item" :class="[current == index ? 'u-tab-item-active' : '']"
@@ -59,7 +62,15 @@
               @clear="clearCart"
               @pay="pay"
     />
+    <u-popup v-model="popupshow" mode="center" border-radius="14"  :mask="true" :mask-close-able="false">
+      <view style="display:flex;flex-direction:column;justify-content:center;align-items:center;width:500rpx;height:300rpx;">
+        <text style="margin-bottom:20rpx">请选择就餐人数</text>
+        <u-number-box v-model="value" min="1" @change="valChange"></u-number-box>
+        <u-button @click="ensure" style="margin-top:30rpx;">确定</u-button>
+      </view>
+    </u-popup>
 		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
+
 	</view>
 </template>
 <script>
@@ -78,10 +89,11 @@
       CartBar,
       ProductModal,
       cartPopup,
-Search
+      Search
     },
     data() {
       return {
+        popupshow:true,
         show: false,
         imgurl:"http://api.mzsale.cn/",
         scrollTop: 0, //tab标题的滚动条位置
@@ -110,7 +122,8 @@ Search
         category_id:[], //菜品分类ID
         companyid:uni.getStorageSync('companyid'),
         counts:'',//商品数量
-        goodslist: []
+        goodslist: [],
+        value:'1'//就餐人数
       }
     },
     onShow(){
@@ -149,12 +162,35 @@ Search
     },
     onLoad(options) {
 
+
+
     },
     onReady() {
       //this.getMenuItemTop()
       console.log('onpeady')
     },
     methods: {
+      //人数确定后，开台
+      ensure() {
+        console.log('确定')
+        this.popupshow=false
+        //开台
+        this.$u.api.orders({
+          access_token:uni.getStorageSync('token'),
+          vtype:"new",
+          posid:uni.getStorageSync('posid'),
+          tableid:uni.getStorageSync('tableid'),
+          tablenumber:uni.getStorageSync('tablenumber'),
+          tablewaiter:uni.getStorageSync('syyid'),
+          fdbh:uni.getStorageSync('fdbh'),
+        }).then((res)=>{
+          console.log('开台成功',res)
+        })
+      },
+      valChange(e) {
+        uni.setStorageSync('tablenumber',e.value)
+      },
+
       shows(){
         this.show=false
         console.log('关闭')

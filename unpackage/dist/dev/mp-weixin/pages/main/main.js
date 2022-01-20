@@ -1,6 +1,6 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/main/main"],{
 
-/***/ 257:
+/***/ 47:
 /*!******************************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/main.js?{"page":"pages%2Fmain%2Fmain"} ***!
   \******************************************************************************************/
@@ -271,5 +271,5 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ })
 
-},[[257,"common/runtime","common/vendor"]]]);
+},[[47,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/main/main.js.map

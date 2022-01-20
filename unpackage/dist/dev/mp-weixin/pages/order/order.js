@@ -98,13 +98,13 @@ var components
 try {
   components = {
     uTabsSwiper: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 171))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 178))
     },
     uLoadmore: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 185))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 178))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 192))
     }
   }
 } catch (e) {
@@ -128,17 +128,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.goodslist, function(item, index) {
-    var $orig = _vm.__get_orig(item)
+  var l0 = _vm.orders
+    ? _vm.__map(_vm.goodslist, function(item, index) {
+        var $orig = _vm.__get_orig(item)
 
-    var m0 = _vm.priceInt(item.quantity)
-    return {
-      $orig: $orig,
-      m0: m0
-    }
-  })
-
-  var m1 = parseFloat(_vm.orders.paytotal)
+        var m0 = _vm.priceInt(item.quantity)
+        return {
+          $orig: $orig,
+          m0: m0
+        }
+      })
+    : null
+  var m1 = _vm.orders ? parseFloat(_vm.orders.paytotal) : null
 
   var l2 = _vm.__map(_vm.orderList[1], function(res, index) {
     var $orig = _vm.__get_orig(res)
@@ -314,7 +315,7 @@ var _default =
       time: '',
       Cart: [],
       token: '',
-      orders: [],
+      orders: '',
       goodslist: [],
       imgurl: "http://api.mzsale.cn/" };
 
