@@ -94,6 +94,22 @@
 			this.historySearch = await this.$api('historySearch')
 		},
 		methods: {
+      //搜索
+      custom(e){
+        console.log(e)
+        this.$u.api.dishess({
+          access_token:uni.getStorageSync('token'),
+          vtype:'pos',
+          categoryid:'10',
+          spmc:e,
+          fdbh:uni.getStorageSync('fdbh'),
+          companyid:uni.getStorageSync('companyid')
+        }).then((res) =>{
+          console.log('搜索')
+          console.log(res)
+        })
+      },
+
 			hide() {
 				this.keyword = ''
 				this.result = []

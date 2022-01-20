@@ -78,9 +78,9 @@ pays() {
           method: 'GET',
           dataType: 'json',
           success:  (ress) =>{
-            console.info('微信预支付',ress);
+            console.log('微信支付',ress);
             //微信支付
-            wx.requestPayment(                                       //调用微信支付
+            wx.requestPayment(//调用微信支付
                 {
                   'timeStamp': ress.data.timeStamp,
                   'nonceStr': ress.data.nonceStr,
@@ -141,14 +141,12 @@ pays() {
 
           },
           fail: function (error) {
-            console.info("准备支付失败");
-            console.info(error);
+            console.log('准备支付失败',error);
           }
         });
       },
       fail: function (error) {
-        console.info("获取门店初始信息失败");
-        console.info(error);
+        console.log('获取门店初始化信息失败',error);
       }
     });
 

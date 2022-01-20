@@ -170,12 +170,10 @@
     },
     onReady() {
       //this.getMenuItemTop()
-      console.log('onpeady')
     },
     methods: {
       //人数确定后，开台
       ensure() {
-        console.log('确定')
         this.popupshow=false
         //开台
         this.$u.api.orders({
@@ -187,7 +185,17 @@
           tablewaiter:uni.getStorageSync('syyid'),
           fdbh:uni.getStorageSync('fdbh'),
         }).then((res)=>{
-          console.log('开台成功',res)
+          if(res.error_code=='0'){
+            console.log('开台成功',res)
+            uni.setStorageSync('xsdbh',res.xsdbh)
+          }
+              if(res.error_code=='2') {
+                uni.showToast({
+                  title: res.message,
+                  duration: 2000,
+                  icon: 'none'
+                });
+              }
         })
       },
       valChange(e) {
@@ -198,21 +206,7 @@
         this.show=false
         console.log('关闭')
       },
-      //搜索
-      custom(e){
-        console.log(e)
-        this.$u.api.dishess({
-          access_token:uni.getStorageSync('token'),
-          vtype:'pos',
-          categoryid:'10',
-          spmc:e,
-          fdbh:uni.getStorageSync('fdbh'),
-          companyid:uni.getStorageSync('companyid')
-        }).then((res) =>{
-          console.log('搜索')
-          console.log(res)
-        })
-      },
+
       // 点击左边的栏目切换
       async swichMenu(index) {
         if (index == this.current) return;
@@ -326,70 +320,9 @@
           counts:this.counts
         }
         uni.setStorageSync('Cart',this.Cart)
-
-        //生成订单
-        this.$u.api.orders({
-          access_token:this.token,
-          vtype:"new",
-          posid:uni.getStorageSync('posid'),
-          tableid:uni.getStorageSync('tableid'),
-          tablenumber:uni.getStorageSync('tablenumber'),
-          tablewaiter:uni.getStorageSync('syyid'),
-          fdbh:uni.getStorageSync('fdbh'),
-        }).then(
-            (res)=>{
-          console.log("生成订单：",res)
-               if(res.error_code=='2'){
-                 uni.showToast({
-                   title: res.message,
-                   duration: 2000,
-                   icon:'none'
-                 });
-                 // uni.showModal({
-                 //   title: '提示',
-                 //  content: '当前桌台已有人，是否清台',
-              //     success:  (res)=> {
-              //       if (res.confirm) {
-              //         console.log('用户点击确定');
-              //         //清台
-              //         this.$u.api.orders({
-              //           access_token:uni.getStorageSync('token'),
-              //           vtype:'clear',
-              //           tableid:uni.getStorageSync('tableid'),
-              //           fdbh:uni.getStorageSync('fdbh')
-              //         }).then((res)=>{
-              //           console.log('清台成功：',res)
-              //           this.$u.api.orders({
-              //             access_token:this.token,
-              //             vtype:"new",
-              //             posid:"80800101",
-              //             tableid:uni.getStorageSync('tableid'),
-              //             tablenumber:uni.getStorageSync('tablenumber'),
-              //             tablewaiter:"00268",
-              //             fdbh:uni.getStorageSync('fdbh'),
-              //           }).then(res=>{
-              //             console.log("生成订单")
-              //             uni.setStorageSync('xsdbh', res.xsdbh);
-              //             uni.navigateTo({
-              //               url:`/pages/pay/pay?table=${this.table}`,
-              //             })
-              //           })
-              //         })
-              //       } else if (res.cancel) {
-              //         console.log('用户点击取消');
-              //       }
-              //     }
-              //   });
-               }
-              if(res.error_code=='0'){
-                console.log("生成订单")
-                uni.setStorageSync('xsdbh', res.xsdbh);
-                uni.navigateTo({
-                  url:`/pages/pay/pay?table=${this.table}`,
-                })
-              }
-        }
-        )
+        uni.navigateTo({
+          url:`/pages/pay/pay?table=${this.table}`,
+        })
       }
   },
     computed:{

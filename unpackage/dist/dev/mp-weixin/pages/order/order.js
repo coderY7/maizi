@@ -98,13 +98,13 @@ var components
 try {
   components = {
     uTabsSwiper: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 178))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 192))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 185))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 199))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 192))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 206))
     }
   }
 } catch (e) {
@@ -336,19 +336,21 @@ var _default =
       _this.goodslist = res.goodslist;
       _this.orders = res;
     });
-    //支付成功订单接口
-    this.$u.api.searchs({
-      access_token: uni.getStorageSync('token'),
-      orderid: uni.getStorageSync('xsdbh'), //销单号
-      shopid: uni.getStorageSync('fdbh'),
-      posid: uni.getStorageSync('posid'),
-      syyid: uni.getStorageSync('syyid'),
-      zktype: 'ZK',
-      zkvalue: '' }).
-    then(function (res) {
-      //console.log('支付成功订单：',res)
-    });
 
+    //订单完成
+    this.$u.api.paydones({
+      access_token: uni.getStorageSync('token'),
+      flow_no: uni.getStorageSync('xsdbh'),
+      payno: '04',
+      total: uni.getStorageSync('total'), //付款金额
+      payid: '',
+      syyid: uni.getStorageSync('syyid'),
+      vipid: uni.getStorageSync('vipid'), //会员码openid
+      fdbh: uni.getStorageSync('fdbh'),
+      companyid: uni.getStorageSync('companyid') }).
+    then(function (res) {
+      console.log('订单完成', res);
+    });
 
   },
   computed: {

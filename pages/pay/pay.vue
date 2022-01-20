@@ -125,6 +125,7 @@ addmenu(){
   onLoad(options) {
     //获取购买商品数据
     this.Cart=uni.getStorageSync('Cart');
+    uni.setStorageSync('total',this.Cart.cartprice)
     this.tableid=uni.getStorageSync('tableid')
   }
 }
