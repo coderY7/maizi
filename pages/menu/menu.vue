@@ -2,12 +2,15 @@
 	<view class="u-wrap">
 
 		<view class="u-search-box">
-     
-	  				<!-- <view class="search-input" @tap="showSearch=true">
-	  					<image src="/static/images/common/search-icon.png" class="search-icon"></image>
-	  					<view>搜索</view>
-	  				</view>
-	  			 -->
+
+      <view class="search-box">
+        <view class="search-input" @tap="showSearch=true">
+          <image src="/static/common/search-icon.png" class="search-icon"></image>
+          <view>搜索</view>
+        </view>
+      </view>
+
+      		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
 		</view>
 
     <view class="rolls">
@@ -69,7 +72,7 @@
         <u-button @click="ensure" style="margin-top:30rpx;">确定</u-button>
       </view>
     </u-popup>
-		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
+<!--		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>-->
 
 	</view>
 </template>
@@ -405,9 +408,6 @@
 <style lang="scss" scoped>
 	.u-wrap {
 		height: calc(100vh);
-		/* #ifdef H5 */
-		//height: calc(100vh - var(--window-top));
-		/* #endif */
 		display: flex;
 		flex-direction: column;
     margin:10rpx 40rpx 0 40rpx;
@@ -415,6 +415,28 @@
 	.u-search-box {
 
 	}
+  .search-box {
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .search-input {
+      height: 60rpx;
+      width: 100%;
+      background-color: #f7f7f7;
+      font-size: $font-size-base;
+      border-radius: 50rem !important;
+      display: flex;
+      align-items: center;
+
+      .search-icon {
+        width: 30rpx;
+        height: 30rpx;
+        margin:0 20rpx;
+      }
+    }
+  }
 	.u-menu-wrap {
 		flex: 1;
 		display: flex;

@@ -141,6 +141,10 @@ var render = function() {
 
   if (!_vm._isMounted) {
     _vm.e0 = function($event) {
+      _vm.showSearch = true
+    }
+
+    _vm.e1 = function($event) {
       _vm.showSearch = false
     }
   }
@@ -187,6 +191,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 24));
+
+
+
 
 
 

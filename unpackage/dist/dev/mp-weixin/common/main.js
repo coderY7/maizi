@@ -104,11 +104,8 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch(options) {
-    //获取桌台号
-    console.log('桌台号', options.query.tableid);
-    var accountInfo = uni.getAccountInfoSync();
-    console.log(accountInfo.miniProgram.appId);
-    uni.setStorageSync('appid', accountInfo.miniProgram.appId);
+    var appId = uni.getAccountInfoSync().miniProgram.appId;
+    uni.setStorageSync('appid', appId);
     uni.setStorageSync('syyid', '00268');
     uni.setStorageSync('vipid', '26512220');
     uni.setStorageSync('posid', '80800101');
@@ -118,7 +115,6 @@ __webpack_require__.r(__webpack_exports__);
     uni.setStorageSync('companyid', '800008');
   },
   onShow: function onShow() {
-    console.log('App Show');
     var Token = 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
     uni.setStorageSync('token', Token);
     //获取openid
@@ -134,17 +130,13 @@ __webpack_require__.r(__webpack_exports__);
           method: 'GET',
           dataType: 'json',
           success: function success(res) {
-            console.log(res);
             if (res.data[0].Result == '0') {
               uni.setStorageSync('openid', res.data[0].openid); //小程序openid
               uni.setStorageSync('unionid', res.data[0].unionid); //开放平台unionid,可能为空
-            } else {
-              console.log(res.data[0].openid);
             }
           },
           fail: function fail(res) {
             console.info('获取用户openId失败');
-            console.info(error);
           } });
 
       } });
@@ -156,7 +148,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   //全局数据
   globalData: {
-    text: 'coderyh' } };exports.default = _default;
+    text: '全局数据' } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

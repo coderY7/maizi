@@ -4,8 +4,9 @@
 			<view class="header">
 				<view class="order-type">
 					<view class="font-weight-bold">
-            <view>请选择就餐人数</view>
-            <u-number-box v-model="value" @change="valChange" :min="1"></u-number-box>
+<!--            <view>请选择就餐人数</view>-->
+<!--            <u-number-box v-model="value" @change="valChange" :min="1"></u-number-box>-->
+            <view>购物车列表</view>
           </view>
 				</view>
 				<view  @tap="clear" class="delete-right">
