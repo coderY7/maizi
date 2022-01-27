@@ -59,7 +59,7 @@ pays() {
       url: 'https://lite.ecsun.cn/api/init/'+snvar+'-'+fdbhvar,
       method: 'GET',
       dataType: 'json',
-      success: function (ress) {
+      success:  (ress)=> {
           console.log('获取商家商户号信息',ress)
           uni.setStorageSync('subappid', ress.data.wxpaylist.appid);       //商家公众号子appid
           uni.setStorageSync('submchid', ress.data.wxpaylist.submchid);    //商家支付子商户号
@@ -78,7 +78,7 @@ pays() {
           method: 'GET',
           dataType: 'json',
           success:  (ress) =>{
-            console.log('微信支付',ress);
+            console.log('微信调用成功',ress);
             //微信支付
             wx.requestPayment(//调用微信支付
                 {
@@ -107,11 +107,11 @@ pays() {
                       companyid:uni.getStorageSync('companyid')
                     }).then((res)=>{
                       console.log('订单支付完成',res)
-                      uni.setStorageSync('orders',res)
+                      uni.setStorageSync('completion',res)
                     })
 
                   },
-                  'fail': res=> {
+                  'fail': (res)=> {
                     console.log('支付失败:',res,this);
                     uni.showToast({
                       title: '微信支付失败',
@@ -131,7 +131,7 @@ pays() {
                       fdbh:uni.getStorageSync('fdbh'),
                       companyid:uni.getStorageSync('companyid')
                     }).then((res)=>{
-                      console.log('订单支付完成',res)
+                      console.log('订单支付失败',res)
                       uni.setStorageSync('orders',res)
                     })
 

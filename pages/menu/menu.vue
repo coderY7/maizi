@@ -65,10 +65,10 @@
               @clear="clearCart"
               @pay="pay"
     />
-    <u-popup v-model="popupshow" mode="center" border-radius="14"  :mask="true" :mask-close-able="false">
+    <u-popup v-model="popupshow" mode="center" border-radius="14"  :mask="true" closeable="true" :mask-close-able="true" >
       <view style="display:flex;flex-direction:column;justify-content:center;align-items:center;width:500rpx;height:300rpx;">
         <text style="margin-bottom:20rpx">请选择就餐人数</text>
-        <u-number-box v-model="value" min="1" @change="valChange"></u-number-box>
+        <u-number-box v-model="value" min="0" @change="valChange"></u-number-box>
         <u-button @click="ensure" style="margin-top:30rpx;">确定</u-button>
       </view>
     </u-popup>
@@ -161,6 +161,9 @@
         uni.switchTab({
           url: '/pages/my/my'
         });
+      }
+      if(uni.getStorageSync('tablenumber')<1){
+        this.popupshow=true
       }
     },
     onLoad(options) {

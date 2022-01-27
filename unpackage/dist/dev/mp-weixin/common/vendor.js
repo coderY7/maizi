@@ -805,9 +805,15 @@ var customize = cached(function (str) {
 
 function initTriggerEvent(mpInstance) {
   var oldTriggerEvent = mpInstance.triggerEvent;
-  mpInstance.triggerEvent = function (event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
+  var newTriggerEvent = function newTriggerEvent(event) {for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {args[_key3 - 1] = arguments[_key3];}
     return oldTriggerEvent.apply(mpInstance, [customize(event)].concat(args));
   };
+  try {
+    // 京东小程序 triggerEvent 为只读
+    mpInstance.triggerEvent = newTriggerEvent;
+  } catch (error) {
+    mpInstance._triggerEvent = newTriggerEvent;
+  }
 }
 
 function initHook(name, options, isComponent) {
@@ -1981,17 +1987,17 @@ function createPlugin(vm) {
   var appOptions = parseApp(vm);
   if (isFn(appOptions.onShow) && wx.onAppShow) {
     wx.onAppShow(function () {for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {args[_key7] = arguments[_key7];}
-      appOptions.onShow.apply(vm, args);
+      vm.__call_hook('onShow', args);
     });
   }
   if (isFn(appOptions.onHide) && wx.onAppHide) {
     wx.onAppHide(function () {for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {args[_key8] = arguments[_key8];}
-      appOptions.onHide.apply(vm, args);
+      vm.__call_hook('onHide', args);
     });
   }
   if (isFn(appOptions.onLaunch)) {
     var args = wx.getLaunchOptionsSync && wx.getLaunchOptionsSync();
-    appOptions.onLaunch.call(vm, args);
+    vm.__call_hook('onLaunch', args);
   }
   return vm;
 }
@@ -2086,9 +2092,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 128:
-/*!********************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/common/qqmap-wx-jssdk.min.js ***!
-  \********************************************************************************/
+/*!************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/common/qqmap-wx-jssdk.min.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2226,9 +2232,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 16:
-/*!**********************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/index.js ***!
-  \**********************************************************************************/
+/*!**************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/index.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2378,9 +2384,9 @@ var install = function install(Vue) {
 /***/ }),
 
 /***/ 17:
-/*!*********************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/mixin/mixin.js ***!
-  \*********************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/mixin/mixin.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2452,9 +2458,9 @@ var install = function install(Vue) {
 /***/ }),
 
 /***/ 18:
-/*!***********************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/request/index.js ***!
-  \***********************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/request/index.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2633,9 +2639,9 @@ new Request();exports.default = _default;
 /***/ }),
 
 /***/ 19:
-/*!****************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/deepMerge.js ***!
-  \****************************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/deepMerge.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2705,9 +2711,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 20:
-/*!****************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/deepClone.js ***!
-  \****************************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/deepClone.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2739,9 +2745,9 @@ deepClone;exports.default = _default;
 /***/ }),
 
 /***/ 21:
-/*!***********************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/test.js ***!
-  \***********************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/test.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2981,9 +2987,9 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
 /***/ }),
 
 /***/ 22:
-/*!******************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/queryParams.js ***!
-  \******************************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/queryParams.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3050,9 +3056,9 @@ queryParams;exports.default = _default;
 /***/ }),
 
 /***/ 23:
-/*!************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/route.js ***!
-  \************************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/route.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3184,9 +3190,9 @@ new Router().route;exports.default = _default;
 /***/ }),
 
 /***/ 239:
-/*!*********************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/components/uni-popup/popup.js ***!
-  \*********************************************************************************/
+/*!*************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/components/uni-popup/popup.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3230,9 +3236,9 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 25);
 /***/ }),
 
 /***/ 240:
-/*!***********************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/components/uni-popup/message.js ***!
-  \***********************************************************************************/
+/*!***************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/components/uni-popup/message.js ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4041,9 +4047,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 27:
-/*!*****************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/timeFormat.js ***!
-  \*****************************************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/timeFormat.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4103,9 +4109,9 @@ timeFormat;exports.default = _default;
 /***/ }),
 
 /***/ 28:
-/*!***************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/timeFrom.js ***!
-  \***************************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/timeFrom.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4161,9 +4167,9 @@ timeFrom;exports.default = _default;
 /***/ }),
 
 /***/ 29:
-/*!********************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/colorGradient.js ***!
-  \********************************************************************************************************/
+/*!************************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/colorGradient.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10131,9 +10137,10 @@ function internalMixin(Vue) {
 
   Vue.prototype.$emit = function(event) {
     if (this.$scope && event) {
-      this.$scope['triggerEvent'](event, {
-        __args__: toArray(arguments, 1)
-      });
+      (this.$scope['_triggerEvent'] || this.$scope['triggerEvent'])
+        .call(this.$scope, event, {
+          __args__: toArray(arguments, 1)
+        })
     }
     return oldEmit.apply(this, arguments)
   };
@@ -10356,9 +10363,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 30:
-/*!***********************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/guid.js ***!
-  \***********************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/guid.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10408,9 +10415,9 @@ guid;exports.default = _default;
 /***/ }),
 
 /***/ 31:
-/*!************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/color.js ***!
-  \************************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/color.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10456,9 +10463,9 @@ color;exports.default = _default;
 /***/ }),
 
 /***/ 32:
-/*!****************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/type2icon.js ***!
-  \****************************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/type2icon.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10502,9 +10509,9 @@ type2icon;exports.default = _default;
 /***/ }),
 
 /***/ 33:
-/*!******************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/randomArray.js ***!
-  \******************************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/randomArray.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10520,9 +10527,9 @@ randomArray;exports.default = _default;
 /***/ }),
 
 /***/ 34:
-/*!**************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/addUnit.js ***!
-  \**************************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/addUnit.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10539,9 +10546,9 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 /***/ }),
 
 /***/ 35:
-/*!*************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/random.js ***!
-  \*************************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/random.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10560,9 +10567,9 @@ random;exports.default = _default;
 /***/ }),
 
 /***/ 36:
-/*!***********************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/trim.js ***!
-  \***********************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/trim.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10586,9 +10593,9 @@ trim;exports.default = _default;
 /***/ }),
 
 /***/ 37:
-/*!************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/toast.js ***!
-  \************************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/toast.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10607,9 +10614,9 @@ toast;exports.default = _default;
 /***/ }),
 
 /***/ 38:
-/*!****************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/getParent.js ***!
-  \****************************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/getParent.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10665,9 +10672,9 @@ function getParent(name, keys) {
 /***/ }),
 
 /***/ 39:
-/*!**************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/$parent.js ***!
-  \**************************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/$parent.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11158,9 +11165,9 @@ function resolveLocaleChain(locale) {
 /***/ }),
 
 /***/ 40:
-/*!**********************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/sys.js ***!
-  \**********************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/sys.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11177,9 +11184,9 @@ function sys() {
 /***/ }),
 
 /***/ 41:
-/*!***************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/debounce.js ***!
-  \***************************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/debounce.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11217,9 +11224,9 @@ debounce;exports.default = _default;
 /***/ }),
 
 /***/ 42:
-/*!***************************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/function/throttle.js ***!
-  \***************************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/function/throttle.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11260,9 +11267,9 @@ throttle;exports.default = _default;
 /***/ }),
 
 /***/ 43:
-/*!***********************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/config/config.js ***!
-  \***********************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/config/config.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11284,9 +11291,9 @@ var version = '1.8.3';var _default =
 /***/ }),
 
 /***/ 44:
-/*!***********************************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/node_modules/uview-ui/libs/config/zIndex.js ***!
-  \***********************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/node_modules/uview-ui/libs/config/zIndex.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11314,9 +11321,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 45:
-/*!******************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/common/http.interceptor.js ***!
-  \******************************************************************************/
+/*!**********************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/common/http.interceptor.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11398,9 +11405,9 @@ var install = function install(Vue, vm) {
 /***/ }),
 
 /***/ 46:
-/*!**********************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/common/http.api.js ***!
-  \**********************************************************************/
+/*!**************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/common/http.api.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11463,9 +11470,9 @@ var install = function install(Vue, vm) {
 /***/ }),
 
 /***/ 5:
-/*!**************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/pages.json ***!
-  \**************************************************************/
+/*!******************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/pages.json ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11563,6 +11570,7 @@ var getPlatformName = function getPlatformName() {var _platformList;
   'mp-baidu', 'bd'), _defineProperty(_platformList,
   'mp-toutiao', 'tt'), _defineProperty(_platformList,
   'mp-qq', 'qq'), _defineProperty(_platformList,
+  'mp-jd', 'jd'), _defineProperty(_platformList,
   'quickapp-native', 'qn'), _defineProperty(_platformList,
   'mp-kuaishou', 'ks'), _platformList);
 
@@ -12464,9 +12472,9 @@ main();
 /***/ }),
 
 /***/ 61:
-/*!************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/common/categories.js ***!
-  \************************************************************************/
+/*!****************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/common/categories.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18101,14 +18109,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_from\":\"@dcloudio/uni-stat@next\",\"_id\":\"@dcloudio/uni-stat@2.0.1-33520211229001\",\"_inBundle\":false,\"_integrity\":\"sha512-dLSo5wsuewbmJVGF7CM5/jhd4cP4/LjrTocMJDv/JBJbLSmdPmxFW4xWhWMv+kOsE8sUZThS4sAr1D6RYgmEKw==\",\"_location\":\"/@dcloudio/uni-stat\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"tag\",\"registry\":true,\"raw\":\"@dcloudio/uni-stat@next\",\"name\":\"@dcloudio/uni-stat\",\"escapedName\":\"@dcloudio%2funi-stat\",\"scope\":\"@dcloudio\",\"rawSpec\":\"next\",\"saveSpec\":null,\"fetchSpec\":\"next\"},\"_requiredBy\":[\"#USER\",\"/\",\"/@dcloudio/vue-cli-plugin-uni\"],\"_resolved\":\"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.1-33520211229001.tgz\",\"_shasum\":\"ec3043136d61a3fc929be717122cde7660efeeed\",\"_spec\":\"@dcloudio/uni-stat@next\",\"_where\":\"/Users/guoshengqiang/Documents/hbx-plugins/uniapp-cli\",\"author\":\"\",\"bugs\":{\"url\":\"https://github.com/dcloudio/uni-app/issues\"},\"bundleDependencies\":false,\"deprecated\":false,\"description\":\"\",\"devDependencies\":{\"@babel/core\":\"^7.5.5\",\"@babel/preset-env\":\"^7.5.5\",\"eslint\":\"^6.1.0\",\"rollup\":\"^1.19.3\",\"rollup-plugin-babel\":\"^4.3.3\",\"rollup-plugin-clear\":\"^2.0.7\",\"rollup-plugin-commonjs\":\"^10.0.2\",\"rollup-plugin-copy\":\"^3.1.0\",\"rollup-plugin-eslint\":\"^7.0.0\",\"rollup-plugin-json\":\"^4.0.0\",\"rollup-plugin-node-resolve\":\"^5.2.0\",\"rollup-plugin-replace\":\"^2.2.0\",\"rollup-plugin-uglify\":\"^6.0.2\"},\"files\":[\"dist\",\"package.json\",\"LICENSE\"],\"gitHead\":\"d53f68995da33f6d65b5276f68a2c9563e548e15\",\"homepage\":\"https://github.com/dcloudio/uni-app#readme\",\"license\":\"Apache-2.0\",\"main\":\"dist/index.js\",\"name\":\"@dcloudio/uni-stat\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/dcloudio/uni-app.git\",\"directory\":\"packages/uni-stat\"},\"scripts\":{\"build\":\"NODE_ENV=production rollup -c rollup.config.js\",\"dev\":\"NODE_ENV=development rollup -w -c rollup.config.js\"},\"version\":\"2.0.1-33520211229001\"}");
+module.exports = JSON.parse("{\"_from\":\"@dcloudio/uni-stat@next\",\"_id\":\"@dcloudio/uni-stat@2.0.1-33920220124001\",\"_inBundle\":false,\"_integrity\":\"sha512-aiQXB1MM2RmWq2AzPr6GzcODPGdP6Ripa9uJN2AtE3mZGV4/8UDFFVtxHUgDaNsndxrvIMPuW5kWPuN+z7Q5gw==\",\"_location\":\"/@dcloudio/uni-stat\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"tag\",\"registry\":true,\"raw\":\"@dcloudio/uni-stat@next\",\"name\":\"@dcloudio/uni-stat\",\"escapedName\":\"@dcloudio%2funi-stat\",\"scope\":\"@dcloudio\",\"rawSpec\":\"next\",\"saveSpec\":null,\"fetchSpec\":\"next\"},\"_requiredBy\":[\"#USER\",\"/\",\"/@dcloudio/vue-cli-plugin-uni\"],\"_resolved\":\"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.1-33920220124001.tgz\",\"_shasum\":\"a3d0cf1427ad8c5050986ab5a094d286913c3664\",\"_spec\":\"@dcloudio/uni-stat@next\",\"_where\":\"/Users/guoshengqiang/Documents/hbx-plugins/uniapp-cli\",\"author\":\"\",\"bugs\":{\"url\":\"https://github.com/dcloudio/uni-app/issues\"},\"bundleDependencies\":false,\"deprecated\":false,\"description\":\"\",\"devDependencies\":{\"@babel/core\":\"^7.5.5\",\"@babel/preset-env\":\"^7.5.5\",\"eslint\":\"^6.1.0\",\"rollup\":\"^1.19.3\",\"rollup-plugin-babel\":\"^4.3.3\",\"rollup-plugin-clear\":\"^2.0.7\",\"rollup-plugin-commonjs\":\"^10.0.2\",\"rollup-plugin-copy\":\"^3.1.0\",\"rollup-plugin-eslint\":\"^7.0.0\",\"rollup-plugin-json\":\"^4.0.0\",\"rollup-plugin-node-resolve\":\"^5.2.0\",\"rollup-plugin-replace\":\"^2.2.0\",\"rollup-plugin-uglify\":\"^6.0.2\"},\"files\":[\"dist\",\"package.json\",\"LICENSE\"],\"gitHead\":\"dc71568105c7a0e7f51bec8833ad2b02cba73b7d\",\"homepage\":\"https://github.com/dcloudio/uni-app#readme\",\"license\":\"Apache-2.0\",\"main\":\"dist/index.js\",\"name\":\"@dcloudio/uni-stat\",\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/dcloudio/uni-app.git\",\"directory\":\"packages/uni-stat\"},\"scripts\":{\"build\":\"NODE_ENV=production rollup -c rollup.config.js\",\"dev\":\"NODE_ENV=development rollup -w -c rollup.config.js\"},\"version\":\"2.0.1-33920220124001\"}");
 
 /***/ }),
 
 /***/ 8:
-/*!******************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/pages.json?{"type":"stat"} ***!
-  \******************************************************************************/
+/*!**********************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/pages.json?{"type":"stat"} ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18118,9 +18126,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 9:
-/*!*******************************************************************************!*\
-  !*** /Users/coderyh/Downloads/codeY/mzscan/maizi/pages.json?{"type":"style"} ***!
-  \*******************************************************************************/
+/*!***********************************************************************!*\
+  !*** /Users/coderyh/Downloads/codeY/扫码点餐/pages.json?{"type":"style"} ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
