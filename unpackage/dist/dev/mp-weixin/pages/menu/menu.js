@@ -371,27 +371,29 @@ var _categories = _interopRequireDefault(__webpack_require__(/*! ../../common/ca
     ensure: function ensure() {
       this.popupshow = false;
       //开台
-      this.$u.api.orders({
-        access_token: uni.getStorageSync('token'),
-        vtype: "new",
-        posid: uni.getStorageSync('posid'),
-        tableid: uni.getStorageSync('tableid'),
-        tablenumber: uni.getStorageSync('tablenumber'),
-        tablewaiter: uni.getStorageSync('syyid'),
-        fdbh: uni.getStorageSync('fdbh') }).
-      then(function (res) {
-        if (res.error_code == '0') {
-          console.log('开台成功', res);
-          uni.setStorageSync('xsdbh', res.xsdbh);
-        }
-        if (res.error_code == '2') {
-          uni.showToast({
-            title: res.message,
-            duration: 2000,
-            icon: 'none' });
+      if (uni.getStorageSync('xsdbh') == '') {
+        this.$u.api.orders({
+          access_token: uni.getStorageSync('token'),
+          vtype: "new",
+          posid: uni.getStorageSync('posid'),
+          tableid: uni.getStorageSync('tableid'),
+          tablenumber: uni.getStorageSync('tablenumber'),
+          tablewaiter: uni.getStorageSync('syyid'),
+          fdbh: uni.getStorageSync('fdbh') }).
+        then(function (res) {
+          if (res.error_code == '0') {
+            console.log('开台成功', res);
+            uni.setStorageSync('xsdbh', res.xsdbh);
+          }
+          if (res.error_code == '2') {
+            uni.showToast({
+              title: res.message,
+              duration: 2000,
+              icon: 'none' });
 
-        }
-      });
+          }
+        });
+      }
     },
     valChange: function valChange(e) {
       uni.setStorageSync('tablenumber', e.value);
