@@ -202,7 +202,6 @@ var _default =
     return {
       tableid: '' };
 
-
   },
   methods: {
     navmenu: function navmenu() {

@@ -234,16 +234,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     //搜索
-    custom: function custom(e) {
-      console.log(e);
+    custom: function custom() {
+      console.log(this.keyword);
       this.$u.api.dishess({
+        spmc: this.keyword,
+        //categoryid:'10',
         access_token: uni.getStorageSync('token'),
-        vtype: 'pos',
-        categoryid: '10',
-        spmc: e,
-        fdbh: uni.getStorageSync('fdbh'),
-        companyid: uni.getStorageSync('companyid') }).
-      then(function (res) {
+        vtype: 'pos'
+        //fdbh:uni.getStorageSync('fdbh'),
+        //companyid:uni.getStorageSync('companyid'),
+      }).then(function (res) {
         console.log('搜索');
         console.log(res);
       });
