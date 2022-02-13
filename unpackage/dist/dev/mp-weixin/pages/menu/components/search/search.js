@@ -213,6 +213,7 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
+      imgurl: "http://api.mzsale.cn/",
       tranStyles: {
         width: '100%',
         position: 'absolute',
@@ -231,8 +232,7 @@ __webpack_require__.r(__webpack_exports__);
 
   methods: {
     //搜索
-    custom: function custom() {
-      console.log(this.keyword);
+    custom: function custom() {var _this = this;
       this.$u.api.dishess({
         spmc: this.keyword,
         categoryid: '10',
@@ -241,17 +241,18 @@ __webpack_require__.r(__webpack_exports__);
         fdbh: uni.getStorageSync('fdbh'),
         companyid: uni.getStorageSync('companyid') }).
       then(function (res) {
-        console.log('搜索');
-        console.log(res);
+        console.log('搜索结果', res);
+        _this.result = res.disheslist;
       });
     },
-
+    //取消
     hide: function hide() {
       this.keyword = '';
       this.result = [];
       this.$emit('hide');
     },
-    handleChoose: function handleChoose(item) {var _this = this;var isSearch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    handleChoose: function handleChoose(item) {var _this2 = this;var isSearch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       if (isSearch) {
         this.hide();
         this.$emit('choose', item);
@@ -260,31 +261,30 @@ __webpack_require__.r(__webpack_exports__);
       this.categories.forEach(function (category) {
         var find = category.products.find(function (product) {return product.id == item.productId;});
         if (find) {
-          _this.hide();
-          _this.$emit('choose', find);
+          _this2.hide();
+          _this2.$emit('choose', find);
           return;
         }
       });
     },
-    handleKeywordInput: function handleKeywordInput(e) {var _this2 = this;
-      console.log('123');
+    handleKeywordInput: function handleKeywordInput(e) {
+      this.custom();
+
       //为了方便，这里使用商品列表的数据来筛选结果
-      var value = e.detail.value;
-
-      if (!value) {
-        this.result = [];
-        return;
-      }
-
-      var result = [];
-      this.categories.forEach(function (category) {
-        category.products.forEach(function (product) {
-          if (product.name.indexOf(value) > -1) {
-            result.push(product);
-          }
-        });
-      });
-      setTimeout(function () {return _this2.result = result;}, 300);
+      // const {value} = e.detail
+      // if(!value) {
+      // 	this.result = []
+      // 	return
+      // }
+      // let result = []
+      // this.categories.forEach(category => {
+      // 	category.products.forEach(product => {
+      // 		if(product.name.indexOf(value) > -1) {
+      // 			result.push(product)
+      // 		}
+      // 	})
+      // })
+      // setTimeout(() => this.result = result, 300)
     },
     clear: function clear() {
       this.keyword = '';

@@ -9,7 +9,7 @@
 							placeholder-class="placeholder" @input="handleKeywordInput">
 				    <image v-if="keyword" src="/static/images/common/image-delete.png" class="close-icon" @tap="clear" />
 				</view>
-				<view class="ml-30" @click="custom">取消</view>
+				<view class="ml-30" @click="hide">取消</view>
 			</view>
 			<scroll-view class="result" scroll-y>
 				<template v-if="!result.length">
@@ -43,10 +43,10 @@
 					<view class="wrapper" style="padding: 0 30rpx 30rpx 0;">
 						<view class="product" v-for="(item, index) in result" :key="index" @tap="handleChoose(item, true)">
 							<view class="d-flex align-items-center">
-								<image :src="item.images[0].url" class="pro-image"/>
-								<view class="pro-name">{{ item.name }}</view>
+								<image :src="imgurl+item.small_img_path" class="pro-image"/>
+								<view class="pro-name">{{ item.spmc }}</view>
 							</view>
-							<view class="pro-price">￥{{ item.price }}</view>
+							<view class="pro-price">￥{{ item.hyjg}}</view>
 						</view>
 					</view>
 				</template>
@@ -74,7 +74,8 @@
 		},
 		data() {
 			return {
-				tranStyles: {
+        imgurl:"http://api.mzsale.cn/",
+        tranStyles: {
 					width: '100%',
 					position: 'absolute',
 					top: 0,
@@ -93,7 +94,6 @@
 		methods: {
       //搜索
       custom(){
-        console.log(this.keyword)
         this.$u.api.dishess({
           spmc:this.keyword,
           categoryid:'10',
@@ -102,16 +102,17 @@
           fdbh:uni.getStorageSync('fdbh'),
           companyid:uni.getStorageSync('companyid'),
         }).then((res) =>{
-          console.log('搜索')
-          console.log(res)
+          console.log('搜索结果',res)
+          this.result=res.disheslist
         })
       },
-
+      //取消
 			hide() {
 				this.keyword = ''
 				this.result = []
 				this.$emit('hide')
 			},
+
 			handleChoose(item, isSearch = false) {
 				if(isSearch) {
 					this.hide()
@@ -128,24 +129,23 @@
 				})
 			},
 			handleKeywordInput(e) {
-        console.log('123')
+        this.custom()
+
 				//为了方便，这里使用商品列表的数据来筛选结果
-				const {value} = e.detail
-				
-				if(!value) {
-					this.result = []
-					return
-				}
-				
-				let result = []
-				this.categories.forEach(category => {
-					category.products.forEach(product => {
-						if(product.name.indexOf(value) > -1) {
-							result.push(product)
-						}
-					})
-				})
-				setTimeout(() => this.result = result, 300)
+				// const {value} = e.detail
+				// if(!value) {
+				// 	this.result = []
+				// 	return
+				// }
+				// let result = []
+				// this.categories.forEach(category => {
+				// 	category.products.forEach(product => {
+				// 		if(product.name.indexOf(value) > -1) {
+				// 			result.push(product)
+				// 		}
+				// 	})
+				// })
+				// setTimeout(() => this.result = result, 300)
 			},
 			clear() {
 				this.keyword=''
