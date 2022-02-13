@@ -137,7 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 24));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var uniTransition = function uniTransition() {__webpack_require__.e(/*! require.ensure | components/uni-transition/uni-transition */ "components/uni-transition/uni-transition").then((function () {return resolve(__webpack_require__(/*! @/components/uni-transition/uni-transition.vue */ 227));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniTransition = function uniTransition() {__webpack_require__.e(/*! require.ensure | components/uni-transition/uni-transition */ "components/uni-transition/uni-transition").then((function () {return resolve(__webpack_require__(/*! @/components/uni-transition/uni-transition.vue */ 227));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
 
 
 
@@ -228,22 +228,19 @@ __webpack_require__.r(__webpack_exports__);
       result: [] };
 
   },
-  created: function created() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                _this.$api('hotSearch'));case 2:_this.hotSearch = _context.sent;_context.next = 5;return (
-                _this.$api('historySearch'));case 5:_this.historySearch = _context.sent;case 6:case "end":return _context.stop();}}}, _callee);}))();
-  },
+
   methods: {
     //搜索
     custom: function custom() {
       console.log(this.keyword);
       this.$u.api.dishess({
         spmc: this.keyword,
-        //categoryid:'10',
+        categoryid: '10',
         access_token: uni.getStorageSync('token'),
-        vtype: 'pos'
-        //fdbh:uni.getStorageSync('fdbh'),
-        //companyid:uni.getStorageSync('companyid'),
-      }).then(function (res) {
+        vtype: 'pos',
+        fdbh: uni.getStorageSync('fdbh'),
+        companyid: uni.getStorageSync('companyid') }).
+      then(function (res) {
         console.log('搜索');
         console.log(res);
       });
@@ -254,7 +251,7 @@ __webpack_require__.r(__webpack_exports__);
       this.result = [];
       this.$emit('hide');
     },
-    handleChoose: function handleChoose(item) {var _this2 = this;var isSearch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    handleChoose: function handleChoose(item) {var _this = this;var isSearch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       if (isSearch) {
         this.hide();
         this.$emit('choose', item);
@@ -263,13 +260,14 @@ __webpack_require__.r(__webpack_exports__);
       this.categories.forEach(function (category) {
         var find = category.products.find(function (product) {return product.id == item.productId;});
         if (find) {
-          _this2.hide();
-          _this2.$emit('choose', find);
+          _this.hide();
+          _this.$emit('choose', find);
           return;
         }
       });
     },
-    handleKeywordInput: function handleKeywordInput(e) {var _this3 = this;
+    handleKeywordInput: function handleKeywordInput(e) {var _this2 = this;
+      console.log('123');
       //为了方便，这里使用商品列表的数据来筛选结果
       var value = e.detail.value;
 
@@ -286,7 +284,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       });
-      setTimeout(function () {return _this3.result = result;}, 300);
+      setTimeout(function () {return _this2.result = result;}, 300);
     },
     clear: function clear() {
       this.keyword = '';

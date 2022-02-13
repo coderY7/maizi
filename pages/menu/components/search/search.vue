@@ -9,7 +9,7 @@
 							placeholder-class="placeholder" @input="handleKeywordInput">
 				    <image v-if="keyword" src="/static/images/common/image-delete.png" class="close-icon" @tap="clear" />
 				</view>
-				<view class="ml-30" @tap="hide">取消</view>
+				<view class="ml-30" @click="custom">取消</view>
 			</view>
 			<scroll-view class="result" scroll-y>
 				<template v-if="!result.length">
@@ -89,21 +89,18 @@
 				result: []
 			}
 		},
-		async created() {
-			this.hotSearch = await this.$api('hotSearch')
-			this.historySearch = await this.$api('historySearch')
-		},
+
 		methods: {
       //搜索
-      custom(e){
-        console.log(e)
+      custom(){
+        console.log(this.keyword)
         this.$u.api.dishess({
+          spmc:this.keyword,
+          categoryid:'10',
           access_token:uni.getStorageSync('token'),
           vtype:'pos',
-          categoryid:'10',
-          spmc:e,
           fdbh:uni.getStorageSync('fdbh'),
-          companyid:uni.getStorageSync('companyid')
+          companyid:uni.getStorageSync('companyid'),
         }).then((res) =>{
           console.log('搜索')
           console.log(res)
@@ -131,6 +128,7 @@
 				})
 			},
 			handleKeywordInput(e) {
+        console.log('123')
 				//为了方便，这里使用商品列表的数据来筛选结果
 				const {value} = e.detail
 				

@@ -4,7 +4,7 @@
     <view class="unit1">
       <image mode="" src="../../static/main/LOGO.png" style="width: 130rpx;height: 130rpx;margin-left: 40rpx"></image>
       <view class="unit1_text">
-        <view class="name">麦子旗航店</view>
+        <view class="name">麦子旗舰店</view>
         <text style="margin-top: 20rpx;opacity: 0.6">天府新谷主店</text>
       </view>
     </view>
@@ -69,7 +69,6 @@ export default {
   data() {
     return {
       tableid:'',
-
     }
   },
   methods: {
