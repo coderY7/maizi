@@ -13,15 +13,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/main/main",
+          "name": "首页",
           "pathName": "pages/main/main",
-          "query": "tableid=908",
-          "scene": null
-        },
-        {
-          "name": "map",
-          "pathName": "pages/map/map",
-          "query": "",
+          "query": "tableid=9012",
           "scene": null
         }
       ]

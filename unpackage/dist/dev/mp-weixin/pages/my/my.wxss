@@ -47,15 +47,13 @@ page {
   overflow: hidden;
 }
 .content .unit1 .unit1box {
-  flex: 1;
   display: flex;
-  margin-left: 20rpx;
   justify-content: space-between;
   align-items: center;
   margin-top: 20rpx;
 }
 .content .unit1 .unit1box .unit1box_code {
-  margin-right: 20rpx;
+  margin-lift: 200rpx;
 }
 .content .unit2 {
   margin-top: 50rpx;

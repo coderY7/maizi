@@ -291,8 +291,6 @@ export default {
         console.log(arr);
         this.productData.dishesextlist=arr
       }
-
-
       this.$set(this.productData, 'number', 1);
       console.log(this.productData.dishesextlist)
     }
@@ -490,7 +488,6 @@ ext_zxprice:'',
     //更新
     updateChoosedText() {
       let tempArr = [];
-
       this.productData.dishesextlist.forEach(item => {
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {

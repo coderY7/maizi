@@ -74,6 +74,29 @@ export default {
   methods: {
 navmenu(){
   uni.setStorageSync('mode','堂食');
+  //获取openid
+      // uni.login({
+      //   success: (res) => {
+      //     uni.request({
+      //       url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
+      //       data: {
+      //         appid: uni.getStorageSync('appid'),
+      //         code: res.code
+      //       },
+      //       method: 'GET',
+      //       dataType: 'json',
+      //       success: res => {
+  			 //  console.log('获取openid成功')
+      //           uni.setStorageSync('openid', res.data[0].openid); //小程序openid
+      //           uni.setStorageSync('unionid', res.data[0].unionid); //开放平台unionid,可能为空
+              
+      //       },
+      //       fail: res => {
+      //         console.info('获取用户openId失败');
+      //       }
+      //     });
+      //   }
+      // });
 },
  navbesides(){
    uni.showToast({

@@ -1,6 +1,7 @@
 <script>
 export default {
   onLaunch: function (options) {
+	  console.log('从二维码中取的数据',options.query)
     const appId = uni.getAccountInfoSync().miniProgram.appId;
     uni.setStorageSync('appid', appId);
     uni.setStorageSync('syyid', '00268');
@@ -10,6 +11,7 @@ export default {
     uni.setStorageSync('tablenumber', '0')
     uni.setStorageSync('fdbh','808001');
     uni.setStorageSync('companyid','800008');
+	uni.setStorageSync('xsdbh','');
     const updateManager = uni.getUpdateManager();
 	updateManager.onCheckForUpdate(function (res) {
 	  // 请求完新版本信息的回调
@@ -39,7 +41,6 @@ export default {
     uni.setStorageSync('token', Token);
     //获取openid
     uni.login({
-      provider: 'weixin',
       success: (res) => {
         uni.request({
           url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
@@ -50,10 +51,10 @@ export default {
           method: 'GET',
           dataType: 'json',
           success: res => {
-            if (res.data[0].Result == '0') {
+			  console.log('获取openid成功')
               uni.setStorageSync('openid', res.data[0].openid); //小程序openid
               uni.setStorageSync('unionid', res.data[0].unionid); //开放平台unionid,可能为空
-            }
+            
           },
           fail: res => {
             console.info('获取用户openId失败');

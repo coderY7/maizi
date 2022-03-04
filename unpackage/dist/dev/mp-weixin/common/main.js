@@ -104,6 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch(options) {
+    console.log('从二维码中取的数据', options.query);
     var appId = uni.getAccountInfoSync().miniProgram.appId;
     uni.setStorageSync('appid', appId);
     uni.setStorageSync('syyid', '00268');
@@ -113,6 +114,7 @@ __webpack_require__.r(__webpack_exports__);
     uni.setStorageSync('tablenumber', '0');
     uni.setStorageSync('fdbh', '808001');
     uni.setStorageSync('companyid', '800008');
+    uni.setStorageSync('xsdbh', '');
     var updateManager = uni.getUpdateManager();
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
@@ -142,7 +144,6 @@ __webpack_require__.r(__webpack_exports__);
     uni.setStorageSync('token', Token);
     //获取openid
     uni.login({
-      provider: 'weixin',
       success: function success(res) {
         uni.request({
           url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
@@ -153,10 +154,10 @@ __webpack_require__.r(__webpack_exports__);
           method: 'GET',
           dataType: 'json',
           success: function success(res) {
-            if (res.data[0].Result == '0') {
-              uni.setStorageSync('openid', res.data[0].openid); //小程序openid
-              uni.setStorageSync('unionid', res.data[0].unionid); //开放平台unionid,可能为空
-            }
+            console.log('获取openid成功');
+            uni.setStorageSync('openid', res.data[0].openid); //小程序openid
+            uni.setStorageSync('unionid', res.data[0].unionid); //开放平台unionid,可能为空
+
           },
           fail: function fail(res) {
             console.info('获取用户openId失败');

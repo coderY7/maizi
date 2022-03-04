@@ -65,10 +65,10 @@
               @clear="clearCart"
               @pay="pay"
     />
-    <u-popup v-model="popupshow" mode="center" border-radius="14"  :mask="true" closeable="true" :mask-close-able="true" >
+    <u-popup v-model="popupshow" mode="center" border-radius="14"  :mask="true"  :mask-close-able="false" >
       <view style="display:flex;flex-direction:column;justify-content:center;align-items:center;width:500rpx;height:300rpx;">
         <text style="margin-bottom:20rpx">请选择就餐人数</text>
-        <u-number-box v-model="value" min="0" @change="valChange"></u-number-box>
+        <u-number-box v-model="value" min="1" @change="valChange"></u-number-box>
         <u-button @click="ensure" style="margin-top:30rpx;">确定</u-button>
       </view>
     </u-popup>
@@ -83,7 +83,7 @@
   import ProductModal from './components/product-modal/product-modal.vue'
   import cartPopup from './components/cart-popup/cart-popup.vue'
   import Search from './components/search/search.vue'
-  import categories from "../../common/categories";
+  // import categories from "../../common/categories";
 
 
   export default {
@@ -110,7 +110,7 @@
         arr: [],
         scrollRightTop: 0, // 右边栏目scroll-view的滚动条高度
         timer: null, // 定时器
-        categories: categories,
+        categories: '',
         cart: [],
         product: {},
         currentCategoryId: 0,
@@ -167,9 +167,7 @@
       }
     },
     onLoad(options) {
-
-
-
+    
     },
     onReady() {
       //this.getMenuItemTop()
@@ -177,7 +175,7 @@
     methods: {
       //人数确定后，开台
       ensure() {
-        this.popupshow=false
+        
         //开台
         if(uni.getStorageSync('xsdbh')==''){
           this.$u.api.orders({
@@ -190,9 +188,17 @@
             fdbh:uni.getStorageSync('fdbh'),
           }).then((res)=>{
             if(res.error_code=='0'){
+			this.popupshow=false
               console.log('开台成功',res)
               uni.setStorageSync('xsdbh',res.xsdbh)
             }
+			if(res.error_code=='500'){
+				uni.showToast({
+				  title: res.message,
+				  duration: 2000,
+				  icon: 'none'
+				});
+			}
             if(res.error_code=='2') {
               uni.showToast({
                 title: res.message,

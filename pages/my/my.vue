@@ -1,18 +1,15 @@
 <template>
   <view class="content">
     <view class="unit1" >
-<!--      <image :src="userInfo.avatarUrl"></image>-->
-      <view class="image">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-
       <view class="unit1box">
+		  <view>
+		  	<image :src="userurl" class="image"></image>
+		  </view>
         <view class="unit1box_text">
-          <!-- <u-button type="warning" @click="login" v-if="!islogin">微信授权登录</u-button> -->
-		  <open-data type="userNickName"></open-data>
-          <text style="font-size:20px" v-if="islogin">{{userInfo.nickName}}</text>
+          <u-button type="warning" @click="login" v-if="!islogin">微信授权登录</u-button>
+		  <view v-if="islogin">{{userInfo.nickName}}</view>
         </view>
-        <view class="unit1box_code">
+        <view class="unit1box_code" style="padding-left: 150rpx;">
           <u-icon name="scan" size="35px" @click="scan"></u-icon>
         </view>
       </view>
@@ -59,8 +56,6 @@
           <text>我的订单</text>
       </navigator>
     </view>
-
-    <!-- <u-button type="warning" v-if="islogin" @click="quit" class="unit4" shape="square">退出登录</u-button> -->
   </view>
 </template>
 
@@ -69,7 +64,8 @@ export default {
   data() {
     return {
       islogin: false,
-      userInfo: {}
+      userInfo: {},
+	  userurl:'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
     }
   },
   onLoad:function(){
@@ -92,36 +88,10 @@ export default {
        uni.getUserProfile({
          desc:"获取用户信息",
          success: (res)=>{
+			 console.log(res)
            this.userInfo=res.userInfo
+		   this.userurl=res.userInfo.avatarUrl
            this.islogin=true
-           uni.login({
-             success:  (res)=> {
-               console.log(res)
-               uni.request({
-                 url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
-                 data: {
-                   appid: uni.getStorageSync('appid'),
-                   code: res.code
-                 },
-                 method: 'GET',
-                 dataType: 'json',
-                 success: (res) => {
-                   console.log(res)
-                   if (res.data[0].Result == "0") {
-                     uni.setStorageSync('openid', res.data[0].openid);          //小程序openid
-                     uni.setStorageSync('unionid', res.data[0].unionid);        //开放平台unionid,可能为空
-                   }
-                   else {
-                     console.log(res.data[0].openid);
-                   }
-                 },
-                 fail:(res)=>{
-                   console.info("获取用户openId失败");
-                   console.info(error);
-                 }
-               });
-             }
-           });
          }
        })
 },
@@ -179,15 +149,14 @@ page {
       overflow: hidden;
     }
     .unit1box {
-      flex: 1;
+      //flex: 1;
       display: flex;
-      margin-left: 20rpx;
+      //margin-left: 20rpx;
       justify-content: space-between;
       align-items: center;
       margin-top: 20rpx;
-
       .unit1box_code{
-        margin-right: 20rpx;
+        margin-lift: 200rpx;
       }
     }
   }

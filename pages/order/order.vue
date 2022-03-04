@@ -111,6 +111,7 @@ export default {
   },
   onShow(){
     this.orders=uni.getStorageSync('orders');
+	this.completion=uni.getStorageSync('completion')//支付成功的订单
     //查询桌台订单信息
     this.$u.api.orders({
       access_token:uni.getStorageSync('token'),

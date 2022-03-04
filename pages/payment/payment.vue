@@ -118,23 +118,6 @@ pays() {
                       duration: 1000,
                       image:'../../static/pay/fail.png'
                     })
-                    //测试
-                    //支付成功，立刻调用查单接口查询订单在后台是否成功
-                    this.$u.api.paydones({
-                      access_token:uni.getStorageSync('token'),
-                      flow_no:uni.getStorageSync('xsdbh'),
-                      payno:'04',
-                      total:uni.getStorageSync('readytopays').paytotal,
-                      payid:'',
-                      syyid:uni.getStorageSync('syyid'),
-                      vipid:uni.getStorageSync('openid'),
-                      fdbh:uni.getStorageSync('fdbh'),
-                      companyid:uni.getStorageSync('companyid')
-                    }).then((res)=>{
-                      console.log('订单支付失败',res)
-                      uni.setStorageSync('orders',res)
-                    })
-
                   },
                   'complete': function (res) {}
                 })

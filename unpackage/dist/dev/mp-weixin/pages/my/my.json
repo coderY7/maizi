@@ -2,7 +2,7 @@
   "navigationBarTitleText": "我的",
   "navigationStyle": "custom",
   "usingComponents": {
-    "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon",
-    "u-button": "/node-modules/uview-ui/components/u-button/u-button"
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
+    "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon"
   }
 }
