@@ -130,13 +130,17 @@ export default {
 				})
 			},
 			handleKeywordInput(e) {
-        function debounce(fn, space) {
-          let task = null;
-          return function (){
-            if(task) {
-              clearTimeout(task);
-            }
-            task = setTimeout(fn.apply(this, arguments), space);
+        function debounce(fn, delay) {
+          let timer = null;
+
+          return function () {
+            clearTimeout(timer);
+            let context = this;
+            let args = arguments;
+
+            timer = setTimeout(function () {
+              fn.apply(context, args);
+            }, delay);
           }
         }
         let debounceShowLog = debounce(this.custom, 2000);

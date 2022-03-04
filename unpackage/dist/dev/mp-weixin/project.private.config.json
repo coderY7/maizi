@@ -15,7 +15,7 @@
         {
           "name": "首页",
           "pathName": "pages/main/main",
-          "query": "tableid=932",
+          "query": "tableid=93211",
           "scene": null
         }
       ]

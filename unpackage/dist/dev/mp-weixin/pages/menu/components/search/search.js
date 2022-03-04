@@ -269,13 +269,17 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     handleKeywordInput: function handleKeywordInput(e) {
-      function debounce(fn, space) {
-        var task = null;
+      function debounce(fn, delay) {
+        var timer = null;
+
         return function () {
-          if (task) {
-            clearTimeout(task);
-          }
-          task = setTimeout(fn.apply(this, arguments), space);
+          clearTimeout(timer);
+          var context = this;
+          var args = arguments;
+
+          timer = setTimeout(function () {
+            fn.apply(context, args);
+          }, delay);
         };
       }
       var debounceShowLog = debounce(this.custom, 2000);
