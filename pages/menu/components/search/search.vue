@@ -145,7 +145,7 @@ export default {
           }
           return _debounce
         }
-        let debounceShowLog = debounce(this.custom, 2000);
+        debounce(this.custom, 2000);
 			},
 
 
