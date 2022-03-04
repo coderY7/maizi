@@ -133,7 +133,6 @@ export default {
         function debounce(fn, delay) {
           // 1.定义一个定时器, 保存上一次的定时器
           let timer = null
-
           // 2.真正执行的函数
           const _debounce = function() {
             // 取消上一次的定时器
@@ -144,12 +143,11 @@ export default {
               fn()
             }, delay)
           }
-
           return _debounce
         }
         let debounceShowLog = debounce(this.custom, 2000);
-        debounceShowLog()
 			},
+
 
 			clear() {
 				this.keyword=''
