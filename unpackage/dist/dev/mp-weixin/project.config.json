@@ -38,11 +38,10 @@
     "minifyWXSS": true,
     "disableUseStrict": false,
     "showES6CompileOption": false,
-    "useCompilerPlugins": false,
-    "minifyWXML": true
+    "useCompilerPlugins": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.22.1",
+  "libVersion": "",
   "appid": "wxbce91b6b8e662b44",
   "projectname": "scan",
   "condition": {

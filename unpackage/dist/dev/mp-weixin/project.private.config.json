@@ -13,9 +13,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "首页",
+          "name": "pages/main/main",
           "pathName": "pages/main/main",
-          "query": "tableid=93211",
+          "query": "tableid=717",
           "scene": null
         }
       ]
