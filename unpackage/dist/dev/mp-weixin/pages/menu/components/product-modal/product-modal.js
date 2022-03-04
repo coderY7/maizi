@@ -361,12 +361,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
-
 {
   props: {
 
@@ -417,11 +411,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.MultiSelectindex = this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料');
       console.log(this.MultiSelectindex);
       if (this.MultiSelectindex == -1) {
-        console.log('-111');
+        console.log('不存在多选加料');
       } else {
         this.MultiSelect = this.productData.dishesextlist[this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料')];
         this.productData.dishesextlist.splice(0, 0, this.MultiSelect);
-
         var hash = {};
         var arr = this.productData.dishesextlist.reduce(function (item, next) {
           hash[next.groupname] ? '' : hash[next.groupname] =  true && item.push(next);

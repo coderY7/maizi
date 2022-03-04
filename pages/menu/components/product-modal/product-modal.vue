@@ -1,12 +1,6 @@
 <template >
     <view>
-<!--      <view class="mask-bg" >-->
-        <!-- #ifdef H5 -->
-
-        <!-- #endif -->
-<!--        <view class="main-area" >-->
           <view class="modal-area" @tap.stop>
-<!--            <image src="/static/images/share.png" class="handle-btn" style="right: 86rpx;"  @tap="$emit('cancel')"></image>-->
             <image src="/static/images/close.png" class="handle-btn" style="right: 20rpx;" @tap="closeModal"></image>
             <view class="good-image-box"><image :src="productData ? imgurl+productData.big_img_path: '/static/images/default.png'" mode="widthFix"></image></view>
             <scroll-view scroll-y="true">
@@ -278,11 +272,10 @@ export default {
       this.MultiSelectindex=this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')
       console.log(this.MultiSelectindex);
       if(this.MultiSelectindex  ==-1){
-        console.log('-111')
+        console.log('不存在多选加料')
       }else {
         this.MultiSelect=this.productData.dishesextlist[this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')]
         this.productData.dishesextlist.splice(0,0,this.MultiSelect)
-
         var hash = {};
         let arr = this.productData.dishesextlist.reduce(function(item, next) {
           hash[next.groupname] ? '' : hash[next.groupname] = true && item.push(next);

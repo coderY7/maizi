@@ -196,6 +196,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   name: 'Search',
   components: {
@@ -268,24 +269,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     handleKeywordInput: function handleKeywordInput(e) {
-      this.custom();
-
-      //为了方便，这里使用商品列表的数据来筛选结果
-      // const {value} = e.detail
-      // if(!value) {
-      // 	this.result = []
-      // 	return
-      // }
-      // let result = []
-      // this.categories.forEach(category => {
-      // 	category.products.forEach(product => {
-      // 		if(product.name.indexOf(value) > -1) {
-      // 			result.push(product)
-      // 		}
-      // 	})
-      // })
-      // setTimeout(() => this.result = result, 300)
+      function debounce(fn, space) {
+        var task = null;
+        return function () {
+          if (task) {
+            clearTimeout(task);
+          }
+          task = setTimeout(fn.apply(this, arguments), space);
+        };
+      }
+      var debounceShowLog = debounce(this.custom, 2000);
+      debounceShowLog();
     },
+
     clear: function clear() {
       this.keyword = '';
       this.result = [];
