@@ -131,7 +131,7 @@ export default {
 			},
 			handleKeywordInput(e) {
         function debounce(fn, delay) {
-          // 1.定义一个定时器, 保存上一次的定时器
+          // 1.定义一个定时器,  . 保存上一次的定时器
           let timer = null
           // 2.真正执行的函数
           const _debounce = function() {
@@ -147,8 +147,6 @@ export default {
         }
         debounce(this.custom, 2000);
 			},
-
-
 			clear() {
 				this.keyword=''
 				this.result = []
