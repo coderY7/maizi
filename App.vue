@@ -62,7 +62,6 @@
 						method: 'GET',
 						dataType: 'json',
 						success: res => {
-							console.log('获取openid成功')
 							uni.setStorageSync('openid', res.data[0].openid); //小程序openid
 							uni.setStorageSync('unionid', res.data[0]
 								.unionid); //开放平台unionid,可能为空
@@ -95,10 +94,9 @@
 					fdbh: uni.getStorageSync('fdbh'),
 					xsdbh: uni.getStorageSync('xsdbh')
 				}).then(res => {
-					let old=res.goodslist;
+					let old=res;
 					uni.setStorageSync('old',old)
-					console.log('查询桌台订单明细：', res.goodslist)
-					let dataold = res.goodslist;
+					console.log('查询桌台订单明细：', res)
 					let cartold =[];
 					res.goodslist.forEach((item) => {
 						 cartold.push({

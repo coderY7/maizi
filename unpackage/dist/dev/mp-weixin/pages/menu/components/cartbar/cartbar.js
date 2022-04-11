@@ -174,7 +174,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   computed: {
     cartNum: function cartNum() {//计算购物车总数
-      console.log('购物车属性', this.cart);
       return this.cart.reduce(function (acc, cur) {return acc + cur.number;}, 0);
     },
     cartPrice: function cartPrice() {//计算购物车总价

@@ -165,7 +165,6 @@ __webpack_require__.r(__webpack_exports__);
           method: 'GET',
           dataType: 'json',
           success: function success(res) {
-            console.log('获取openid成功');
             uni.setStorageSync('openid', res.data[0].openid); //小程序openid
             uni.setStorageSync('unionid', res.data[0].
             unionid); //开放平台unionid,可能为空
@@ -198,10 +197,9 @@ __webpack_require__.r(__webpack_exports__);
         fdbh: uni.getStorageSync('fdbh'),
         xsdbh: uni.getStorageSync('xsdbh') }).
       then(function (res) {
-        var old = res.goodslist;
+        var old = res;
         uni.setStorageSync('old', old);
-        console.log('查询桌台订单明细：', res.goodslist);
-        var dataold = res.goodslist;
+        console.log('查询桌台订单明细：', res);
         var cartold = [];
         res.goodslist.forEach(function (item) {
           cartold.push({

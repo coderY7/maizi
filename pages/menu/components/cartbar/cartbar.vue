@@ -32,7 +32,6 @@ export default {
 	},
 	computed: {
 		cartNum() { //计算购物车总数
-      console.log('购物车属性',this.cart)
 			return this.cart.reduce((acc, cur) => acc + cur.number, 0)
 		},
 		cartPrice() {	//计算购物车总价

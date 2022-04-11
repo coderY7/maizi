@@ -78,12 +78,12 @@
 </template>
 <script>
 
-  import Actions from './components/actions/actions.vue'
-  import CartBar from './components/cartbar/cartbar.vue'
-  import ProductModal from './components/product-modal/product-modal.vue'
-  import cartPopup from './components/cart-popup/cart-popup.vue'
-  import Search from './components/search/search.vue'
-  // import categories from "../../common/categories";
+import Actions from './components/actions/actions.vue'
+import CartBar from './components/cartbar/cartbar.vue'
+import ProductModal from './components/product-modal/product-modal.vue'
+import cartPopup from './components/cart-popup/cart-popup.vue'
+import Search from './components/search/search.vue'
+// import categories from "../../common/categories";
 
 
   export default {
@@ -140,7 +140,6 @@
         parentid:"",
         level:"3"
       }).then((res)=> {
-        console.log('左侧菜单:',res)
         this.categorylist=res.categorylist
         //获取菜品数据
         this.$u.api.caterings({
@@ -150,7 +149,6 @@
           companyid:uni.getStorageSync('companyid'),
           categoryid:this.categorylist[0].category_id
         }).then((res) => {
-          console.log('右侧菜单：',res)
           this.disheslist=res.disheslist
         })
       },(err)=>{
@@ -233,7 +231,6 @@
             companyid:uni.getStorageSync('companyid'),
             categoryid:this.categorylist[index].category_id
           }).then((res) => {
-            console.log('获取菜品:',res)
             this.disheslist=res.disheslist
           })
         }
@@ -247,7 +244,6 @@
             companyid:uni.getStorageSync('companyid'),
             categoryid:this.categorylist[index].category_id
           }).then((res) => {
-            console.log('获取菜品:',res)
             this.disheslist=res.disheslist
           })
         }
@@ -274,7 +270,10 @@
           price:  product.goodslist.price,
           zxprice:product.goodslist.zxprice
         })
-        console.log('购物车中的商品：',this.cart)
+        uni.getStorageSync('cartold').forEach(item=>{
+          this.cart.push(item)
+        })
+        console.log('已经加入购物车中的商品：',this.cart)
       },
       //从购物车减商品
       handleMinusFromCart(product) {
