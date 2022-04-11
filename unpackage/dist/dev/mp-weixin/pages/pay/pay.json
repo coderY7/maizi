@@ -1,7 +1,6 @@
 {
   "navigationBarTitleText": "确定订单",
   "usingComponents": {
-    "u-number-box": "/node-modules/uview-ui/components/u-number-box/u-number-box",
     "u-button": "/node-modules/uview-ui/components/u-button/u-button"
   }
 }

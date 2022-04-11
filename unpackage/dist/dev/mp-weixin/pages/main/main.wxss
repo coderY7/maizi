@@ -101,7 +101,7 @@ page {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  border: 2rpx  #ccc;
+  border: 2rpx #ccc;
   border-radius: 40rpx;
   box-shadow: 4rpx 4rpx 4rpx #ccc;
   background-color: #ffffff;

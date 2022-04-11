@@ -243,7 +243,7 @@ __webpack_require__.r(__webpack_exports__);
                 'signType': 'MD5',
                 'paySign': ress.data.paySign,
                 'success': function success(res) {
-                  console.log('支付成功:', res);
+                  console.log('微信支付成功:', res);
                   uni.showToast({
                     title: '微信支付成功',
                     duration: 1000,
@@ -251,18 +251,24 @@ __webpack_require__.r(__webpack_exports__);
 
                   //支付成功，立刻调用查单接口查询订单在后台是否成功
                   _this.$u.api.paydones({
-                    access_token: uni.getStorageSync('token'),
-                    flow_no: uni.getStorageSync('xsdbh'),
+                    access_token: uni.getStorageSync(
+                    'token'),
+                    flow_no: uni.getStorageSync(
+                    'xsdbh'),
                     payno: '04',
-                    total: uni.getStorageSync('readytopays').paytotal,
+                    total: uni.getStorageSync(
+                    'readytopays').paytotal,
                     payid: '',
                     syyid: uni.getStorageSync('syyid'),
-                    vipid: uni.getStorageSync('openid'),
+                    vipid: uni.getStorageSync(
+                    'openid'),
                     fdbh: uni.getStorageSync('fdbh'),
-                    companyid: uni.getStorageSync('companyid') }).
+                    companyid: uni.getStorageSync(
+                    'companyid') }).
                   then(function (res) {
-                    console.log('订单支付完成', res);
-                    uni.setStorageSync('completion', res);
+                    console.log('查询订单结算完成', res);
+                    uni.setStorageSync('completion',
+                    res);
                   });
 
                 },

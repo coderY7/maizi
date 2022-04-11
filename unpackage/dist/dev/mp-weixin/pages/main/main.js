@@ -196,6 +196,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -204,6 +205,20 @@ var _default =
 
   },
   methods: {
+    //查询订单信息
+    order: function order() {
+      //查询桌台订单信息
+      this.$u.api.orders({
+        access_token: uni.getStorageSync('token'),
+        vtype: 'detail',
+        tableid: uni.getStorageSync('tableid'),
+        fdbh: uni.getStorageSync('fdbh'),
+        xsdbh: uni.getStorageSync('xsdbh') }).
+      then(function (res) {
+        console.log('查询桌台订单明细：', res);
+      });
+
+    },
     navmenu: function navmenu() {
       uni.setStorageSync('mode', '堂食');
     },
@@ -232,7 +247,6 @@ var _default =
 
   onLoad: function onLoad(options) {
     this.tableid = options.tableid;
-
   },
   onShow: function onShow() {
 

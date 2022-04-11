@@ -269,7 +269,7 @@ export default {
     product(val) {
       this.productData = JSON.parse(JSON.stringify(val));
       console.log(this.productData);
-      this.MultiSelectindex=this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')
+      this.MultiSelectindex=this.productData.dishesextlist?.map(item=>item.groupname).indexOf('加料')
       console.log(this.MultiSelectindex);
       if(this.MultiSelectindex  ==-1){
         console.log('不存在多选加料')
@@ -297,7 +297,7 @@ export default {
       number: 1,
       shownPrice: 0,
       choosedText: '',
-      imgurl:"http://api.mzsale.cn/",
+      imgurl:"http://cateapi.mzsale.cn/",
       productData: {},
       zxprice:0,
       extlist:[],//附加属性
@@ -312,12 +312,12 @@ ext_zxprice:'',
   },
   onShow(){
     let data=this.productData.dishesextlist[1].extitems
-    console.log('data',data)
+
   },
   methods: {
     checkboxChange(value,key){
       var value=this.productData.dishesextlist[0].extitems[key]
-      console.log(value,key)
+
       value.ext_quantity=1
       if(value.isDefault==undefined){
         value.isDefault=true
@@ -325,7 +325,7 @@ ext_zxprice:'',
         this.pitch()
       }else if(value.isDefault){
         value.isDefault=undefined
-        console.log(value)
+
         this.pitch()
       }
     },
@@ -366,7 +366,7 @@ ext_zxprice:'',
       unity.ext_quantity=1
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=0){
-        console.log(rowIndex,itemIndex)
+
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
         });
@@ -382,7 +382,7 @@ ext_zxprice:'',
 
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=0){
-        console.log(rowIndex,itemIndex)
+
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
         });
@@ -398,7 +398,7 @@ ext_zxprice:'',
 
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=0){
-        console.log(rowIndex,itemIndex)
+
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
         });
@@ -413,7 +413,7 @@ ext_zxprice:'',
       unity.ext_quantity=1
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=0){
-        console.log(rowIndex,itemIndex)
+
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
         });
@@ -428,7 +428,7 @@ ext_zxprice:'',
       unity.ext_quantity=1
       unity.ext_zxprice=unity.ext_price * 1
       if(rowIndex!=0){
-        console.log(rowIndex,itemIndex)
+
         this.productData.dishesextlist[rowIndex].extitems.map(item => {
           item.isDefault = false;
         });
@@ -440,7 +440,7 @@ ext_zxprice:'',
     // 关闭modal
     closeModal() {
       this.$emit('cancel');
-      console.log('12321')
+
     },
     //分享
     shareGoods() {
@@ -449,7 +449,7 @@ ext_zxprice:'',
     // 计算总价（商品+加料）
     calcOverprice() {
       let pri =0;
-      this.productData.dishesextlist.forEach(item => {
+      this.productData.dishesextlist?.forEach(item => {
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
             // console.log('单个属性价格',item1.ext_price * item1.ext_quantity)
@@ -461,7 +461,7 @@ ext_zxprice:'',
        this.productData.price=this.productData.nsjg
       this.productData.zxprice=this.productData.nsjg+ pri
       this.productData.shownPrice=this.productData.number * this.productData.price+pri;
-      console.log('商品总价格',this.productData.shownPrice);
+
       this.updateChoosedText();
     },
 
@@ -481,7 +481,7 @@ ext_zxprice:'',
     //更新
     updateChoosedText() {
       let tempArr = [];
-      this.productData.dishesextlist.forEach(item => {
+      this.productData.dishesextlist?.forEach(item => {
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
               tempArr.push(item1.ext_name);
@@ -493,9 +493,9 @@ ext_zxprice:'',
    //选中
     pitch(){
       let pitch=[];
-      console.log(this.productData.dishesextlist)
+
       this.productData.dishesextlist.forEach(item => {
-        console.log(item)
+
         item.extitems.forEach(item1 => {
           if (item1.isDefault) {
             pitch.push(item1);
@@ -509,12 +509,6 @@ ext_zxprice:'',
     // 加入购物车
     addToCart() {
       if(this.productData.extlist){
-        // this.productData.extlist.map(item => {
-        //   if (item.isDefault) {
-        //     item.isDefault=undefined;
-        //     item.ext_desc=undefined;
-        //   }
-        // });
         this.productData.choosedText=this.choosedText
         let goodslist={
           price: this.productData.nsjg,
@@ -529,12 +523,11 @@ ext_zxprice:'',
         this.productData.goodslist=goodslist;
         const product = {...this.productData}
         this.$emit('add-to-cart', product)
-        console.log(product)
+
       }
       //未选择规格
       else {
         this.productData.choosedText=this.choosedText
-        console.log(this.productData)
         let goodslist={
           price: this.productData.nsjg,
           extlist:[],
@@ -546,9 +539,8 @@ ext_zxprice:'',
           spbm:this.productData.spbm,
         }
         this.productData.goodslist=goodslist;
-        const product = {...this.productData}
+
         this.$emit('add-to-cart', product)
-        console.log(product)
       }
     }
   }

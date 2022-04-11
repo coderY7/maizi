@@ -65,6 +65,14 @@ page {
   width: 100rpx;
   height: 100rpx;
 }
+.order .item .item_left.data-v-127632e4 {
+  width: 400rpx;
+  height: 100%;
+  display: flex;
+}
+.order .item .item_left .item_left_box.data-v-127632e4 {
+  margin-left: 20rpx;
+}
 .order .total.data-v-127632e4 {
   display: flex;
   justify-content: space-between;

@@ -50,6 +50,7 @@ page {
 .content .unit1 .unit1_top .unit1_top_left {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .content .unit1 .unit1_top .unit1_top_left .unit1_top_left2 {
   margin-left: 30rpx;

@@ -139,16 +139,6 @@ var render = function() {
     }
   })
 
-  if (!_vm._isMounted) {
-    _vm.e0 = function($event) {
-      _vm.showSearch = true
-    }
-
-    _vm.e1 = function($event) {
-      _vm.showSearch = false
-    }
-  }
-
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -288,9 +278,9 @@ var _default =
 
   data: function data() {
     return {
-      popupshow: true,
+      popupshow: uni.getStorageSync('popupshow'),
       show: false,
-      imgurl: "http://api.mzsale.cn/",
+      imgurl: "http://cateapi.mzsale.cn/",
       scrollTop: 0, //tab标题的滚动条位置
       oldScrollTop: 0,
       current: 0, // 预设当前项的值
@@ -322,7 +312,7 @@ var _default =
     };
   },
   onShow: function onShow() {var _this = this;
-    console.log(getApp().globalData.text);
+
     this.token = uni.getStorageSync('token');
     this.$u.api.categorys({
       access_token: uni.getStorageSync('token'),
@@ -354,12 +344,12 @@ var _default =
         url: '/pages/my/my' });
 
     }
-    if (uni.getStorageSync('tablenumber') < 1) {
-      this.popupshow = true;
-    }
+
   },
   onLoad: function onLoad(options) {
-
+    if (uni.getStorageSync('xsdbh') == '') {
+      this.popupshow = true;
+    }
   },
   onReady: function onReady() {
     //this.getMenuItemTop()
@@ -367,7 +357,6 @@ var _default =
   methods: {
     //人数确定后，开台
     ensure: function ensure() {var _this2 = this;
-
       //开台
       if (uni.getStorageSync('xsdbh') == '') {
         this.$u.api.orders({
@@ -381,6 +370,7 @@ var _default =
         then(function (res) {
           if (res.error_code == '0') {
             _this2.popupshow = false;
+            uni.setStorageSync('popupshow', false);
             console.log('开台成功', res);
             uni.setStorageSync('xsdbh', res.xsdbh);
           }
@@ -451,7 +441,6 @@ var _default =
       });
       if (index > -1) {
         this.cart[index].goodslist.quantity += 1;
-        console.log(this.cart[index].goodslist.quantity);
         this.cart[index].number += product.number || 1;
         return;
       }
@@ -481,7 +470,7 @@ var _default =
     //菜品详情页
     showProductDetailModal: function showProductDetailModal(product) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
                   _this4.$u.api.exts({
-                    access_token: _this4.token,
+                    access_token: uni.getStorageSync('token'),
                     vtype: "pos",
                     fdbh: uni.getStorageSync('fdbh'),
                     companyid: uni.getStorageSync('companyid'),
@@ -490,11 +479,10 @@ var _default =
                     Object.assign(product, res);
                   }));case 2:
                 _this4.product = product;
-
                 _this4.show = true;case 4:case "end":return _context2.stop();}}}, _callee2);}))();
     },
+    //点击加入购物车
     handleAddToCartInModal: function handleAddToCartInModal(product) {
-      console.log('选择的商品', product);
       this.handleAddToCart(product);
       this.closeProductDetailModal();
     },
@@ -507,10 +495,12 @@ var _default =
     },
 
     pay: function pay() {
+
       var goodslist = this.cart.reduce(function (previous, primary) {
         previous.push(primary.goodslist);
         return previous;
       }, []);
+
       uni.setStorageSync('goodslist', goodslist);
       //计算购物车总价
       this.cartprice = this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price + cur.zxprice - cur.price;}, 0);
@@ -524,7 +514,7 @@ var _default =
 
       uni.setStorageSync('Cart', this.Cart);
       uni.navigateTo({
-        url: "/pages/pay/pay?table=".concat(this.table) });
+        url: '/pages/pay/pay' });
 
     } },
 

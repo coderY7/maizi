@@ -3,13 +3,13 @@
 		<view class="d-flex flex-column overflow-hidden">
 			<view class="search-box">
 				<view class="search-input">
-					<image src="/static/common/search-icon.png" class="search-icon"></image>
+					<image src="../../../../static/common/search-icon.png" class="search-icon"></image>
 					<input type="text" v-model="keyword" 
 							placeholder="输入要搜索的菜品"
 							placeholder-class="placeholder" @input="handleKeywordInput">
-				    <image v-if="keyword" src="/static/images/common/image-delete.png" class="close-icon" @tap="clear" />
+				    <!-- <image v-if="keyword" src="../../../../static/images/common/image-delete.png" class="close-icon" @tap="clear" /> -->
 				</view>
-				<view class="ml-30" @click="hide">取消</view>
+				<view class="ml-30" @click="custom()">搜索</view>
 			</view>
 			<scroll-view class="result" scroll-y>
 				<template v-if="!result.length">
@@ -17,7 +17,7 @@
 						<view class="header">
 							<view class="title">历史搜索</view>
 							<view class="subtitle">
-								<image src="/static/images/common/delete.png"></image>
+								<!-- <image src="../../../../static/images/common/delete.png"></image> -->
 								<view>清除</view>
 							</view>
 						</view>
@@ -43,7 +43,7 @@
 					<view class="wrapper" style="padding: 0 30rpx 30rpx 0;">
 						<view class="product" v-for="(item, index) in result" :key="index" @tap="handleChoose(item, true)">
 							<view class="d-flex align-items-center">
-								<image :src="imgurl+item.small_img_path" class="pro-image"/>
+								<image :src="imgurl + item.small_img_path" class="pro-image"/>
 								<view class="pro-name">{{ item.spmc }}</view>
 							</view>
 							<view class="pro-price">￥{{ item.hyjg}}</view>
@@ -75,7 +75,7 @@ export default {
 		},
 		data() {
 			return {
-        imgurl:"http://api.mzsale.cn/",
+        imgurl:"http://cateapi.mzsale.cn/",
         tranStyles: {
 					width: '100%',
 					position: 'absolute',
@@ -130,22 +130,6 @@ export default {
 				})
 			},
 			handleKeywordInput(e) {
-        function debounce(fn, delay) {
-          // 1.定义一个定时器,  . 保存上一次的定时器
-          let timer = null
-          // 2.真正执行的函数
-          const _debounce = function() {
-            // 取消上一次的定时器
-            if (timer) clearTimeout(timer)
-            // 延迟执行
-            timer = setTimeout(() => {
-              // 外部传入的真正要执行的函数
-              fn()
-            }, delay)
-          }
-          return _debounce
-        }
-        debounce(this.custom, 2000);
 			},
 			clear() {
 				this.keyword=''

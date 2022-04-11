@@ -2,15 +2,13 @@
   <view class="content">
     <view class="unit1">
       <view class="unit1_top">
-        <view class="unit1_top_left">
           <view>大厅区</view>
-          <view class="unit1_top_left2">{{tableid}}</view>
-        </view>
-        <view>{{table[1]}}</view>
+          <view>{{tableid}}</view>
       </view>
       <view class="unit1_bottom">
-        <text>用餐人数</text>
-        <u-number-box v-model="attendance" @change="valChange" :min="1"></u-number-box>
+        <view>用餐人数</view>
+<view>{{attendance}}</view>
+        <!-- <u-number-box v-model="attendance" @change="valChange" :min="1"></u-number-box> -->
       </view>
     </view>
 <!--    商品信息-->
@@ -117,7 +115,7 @@ addmenu(){
          console.log('预结算',res)
          uni.setStorageSync('unfinished',res.goodslist)
         uni.navigateTo({
-          url:`../payment/payment?tableid=${this.tableid}`
+          url:'../payment/payment'
         })
        })
     }
@@ -156,6 +154,7 @@ page{
       .unit1_top_left{
         display:flex;
         flex-direction:row;
+		justify-content:space-between;
         .unit1_top_left2{
           margin-left:30rpx;
         }

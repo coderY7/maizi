@@ -9,17 +9,20 @@
           <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
             <view class="page-box">
 <!--  订单状态-->
-              <view class="order" v-if="orders">
+              <view class="order" v-if="goodslist">
 <!--                <view class="store"><u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>：{{orders.xssj}}</view>-->
-
                 <view v-for="(item,index) in goodslist" :key="index">
                   <view class="top">
                     <view class="left"></view>
                     <view class="right"></view>
                   </view>
                   <view class="item">
-                    <view>
+                    <view class="item_left">
                       <image :src="imgurl+item.small_img_path" mode="aspectFill"></image>
+					  <view class="item_left_box">
+						  <view>{{item.spmc}}</view>
+						  <view v-for="(items,index) in item.extlist" :key="index" style="font-size: 20rpx; color: #999999;">{{items.ext_name}}</view>
+					  </view>
                     </view>
                     <view class="right">
                       <view>共{{priceInt(item.quantity)}}件</view>
@@ -35,42 +38,11 @@
             <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>
           </scroll-view>
         </swiper-item>
+		
         <swiper-item class="swiper-item">
           <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
             <view class="page-box">
-              <view class="order" v-for="(res, index) in  orderList[1]" :key="res.id">
-                <view class="top">
-                  <view class="left">
-                    <u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
-                    <view class="store">{{ res.store }}</view>
-                    <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon>
-                  </view>
-                  <view class="right">{{ res.deal }}</view>
-                </view>
-                <view class="item" v-for="(item, index) in res.goodsList" :key="index">
-                  <view class="left"><image :src="item.goodsUrl" mode="aspectFill"></image></view>
-                  <view class="content">
-                    <view class="title u-line-2">{{ item.title }}</view>
-                    <view class="type">{{ item.type }}</view>
-                    <view class="delivery-time">发货时间 {{ item.deliveryTime }}</view>
-                  </view>
-                  <view class="right">
-                    <view class="price">
-                      ￥{{ priceInt(item.price) }}
-                      <text class="decimal">.{{ priceDecimal(item.price) }}</text>
-                    </view>
-                    <view class="number">x{{ item.number }}</view>
-                  </view>
-                </view>
-                <view class="total">
-                  共{{ totalNum(res.goodsList) }}件商品 合计:
-                  <text class="total-price">
-                    ￥{{ priceInt(totalPrice(res.goodsList)) }}.
-                    <text class="decimal">{{ priceDecimal(totalPrice(res.goodsList)) }}</text>
-                  </text>
-                </view>
-
-              </view>
+             
               <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>
             </view>
           </scroll-view>
@@ -100,11 +72,9 @@ export default {
       dx: 0,
       loadStatus: ['loadmore','loadmore'],
       time:'',
-      Cart:[],
-      token:'',
       orders:'',
       goodslist:[],
-      imgurl:"http://api.mzsale.cn/",
+      imgurl:"http://cateapi.mzsale.cn/",
     };
   },
   onLoad() {
@@ -173,10 +143,10 @@ export default {
       let data = JSON.parse(JSON.stringify(this.dataList[index]));
       let data1 = JSON.parse(JSON.stringify(this.dataList[1]));
       if(idx=='0'){
-        this.orderList[0].push(data);
+        this.orderList[0].push(data);//未成功数据
       }
       if(idx=='1'){
-        this.orderList[1].push(data1);
+        this.orderList[1].push(data1);// 成功数据
       }
       this.loadStatus.splice(this.current,1,"loadmore")
     },
@@ -255,7 +225,13 @@ page {
       width:100rpx;
       height:100rpx;
     }
-    .right{
+    .item_left{
+		width: 400rpx;
+		height: 100%;
+		display: flex;
+		.item_left_box{
+			margin-left: 20rpx;
+		}
     }
 
   }

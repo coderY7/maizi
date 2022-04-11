@@ -1,7 +1,7 @@
 <template>
 	<view class="u-wrap">
 
-		<view class="u-search-box">
+		<!-- <view class="u-search-box">
 
       <view class="search-box">
         <view class="search-input" @tap="showSearch=true">
@@ -11,7 +11,7 @@
       </view>
 
       		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
-		</view>
+		</view> -->
 
     <view class="rolls">
       <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image>
@@ -68,7 +68,7 @@
     <u-popup v-model="popupshow" mode="center" border-radius="14"  :mask="true"  :mask-close-able="false" >
       <view style="display:flex;flex-direction:column;justify-content:center;align-items:center;width:500rpx;height:300rpx;">
         <text style="margin-bottom:20rpx">请选择就餐人数</text>
-        <u-number-box v-model="value" min="1" @change="valChange"></u-number-box>
+        <u-number-box v-model="value" min="1" max="10" @change="valChange"></u-number-box>
         <u-button @click="ensure" style="margin-top:30rpx;">确定</u-button>
       </view>
     </u-popup>
@@ -96,9 +96,9 @@
     },
     data() {
       return {
-        popupshow:true,
+        popupshow:uni.getStorageSync('popupshow'),
         show: false,
-        imgurl:"http://api.mzsale.cn/",
+        imgurl:"http://cateapi.mzsale.cn/",
         scrollTop: 0, //tab标题的滚动条位置
         oldScrollTop: 0,
         current: 0, // 预设当前项的值
@@ -130,7 +130,7 @@
       }
     },
     onShow(){
-      console.log(getApp().globalData.text)
+		
       this.token = uni.getStorageSync('token');
       this.$u.api.categorys({
         access_token:uni.getStorageSync('token'),
@@ -162,12 +162,12 @@
           url: '/pages/my/my'
         });
       }
-      if(uni.getStorageSync('tablenumber')<1){
-        this.popupshow=true
-      }
+     
     },
     onLoad(options) {
-    
+    if(uni.getStorageSync('xsdbh')==''){
+      this.popupshow=true
+    }
     },
     onReady() {
       //this.getMenuItemTop()
@@ -175,7 +175,6 @@
     methods: {
       //人数确定后，开台
       ensure() {
-        
         //开台
         if(uni.getStorageSync('xsdbh')==''){
           this.$u.api.orders({
@@ -189,6 +188,7 @@
           }).then((res)=>{
             if(res.error_code=='0'){
 			this.popupshow=false
+			uni.setStorageSync('popupshow',false)
               console.log('开台成功',res)
               uni.setStorageSync('xsdbh',res.xsdbh)
             }
@@ -259,7 +259,6 @@
         })
         if(index > -1) {
           this.cart[index].goodslist.quantity+=1;
-          console.log(this.cart[index].goodslist.quantity)
           this.cart[index].number += (product.number || 1)
             return
         }
@@ -289,7 +288,7 @@
       //菜品详情页
       async showProductDetailModal(product) {
        await this.$u.api.exts({
-          access_token:this.token,
+          access_token:uni.getStorageSync('token'),
           vtype:"pos",
          fdbh:uni.getStorageSync('fdbh'),
          companyid:uni.getStorageSync('companyid'),
@@ -298,11 +297,10 @@
           Object.assign(product,res)
         })
         this.product = product
-
         this.show=true
       },
+	  //点击加入购物车
       handleAddToCartInModal(product) {
-        console.log('选择的商品',product)
         this.handleAddToCart(product)
         this.closeProductDetailModal()
       },
@@ -315,10 +313,12 @@
       },
 
       pay(){
+	
         var goodslist = this.cart.reduce((previous,primary)=>{
           previous.push(primary.goodslist);
           return previous;
         },[]);
+
         uni.setStorageSync('goodslist', goodslist)
         //计算购物车总价
         this.cartprice=this.cart.reduce((acc, cur) => acc + cur.number * cur.price+cur.zxprice-cur.price, 0)
@@ -332,7 +332,7 @@
         }
         uni.setStorageSync('Cart',this.Cart)
         uni.navigateTo({
-          url:`/pages/pay/pay?table=${this.table}`,
+          url:'/pages/pay/pay',
         })
       }
   },

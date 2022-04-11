@@ -111,10 +111,12 @@ __webpack_require__.r(__webpack_exports__);
     uni.setStorageSync('vipid', '26512220');
     uni.setStorageSync('posid', '80800101');
     uni.setStorageSync('tableid', options.query.tableid);
-    uni.setStorageSync('tablenumber', '0');
+    uni.setStorageSync('tablenumber', '1');
     uni.setStorageSync('fdbh', '808001');
     uni.setStorageSync('companyid', '800008');
     uni.setStorageSync('xsdbh', '');
+    var Token = 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
+    uni.setStorageSync('token', Token);
     var updateManager = uni.getUpdateManager();
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
@@ -138,10 +140,19 @@ __webpack_require__.r(__webpack_exports__);
     updateManager.onUpdateFailed(function (res) {
       // 新的版本下载失败
     });
+    //清台
+    // this.$u.api.orders({
+    // 	access_token:uni.getStorageSync('token'),
+    // 	vtype:'clear',
+    // 	tableid:uni.getStorageSync('tableid'),
+    // 	fdbh:uni.getStorageSync('fdbh')
+    // }).then((res)=>{
+    // 	console.log('清台',res)
+    // })
+
+
   },
-  onShow: function onShow() {
-    var Token = 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd';
-    uni.setStorageSync('token', Token);
+  onShow: function onShow() {var _this = this;
     //获取openid
     uni.login({
       success: function success(res) {
@@ -156,7 +167,8 @@ __webpack_require__.r(__webpack_exports__);
           success: function success(res) {
             console.log('获取openid成功');
             uni.setStorageSync('openid', res.data[0].openid); //小程序openid
-            uni.setStorageSync('unionid', res.data[0].unionid); //开放平台unionid,可能为空
+            uni.setStorageSync('unionid', res.data[0].
+            unionid); //开放平台unionid,可能为空
 
           },
           fail: function fail(res) {
@@ -165,6 +177,52 @@ __webpack_require__.r(__webpack_exports__);
 
       } });
 
+    //查询当前桌台订单信息
+    this.$u.api.orders({
+      access_token: uni.getStorageSync('token'),
+      vtype: 'new',
+      tableid: uni.getStorageSync('tableid'),
+      fdbh: uni.getStorageSync('fdbh'),
+      tablewaiter: uni.getStorageSync('syyid'),
+      posid: uni.getStorageSync('posid'),
+      tablenumber: uni.getStorageSync('tablenumber') }).
+    then(function (res) {
+      console.log('查询开台信息', res);
+      //已开台单号
+      uni.setStorageSync('xsdbh', res.xsdbh);
+      //查询桌台订单信息
+      _this.$u.api.orders({
+        access_token: uni.getStorageSync('token'),
+        vtype: 'detail',
+        tableid: uni.getStorageSync('tableid'),
+        fdbh: uni.getStorageSync('fdbh'),
+        xsdbh: uni.getStorageSync('xsdbh') }).
+      then(function (res) {
+        var old = res.goodslist;
+        uni.setStorageSync('old', old);
+        console.log('查询桌台订单明细：', res.goodslist);
+        var dataold = res.goodslist;
+        var cartold = [];
+        res.goodslist.forEach(function (item) {
+          cartold.push({
+            price: item.price,
+            extlist: item.extlist,
+            spsmm: item.spsmm,
+            zxprice: item.zxprice,
+            quantity: item.quantity,
+            flownum: item.flownum++,
+            discount: '0',
+            spbm: item.spbm,
+            image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),
+            name: item.spmc,
+            number: item.quantity });
+
+        });
+        console.log('旧的数据信息', cartold);
+        uni.setStorageSync('cartold', cartold);
+      });
+
+    });
 
   },
   onHide: function onHide() {

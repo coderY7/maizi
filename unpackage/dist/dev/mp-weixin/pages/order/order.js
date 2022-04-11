@@ -102,9 +102,6 @@ try {
     },
     uLoadmore: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 198))
-    },
-    uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 205))
     }
   }
 } catch (e) {
@@ -128,7 +125,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.orders
+  var l0 = _vm.goodslist
     ? _vm.__map(_vm.goodslist, function(item, index) {
         var $orig = _vm.__get_orig(item)
 
@@ -139,42 +136,13 @@ var render = function() {
         }
       })
     : null
-  var m1 = _vm.orders ? parseFloat(_vm.orders.paytotal) : null
-
-  var l2 = _vm.__map(_vm.orderList[1], function(res, index) {
-    var $orig = _vm.__get_orig(res)
-
-    var l1 = _vm.__map(res.goodsList, function(item, index) {
-      var $orig = _vm.__get_orig(item)
-
-      var m2 = _vm.priceInt(item.price)
-      var m3 = _vm.priceDecimal(item.price)
-      return {
-        $orig: $orig,
-        m2: m2,
-        m3: m3
-      }
-    })
-
-    var m4 = _vm.totalNum(res.goodsList)
-    var m5 = _vm.priceInt(_vm.totalPrice(res.goodsList))
-    var m6 = _vm.priceDecimal(_vm.totalPrice(res.goodsList))
-    return {
-      $orig: $orig,
-      l1: l1,
-      m4: m4,
-      m5: m5,
-      m6: m6
-    }
-  })
-
+  var m1 = _vm.goodslist ? parseFloat(_vm.orders.paytotal) : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
         l0: l0,
-        m1: m1,
-        l2: l2
+        m1: m1
       }
     }
   )
@@ -265,34 +233,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -313,11 +253,9 @@ var _default =
       dx: 0,
       loadStatus: ['loadmore', 'loadmore'],
       time: '',
-      Cart: [],
-      token: '',
       orders: '',
       goodslist: [],
-      imgurl: "http://api.mzsale.cn/" };
+      imgurl: "http://cateapi.mzsale.cn/" };
 
   },
   onLoad: function onLoad() {
@@ -386,10 +324,10 @@ var _default =
       var data = JSON.parse(JSON.stringify(this.dataList[index]));
       var data1 = JSON.parse(JSON.stringify(this.dataList[1]));
       if (idx == '0') {
-        this.orderList[0].push(data);
+        this.orderList[0].push(data); //未成功数据
       }
       if (idx == '1') {
-        this.orderList[1].push(data1);
+        this.orderList[1].push(data1); // 成功数据
       }
       this.loadStatus.splice(this.current, 1, "loadmore");
     },

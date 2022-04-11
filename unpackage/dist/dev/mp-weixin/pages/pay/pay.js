@@ -95,9 +95,6 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
-    uNumberBox: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-number-box/u-number-box */ "node-modules/uview-ui/components/u-number-box/u-number-box").then(__webpack_require__.bind(null, /*! uview-ui/components/u-number-box/u-number-box.vue */ 142))
-    },
     uButton: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 149))
     }
@@ -224,8 +221,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
 
 {
@@ -275,7 +270,7 @@ var _default =
                   console.log('预结算', res);
                   uni.setStorageSync('unfinished', res.goodslist);
                   uni.navigateTo({
-                    url: "../payment/payment?tableid=".concat(_this.tableid) });
+                    url: '../payment/payment' });
 
                 });case 6:case "end":return _context.stop();}}}, _callee);}))();
     } },

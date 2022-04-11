@@ -231,13 +231,7 @@ var _default =
   onShow: function onShow() {
     console.log(getApp().globalData.text);
     getApp().globalData.text = '123321';
-    if (uni.getStorageSync('openid') == '') {
-      uni.showToast({
-        title: '请先微信登录',
-        duration: 2000,
-        icon: "none" });
 
-    }
   },
   methods: {
     //用户登录
