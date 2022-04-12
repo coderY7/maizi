@@ -31,8 +31,8 @@
 									<view class="materials">{{ item.choosedText }}</view>
 								</view>
 								<view class="price-and-actions">
-									<view class="price">￥{{ item.zxprice }}</view>
-									<actions :number="item.number" @add="add(item)" @minus="minus(item)"></actions>
+									<view class="price">￥{{ item.price }}</view>
+									<actions :number="item.number" @add="add(item,index)" @minus="minus(item,index)"></actions>
 								</view>
 							</view>
 						</view>
@@ -76,12 +76,12 @@ export default {
 		change({show}) {
 			this.$emit('change', show)
 		},
-		add(item) {
-      console.log('item:',item)
-			this.$emit('add', item)
+		add(item,index) {
+      console.log('item:',item, index)
+			this.$emit('add', {...item,index})
 		},
-		minus(item) {
-			this.$emit('minus', item)
+		minus(item,index) {
+			this.$emit('minus', {...item,index})
 		},
 		clear() {
 			uni.showModal({

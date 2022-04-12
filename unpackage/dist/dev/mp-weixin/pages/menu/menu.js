@@ -344,9 +344,16 @@ var _default =
     }
 
   },
-  onLoad: function onLoad(options) {
+  onLoad: function onLoad(options) {var _this2 = this;
     if (uni.getStorageSync('xsdbh') == '') {
       this.popupshow = true;
+    }
+    uni.getStorageSync('cartold').forEach(function (item) {
+      _this2.cart.push(item);
+    });
+    if (uni.getStorageSync('dataold') != '') {
+      console.log('加菜');
+      this.handleAddToCartInModal();
     }
   },
   onReady: function onReady() {
@@ -354,7 +361,7 @@ var _default =
   },
   methods: {
     //人数确定后，开台
-    ensure: function ensure() {var _this2 = this;
+    ensure: function ensure() {var _this3 = this;
       //开台
       if (uni.getStorageSync('xsdbh') == '') {
         this.$u.api.orders({
@@ -367,7 +374,7 @@ var _default =
           fdbh: uni.getStorageSync('fdbh') }).
         then(function (res) {
           if (res.error_code == '0') {
-            _this2.popupshow = false;
+            _this3.popupshow = false;
             uni.setStorageSync('popupshow', false);
             console.log('开台成功', res);
             uni.setStorageSync('xsdbh', res.xsdbh);
@@ -399,45 +406,45 @@ var _default =
     },
 
     // 点击左边的栏目切换
-    swichMenu: function swichMenu(index) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
-                index == _this3.current)) {_context.next = 2;break;}return _context.abrupt("return");case 2:
-                _this3.$nextTick(function () {
+    swichMenu: function swichMenu(index) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
+                index == _this4.current)) {_context.next = 2;break;}return _context.abrupt("return");case 2:
+                _this4.$nextTick(function () {
                   this.current = index;
                 });
                 if (index == '0') {
                   //获取菜品数据
-                  _this3.$u.api.caterings({
+                  _this4.$u.api.caterings({
                     access_token: uni.getStorageSync('token'),
                     vtype: "pos",
                     fdbh: uni.getStorageSync('fdbh'),
                     companyid: uni.getStorageSync('companyid'),
-                    categoryid: _this3.categorylist[index].category_id }).
+                    categoryid: _this4.categorylist[index].category_id }).
                   then(function (res) {
-                    _this3.disheslist = res.disheslist;
+                    _this4.disheslist = res.disheslist;
                   });
                 }
                 // 点击分类切换请求
                 if (index) {
                   //获取菜品数据
-                  _this3.$u.api.caterings({
+                  _this4.$u.api.caterings({
                     access_token: uni.getStorageSync('token'),
                     vtype: "pos",
                     fdbh: uni.getStorageSync('fdbh'),
                     companyid: uni.getStorageSync('companyid'),
-                    categoryid: _this3.categorylist[index].category_id }).
+                    categoryid: _this4.categorylist[index].category_id }).
                   then(function (res) {
-                    _this3.disheslist = res.disheslist;
+                    _this4.disheslist = res.disheslist;
                   });
                 }case 5:case "end":return _context.stop();}}}, _callee);}))();
     },
     //添加到购物车
-    handleAddToCart: function handleAddToCart(product) {var _this4 = this;
-      var index = this.cart.findIndex(function (item) {
-        return item.spbm == product.spbm && item.choosedText == product.choosedText;
-      });
-      if (index > -1) {
-        this.cart[index].goodslist.quantity += 1;
-        this.cart[index].number += product.number || 1;
+    handleAddToCart: function handleAddToCart(product) {
+      // const index = this.cart.findIndex(item => {
+      //     return (item.spbm == product.spbm) && (item.choosedText == product.choosedText)
+      // })
+      if (product.index > -1) {
+        this.cart[product.index].goodslist.quantity += 1;
+        this.cart[product.index].number += product.number || 1;
         return;
       }
       this.cart.push({
@@ -452,18 +459,17 @@ var _default =
         price: product.goodslist.price,
         zxprice: product.goodslist.zxprice });
 
-      uni.getStorageSync('cartold').forEach(function (item) {
-        _this4.cart.push(item);
-      });
+
       console.log('已经加入购物车中的商品：', this.cart);
     },
     //从购物车减商品
     handleMinusFromCart: function handleMinusFromCart(product) {
-      var index = this.cart.findIndex(function (item) {return item.spbm == product.spbm && item.choosedText == product.choosedText;});
-      this.cart[index].goodslist.quantity -= 1;
-      this.cart[index].number -= 1;
-      if (this.cart[index].number <= 0) {
-        this.cart.splice(index, 1);
+      // let index = this.cart.findIndex(item => (item.spbm == product.spbm) && (item.choosedText == product.choosedText) && (item.name == product.name))
+      console.log(product.index);
+      this.cart[product.index].goodslist.quantity -= 1;
+      this.cart[product.index].number -= 1;
+      if (this.cart[product.index].number <= 0) {
+        this.cart.splice(product.index, 1);
       }
     },
     //菜品详情页
@@ -494,7 +500,6 @@ var _default =
     },
 
     pay: function pay() {
-
       var goodslist = this.cart.reduce(function (previous, primary) {
         previous.push(primary.goodslist);
         return previous;
@@ -502,9 +507,9 @@ var _default =
 
       uni.setStorageSync('goodslist', goodslist);
       //计算购物车总价
-      this.cartprice = this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price + cur.zxprice - cur.price;}, 0);
+      this.cartprice = goodslist.reduce(function (acc, cur) {return acc + cur.quantity * cur.price;}, 0);
       //计算商品数量
-      this.counts = this.cart.reduce(function (acc, cur) {return acc + cur.number;}, 0);
+      this.counts = goodslist.reduce(function (acc, cur) {return acc + cur.quantity;}, 0);
       //跳转支付
       this.Cart = {
         cart: this.cart,

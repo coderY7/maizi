@@ -40,8 +40,8 @@
                     <actions :materials-btn="!product.is_single"
                              @materials="showProductDetailModal(product)"
                              :number="productCartNum(product.spbm)"
-                             @add="handleAddToCart(product)"
-                             @minus="handleMinusFromCart(product)" />
+                             @add="handleAddToCart(product,index)"
+                             @minus="handleMinusFromCart(product,index)" />
 									</view>
 								</view>
 							</view>
@@ -166,6 +166,13 @@ import Search from './components/search/search.vue'
     if(uni.getStorageSync('xsdbh')==''){
       this.popupshow=true
     }
+      uni.getStorageSync('cartold').forEach(item=>{
+        this.cart.push(item)
+      })
+      if(uni.getStorageSync('dataold')!=''){
+        console.log('加菜')
+        this.handleAddToCartInModal()
+      }
     },
     onReady() {
       //this.getMenuItemTop()
@@ -250,12 +257,12 @@ import Search from './components/search/search.vue'
       },
       //添加到购物车
       handleAddToCart(product) {
-        const index = this.cart.findIndex(item => {
-            return (item.spbm == product.spbm) && (item.choosedText == product.choosedText)
-        })
-        if(index > -1) {
-          this.cart[index].goodslist.quantity+=1;
-          this.cart[index].number += (product.number || 1)
+        // const index = this.cart.findIndex(item => {
+        //     return (item.spbm == product.spbm) && (item.choosedText == product.choosedText)
+        // })
+        if(product.index > -1) {
+          this.cart[product.index].goodslist.quantity+=1;
+          this.cart[product.index].number += (product.number || 1)
             return
         }
         this.cart.push({
@@ -270,18 +277,17 @@ import Search from './components/search/search.vue'
           price:  product.goodslist.price,
           zxprice:product.goodslist.zxprice
         })
-        uni.getStorageSync('cartold').forEach(item=>{
-          this.cart.push(item)
-        })
+
         console.log('已经加入购物车中的商品：',this.cart)
       },
       //从购物车减商品
       handleMinusFromCart(product) {
-         let index = this.cart.findIndex(item => (item.spbm == product.spbm) && (item.choosedText == product.choosedText))
-        this.cart[index].goodslist.quantity-=1;
-        this.cart[index].number -= 1
-        if(this.cart[index].number <= 0) {
-          this.cart.splice(index, 1)
+         // let index = this.cart.findIndex(item => (item.spbm == product.spbm) && (item.choosedText == product.choosedText) && (item.name == product.name))
+        console.log(product.index)
+        this.cart[product.index].goodslist.quantity-=1;
+        this.cart[product.index].number -= 1
+        if(this.cart[product.index].number <= 0) {
+          this.cart.splice(product.index, 1)
         }
       },
       //菜品详情页
@@ -312,7 +318,6 @@ import Search from './components/search/search.vue'
       },
 
       pay(){
-	
         var goodslist = this.cart.reduce((previous,primary)=>{
           previous.push(primary.goodslist);
           return previous;
@@ -320,9 +325,9 @@ import Search from './components/search/search.vue'
 
         uni.setStorageSync('goodslist', goodslist)
         //计算购物车总价
-        this.cartprice=this.cart.reduce((acc, cur) => acc + cur.number * cur.price+cur.zxprice-cur.price, 0)
+        this.cartprice=goodslist.reduce((acc, cur) => acc + cur.quantity * cur.price, 0)
         //计算商品数量
-        this.counts=this.cart.reduce((acc, cur) => acc + cur.number, 0)
+        this.counts=goodslist.reduce((acc, cur) => acc + cur.quantity, 0)
         //跳转支付
         this.Cart={
           cart:this.cart,

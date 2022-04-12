@@ -202,13 +202,20 @@ __webpack_require__.r(__webpack_exports__);
         console.log('查询桌台订单明细：', res);
         var cartold = [];
         res.goodslist.forEach(function (item) {
+          var choosedText = [];
+
+          item.extlist.forEach(function (res) {
+            choosedText.push(res.ext_name);
+          });
+          var text = choosedText.join(',');
+
           cartold.push({
             id: item.spbm,
             cate_id: item.category_id,
             name: item.spmc,
-            number: item.number || 1,
+            number: Number.parseInt(item.quantity) || 1,
             is_single: item.is_single,
-            choosedText: item.choosedText || '',
+            choosedText: text || '',
             price: Number.parseInt(item.price),
             zxprice: Number.parseInt(item.zxprice),
             image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),

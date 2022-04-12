@@ -137,7 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniPopup = function uniPopup() {Promise.all(/*! require.ensure | components/uni-popup/uni-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-popup/uni-popup")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 233));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var actions = function actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ../actions/actions.vue */ 156));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var productModal = function productModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ../product-modal/product-modal */ 170));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniPopup = function uniPopup() {Promise.all(/*! require.ensure | components/uni-popup/uni-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-popup/uni-popup")]).then((function () {return resolve(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 233));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var actions = function actions() {__webpack_require__.e(/*! require.ensure | pages/menu/components/actions/actions */ "pages/menu/components/actions/actions").then((function () {return resolve(__webpack_require__(/*! ../actions/actions.vue */ 156));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var productModal = function productModal() {__webpack_require__.e(/*! require.ensure | pages/menu/components/product-modal/product-modal */ "pages/menu/components/product-modal/product-modal").then((function () {return resolve(__webpack_require__(/*! ../product-modal/product-modal */ 170));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
 
 
 
@@ -215,12 +215,12 @@ __webpack_require__.r(__webpack_exports__);
     change: function change(_ref) {var show = _ref.show;
       this.$emit('change', show);
     },
-    add: function add(item) {
-      console.log('item:', item);
-      this.$emit('add', item);
+    add: function add(item, index) {
+      console.log('item:', item, index);
+      this.$emit('add', _objectSpread(_objectSpread({}, item), {}, { index: index }));
     },
-    minus: function minus(item) {
-      this.$emit('minus', item);
+    minus: function minus(item, index) {
+      this.$emit('minus', _objectSpread(_objectSpread({}, item), {}, { index: index }));
     },
     clear: function clear() {var _this = this;
       uni.showModal({

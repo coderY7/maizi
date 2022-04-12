@@ -649,12 +649,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     // 加入购物车
     addToCart: function addToCart() {
       if (this.productData.extlist) {
-        // this.productData.extlist.map(item => {
-        //   if (item.isDefault) {
-        //     item.isDefault=undefined;
-        //     item.ext_desc=undefined;
-        //   }
-        // });
         this.productData.choosedText = this.choosedText;
         var goodslist = {
           price: this.productData.nsjg,

@@ -510,12 +510,6 @@ export default {
     // 加入购物车
     addToCart() {
       if(this.productData.extlist){
-        // this.productData.extlist.map(item => {
-        //   if (item.isDefault) {
-        //     item.isDefault=undefined;
-        //     item.ext_desc=undefined;
-        //   }
-        // });
         this.productData.choosedText=this.choosedText
         let goodslist={
           price: this.productData.nsjg,

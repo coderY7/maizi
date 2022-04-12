@@ -35,8 +35,9 @@ export default {
 			return this.cart.reduce((acc, cur) => acc + cur.number, 0)
 		},
 		cartPrice() {	//计算购物车总价
-			 let cartPrice=this.cart.reduce((acc, cur) => acc + cur.number * cur.price+cur.zxprice-cur.price, 0)
-      return cartPrice
+			  let cartPrice=this.cart.reduce((acc, cur) => acc + cur.number * cur.price, 0)
+      //let cartPrice=this.cart.reduce((acc, cur) => acc + cur.zxprice, 0)
+       return cartPrice
 		}	
 	},
 	data() {
