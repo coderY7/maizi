@@ -177,7 +177,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       return this.cart.reduce(function (acc, cur) {return acc + cur.number;}, 0);
     },
     cartPrice: function cartPrice() {//计算购物车总价
-      var cartPrice = this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price;}, 0);
+
+      var cartPrice = this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price + cur.addzxprice;}, 0);
       //let cartPrice=this.cart.reduce((acc, cur) => acc + cur.zxprice, 0)
       return cartPrice;
     } },

@@ -31,7 +31,10 @@
                 </view>
                 <view class="total">
                   <view>总价格:{{parseFloat(orders.paytotal)}}</view>
-                  <view></view>
+                  <view>
+                    <u-button @click="dish()">加菜</u-button>
+                    <u-button @click="pay()">立即支付</u-button>
+                  </view>
                 </view>
               </view>
             </view>
@@ -73,14 +76,13 @@ export default {
       loadStatus: ['loadmore','loadmore'],
       time:'',
       orders:'',
-      goodslist:[],
+      goodslist:false,
       imgurl:"http://cateapi.mzsale.cn/",
     };
   },
   onLoad() {
   },
   onShow(){
-    this.orders=uni.getStorageSync('orders');
 	this.completion=uni.getStorageSync('completion')//支付成功的订单
     //查询桌台订单信息
     this.$u.api.orders({
@@ -109,7 +111,6 @@ export default {
     }).then((res)=>{
       console.log('订单完成',res)
     })
-
 },
   computed: {
     // 价格小数
@@ -128,6 +129,18 @@ export default {
     }
   },
   methods: {
+    //跳转支付
+    pay(){
+      uni.navigateTo({
+        url:'/pages/payment/payment'
+      })
+    },
+    //加菜
+    dish(){
+      uni.switchTab({
+        url:'/pages/menu/menu'
+      })
+    },
     reachBottom() {
       // 此tab为空数据
       if(this.current != 2) {

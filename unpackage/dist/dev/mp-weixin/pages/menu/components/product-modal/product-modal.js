@@ -598,6 +598,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         });
       });
       console.log('属性总价:', pri);
+      this.productData.addzxprice = pri;
       this.productData.price = this.productData.nsjg;
       this.productData.zxprice = this.productData.nsjg + pri;
       this.productData.shownPrice = this.productData.number * this.productData.price + pri;
@@ -670,6 +671,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
           this.productData.choosedText = this.choosedText;
           console.log(this.productData);
           var _goodslist = {
+            addzxprice: this.productData.addzxprice,
             price: this.productData.nsjg,
             extlist: [],
             spsmm: this.productData.spsmm,

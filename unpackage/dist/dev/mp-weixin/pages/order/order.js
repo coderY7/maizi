@@ -100,6 +100,9 @@ try {
     uTabsSwiper: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 191))
     },
+    uButton: function() {
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 149))
+    },
     uLoadmore: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 198))
     }
@@ -233,6 +236,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -254,14 +260,13 @@ var _default =
       loadStatus: ['loadmore', 'loadmore'],
       time: '',
       orders: '',
-      goodslist: [],
+      goodslist: false,
       imgurl: "http://cateapi.mzsale.cn/" };
 
   },
   onLoad: function onLoad() {
   },
   onShow: function onShow() {var _this = this;
-    this.orders = uni.getStorageSync('orders');
     this.completion = uni.getStorageSync('completion'); //支付成功的订单
     //查询桌台订单信息
     this.$u.api.orders({
@@ -290,7 +295,6 @@ var _default =
     then(function (res) {
       console.log('订单完成', res);
     });
-
   },
   computed: {
     // 价格小数
@@ -309,6 +313,18 @@ var _default =
     } },
 
   methods: {
+    //跳转支付
+    pay: function pay() {
+      uni.navigateTo({
+        url: '/pages/payment/payment' });
+
+    },
+    //加菜
+    dish: function dish() {
+      uni.switchTab({
+        url: '/pages/menu/menu' });
+
+    },
     reachBottom: function reachBottom() {var _this2 = this;
       // 此tab为空数据
       if (this.current != 2) {

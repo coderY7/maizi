@@ -100,11 +100,18 @@ export default {
         let cartold = [];
         res.goodslist.forEach((item) => {
           let choosedText = [];
-
+          let ext_zxprices = [];
           item.extlist.forEach(res => {
             choosedText.push(res.ext_name)
+            ext_zxprices.push(Number.parseInt(res.ext_zxprice))
           })
-          let text=choosedText.join(',')
+          let text = choosedText.join(',')
+          function sum(arr) {
+            return arr.reduce(function(prev, curr, idx, arr){
+              return prev + curr;
+            });
+          }
+           let addzxprice=sum(ext_zxprices) //属性总价
 
           cartold.push({
             id: item.spbm,
@@ -114,14 +121,15 @@ export default {
             is_single: item.is_single,
             choosedText: text || '',
             price: Number.parseInt(item.price),
-            zxprice: Number.parseInt(item.zxprice),
+            zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
             image: `http://cateapi.mzsale.cn/${item.small_img_path}`,
+            addzxprice:addzxprice,
             goodslist: {
               discount: item.discount,
               extlist: [item.extlist],
               flownum: item.flownum++,
               price: Number.parseInt(item.price),
-              zxprice: Number.parseInt(item.zxprice),
+              zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
               quantity: Number.parseInt(item.quantity),
               spbm: item.spbm,
               spsmm: item.spsmm,

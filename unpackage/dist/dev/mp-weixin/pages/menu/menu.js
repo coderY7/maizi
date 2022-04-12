@@ -457,7 +457,8 @@ var _default =
         choosedText: product.choosedText || '',
         goodslist: product.goodslist,
         price: product.goodslist.price,
-        zxprice: product.goodslist.zxprice });
+        zxprice: product.goodslist.zxprice,
+        addzxprice: product.addzxprice });
 
 
       console.log('已经加入购物车中的商品：', this.cart);

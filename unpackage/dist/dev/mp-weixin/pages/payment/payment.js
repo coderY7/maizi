@@ -175,6 +175,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   name: "payment",
   data: function data() {
@@ -182,7 +183,7 @@ __webpack_require__.r(__webpack_exports__);
       tableid: '',
       xsdbh: '', //订单号
       readytopays: '',
-      pay: uni.getStorageSync('Cart').cartprice,
+      pay: Number.parseInt(uni.getStorageSync('unfinished').paytotal),
       payment: '0',
       tablenumber: '' };
 
@@ -219,14 +220,14 @@ __webpack_require__.r(__webpack_exports__);
           uni.setStorageSync('subappid', ress.data.wxpaylist.appid); //商家公众号子appid
           uni.setStorageSync('submchid', ress.data.wxpaylist.submchid); //商家支付子商户号
 
-          uni.request({ //请求支付必要参数，发起预支付请求
+          wx.request({ //请求支付必要参数，发起预支付请求
             url: 'https://wx.ecsun.cn/AjacService/LiteReadyToPay2.ashx',
             data: {
               subappid: uni.getStorageSync('appid'), //小程序appid
               openid: uni.getStorageSync('openid'), //小程序openid
               submchid: uni.getStorageSync('submchid'), //商家支付子商户号
               billnum: uni.getStorageSync('xsdbh'), //本次交易订单号
-              total_fee: uni.getStorageSync('Cart').cartprice, //本次交易应付总额
+              total_fee: uni.getStorageSync('unfinished').paytotal, //本次交易应付总额
               cardid: '',
               nums: Math.random() },
 

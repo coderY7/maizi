@@ -268,7 +268,7 @@ var _default =
                   goodslist: uni.getStorageSync('goodslist') }).
                 then(function (res) {
                   console.log('预结算', res);
-                  uni.setStorageSync('unfinished', res.goodslist);
+                  uni.setStorageSync('unfinished', res);
                   uni.navigateTo({
                     url: '../payment/payment' });
 
