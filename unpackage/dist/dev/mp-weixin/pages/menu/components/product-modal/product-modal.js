@@ -408,20 +408,24 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   watch: {
     product: function product(val) {var _this$productData$dis;
       this.productData = JSON.parse(JSON.stringify(val));
+      console.log(this.productData);
       this.MultiSelectindex = (_this$productData$dis = this.productData.dishesextlist) === null || _this$productData$dis === void 0 ? void 0 : _this$productData$dis.map(function (item) {return item.groupname;}).indexOf('加料');
+      console.log(this.MultiSelectindex);
       if (this.MultiSelectindex == -1) {
         console.log('不存在多选加料');
-      } else {
-        this.MultiSelect = this.productData.dishesextlist[this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料')];
+      } else {var _this$productData, _this$productData$dis2;
+        this.MultiSelect = (_this$productData = this.productData) === null || _this$productData === void 0 ? void 0 : _this$productData.dishesextlist[(_this$productData$dis2 = this.productData.dishesextlist) === null || _this$productData$dis2 === void 0 ? void 0 : _this$productData$dis2.map(function (item) {return item.groupname;}).indexOf('加料')];
         this.productData.dishesextlist.splice(0, 0, this.MultiSelect);
         var hash = {};
         var arr = this.productData.dishesextlist.reduce(function (item, next) {
           hash[next.groupname] ? '' : hash[next.groupname] =  true && item.push(next);
           return item;
         }, []);
+        console.log(arr);
         this.productData.dishesextlist = arr;
       }
       this.$set(this.productData, 'number', 1);
+      console.log(this.productData.dishesextlist);
     } },
 
 
@@ -448,12 +452,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   },
   onShow: function onShow() {
     var data = this.productData.dishesextlist[1].extitems;
-
+    console.log('data', data);
   },
   methods: {
     checkboxChange: function checkboxChange(value, key) {
       var value = this.productData.dishesextlist[0].extitems[key];
-
+      console.log(value, key);
       value.ext_quantity = 1;
       if (value.isDefault == undefined) {
         value.isDefault = true;
@@ -461,7 +465,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         this.pitch();
       } else if (value.isDefault) {
         value.isDefault = undefined;
-
+        console.log(value);
         this.pitch();
       }
     },
@@ -502,7 +506,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       unity.ext_quantity = 1;
       unity.ext_zxprice = unity.ext_price * 1;
       if (rowIndex != 0) {
-
+        console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
         });
@@ -518,7 +522,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
       unity.ext_zxprice = unity.ext_price * 1;
       if (rowIndex != 0) {
-
+        console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
         });
@@ -534,7 +538,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
       unity.ext_zxprice = unity.ext_price * 1;
       if (rowIndex != 0) {
-
+        console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
         });
@@ -549,7 +553,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       unity.ext_quantity = 1;
       unity.ext_zxprice = unity.ext_price * 1;
       if (rowIndex != 0) {
-
+        console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
         });
@@ -564,7 +568,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       unity.ext_quantity = 1;
       unity.ext_zxprice = unity.ext_price * 1;
       if (rowIndex != 0) {
-
+        console.log(rowIndex, itemIndex);
         this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
           item.isDefault = false;
         });
@@ -576,16 +580,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     // 关闭modal
     closeModal: function closeModal() {
       this.$emit('cancel');
-
+      console.log('12321');
     },
     //分享
     shareGoods: function shareGoods() {
       this.$emit('share', {});
     },
     // 计算总价（商品+加料）
-    calcOverprice: function calcOverprice() {var _this$productData$dis2;
+    calcOverprice: function calcOverprice() {
       var pri = 0;
-      (_this$productData$dis2 = this.productData.dishesextlist) === null || _this$productData$dis2 === void 0 ? void 0 : _this$productData$dis2.forEach(function (item) {
+      this.productData.dishesextlist.forEach(function (item) {
         item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
             // console.log('单个属性价格',item1.ext_price * item1.ext_quantity)
@@ -597,7 +601,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       this.productData.price = this.productData.nsjg;
       this.productData.zxprice = this.productData.nsjg + pri;
       this.productData.shownPrice = this.productData.number * this.productData.price + pri;
-
+      console.log('商品总价格', this.productData.shownPrice);
       this.updateChoosedText();
     },
 
@@ -629,9 +633,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     //选中
     pitch: function pitch() {
       var pitch = [];
-
+      console.log(this.productData.dishesextlist);
       this.productData.dishesextlist.forEach(function (item) {
-
+        console.log(item);
         item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
             pitch.push(item1);
@@ -645,6 +649,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     // 加入购物车
     addToCart: function addToCart() {
       if (this.productData.extlist) {
+        // this.productData.extlist.map(item => {
+        //   if (item.isDefault) {
+        //     item.isDefault=undefined;
+        //     item.ext_desc=undefined;
+        //   }
+        // });
         this.productData.choosedText = this.choosedText;
         var goodslist = {
           price: this.productData.nsjg,
@@ -657,13 +667,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
           spbm: this.productData.spbm };
 
         this.productData.goodslist = goodslist;
-        var _product = _objectSpread({}, this.productData);
-        this.$emit('add-to-cart', _product);
-
+        var product = _objectSpread({}, this.productData);
+        this.$emit('add-to-cart', product);
+        console.log(product);
       }
       //未选择规格
       else {
           this.productData.choosedText = this.choosedText;
+          console.log(this.productData);
           var _goodslist = {
             price: this.productData.nsjg,
             extlist: [],
@@ -675,8 +686,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
             spbm: this.productData.spbm };
 
           this.productData.goodslist = _goodslist;
-
-          this.$emit('add-to-cart', product);
+          var _product = _objectSpread({}, this.productData);
+          this.$emit('add-to-cart', _product);
+          console.log(_product);
         }
     } } };exports.default = _default2;
 

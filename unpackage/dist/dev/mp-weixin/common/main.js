@@ -203,20 +203,28 @@ __webpack_require__.r(__webpack_exports__);
         var cartold = [];
         res.goodslist.forEach(function (item) {
           cartold.push({
-            price: item.price,
-            extlist: item.extlist,
-            spsmm: item.spsmm,
-            zxprice: item.zxprice,
-            quantity: item.quantity,
-            flownum: item.flownum++,
-            discount: '0',
-            spbm: item.spbm,
-            image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),
+            id: item.spbm,
+            cate_id: item.category_id,
             name: item.spmc,
-            number: item.quantity });
+            number: item.number || 1,
+            is_single: item.is_single,
+            choosedText: item.choosedText || '',
+            price: Number.parseInt(item.price),
+            zxprice: Number.parseInt(item.zxprice),
+            image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),
+            goodslist: {
+              discount: item.discount,
+              extlist: [item.extlist],
+              flownum: item.flownum++,
+              price: Number.parseInt(item.price),
+              zxprice: Number.parseInt(item.zxprice),
+              quantity: Number.parseInt(item.quantity),
+              spbm: item.spbm,
+              spsmm: item.spsmm } });
+
 
         });
-        console.log('旧的数据信息', cartold);
+        console.log('旧数据信息', cartold);
         uni.setStorageSync('cartold', cartold);
       });
 
