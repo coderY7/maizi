@@ -508,7 +508,8 @@ var _default =
 
       uni.setStorageSync('goodslist', goodslist);
       //计算购物车总价
-      this.cartprice = goodslist.reduce(function (acc, cur) {return acc + cur.quantity * cur.price;}, 0);
+      //this.cartprice=goodslist.reduce((acc, cur) => acc + cur.quantity * cur.price, 0),
+      this.cartprice = uni.getStorageSync('cartPrice'),
       //计算商品数量
       this.counts = goodslist.reduce(function (acc, cur) {return acc + cur.quantity;}, 0);
       //跳转支付

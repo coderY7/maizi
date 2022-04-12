@@ -298,6 +298,7 @@ export default {
       number: 1,
       shownPrice: 0,
       choosedText: '',
+      addzxprice:0,
       imgurl:"http://cateapi.mzsale.cn/",
       productData: {},
       zxprice:0,
@@ -530,9 +531,9 @@ export default {
       //未选择规格
       else {
         this.productData.choosedText=this.choosedText
+        this.productData.addzxprice=0
         console.log(this.productData)
         let goodslist={
-          addzxprice:this.productData.addzxprice,
           price: this.productData.nsjg,
           extlist:[],
           spsmm:this.productData.spsmm,

@@ -437,6 +437,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       number: 1,
       shownPrice: 0,
       choosedText: '',
+      addzxprice: 0,
       imgurl: "http://cateapi.mzsale.cn/",
       productData: {},
       zxprice: 0,
@@ -669,9 +670,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       //未选择规格
       else {
           this.productData.choosedText = this.choosedText;
+          this.productData.addzxprice = 0;
           console.log(this.productData);
           var _goodslist = {
-            addzxprice: this.productData.addzxprice,
             price: this.productData.nsjg,
             extlist: [],
             spsmm: this.productData.spsmm,

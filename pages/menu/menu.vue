@@ -326,8 +326,9 @@ import Search from './components/search/search.vue'
 
         uni.setStorageSync('goodslist', goodslist)
         //计算购物车总价
-        this.cartprice=goodslist.reduce((acc, cur) => acc + cur.quantity * cur.price, 0)
-        //计算商品数量
+        //this.cartprice=goodslist.reduce((acc, cur) => acc + cur.quantity * cur.price, 0),
+            this.cartprice=uni.getStorageSync('cartPrice'),
+            //计算商品数量
         this.counts=goodslist.reduce((acc, cur) => acc + cur.quantity, 0)
         //跳转支付
         this.Cart={

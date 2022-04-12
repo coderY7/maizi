@@ -35,9 +35,14 @@ export default {
 			return this.cart.reduce((acc, cur) => acc + cur.number, 0)
 		},
 		cartPrice() {	//计算购物车总价
+        this.cart.forEach(item => {
+          if(item.addzxprice!=''){
 
+          }
+        })
 			  let cartPrice=this.cart.reduce((acc, cur) => acc + cur.number * cur.price+cur.addzxprice, 0)
       //let cartPrice=this.cart.reduce((acc, cur) => acc + cur.zxprice, 0)
+      uni.setStorageSync('cartPrice', cartPrice)
        return cartPrice
 		}	
 	},

@@ -107,9 +107,9 @@ export default {
           })
           let text = choosedText.join(',')
           function sum(arr) {
-            return arr.reduce(function(prev, curr, idx, arr){
+            return arr.reduce((prev, curr)=>{
               return prev + curr;
-            });
+            },0);
           }
            let addzxprice=sum(ext_zxprices) //属性总价
 

@@ -210,9 +210,9 @@ __webpack_require__.r(__webpack_exports__);
           });
           var text = choosedText.join(',');
           function sum(arr) {
-            return arr.reduce(function (prev, curr, idx, arr) {
+            return arr.reduce(function (prev, curr) {
               return prev + curr;
-            });
+            }, 0);
           }
           var addzxprice = sum(ext_zxprices); //属性总价
 

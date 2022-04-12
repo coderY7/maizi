@@ -140,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniTransition = function uniTransition() {__webpack_require__.e(/*! require.ensure | components/uni-transition/uni-transition */ "components/uni-transition/uni-transition").then((function () {return resolve(__webpack_require__(/*! @/components/uni-transition/uni-transition.vue */ 226));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ../cart-popup/cart-popup.vue */ 177));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniTransition = function uniTransition() {__webpack_require__.e(/*! require.ensure | components/uni-transition/uni-transition */ "components/uni-transition/uni-transition").then((function () {return resolve(__webpack_require__(/*! @/components/uni-transition/uni-transition.vue */ 226));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var cartPopup = function cartPopup() {__webpack_require__.e(/*! require.ensure | pages/menu/components/cart-popup/cart-popup */ "pages/menu/components/cart-popup/cart-popup").then((function () {return resolve(__webpack_require__(/*! ../cart-popup/cart-popup.vue */ 177));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default2 =
 
 
 
@@ -177,9 +177,14 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
       return this.cart.reduce(function (acc, cur) {return acc + cur.number;}, 0);
     },
     cartPrice: function cartPrice() {//计算购物车总价
+      this.cart.forEach(function (item) {
+        if (item.addzxprice != '') {
 
+        }
+      });
       var cartPrice = this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price + cur.addzxprice;}, 0);
       //let cartPrice=this.cart.reduce((acc, cur) => acc + cur.zxprice, 0)
+      uni.setStorageSync('cartPrice', cartPrice);
       return cartPrice;
     } },
 
@@ -225,6 +230,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         this.$refs['cartPopup'].close();
       }
     } } };exports.default = _default2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
