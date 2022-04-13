@@ -46,8 +46,6 @@ export default {
     // }).then((res)=>{
     // 	console.log('清台',res)
     // })
-
-
   },
   onShow: function () {
     //获取openid
@@ -126,7 +124,7 @@ export default {
             addzxprice:addzxprice,
             goodslist: {
               discount: item.discount,
-              extlist: [item.extlist],
+              extlist: item.extlist,
               flownum: item.flownum++,
               price: Number.parseInt(item.price),
               zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),

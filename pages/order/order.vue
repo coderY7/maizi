@@ -98,19 +98,19 @@ export default {
     })
 
     //订单完成
-    this.$u.api.paydones({
-      access_token:uni.getStorageSync('token'),
-      flow_no:uni.getStorageSync('xsdbh'),
-      payno:'04',
-      total:uni.getStorageSync('total'), //付款金额
-      payid:'',
-      syyid:uni.getStorageSync('syyid'),
-      vipid:uni.getStorageSync('vipid'),//会员码openid
-      fdbh:uni.getStorageSync('fdbh'),
-      companyid:uni.getStorageSync('companyid')
-    }).then((res)=>{
-      console.log('订单完成',res)
-    })
+    // this.$u.api.paydones({
+    //   access_token:uni.getStorageSync('token'),
+    //   flow_no:uni.getStorageSync('xsdbh'),
+    //   payno:'04',
+    //   total:uni.getStorageSync('total'), //付款金额
+    //   payid:'',
+    //   syyid:uni.getStorageSync('syyid'),
+    //   vipid:uni.getStorageSync('vipid'),//会员码openid
+    //   fdbh:uni.getStorageSync('fdbh'),
+    //   companyid:uni.getStorageSync('companyid')
+    // }).then((res)=>{
+    //   console.log('订单完成',res)
+    // })
 },
   computed: {
     // 价格小数

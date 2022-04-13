@@ -114,8 +114,9 @@ addmenu(){
            }).then(res=>{
          console.log('预结算',res)
          uni.setStorageSync('unfinished',res)
+
         uni.navigateTo({
-          url:'../payment/payment'
+          url:'../order/order'
         })
        })
     }

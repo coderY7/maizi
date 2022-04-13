@@ -269,8 +269,9 @@ var _default =
                 then(function (res) {
                   console.log('预结算', res);
                   uni.setStorageSync('unfinished', res);
+
                   uni.navigateTo({
-                    url: '../payment/payment' });
+                    url: '../order/order' });
 
                 });case 6:case "end":return _context.stop();}}}, _callee);}))();
     } },

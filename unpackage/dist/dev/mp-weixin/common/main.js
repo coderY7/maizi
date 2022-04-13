@@ -149,8 +149,6 @@ __webpack_require__.r(__webpack_exports__);
     // }).then((res)=>{
     // 	console.log('清台',res)
     // })
-
-
   },
   onShow: function onShow() {var _this = this;
     //获取openid
@@ -229,7 +227,7 @@ __webpack_require__.r(__webpack_exports__);
             addzxprice: addzxprice,
             goodslist: {
               discount: item.discount,
-              extlist: [item.extlist],
+              extlist: item.extlist,
               flownum: item.flownum++,
               price: Number.parseInt(item.price),
               zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
