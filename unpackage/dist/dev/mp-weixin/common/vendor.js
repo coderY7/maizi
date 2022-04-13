@@ -2091,7 +2091,7 @@ uni$1;exports.default = _default;
 
 /***/ }),
 
-/***/ 127:
+/***/ 133:
 /*!************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/扫码点餐/common/qqmap-wx-jssdk.min.js ***!
   \************************************************************************/
@@ -3189,7 +3189,18 @@ new Router().route;exports.default = _default;
 
 /***/ }),
 
-/***/ 238:
+/***/ 24:
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ 25);
+
+/***/ }),
+
+/***/ 244:
 /*!*************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/扫码点餐/components/uni-popup/popup.js ***!
   \*************************************************************************/
@@ -3197,7 +3208,7 @@ new Router().route;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 239));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _message = _interopRequireDefault(__webpack_require__(/*! ./message.js */ 245));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 定义 type 类型:弹出类型：top/bottom/center
 var config = {
   // 顶部弹出
@@ -3224,7 +3235,7 @@ var config = {
 
 /***/ }),
 
-/***/ 239:
+/***/ 245:
 /*!***************************************************************************!*\
   !*** /Users/coderyh/Downloads/codeY/扫码点餐/components/uni-popup/message.js ***!
   \***************************************************************************/
@@ -3252,17 +3263,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
         this.childrenMsg.close();
       }
     } } };exports.default = _default;
-
-/***/ }),
-
-/***/ 24:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ 25);
 
 /***/ }),
 
@@ -12504,7 +12504,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/main/main": { "navigationBarTitleText": "首页", "navigationStyle": "custom" }, "pages/menu/menu": { "navigationBarTitleText": "点餐", "FontSize": "500px" }, "pages/order/order": { "navigationBarTitleText": "订单" }, "pages/my/my": { "navigationBarTitleText": "我的", "navigationStyle": "custom" }, "pages/pay/pay": { "navigationBarTitleText": "确定订单" }, "pages/payment/payment": { "navigationBarTitleText": "订单支付" }, "pages/vip/vip": { "navigationBarTitleText": "会员", "enablePullDownRefresh": false }, "pages/roll/roll": { "navigationBarTitleText": "卡卷", "enablePullDownRefresh": false }, "pages/distribution/distribution": { "navigationBarTitleText": "", "enablePullDownRefresh": false }, "pages/integrate/integrate": { "navigationBarTitleText": "积分", "enablePullDownRefresh": false }, "pages/map/map": { "navigationBarTitleText": "", "enablePullDownRefresh": false } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "扫码点餐", "navigationBarBackgroundColor": "#FEB121", "backgroundColor": "#ffffff" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/scan/scan": { "navigationBarTitleText": "欢迎使用扫码点餐", "enablePullDownRefresh": false }, "pages/main/main": { "navigationBarTitleText": "首页", "navigationStyle": "custom" }, "pages/menu/menu": { "navigationBarTitleText": "点餐", "FontSize": "500px" }, "pages/order/order": { "navigationBarTitleText": "订单" }, "pages/my/my": { "navigationBarTitleText": "我的", "navigationStyle": "custom" }, "pages/pay/pay": { "navigationBarTitleText": "确定订单" }, "pages/payment/payment": { "navigationBarTitleText": "订单支付" }, "pages/vip/vip": { "navigationBarTitleText": "会员", "enablePullDownRefresh": false }, "pages/roll/roll": { "navigationBarTitleText": "卡卷", "enablePullDownRefresh": false }, "pages/distribution/distribution": { "navigationBarTitleText": "", "enablePullDownRefresh": false }, "pages/integrate/integrate": { "navigationBarTitleText": "积分", "enablePullDownRefresh": false }, "pages/map/map": { "navigationBarTitleText": "", "enablePullDownRefresh": false } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "扫码点餐", "navigationBarBackgroundColor": "#FEB121", "backgroundColor": "#ffffff" } };exports.default = _default;
 
 /***/ })
 

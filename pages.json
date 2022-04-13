@@ -4,6 +4,15 @@
 	},
 	"pages": [
 		{
+		    "path" : "pages/scan/scan",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "欢迎使用扫码点餐",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
 			"path": "pages/main/main",
 			"style": {
 				"navigationBarTitleText": "首页",
