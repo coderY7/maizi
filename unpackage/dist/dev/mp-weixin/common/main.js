@@ -199,6 +199,8 @@ __webpack_require__.r(__webpack_exports__);
         uni.setStorageSync('old', old);
         console.log('查询桌台订单明细：', res);
         var cartold = [];
+        var countold = res.count;
+        uni.setStorageSync('flownumold', countold);
         res.goodslist.forEach(function (item) {
           var choosedText = [];
           var ext_zxprices = [];
@@ -228,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
             goodslist: {
               discount: item.discount,
               extlist: item.extlist,
-              flownum: item.flownum++,
+              flownum: item.flownum,
               price: Number.parseInt(item.price),
               zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
               quantity: Number.parseInt(item.quantity),

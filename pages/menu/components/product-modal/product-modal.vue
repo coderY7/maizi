@@ -305,7 +305,7 @@ export default {
       extlist:[],//附加属性
       ext_zxprice:'',
       ext_quantity:'1',
-      flownum:'0',
+      flownum:uni.getStorageSync('flownumold')?uni.getStorageSync('flownumold'):'0',
       value:'1'
     };
   },

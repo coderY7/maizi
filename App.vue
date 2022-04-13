@@ -96,6 +96,8 @@ export default {
         uni.setStorageSync('old', old)
         console.log('查询桌台订单明细：', res)
         let cartold = [];
+        let countold=res.count;
+        uni.setStorageSync('flownumold',countold)
         res.goodslist.forEach((item) => {
           let choosedText = [];
           let ext_zxprices = [];
@@ -125,7 +127,7 @@ export default {
             goodslist: {
               discount: item.discount,
               extlist: item.extlist,
-              flownum: item.flownum++,
+              flownum: item.flownum,
               price: Number.parseInt(item.price),
               zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
               quantity: Number.parseInt(item.quantity),

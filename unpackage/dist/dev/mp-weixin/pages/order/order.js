@@ -294,6 +294,8 @@ var _default =
     //   companyid:uni.getStorageSync('companyid')
     // }).then((res)=>{
     //   console.log('订单完成',res)
+    //   // this.goodslist=res.goodslist
+    //   // this.orders=res
     // })
   },
   computed: {

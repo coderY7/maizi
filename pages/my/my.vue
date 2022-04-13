@@ -5,13 +5,16 @@
 		  <view>
 		  	<image :src="userurl" class="image"></image>
 		  </view>
-        <view class="unit1box_text">
-          <u-button type="warning" @click="login" v-if="!islogin">微信授权登录</u-button>
-		  <view v-if="islogin">{{userInfo.nickName}}</view>
+        <view class="unit1right">
+          <view class="">
+            <u-button type="warning" @click="login" v-if="!islogin">微信授权登录</u-button>
+            <view v-if="islogin">{{userInfo.nickName}}</view>
+          </view>
+          <view class="unit1box_code">
+            <u-icon name="scan" size="35px" @click="scan"></u-icon>
+          </view>
         </view>
-        <view class="unit1box_code" style="padding-left: 150rpx;">
-          <u-icon name="scan" size="35px" @click="scan"></u-icon>
-        </view>
+
       </view>
     </view>
 
@@ -28,7 +31,7 @@
   <view style="font-size: 20px;margin-top:10px;margin-left: 20rpx;">我的资产</view>
   <view class="unit2_bottom">
    <view class="unit2_bottom_item">
-     <text style="font-size:16px;color: red;margin:0 0 20rpx 0">20</text>
+     <text style="font-size:16px;color: red;margin:0 0 20rpx 0">0</text>
      <view>我的积分</view>
    </view>
     <view class="unit2_bottom_item">
@@ -143,14 +146,16 @@ page {
       overflow: hidden;
     }
     .unit1box {
-      //flex: 1;
+      width: 100%;
       display: flex;
-      //margin-left: 20rpx;
-      justify-content: space-between;
       align-items: center;
       margin-top: 20rpx;
-      .unit1box_code{
-        margin-lift: 200rpx;
+      font-size:30rpx;
+      .unit1right{
+        width:100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
     }
   }
