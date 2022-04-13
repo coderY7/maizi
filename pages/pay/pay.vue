@@ -115,7 +115,7 @@ addmenu(){
          console.log('预结算',res)
          uni.setStorageSync('unfinished',res)
 
-        uni.navigateTo({
+        uni.switchTab({
           url:'../order/order'
         })
        })

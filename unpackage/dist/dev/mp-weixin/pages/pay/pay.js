@@ -270,7 +270,7 @@ var _default =
                   console.log('预结算', res);
                   uni.setStorageSync('unfinished', res);
 
-                  uni.navigateTo({
+                  uni.switchTab({
                     url: '../order/order' });
 
                 });case 6:case "end":return _context.stop();}}}, _callee);}))();
