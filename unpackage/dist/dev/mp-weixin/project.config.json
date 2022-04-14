@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -37,12 +37,13 @@
     "packNpmRelationList": [],
     "minifyWXSS": true,
     "disableUseStrict": false,
+    "minifyWXML": true,
     "showES6CompileOption": false,
     "useCompilerPlugins": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.23.4",
-  "appid": "wxbce91b6b8e662b44",
+  "libVersion": "",
+  "appid": "wx6153d2442b9327bd",
   "projectname": "scan",
   "condition": {
     "search": {
