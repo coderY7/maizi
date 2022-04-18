@@ -2,15 +2,28 @@
 export default {
   onLaunch: function (options) {
     console.log('从二维码中取的数据', options)
-    const appId = uni.getAccountInfoSync().miniProgram.appId;
-    uni.setStorageSync('appid', appId);
-    uni.setStorageSync('syyid', '00268');
+	 let name=options.query.scene
+	    let now=name.split("-")
+	   let codeparam=[]
+	   now.forEach(item=>{
+	       codeparam.push(parseInt(item, 16).toString(10))
+	   })
+	    //服务员ID不满6位数前面加0
+	    if(codeparam[1].length<6){
+	    codeparam[1]=codeparam[1].padStart(6,'0')
+	    }
+	    console.log(codeparam)
+	
+    // const appId = uni.getAccountInfoSync().miniProgram.appId;
+    // uni.setStorageSync('appid', appId);
+	//table_id waiter_num pos_id fdbh companyid
+    uni.setStorageSync('syyid', codeparam[1]);
     uni.setStorageSync('vipid', '26512220');
-    uni.setStorageSync('posid', '80800101');
-    uni.setStorageSync('tableid', '4');
+    uni.setStorageSync('posid', codeparam[2]);
+    uni.setStorageSync('tableid', codeparam[0]);
     uni.setStorageSync('tablenumber', '1');
-    uni.setStorageSync('fdbh', '808001');
-    uni.setStorageSync('companyid', '800008');
+    uni.setStorageSync('fdbh', codeparam[3]);
+    uni.setStorageSync('companyid', codeparam[4]);
     uni.setStorageSync('xsdbh', '');
     uni.setStorageSync('token', 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd');
 
@@ -33,9 +46,7 @@ export default {
           }
         }
       });
-
     });
-
     updateManager.onUpdateFailed(function (res) {
       // 新的版本下载失败
     });
@@ -51,27 +62,27 @@ export default {
   },
   onShow: function () {
     //获取openid
-    uni.login({
-      success: (res) => {
-        uni.request({
-          url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
-          data: {
-            appid: uni.getStorageSync('appid'),
-            code: res.code
-          },
-          method: 'GET',
-          dataType: 'json',
-          success: res => {
-            uni.setStorageSync('openid', res.data[0].openid); //小程序openid
-            uni.setStorageSync('unionid', res.data[0]
-                .unionid); //开放平台unionid,可能为空
-          },
-          fail: res => {
-            console.info('获取用户openId失败');
-          }
-        });
-      }
-    });
+    // uni.login({
+    //   success: (res) => {
+    //     uni.request({
+    //       url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
+    //       data: {
+    //         appid: uni.getStorageSync('appid'),
+    //         code: res.code
+    //       },
+    //       method: 'GET',
+    //       dataType: 'json',
+    //       success: res => {
+    //         uni.setStorageSync('openid', res.data[0].openid); //小程序openid
+    //         uni.setStorageSync('unionid', res.data[0]
+    //             .unionid); //开放平台unionid,可能为空
+    //       },
+    //       fail: res => {
+    //         console.info('获取用户openId失败');
+    //       }
+    //     });
+    //   }
+    // });
 
 
     //查询当前桌台订单信息
@@ -145,6 +156,9 @@ export default {
           console.log('旧数据信息', cartold)
           uni.setStorageSync('cartold', cartold)
         })
+		uni.switchTab({
+			url: '/pages/order/order'
+		});
       }
     })
     uni.switchTab({

@@ -3,6 +3,6 @@
   "usingComponents": {
     "u-tabs-swiper": "/node-modules/uview-ui/components/u-tabs-swiper/u-tabs-swiper",
     "u-button": "/node-modules/uview-ui/components/u-button/u-button",
-    "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore"
+    "u-divider": "/node-modules/uview-ui/components/u-divider/u-divider"
   }
 }

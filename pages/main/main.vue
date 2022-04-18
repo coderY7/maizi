@@ -50,18 +50,18 @@
 		</view>
 		<!--    推荐-->
 		<view id="name">热门推荐</view>
-		<view class="unit4">
+		<view class="unit4" @click="hot()">
 			<image src="../../static/main/hot.jpg"></image>
 			<view class="unit4_text">
-				商品信息1
+				热门菜系
 			</view>
 		</view>
-		<view class="unit4">
+		<!-- <view class="unit4">
 			<image src="../../static/main/hot.jpg"></image>
 			<view class="unit4_text">
 				商品信息2
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -86,6 +86,11 @@
 				  console.log('查询桌台订单明细：',res)
 				})
 				
+			},
+			hot(){
+				uni.switchTab({
+					url: '/pages/menu/menu'
+				});
 			},
 			navmenu() {
 				uni.setStorageSync('mode', '堂食');
@@ -114,7 +119,7 @@
 			}
 		},
 		onLoad(options) {
-			this.tableid = options.tableid
+			//this.tableid = options.tableid
 		},
 		onShow() {
 			

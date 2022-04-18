@@ -2,6 +2,7 @@
   "navigationBarTitleText": "点餐",
   "FontSize": "500px",
   "usingComponents": {
+    "u-notice-bar": "/node-modules/uview-ui/components/u-notice-bar/u-notice-bar",
     "u-mask": "/node-modules/uview-ui/components/u-mask/u-mask",
     "u-popup": "/node-modules/uview-ui/components/u-popup/u-popup",
     "u-number-box": "/node-modules/uview-ui/components/u-number-box/u-number-box",

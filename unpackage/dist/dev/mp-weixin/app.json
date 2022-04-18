@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/scan/scan",
     "pages/main/main",
     "pages/menu/menu",
     "pages/order/order",
@@ -61,6 +60,5 @@
   "uniStatistics": {
     "enable": true
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

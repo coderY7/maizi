@@ -32,21 +32,22 @@
                 <view class="total">
                   <view>总价格:{{parseFloat(orders.paytotal)}}</view>
                   <view>
-                    <u-button @click="dish()">加菜</u-button>
-                    <u-button @click="pay()">立即支付</u-button>
+                    <u-button @click="dish()" size="mini" type="warning">加菜</u-button>
+                    <!-- <u-button @click="pay()">立即支付</u-button> -->
                   </view>
                 </view>
               </view>
             </view>
-            <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>
+            <!-- <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore> -->
+			<u-divider bg-color="#f2f2f2">{{text[0]}}</u-divider>
           </scroll-view>
         </swiper-item>
 		
         <swiper-item class="swiper-item">
           <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
             <view class="page-box">
-             
-              <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>
+              <!-- <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>-->
+			  <u-divider bg-color="#f2f2f2">{{text[1]}}</u-divider>
             </view>
           </scroll-view>
         </swiper-item>
@@ -59,14 +60,15 @@
 export default {
   data() {
     return {
+		text:['已下单订单，若要取消请前往前台办理','已结算订单'],
       orderList: [[], []],
       dataList: [],
       list: [
         {
-          name: '未完成'
+          name: '已下单'
         },
         {
-          name: '已完成'
+          name: '已结算'
         }
       ],
       current: 0,

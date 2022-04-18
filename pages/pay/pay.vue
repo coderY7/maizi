@@ -99,8 +99,8 @@ addmenu(){
        this.xsdbh=uni.getStorageSync('xsdbh');
         uni.setStorageSync('Attendance',this.attendance)
        this.attendance = uni.getStorageSync('Attendance');
-       //订单预结算
-      await this.$u.api.readytopays({
+       //订单下单
+      await this.$u.api.orderdishess({
              access_token:uni.getStorageSync('token'),
              xsdbh:uni.getStorageSync('xsdbh'),//订单号
              fdbh: uni.getStorageSync('fdbh'),//分店号
@@ -112,9 +112,8 @@ addmenu(){
              counts: uni.getStorageSync('Cart').counts,//商品总数
              goodslist: uni.getStorageSync('goodslist')
            }).then(res=>{
-         console.log('预结算',res)
+         console.log('订单下单',res)
          uni.setStorageSync('unfinished',res)
-
         uni.switchTab({
           url:'../order/order'
         })

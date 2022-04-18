@@ -14,7 +14,8 @@
 		</view> -->
 
     <view class="rolls">
-      <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image>
+		<u-notice-bar mode="horizontal" :list="barlist"></u-notice-bar>
+      <!-- <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image> -->
     </view>
 
     <view class="u-menu-wrap">
@@ -96,6 +97,7 @@ import Search from './components/search/search.vue'
     },
     data() {
       return {
+		  barlist:['欢迎使用扫码点餐小程序','祝您用餐愉快'],//滚动
         popupshow:uni.getStorageSync('popupshow'),
         show: false,
         imgurl:"http://cateapi.mzsale.cn/",
@@ -154,25 +156,26 @@ import Search from './components/search/search.vue'
       },(err)=>{
         console.log('获取菜单失败',err)
       })
-      if(uni.getStorageSync('openid')==''){
-        console.log('跳转登录')
-        uni.switchTab({
-          url: '/pages/my/my'
-        });
-      }
+      // if(uni.getStorageSync('openid')==''){
+      //   console.log('跳转登录')
+      //   uni.switchTab({
+      //     url: '/pages/my/my'
+      //   });
+      // }
      
     },
     onLoad(options) {
     if(uni.getStorageSync('xsdbh')==''){
       this.popupshow=true
     }
-      uni.getStorageSync('cartold').forEach(item=>{
-        this.cart.push(item)
-      })
-      if(uni.getStorageSync('dataold')!=''){
-        console.log('加菜')
-        this.handleAddToCartInModal()
-      }
+	
+      // uni.getStorageSync('cartold').forEach(item=>{
+      //   this.cart.push(item)
+      // })
+      // if(uni.getStorageSync('dataold')!=''){
+      //   console.log('加菜')
+      //   this.handleAddToCartInModal()
+      // }
     },
     onReady() {
       //this.getMenuItemTop()

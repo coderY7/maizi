@@ -105,8 +105,33 @@ __webpack_require__.r(__webpack_exports__);
 {
   onLaunch: function onLaunch(options) {
     console.log('从二维码中取的数据', options);
-    var appId = uni.getAccountInfoSync().miniProgram.appId;
-    uni.setStorageSync('appid', appId);
+    var name = options.query.scene;
+    var now = name.split("-");
+    var codeparam = [];
+    now.forEach(function (item) {
+      codeparam.push(parseInt(item, 16).toString(10));
+    });
+    //服务员ID不满6位数前面加0
+    if (codeparam[1].length < 6) {
+      codeparam[1] = codeparam[1].padStart(6, '0');
+    }
+    console.log(codeparam);
+
+    // const appId = uni.getAccountInfoSync().miniProgram.appId;
+    // uni.setStorageSync('appid', appId);
+    //table_id waiter_num pos_id fdbh companyid
+    uni.setStorageSync('syyid', codeparam[1]);
+    uni.setStorageSync('vipid', '26512220');
+    uni.setStorageSync('posid', codeparam[2]);
+    uni.setStorageSync('tableid', codeparam[0]);
+    uni.setStorageSync('tablenumber', '1');
+    uni.setStorageSync('fdbh', codeparam[3]);
+    uni.setStorageSync('companyid', codeparam[4]);
+    uni.setStorageSync('xsdbh', '');
+    uni.setStorageSync('token', 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd');
+
+
+
     var updateManager = uni.getUpdateManager();
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
@@ -124,9 +149,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         } });
 
-
     });
-
     updateManager.onUpdateFailed(function (res) {
       // 新的版本下载失败
     });
@@ -140,28 +163,109 @@ __webpack_require__.r(__webpack_exports__);
     // 	console.log('清台',res)
     // })
   },
-  onShow: function onShow() {
+  onShow: function onShow() {var _this = this;
     //获取openid
-    uni.login({
-      success: function success(res) {
-        uni.request({
-          url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
-          data: {
-            appid: uni.getStorageSync('appid'),
-            code: res.code },
+    // uni.login({
+    //   success: (res) => {
+    //     uni.request({
+    //       url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
+    //       data: {
+    //         appid: uni.getStorageSync('appid'),
+    //         code: res.code
+    //       },
+    //       method: 'GET',
+    //       dataType: 'json',
+    //       success: res => {
+    //         uni.setStorageSync('openid', res.data[0].openid); //小程序openid
+    //         uni.setStorageSync('unionid', res.data[0]
+    //             .unionid); //开放平台unionid,可能为空
+    //       },
+    //       fail: res => {
+    //         console.info('获取用户openId失败');
+    //       }
+    //     });
+    //   }
+    // });
 
-          method: 'GET',
-          dataType: 'json',
-          success: function success(res) {
-            uni.setStorageSync('openid', res.data[0].openid); //小程序openid
-            uni.setStorageSync('unionid', res.data[0].
-            unionid); //开放平台unionid,可能为空
-          },
-          fail: function fail(res) {
-            console.info('获取用户openId失败');
-          } });
 
-      } });
+    //查询当前桌台订单信息
+    this.$u.api.orders({
+      access_token: uni.getStorageSync('token'),
+      vtype: 'new',
+      tableid: uni.getStorageSync('tableid'),
+      fdbh: uni.getStorageSync('fdbh'),
+      tablewaiter: uni.getStorageSync('syyid'),
+      posid: uni.getStorageSync('posid'),
+      tablenumber: uni.getStorageSync('tablenumber') }).
+    then(function (res) {
+      console.log('查询开台信息', res);
+      //查询桌台订单信息
+      if (res.error_code == '2') {
+        console.log('已有订单');
+        //已开台单号
+        uni.setStorageSync('xsdbh', res.xsdbh);
+        uni.setStorageSync('tablenumber', res.table_number);
+        _this.$u.api.orders({
+          access_token: uni.getStorageSync('token'),
+          vtype: 'detail',
+          tableid: uni.getStorageSync('tableid'),
+          fdbh: uni.getStorageSync('fdbh'),
+          xsdbh: uni.getStorageSync('xsdbh') }).
+        then(function (res) {
+          var old = res;
+          uni.setStorageSync('old', old);
+          console.log('查询桌台订单明细：', res);
+          var cartold = [];
+          var countold = res.count;
+          uni.setStorageSync('flownumold', countold);
+          res.goodslist.forEach(function (item) {
+            var choosedText = [];
+            var ext_zxprices = [];
+            item.extlist.forEach(function (res) {
+              choosedText.push(res.ext_name);
+              ext_zxprices.push(Number.parseInt(res.ext_zxprice));
+            });
+            var text = choosedText.join(',');
+            function sum(arr) {
+              return arr.reduce(function (prev, curr) {
+                return prev + curr;
+              }, 0);
+            }
+            var addzxprice = sum(ext_zxprices); //属性总价
+
+            cartold.push({
+              id: item.spbm,
+              cate_id: item.category_id,
+              name: item.spmc,
+              number: Number.parseInt(item.quantity) || 1,
+              is_single: item.is_single,
+              choosedText: text || '',
+              price: Number.parseInt(item.price),
+              zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
+              image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),
+              addzxprice: addzxprice,
+              goodslist: {
+                discount: item.discount,
+                extlist: item.extlist,
+                flownum: item.flownum,
+                price: Number.parseInt(item.price),
+                zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
+                quantity: Number.parseInt(item.quantity),
+                spbm: item.spbm,
+                spsmm: item.spsmm } });
+
+
+          });
+          console.log('旧数据信息', cartold);
+          uni.setStorageSync('cartold', cartold);
+        });
+        uni.switchTab({
+          url: '/pages/order/order' });
+
+      }
+    });
+    uni.switchTab({
+      url: '/pages/main/main' });
 
 
 
