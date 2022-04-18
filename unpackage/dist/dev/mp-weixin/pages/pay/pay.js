@@ -96,7 +96,7 @@ var components
 try {
   components = {
     uButton: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 149))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 156))
     }
   }
 } catch (e) {
@@ -262,6 +262,7 @@ var _default =
                   vipid: uni.getStorageSync('vipid'), //会员号
                   viplevel: "HYJG", //会员等级
                   viprate: "1.0", //会员折扣率
+                  ordertype: 'wx',
                   syyid: uni.getStorageSync('syyid'), //收银员工号
                   posid: uni.getStorageSync('posid'), //pos机
                   counts: uni.getStorageSync('Cart').counts, //商品总数

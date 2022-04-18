@@ -156,13 +156,8 @@ import Search from './components/search/search.vue'
       },(err)=>{
         console.log('获取菜单失败',err)
       })
-      // if(uni.getStorageSync('openid')==''){
-      //   console.log('跳转登录')
-      //   uni.switchTab({
-      //     url: '/pages/my/my'
-      //   });
-      // }
-     
+
+
     },
     onLoad(options) {
     if(uni.getStorageSync('xsdbh')==''){

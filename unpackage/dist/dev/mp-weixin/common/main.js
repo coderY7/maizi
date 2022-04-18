@@ -264,11 +264,6 @@ __webpack_require__.r(__webpack_exports__);
 
       }
     });
-    uni.switchTab({
-      url: '/pages/main/main' });
-
-
-
   },
   onHide: function onHide() {
     console.log('App Hide');

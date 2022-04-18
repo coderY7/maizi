@@ -18,7 +18,7 @@ export default {
     // uni.setStorageSync('appid', appId);
 	//table_id waiter_num pos_id fdbh companyid
     uni.setStorageSync('syyid', codeparam[1]);
-    uni.setStorageSync('vipid', '26512220');
+    uni.setStorageSync('vipid', '');
     uni.setStorageSync('posid', codeparam[2]);
     uni.setStorageSync('tableid', codeparam[0]);
     uni.setStorageSync('tablenumber', '1');
@@ -96,12 +96,12 @@ export default {
       tablenumber: uni.getStorageSync('tablenumber'),
     }).then((res) => {
       console.log('查询开台信息', res)
+      uni.setStorageSync('xsdbh', res.xsdbh)
+      uni.setStorageSync('tablenumber', res.table_number)
       //查询桌台订单信息
       if(res.error_code=='2'){
         console.log('已有订单')
         //已开台单号
-        uni.setStorageSync('xsdbh', res.xsdbh)
-        uni.setStorageSync('tablenumber', res.table_number)
         this.$u.api.orders({
           access_token: uni.getStorageSync('token'),
           vtype: 'detail',
@@ -161,11 +161,6 @@ export default {
 		});
       }
     })
-    uni.switchTab({
-      url: '/pages/main/main'
-    });
-
-
   },
   onHide: function () {
     console.log('App Hide');

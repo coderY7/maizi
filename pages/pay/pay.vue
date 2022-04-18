@@ -107,6 +107,7 @@ addmenu(){
              vipid:uni.getStorageSync('vipid'),//会员号
              viplevel: "HYJG",//会员等级
              viprate: "1.0",//会员折扣率
+			 ordertype:'wx',
              syyid: uni.getStorageSync('syyid'),//收银员工号
              posid: uni.getStorageSync('posid'),//pos机
              counts: uni.getStorageSync('Cart').counts,//商品总数
