@@ -135,6 +135,7 @@ import Search from './components/search/search.vue'
     onShow(){
 			if(uni.getStorageSync('yidian')){
 				this.clearCart()
+uni.setStorageSync('yidian',false)
 			}
 		
       this.token = uni.getStorageSync('token');

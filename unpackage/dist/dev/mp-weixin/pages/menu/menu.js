@@ -320,6 +320,7 @@ var _default =
   onShow: function onShow() {var _this = this;
     if (uni.getStorageSync('yidian')) {
       this.clearCart();
+      uni.setStorageSync('yidian', false);
     }
 
     this.token = uni.getStorageSync('token');
