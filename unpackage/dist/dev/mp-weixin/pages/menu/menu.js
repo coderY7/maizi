@@ -282,8 +282,9 @@ var _default =
 
   data: function data() {
     return {
+      shname: uni.getStorageSync('shmc'),
       barlist: ['欢迎使用扫码点餐小程序', '祝您用餐愉快'], //滚动
-      popupshow: uni.getStorageSync('popupshow'),
+      popupshow: uni.getStorageSync('popupshow') == false ? uni.getStorageSync('popupshow') : true,
       show: false,
       imgurl: "http://cateapi.mzsale.cn/",
       scrollTop: 0, //tab标题的滚动条位置
@@ -317,6 +318,9 @@ var _default =
     };
   },
   onShow: function onShow() {var _this = this;
+    if (uni.getStorageSync('yidian')) {
+      this.clearCart();
+    }
 
     this.token = uni.getStorageSync('token');
     this.$u.api.categorys({
@@ -341,18 +345,13 @@ var _default =
     }, function (err) {
       console.log('获取菜单失败', err);
     });
-    // if(uni.getStorageSync('openid')==''){
-    //   console.log('跳转登录')
-    //   uni.switchTab({
-    //     url: '/pages/my/my'
-    //   });
-    // }
+
 
   },
   onLoad: function onLoad(options) {
-    if (uni.getStorageSync('xsdbh') == '') {
-      this.popupshow = true;
-    }
+    // if(uni.getStorageSync('tablenumberold')!='0'){
+    //   this.popupshow=false
+    // }
 
     // uni.getStorageSync('cartold').forEach(item=>{
     //   this.cart.push(item)
@@ -368,39 +367,23 @@ var _default =
   methods: {
     //人数确定后，开台
     ensure: function ensure() {var _this2 = this;
-      //开台
-      if (uni.getStorageSync('xsdbh') == '') {
-        this.$u.api.orders({
-          access_token: uni.getStorageSync('token'),
-          vtype: "new",
-          posid: uni.getStorageSync('posid'),
-          tableid: uni.getStorageSync('tableid'),
-          tablenumber: uni.getStorageSync('tablenumber'),
-          tablewaiter: uni.getStorageSync('syyid'),
-          fdbh: uni.getStorageSync('fdbh') }).
-        then(function (res) {
-          if (res.error_code == '0') {
-            _this2.popupshow = false;
-            uni.setStorageSync('popupshow', false);
-            console.log('开台成功', res);
-            uni.setStorageSync('xsdbh', res.xsdbh);
-          }
-          if (res.error_code == '500') {
-            uni.showToast({
-              title: res.message,
-              duration: 2000,
-              icon: 'none' });
+      //修改人数
 
-          }
-          if (res.error_code == '2') {
-            uni.showToast({
-              title: res.message,
-              duration: 2000,
-              icon: 'none' });
+      this.$u.api.orders({
+        access_token: uni.getStorageSync('token'),
+        vtype: "change",
+        tableid: uni.getStorageSync('tableid'),
+        tableid_old: uni.getStorageSync('tableid'),
+        tablenumber: uni.getStorageSync('tablenumber'),
+        tablewaiter: uni.getStorageSync('syyid'),
+        fdbh: uni.getStorageSync('fdbh'),
+        xsdbh: uni.getStorageSync('xsdbh') }).
+      then(function (res) {
+        console.log('修改开台人数', res);
+        _this2.popupshow = false;
+        uni.setStorageSync('popupshow', false);
+      });
 
-          }
-        });
-      }
     },
     valChange: function valChange(e) {
       uni.setStorageSync('tablenumber', e.value);
@@ -450,6 +433,7 @@ var _default =
       // })
       if (product.index > -1) {
         this.cart[product.index].goodslist.quantity += 1;
+        this.cart[product.index].goodslist.zxprice = this.cart[product.index].price * this.cart[product.index].goodslist.quantity;
         this.cart[product.index].number += product.number || 1;
         return;
       }
@@ -475,6 +459,8 @@ var _default =
       console.log(product.index);
       this.cart[product.index].goodslist.quantity -= 1;
       this.cart[product.index].number -= 1;
+
+      this.cart[product.index].goodslist.zxprice = this.cart[product.index].price * this.cart[product.index].goodslist.quantity;
       if (this.cart[product.index].number <= 0) {
         this.cart.splice(product.index, 1);
       }

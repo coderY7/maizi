@@ -53,9 +53,6 @@ page {
   font-size: 32rpx;
   font-weight: bold;
 }
-.order .top .right.data-v-127632e4 {
-  color: #f29100;
-}
 .order .item.data-v-127632e4 {
   display: flex;
   justify-content: space-between;

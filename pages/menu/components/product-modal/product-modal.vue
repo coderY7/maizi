@@ -9,60 +9,6 @@
           <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
           <view>{{productData.description}}</view>
 
-          <view v-if="MultiSelectindex!=-1">
-            <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
-            <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
-              <checkbox-group @change="checkboxChange(item,key)">
-                <view style="display: flex;justify-content: space-between;align-items: center;">
-                  <view class="list-group">
-                    <label class="radio">
-                      <checkbox :checked="item.isDefault"/>
-                    </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
-                  </view>
-                  <view class="list-list" v-if="item.isDefault">
-                    <!--                          <view class="Button" @click="reduce(item,key)">-</view>-->
-                    <image src="/static/common/round_minus.png" class="Button" @click="reduce(item,key)"></image>
-
-                    <view class="number">{{item.ext_quantity}}</view>
-                    <!--                          <view class="Button" @click="plus(item,key)">+</view>-->
-                    <image src="/static/common/round_add_normal.png" class="Button" @click="plus(item,key)"></image>
-
-                  </view>
-                </view>
-              </checkbox-group>
-            </view>
-          </view>
-
-          <view v-else>
-            <view class="status-item">
-              <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
-              <view class="status-tags">
-                <view v-for="(item1, index1) in productData.dishesextlist[0].extitems" :key="item1.ext_name + index1">
-                  <view
-                      class="tags-item2"
-                      :style="{
-												color: item1.isDefault ? activeTextColor : normalTextColor,
-												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
-											}"
-                      @tap="chooseTag0(item1, index1)"
-                  >
-                    {{ item1.ext_name }}
-                    <text
-                        class="tags-pri"
-                        :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                        v-if="item1.ext_price > 0"
-                        :class="{ 'active-text': item1.isDefault }"
-                    >
-                      ￥{{item1.ext_price}}
-                    </text>
-                  </view>
-                </view>
-              </view>
-            </view>
-          </view>
-
-
-
           <view class="status-item">
             <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
             <view class="status-tags">
@@ -196,6 +142,57 @@
             </view>
           </view>
 
+          <view v-if="MultiSelectindex!=-1">
+            <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
+            <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
+              <checkbox-group @change="checkboxChange(item,key)">
+                <view style="display: flex;justify-content: space-between;align-items: center;">
+                  <view class="list-group">
+                    <label class="radio">
+                      <checkbox :checked="item.isDefault"/>
+                    </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
+                  </view>
+                  <view class="list-list" v-if="item.isDefault">
+                    <!--                          <view class="Button" @click="reduce(item,key)">-</view>-->
+                    <image src="/static/common/round_minus.png" class="Button" @click="reduce(item,key)"></image>
+
+                    <view class="number">{{item.ext_quantity}}</view>
+                    <!--                          <view class="Button" @click="plus(item,key)">+</view>-->
+                    <image src="/static/common/round_add_normal.png" class="Button" @click="plus(item,key)"></image>
+
+                  </view>
+                </view>
+              </checkbox-group>
+            </view>
+          </view>
+
+          <view v-else>
+            <view class="status-item">
+              <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
+              <view class="status-tags">
+                <view v-for="(item1, index1) in productData.dishesextlist[0].extitems" :key="item1.ext_name + index1">
+                  <view
+                      class="tags-item2"
+                      :style="{
+												color: item1.isDefault ? activeTextColor : normalTextColor,
+												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
+											}"
+                      @tap="chooseTag0(item1, index1)"
+                  >
+                    {{ item1.ext_name }}
+                    <text
+                        class="tags-pri"
+                        :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                        v-if="item1.ext_price > 0"
+                        :class="{ 'active-text': item1.isDefault }"
+                    >
+                      ￥{{item1.ext_price}}
+                    </text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
         </view>
       </scroll-view>
 
@@ -208,7 +205,7 @@
           <actions :number="productData.number" @add="add" @minus="minus"></actions>
         </view>
         <view class="btn-box">
-          <u-button type="warning" :bgColor="activeBgColor" :textColor="activeTextColor" btnWidth="600rpx" @click="addToCart">加入购物袋</u-button>
+          <u-button type="warning" :bgColor="activeBgColor" :textColor="activeTextColor" btnWidth="600rpx" @click="addToCart">确认加菜</u-button>
         </view>
       </view>
     </view>
@@ -269,9 +266,9 @@ export default {
   watch: {
     product(val) {
       this.productData = JSON.parse(JSON.stringify(val));
-      console.log(this.productData);
+      console.log('列表数量',this.productData.dishesextlist.length)
+      let lbsl=this.productData.dishesextlist.length
       this.MultiSelectindex=this.productData.dishesextlist?.map(item=>item.groupname).indexOf('加料')
-      console.log(this.MultiSelectindex);
       if(this.MultiSelectindex  ==-1){
         console.log('不存在多选加料')
       }else {
@@ -462,7 +459,7 @@ export default {
       console.log('属性总价:',pri)
       this.productData.addzxprice=pri
       this.productData.price=this.productData.nsjg
-      this.productData.zxprice=this.productData.nsjg+ pri
+      this.productData.zxprice=this.productData.nsjg*this.productData.number
       this.productData.shownPrice=this.productData.number * this.productData.price+pri;
       console.log('商品总价格',this.productData.shownPrice);
       this.updateChoosedText();
@@ -537,7 +534,7 @@ export default {
           price: this.productData.nsjg,
           extlist:[],
           spsmm:this.productData.spsmm,
-          zxprice:this.productData.nsjg,
+          zxprice:this.productData.nsjg*this.productData.number,
           quantity:this.productData.number,
           flownum: this.flownum++,
           discount: '0',

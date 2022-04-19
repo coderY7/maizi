@@ -98,12 +98,12 @@
 		"backgroundColor": "#ffffff",
 		"iconWidth": "30px",
 		"list": [
-			{
-				"pagePath": "pages/main/main",
-				"iconPath": "static/tab/main.png",
-				"selectedIconPath": "static/tab/main1.png",
-				"text": "首页"
-			},
+			// {
+			// 	"pagePath": "pages/main/main",
+			// 	"iconPath": "static/tab/main.png",
+			// 	"selectedIconPath": "static/tab/main1.png",
+			// 	"text": "首页"
+			// },
 			{
 				"pagePath": "pages/menu/menu",
 				"iconPath": "static/tab/menu.png",

@@ -104,24 +104,28 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
 {
   onLaunch: function onLaunch(options) {
+    console.log(options);
+  },
+  onShow: function onShow(options) {var _this = this;
     console.log('从二维码中取的数据', options);
+    //let name='4-26-4D0E965-C5441-C3508'
     var name = options.query.scene;
+    console.log(name);
     var now = name.split("-");
     var codeparam = [];
     now.forEach(function (item) {
       codeparam.push(parseInt(item, 16).toString(10));
     });
+    console.log(codeparam);
     //服务员ID不满6位数前面加0
     if (codeparam[1].length < 6) {
       codeparam[1] = codeparam[1].padStart(6, '0');
     }
     console.log(codeparam);
 
-    // const appId = uni.getAccountInfoSync().miniProgram.appId;
-    // uni.setStorageSync('appid', appId);
-    //table_id waiter_num pos_id fdbh companyid
+
     uni.setStorageSync('syyid', codeparam[1]);
-    uni.setStorageSync('vipid', '26512220');
+    uni.setStorageSync('vipid', '');
     uni.setStorageSync('posid', codeparam[2]);
     uni.setStorageSync('tableid', codeparam[0]);
     uni.setStorageSync('tablenumber', '1');
@@ -130,6 +134,27 @@ __webpack_require__.r(__webpack_exports__);
     uni.setStorageSync('xsdbh', '');
     uni.setStorageSync('token', 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd');
 
+
+
+    var snvar = uni.getStorageSync('companyid'); //商家SN
+    var fdbhvar = uni.getStorageSync('fdbh'); //分店编号
+    console.log("https://lite.ecsun.cn/api/init/".concat(snvar, "-").concat(fdbhvar));
+    //获取商户信息
+    uni.request({
+      url: 'https://lite.ecsun.cn/api/init/' + snvar + '-' + fdbhvar,
+      method: 'GET',
+      dataType: 'json',
+      success: function success(res) {
+        console.log('获取门店信息', res.data.wxpaylist);
+        var sh = res.data.wxpaylist;
+        uni.setStorageSync('shmc', sh.shopname); //商户名称
+        uni.setStorageSync('shappid', sh.appid); //商户appID
+        uni.setStorageSync('shsubmchid', sh.submchid); //商户号
+
+      },
+      fail: function fail(error) {
+        console.log('获取门店初始化信息失败', error);
+      } });
 
 
     var updateManager = uni.getUpdateManager();
@@ -153,39 +178,11 @@ __webpack_require__.r(__webpack_exports__);
     updateManager.onUpdateFailed(function (res) {
       // 新的版本下载失败
     });
-    //清台
-    // this.$u.api.orders({
-    // 	access_token:uni.getStorageSync('token'),
-    // 	vtype:'clear',
-    // 	tableid:uni.getStorageSync('tableid'),
-    // 	fdbh:uni.getStorageSync('fdbh')
-    // }).then((res)=>{
-    // 	console.log('清台',res)
-    // })
-  },
-  onShow: function onShow() {var _this = this;
-    //获取openid
-    // uni.login({
-    //   success: (res) => {
-    //     uni.request({
-    //       url: 'https://wx.ecsun.cn/AjacService/liteappopenid.ashx',
-    //       data: {
-    //         appid: uni.getStorageSync('appid'),
-    //         code: res.code
-    //       },
-    //       method: 'GET',
-    //       dataType: 'json',
-    //       success: res => {
-    //         uni.setStorageSync('openid', res.data[0].openid); //小程序openid
-    //         uni.setStorageSync('unionid', res.data[0]
-    //             .unionid); //开放平台unionid,可能为空
-    //       },
-    //       fail: res => {
-    //         console.info('获取用户openId失败');
-    //       }
-    //     });
-    //   }
-    // });
+
+
+
+
+
 
 
     //查询当前桌台订单信息
@@ -199,12 +196,22 @@ __webpack_require__.r(__webpack_exports__);
       tablenumber: uni.getStorageSync('tablenumber') }).
     then(function (res) {
       console.log('查询开台信息', res);
+      if (res.error_code == '0') {
+        uni.setStorageSync('xsdbh', res.xsdbh);
+        uni.setStorageSync('popupshow', true);
+        uni.switchTab({
+          url: '/pages/menu/menu' });
+
+      }
       //查询桌台订单信息
       if (res.error_code == '2') {
         console.log('已有订单');
-        //已开台单号
         uni.setStorageSync('xsdbh', res.xsdbh);
         uni.setStorageSync('tablenumber', res.table_number);
+        uni.setStorageSync('tablenumberold', res.table_number);
+        uni.setStorageSync('popupshow', false);
+
+        //已开台单号
         _this.$u.api.orders({
           access_token: uni.getStorageSync('token'),
           vtype: 'detail',
@@ -226,6 +233,7 @@ __webpack_require__.r(__webpack_exports__);
               ext_zxprices.push(Number.parseInt(res.ext_zxprice));
             });
             var text = choosedText.join(',');
+
             function sum(arr) {
               return arr.reduce(function (prev, curr) {
                 return prev + curr;
@@ -241,7 +249,8 @@ __webpack_require__.r(__webpack_exports__);
               is_single: item.is_single,
               choosedText: text || '',
               price: Number.parseInt(item.price),
-              zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
+              zxprice: Number.parseInt(addzxprice) + Number.parseInt(
+              item.price),
               image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),
               addzxprice: addzxprice,
               goodslist: {
@@ -249,7 +258,8 @@ __webpack_require__.r(__webpack_exports__);
                 extlist: item.extlist,
                 flownum: item.flownum,
                 price: Number.parseInt(item.price),
-                zxprice: Number.parseInt(addzxprice) + Number.parseInt(item.price),
+                zxprice: Number.parseInt(addzxprice) + Number.
+                parseInt(item.price),
                 quantity: Number.parseInt(item.quantity),
                 spbm: item.spbm,
                 spsmm: item.spsmm } });
@@ -264,9 +274,12 @@ __webpack_require__.r(__webpack_exports__);
 
       }
     });
+
+
   },
   onHide: function onHide() {
     console.log('App Hide');
+    //uni.clearStorageSync();
   },
   //全局数据
   globalData: {

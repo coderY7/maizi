@@ -12,7 +12,7 @@
 
       		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
 		</view> -->
-
+<view class="shname">{{shname}}</view>
     <view class="rolls">
 		<u-notice-bar mode="horizontal" :list="barlist"></u-notice-bar>
       <!-- <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image> -->
@@ -97,8 +97,9 @@ import Search from './components/search/search.vue'
     },
     data() {
       return {
+				shname:uni.getStorageSync('shmc'),
 		  barlist:['欢迎使用扫码点餐小程序','祝您用餐愉快'],//滚动
-        popupshow:uni.getStorageSync('popupshow'),
+        popupshow:uni.getStorageSync('popupshow')==false?uni.getStorageSync('popupshow'):true,
         show: false,
         imgurl:"http://cateapi.mzsale.cn/",
         scrollTop: 0, //tab标题的滚动条位置
@@ -132,6 +133,9 @@ import Search from './components/search/search.vue'
       }
     },
     onShow(){
+			if(uni.getStorageSync('yidian')){
+				this.clearCart()
+			}
 		
       this.token = uni.getStorageSync('token');
       this.$u.api.categorys({
@@ -160,9 +164,9 @@ import Search from './components/search/search.vue'
 
     },
     onLoad(options) {
-    if(uni.getStorageSync('xsdbh')==''){
-      this.popupshow=true
-    }
+    // if(uni.getStorageSync('tablenumberold')!='0'){
+    //   this.popupshow=false
+    // }
 	
       // uni.getStorageSync('cartold').forEach(item=>{
       //   this.cart.push(item)
@@ -178,39 +182,23 @@ import Search from './components/search/search.vue'
     methods: {
       //人数确定后，开台
       ensure() {
-        //开台
-        if(uni.getStorageSync('xsdbh')==''){
+        //修改人数
+       
           this.$u.api.orders({
             access_token:uni.getStorageSync('token'),
-            vtype:"new",
-            posid:uni.getStorageSync('posid'),
+            vtype:"change",
             tableid:uni.getStorageSync('tableid'),
+            tableid_old:uni.getStorageSync('tableid'),
             tablenumber:uni.getStorageSync('tablenumber'),
             tablewaiter:uni.getStorageSync('syyid'),
             fdbh:uni.getStorageSync('fdbh'),
+            xsdbh: uni.getStorageSync('xsdbh')
           }).then((res)=>{
-            if(res.error_code=='0'){
+            console.log('修改开台人数',res)
 			this.popupshow=false
 			uni.setStorageSync('popupshow',false)
-              console.log('开台成功',res)
-              uni.setStorageSync('xsdbh',res.xsdbh)
-            }
-			if(res.error_code=='500'){
-				uni.showToast({
-				  title: res.message,
-				  duration: 2000,
-				  icon: 'none'
-				});
-			}
-            if(res.error_code=='2') {
-              uni.showToast({
-                title: res.message,
-                duration: 2000,
-                icon: 'none'
-              });
-            }
           })
-        }
+        
       },
       valChange(e) {
         uni.setStorageSync('tablenumber',e.value)
@@ -260,6 +248,7 @@ import Search from './components/search/search.vue'
         // })
         if(product.index > -1) {
           this.cart[product.index].goodslist.quantity+=1;
+					this.cart[product.index].goodslist.zxprice=this.cart[product.index].price*this.cart[product.index].goodslist.quantity;
           this.cart[product.index].number += (product.number || 1)
             return
         }
@@ -285,7 +274,9 @@ import Search from './components/search/search.vue'
         console.log(product.index)
         this.cart[product.index].goodslist.quantity-=1;
         this.cart[product.index].number -= 1
-        if(this.cart[product.index].number <= 0) {
+				
+        this.cart[product.index].goodslist.zxprice=this.cart[product.index].price*this.cart[product.index].goodslist.quantity;
+				if(this.cart[product.index].number <= 0) {
           this.cart.splice(product.index, 1)
         }
       },
@@ -488,4 +479,8 @@ import Search from './components/search/search.vue'
     }
 
   }
+	.shname{
+		color:#ff9f13;
+		font-size: 35rpx;
+	}
 </style>

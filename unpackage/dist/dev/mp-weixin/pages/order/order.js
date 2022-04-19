@@ -133,19 +133,21 @@ var render = function() {
         var $orig = _vm.__get_orig(item)
 
         var m0 = _vm.priceInt(item.quantity)
+        var m1 = _vm.priceInt(item.price)
         return {
           $orig: $orig,
-          m0: m0
+          m0: m0,
+          m1: m1
         }
       })
     : null
-  var m1 = _vm.goodslist ? parseFloat(_vm.orders.paytotal) : null
+  var m2 = _vm.goodslist ? parseFloat(_vm.orders.paytotal) : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
         l0: l0,
-        m1: m1
+        m2: m2
       }
     }
   )
@@ -183,6 +185,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
 //
 //
 //
@@ -282,23 +285,6 @@ var _default =
       _this.goodslist = res.goodslist;
       _this.orders = res;
     });
-
-    //订单完成
-    // this.$u.api.paydones({
-    //   access_token:uni.getStorageSync('token'),
-    //   flow_no:uni.getStorageSync('xsdbh'),
-    //   payno:'04',
-    //   total:uni.getStorageSync('total'), //付款金额
-    //   payid:'',
-    //   syyid:uni.getStorageSync('syyid'),
-    //   vipid:uni.getStorageSync('vipid'),//会员码openid
-    //   fdbh:uni.getStorageSync('fdbh'),
-    //   companyid:uni.getStorageSync('companyid')
-    // }).then((res)=>{
-    //   console.log('订单完成',res)
-    //   // this.goodslist=res.goodslist
-    //   // this.orders=res
-    // })
   },
   computed: {
     // 价格小数
@@ -328,6 +314,8 @@ var _default =
       uni.switchTab({
         url: '/pages/menu/menu' });
 
+      //默认清除已点
+      uni.setStorageSync('yidian', true);
     },
     reachBottom: function reachBottom() {var _this2 = this;
       // 此tab为空数据

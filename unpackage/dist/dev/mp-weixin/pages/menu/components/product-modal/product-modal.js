@@ -359,9 +359,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 {
   props: {
 
@@ -408,9 +405,9 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     product: function product(val) {var _this$productData$dis;
       this.productData = JSON.parse(JSON.stringify(val));
-      console.log(this.productData);
+      console.log('列表数量', this.productData.dishesextlist.length);
+      var lbsl = this.productData.dishesextlist.length;
       this.MultiSelectindex = (_this$productData$dis = this.productData.dishesextlist) === null || _this$productData$dis === void 0 ? void 0 : _this$productData$dis.map(function (item) {return item.groupname;}).indexOf('加料');
-      console.log(this.MultiSelectindex);
       if (this.MultiSelectindex == -1) {
         console.log('不存在多选加料');
       } else {var _this$productData, _this$productData$dis2;
@@ -601,7 +598,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log('属性总价:', pri);
       this.productData.addzxprice = pri;
       this.productData.price = this.productData.nsjg;
-      this.productData.zxprice = this.productData.nsjg + pri;
+      this.productData.zxprice = this.productData.nsjg * this.productData.number;
       this.productData.shownPrice = this.productData.number * this.productData.price + pri;
       console.log('商品总价格', this.productData.shownPrice);
       this.updateChoosedText();
@@ -676,7 +673,7 @@ __webpack_require__.r(__webpack_exports__);
             price: this.productData.nsjg,
             extlist: [],
             spsmm: this.productData.spsmm,
-            zxprice: this.productData.nsjg,
+            zxprice: this.productData.nsjg * this.productData.number,
             quantity: this.productData.number,
             flownum: this.flownum++,
             discount: '0',

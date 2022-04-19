@@ -5,12 +5,12 @@
 			<image mode="" src="../../static/main/LOGO.png" style="width: 130rpx;height: 130rpx;margin-left: 40rpx">
 			</image>
 			<view class="unit1_text">
-				<view class="name">麦子旗舰店</view>
-				<text style="margin-top: 20rpx;opacity: 0.6">天府新谷主店</text>
+				<view class="name">{{shmc}}</view>
+				<text style="margin-top: 20rpx;opacity: 0.6"></text>
 			</view>
 		</view>
 		<!--    会员-->
-		<view class="unit2">
+		<!-- <view class="unit2">
 			<navigator class="unit2Nav" url="" @click="vip">
 				<view class="unit2_box">
 					<image class="unit2_img1" src="../../static/main/hy.png"></image>
@@ -29,7 +29,7 @@
 					<text>我的订单</text>
 				</view>
 			</navigator>
-		</view>
+		</view> -->
 		<!--    点餐-->
 		<view id="name">开始点餐</view>
 		<view class="unit3">
@@ -70,6 +70,7 @@
 		data() {
 			return {
 				tableid: '',
+				shmc:uni.getStorageSync('shmc')
 			}
 		},
 		methods: {
@@ -122,7 +123,9 @@
 			//this.tableid = options.tableid
 		},
 		onShow() {
-			
+			uni.switchTab({
+				url: '/pages/menu/menu'
+			});
 		}
 	}
 </script>
@@ -167,11 +170,11 @@
 			flex: 1;
 			display: flex;
 			flex-direction: column;
-			margin-left: 100rpx;
+			margin-left: 80rpx;
 
 			.name {
 				margin: 20 rpx 0;
-				font-size: 25px;
+				font-size: 18px;
 			}
 		}
 	}

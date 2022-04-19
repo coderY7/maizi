@@ -201,7 +201,8 @@ var _default =
 {
   data: function data() {
     return {
-      tableid: '' };
+      tableid: '',
+      shmc: uni.getStorageSync('shmc') };
 
   },
   methods: {
@@ -254,6 +255,8 @@ var _default =
     //this.tableid = options.tableid
   },
   onShow: function onShow() {
+    uni.switchTab({
+      url: '/pages/menu/menu' });
 
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -21,8 +21,8 @@
 <view class="unit2">
   <view class="unit2_top">
     <view class="unit2_top_left" style="padding-left: 20rpx">
-      <image src="../../static/main/LOGO.png" style="height: 80rpx; width:80rpx;border-radius: 50%"></image>
-      <text style="padding-left: 20rpx">麦子会员</text>
+      <!-- <image src="../../static/main/LOGO.png" style="height: 80rpx; width:80rpx;border-radius: 50%"></image> -->
+      <text style="padding-left: 20rpx">{{shmc}}</text>
     </view>
     <view class="unit2_top_right">
       <u-button @click="vip" type="warning" size="mini" style="padding-right: 20rpx;">立即入会</u-button>
@@ -66,6 +66,7 @@
 export default {
   data() {
     return {
+			shmc:uni.getStorageSync('shmc'),
       islogin: false,
       userInfo: {},
 	  userurl:'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'

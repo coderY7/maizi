@@ -114,6 +114,8 @@ addmenu(){
              goodslist: uni.getStorageSync('goodslist')
            }).then(res=>{
          console.log('订单下单',res)
+		 uni.removeStorageSync('goodslist');
+		 uni.removeStorageSync('Cart');
          uni.setStorageSync('unfinished',res)
         uni.switchTab({
           url:'../order/order'
