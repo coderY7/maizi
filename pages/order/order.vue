@@ -11,27 +11,27 @@
 <!--  订单状态-->
               <view class="order" v-if="goodslist">
 <!--                <view class="store"><u-icon name="clock" :size="30" color="rgb(94,94,94)"></u-icon>：{{orders.xssj}}</view>-->
-                <view v-for="(item,index) in goodslist" :key="index">
+                <view v-for="(item,index) in cartlistold" :key="index">
                   <view class="top">
                     <view class="left"></view>
                     <view class="right"></view>
                   </view>
                   <view class="item">
                     <view class="item_left">
-                      <image :src="imgurl+item.small_img_path" mode="aspectFill"></image>
+                      <image :src="item.image" mode="aspectFill"></image>
 					  <view class="item_left_box">
-						  <view>{{item.spmc}}</view>
-						  <view v-for="(items,index) in item.extlist" :key="index" style="font-size: 20rpx; color: #999999;">{{items.ext_name}}</view>
+						  <view>{{item.name}}</view>
+						  <view style="font-size: 20rpx; color: #999999;" class="listtext">{{item.choosedText}}</view>
 					  </view>
                     </view>
                     <view class="right">
-                      <view>总共:{{priceInt(item.quantity)}}件</view>
+                      <view>总共:{{priceInt(item.number)}}件</view>
 											<view>单价:{{priceInt(item.price)}}</view>
                     </view>
                   </view>
                 </view>
                 <view class="total">
-                  <view>总价格:¥{{parseFloat(orders.paytotal)}}</view>
+                  <view style="color: #ff9f13;">总价格:¥{{parseFloat(orders.paytotal)}}</view>
                   <view>
                     <u-button @click="dish()" size="mini" type="warning">加菜</u-button>
                     <!-- <u-button @click="pay()">立即支付</u-button> -->
@@ -61,6 +61,7 @@
 export default {
   data() {
     return {
+			
 		text:['已下单订单，若要取消请前往前台办理','已结算订单'],
       orderList: [[], []],
       dataList: [],
@@ -81,6 +82,7 @@ export default {
       orders:'',
       goodslist:false,
       imgurl:"http://cateapi.mzsale.cn/",
+			cartlistold:[]
     };
   },
   onLoad() {
@@ -98,6 +100,52 @@ export default {
       console.log('查询桌台订单明细：',res)
       this.goodslist=res.goodslist
       this.orders=res
+			let cartlistold=[]
+			let countold = res.count;
+			uni.setStorageSync('flownumold', countold)
+			res.goodslist.forEach((item) => {
+				let choosedText = [];
+				let ext_zxprices = [];
+				item.extlist.forEach(res => {
+					choosedText.push(res.ext_name)
+					ext_zxprices.push(Number.parseInt(res.ext_zxprice))
+				})
+				let text = choosedText.join(',')
+						
+				function sum(arr) {
+					return arr.reduce((prev, curr) => {
+						return prev + curr;
+					}, 0);
+				}
+				let addzxprice = sum(ext_zxprices) //属性总价
+						
+				cartlistold.push({
+					id: item.spbm,
+					cate_id: item.category_id,
+					name: item.spmc,
+					number: Number.parseInt(item.quantity) || 1,
+					is_single: item.is_single,
+					choosedText: text || '',
+					price: Number.parseInt(item.price),
+					zxprice: Number.parseInt(addzxprice) + Number.parseInt(
+						item.price),
+					image: `http://cateapi.mzsale.cn/${item.small_img_path}`,
+					addzxprice: addzxprice,
+					goodslist: {
+						discount: item.discount,
+						extlist: item.extlist,
+						flownum: item.flownum,
+						price: Number.parseInt(item.price),
+						zxprice: Number.parseInt(addzxprice) + Number
+							.parseInt(item.price),
+						quantity: Number.parseInt(item.quantity),
+						spbm: item.spbm,
+						spsmm: item.spsmm,
+					}
+				})
+			})
+			this.cartlistold=cartlistold
+			uni.setStorageSync('cartold',cartlistold) //已点菜品列表
     })
 },
   computed: {
@@ -135,9 +183,9 @@ export default {
       // 此tab为空数据
       if(this.current != 2) {
         this.loadStatus.splice(this.current,1,"loading")
-        setTimeout(() => {
-          this.getOrderList(this.current);
-        }, 1200);
+        // setTimeout(() => {
+        //   this.getOrderList(this.current);
+        // }, 1200);
       }
     },
     // 页面数据
@@ -235,6 +283,11 @@ page {
 		display: flex;
 		.item_left_box{
 			margin-left: 20rpx;
+			display: flex;
+			flex-direction:column;
+			.listtext{
+				display: inline;
+			}
 		}
     }
 

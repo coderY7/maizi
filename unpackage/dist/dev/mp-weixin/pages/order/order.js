@@ -129,10 +129,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   var l0 = _vm.goodslist
-    ? _vm.__map(_vm.goodslist, function(item, index) {
+    ? _vm.__map(_vm.cartlistold, function(item, index) {
         var $orig = _vm.__get_orig(item)
 
-        var m0 = _vm.priceInt(item.quantity)
+        var m0 = _vm.priceInt(item.number)
         var m1 = _vm.priceInt(item.price)
         return {
           $orig: $orig,
@@ -247,6 +247,7 @@ var _default =
 {
   data: function data() {
     return {
+
       text: ['已下单订单，若要取消请前往前台办理', '已结算订单'],
       orderList: [[], []],
       dataList: [],
@@ -266,7 +267,8 @@ var _default =
       time: '',
       orders: '',
       goodslist: false,
-      imgurl: "http://cateapi.mzsale.cn/" };
+      imgurl: "http://cateapi.mzsale.cn/",
+      cartlistold: [] };
 
   },
   onLoad: function onLoad() {
@@ -284,6 +286,52 @@ var _default =
       console.log('查询桌台订单明细：', res);
       _this.goodslist = res.goodslist;
       _this.orders = res;
+      var cartlistold = [];
+      var countold = res.count;
+      uni.setStorageSync('flownumold', countold);
+      res.goodslist.forEach(function (item) {
+        var choosedText = [];
+        var ext_zxprices = [];
+        item.extlist.forEach(function (res) {
+          choosedText.push(res.ext_name);
+          ext_zxprices.push(Number.parseInt(res.ext_zxprice));
+        });
+        var text = choosedText.join(',');
+
+        function sum(arr) {
+          return arr.reduce(function (prev, curr) {
+            return prev + curr;
+          }, 0);
+        }
+        var addzxprice = sum(ext_zxprices); //属性总价
+
+        cartlistold.push({
+          id: item.spbm,
+          cate_id: item.category_id,
+          name: item.spmc,
+          number: Number.parseInt(item.quantity) || 1,
+          is_single: item.is_single,
+          choosedText: text || '',
+          price: Number.parseInt(item.price),
+          zxprice: Number.parseInt(addzxprice) + Number.parseInt(
+          item.price),
+          image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),
+          addzxprice: addzxprice,
+          goodslist: {
+            discount: item.discount,
+            extlist: item.extlist,
+            flownum: item.flownum,
+            price: Number.parseInt(item.price),
+            zxprice: Number.parseInt(addzxprice) + Number.
+            parseInt(item.price),
+            quantity: Number.parseInt(item.quantity),
+            spbm: item.spbm,
+            spsmm: item.spsmm } });
+
+
+      });
+      _this.cartlistold = cartlistold;
+      uni.setStorageSync('cartold', cartlistold); //已点菜品列表
     });
   },
   computed: {
@@ -317,13 +365,13 @@ var _default =
       //默认清除已点
       uni.setStorageSync('yidian', true);
     },
-    reachBottom: function reachBottom() {var _this2 = this;
+    reachBottom: function reachBottom() {
       // 此tab为空数据
       if (this.current != 2) {
         this.loadStatus.splice(this.current, 1, "loading");
-        setTimeout(function () {
-          _this2.getOrderList(_this2.current);
-        }, 1200);
+        // setTimeout(() => {
+        //   this.getOrderList(this.current);
+        // }, 1200);
       }
     },
     // 页面数据

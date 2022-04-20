@@ -347,18 +347,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 {
   props: {
 
@@ -404,14 +392,14 @@ __webpack_require__.r(__webpack_exports__);
 
   watch: {
     product: function product(val) {var _this$productData$dis;
+      this.flownum = uni.getStorageSync('flownumold');
+      console.log(val);
       this.productData = JSON.parse(JSON.stringify(val));
-      console.log('列表数量', this.productData.dishesextlist.length);
-      var lbsl = this.productData.dishesextlist.length;
       this.MultiSelectindex = (_this$productData$dis = this.productData.dishesextlist) === null || _this$productData$dis === void 0 ? void 0 : _this$productData$dis.map(function (item) {return item.groupname;}).indexOf('加料');
       if (this.MultiSelectindex == -1) {
         console.log('不存在多选加料');
-      } else {var _this$productData, _this$productData$dis2;
-        this.MultiSelect = (_this$productData = this.productData) === null || _this$productData === void 0 ? void 0 : _this$productData.dishesextlist[(_this$productData$dis2 = this.productData.dishesextlist) === null || _this$productData$dis2 === void 0 ? void 0 : _this$productData$dis2.map(function (item) {return item.groupname;}).indexOf('加料')];
+      } else {
+        this.MultiSelect = this.productData.dishesextlist[this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('加料')];
         this.productData.dishesextlist.splice(0, 0, this.MultiSelect);
         var hash = {};
         var arr = this.productData.dishesextlist.reduce(function (item, next) {
@@ -618,9 +606,9 @@ __webpack_require__.r(__webpack_exports__);
       this.pitch();
     },
     //更新
-    updateChoosedText: function updateChoosedText() {var _this$productData$dis3;
+    updateChoosedText: function updateChoosedText() {var _this$productData$dis2;
       var tempArr = [];
-      (_this$productData$dis3 = this.productData.dishesextlist) === null || _this$productData$dis3 === void 0 ? void 0 : _this$productData$dis3.forEach(function (item) {
+      (_this$productData$dis2 = this.productData.dishesextlist) === null || _this$productData$dis2 === void 0 ? void 0 : _this$productData$dis2.forEach(function (item) {
         item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
             tempArr.push(item1.ext_name);

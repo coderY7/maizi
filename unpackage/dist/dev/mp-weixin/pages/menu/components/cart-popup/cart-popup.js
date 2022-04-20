@@ -104,6 +104,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.cartold, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m0 = _vm.priceInt(item.number)
+    return {
+      $orig: $orig,
+      m0: m0
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -188,6 +206,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   components: {
     uniPopup: uniPopup,
@@ -196,7 +240,10 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
-      value: 1 };
+      carts: [],
+      value: 1,
+      cartold: uni.getStorageSync('cartold'), //已下单的菜品
+      imgurl: "http://cateapi.mzsale.cn/" };
 
   },
   props: {
@@ -204,6 +251,61 @@ __webpack_require__.r(__webpack_exports__);
       type: Array,
       default: function _default() {return [];} } },
 
+
+  onShow: function onShow() {
+    console.log('leibain显示');
+  },
+  watch: {
+    cart: function cart(newvalue, oldvalue) {
+      console.log('cortold改变');
+      this.cartold = uni.getStorageSync('cartold');
+    } },
+
+  // watch:{
+  // 	cart(val){
+  // 		console.log('列表',val)
+  // 		let cartlistold=[]
+  // 		val.forEach(item=>{
+  // 			console.log('列表数据',item.goodslist)
+  // 			let choosedText = [];
+  // 			let ext_zxprices = [];
+  // 			item.goodslist.extlist.forEach(res => {
+  // 				choosedText.push(res.ext_name)
+  // 				ext_zxprices.push(Number.parseInt(res.ext_zxprice))
+  // 			})
+  // 			let text = choosedText.join(',')
+
+  // 			function sum(arr) {
+  // 				return arr.reduce((prev, curr) => {
+  // 					return prev + curr;
+  // 				}, 0);
+  // 			}
+  // 			let addzxprice = sum(ext_zxprices) //属性总价
+  // 			console.log(choosedText,addzxprice)
+  // 			cartlistold.push({
+  // 				id: item.spbm,
+  // 				cate_id: item.category_id,
+  // 				name: item.spmc,
+  // 				number: Number.parseInt(item.quantity) || 1,
+  // 				is_single: item.is_single,
+  // 				choosedText: text || '',
+  // 				price: Number.parseInt(item.price),
+  // 				zxprice: Number.parseInt(addzxprice) + Number.parseInt(
+  // 					item.price),
+  // 				image: `http://cateapi.mzsale.cn/${item.small_img_path}`,
+  // 				addzxprice: addzxprice,
+  // 			})
+  // 		})
+  // 		console.log(cartlistold)
+  // 		}
+  // },
+  computed: {
+    priceInt: function priceInt() {
+      return function (val) {
+        if (val !== parseInt(val)) return val.split('.')[0];else
+        return val;
+      };
+    } },
 
   methods: {
     open: function open() {

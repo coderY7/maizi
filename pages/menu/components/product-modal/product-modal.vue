@@ -8,7 +8,6 @@
           <text class="good-name">{{ productData.spmc}}</text>
           <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
           <view>{{productData.description}}</view>
-
           <view class="status-item">
             <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
             <view class="status-tags">
@@ -34,8 +33,6 @@
               </view>
             </view>
           </view>
-
-
           <view class="status-item">
             <view class="status-title">{{ productData.dishesextlist[2].groupname }}</view>
             <view class="status-tags">
@@ -61,8 +58,6 @@
               </view>
             </view>
           </view>
-
-
           <view class="status-item">
             <view class="status-title">{{ productData.dishesextlist[3].groupname }}</view>
             <view class="status-tags">
@@ -88,8 +83,6 @@
               </view>
             </view>
           </view>
-
-
           <view class="status-item">
             <view class="status-title">{{ productData.dishesextlist[4].groupname }}</view>
             <view class="status-tags">
@@ -115,7 +108,6 @@
               </view>
             </view>
           </view>
-
           <view class="status-item">
             <view class="status-title">{{ productData.dishesextlist[5].groupname }}</view>
             <view class="status-tags">
@@ -141,7 +133,6 @@
               </view>
             </view>
           </view>
-
           <view v-if="MultiSelectindex!=-1">
             <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
             <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
@@ -159,13 +150,11 @@
                     <view class="number">{{item.ext_quantity}}</view>
                     <!--                          <view class="Button" @click="plus(item,key)">+</view>-->
                     <image src="/static/common/round_add_normal.png" class="Button" @click="plus(item,key)"></image>
-
                   </view>
                 </view>
               </checkbox-group>
             </view>
           </view>
-
           <view v-else>
             <view class="status-item">
               <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
@@ -195,7 +184,6 @@
           </view>
         </view>
       </scroll-view>
-
       <view class="bottom-btn-box">
         <view class="status-box">
           <view class="left-status">
@@ -265,14 +253,14 @@ export default {
   },
   watch: {
     product(val) {
+			this.flownum=uni.getStorageSync('flownumold')
+			console.log(val)
       this.productData = JSON.parse(JSON.stringify(val));
-      console.log('列表数量',this.productData.dishesextlist.length)
-      let lbsl=this.productData.dishesextlist.length
       this.MultiSelectindex=this.productData.dishesextlist?.map(item=>item.groupname).indexOf('加料')
       if(this.MultiSelectindex  ==-1){
         console.log('不存在多选加料')
       }else {
-        this.MultiSelect=this.productData?.dishesextlist[this.productData.dishesextlist?.map(item=>item.groupname).indexOf('加料')]
+        this.MultiSelect=this.productData.dishesextlist[this.productData.dishesextlist.map(item=>item.groupname).indexOf('加料')]
         this.productData.dishesextlist.splice(0,0,this.MultiSelect)
         var hash = {};
         let arr = this.productData.dishesextlist.reduce(function(item, next) {

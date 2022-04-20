@@ -6,7 +6,7 @@
 					<view class="font-weight-bold">
 <!--            <view>请选择就餐人数</view>-->
 <!--            <u-number-box v-model="value" @change="valChange" :min="1"></u-number-box>-->
-            <view>购物车列表</view>
+            <view>菜品列表</view>
           </view>
 				</view>
 				<view  @tap="clear" class="delete-right">
@@ -29,14 +29,40 @@
 								<view class="name-and-materials">
 									<view class="name">{{ item.name }}</view>
 									<view class="materials">{{ item.choosedText }}</view>
+									<view class="materials" v-if="item.addzxprice!='0'">辅料:¥{{item.addzxprice}}</view>
 								</view>
 								<view class="price-and-actions">
-									<view class="price">￥{{ item.price }}</view>
+									<view class="price">单价￥{{ item.price }}</view>
 									<actions :number="item.number" @add="add(item,index)" @minus="minus(item,index)"></actions>
 								</view>
 							</view>
 						</view>
 
+					</view>
+					<!-- 已下单的菜品 -->
+					<view class="" style="color:#DD524D;font-size: 18px;">
+						已下单的菜品
+					</view>
+					<view class="list">
+					
+						<view class="item" v-for="(item, index) in cartold" :key="index" style="background-color: #DADADA;margin-top: 10rpx;border-radius: 10rpx;">
+							<view class="left">
+								<image :src="item.image"></image>
+							</view>
+							<view class="right">
+								<view class="name-and-materials">
+									<view class="name">{{ item.name }}</view>
+									<view class="materials">{{ item.choosedText }}</view>
+									<view class="materials" v-if="item.addzxprice!='0'">辅料:¥{{item.addzxprice}}</view>
+								
+								</view>
+								<view class="price-and-actions">
+									<view class="price">￥{{ item.price }}</view>
+									<view class="">总共:{{priceInt(item.number)}}件</view>
+								</view>
+							</view>
+						</view>
+					
 					</view>
 				</view>
 			</scroll-view>
@@ -57,13 +83,71 @@ export default {
 	},
   data() {
     return{
-      value:1
+			carts:[],
+      value:1,
+			cartold:uni.getStorageSync('cartold'), //已下单的菜品
+			imgurl:"http://cateapi.mzsale.cn/"
     }
   },
 	props: {
 		cart: {
 			type: Array,
 			default: () => []
+		}
+	},
+	onShow() {
+		console.log('leibain显示')
+	},
+	watch:{
+		cart(newvalue,oldvalue){
+			console.log('cortold改变')
+			this.cartold=uni.getStorageSync('cartold')
+		}
+	},
+	// watch:{
+	// 	cart(val){
+	// 		console.log('列表',val)
+	// 		let cartlistold=[]
+	// 		val.forEach(item=>{
+	// 			console.log('列表数据',item.goodslist)
+	// 			let choosedText = [];
+	// 			let ext_zxprices = [];
+	// 			item.goodslist.extlist.forEach(res => {
+	// 				choosedText.push(res.ext_name)
+	// 				ext_zxprices.push(Number.parseInt(res.ext_zxprice))
+	// 			})
+	// 			let text = choosedText.join(',')
+						
+	// 			function sum(arr) {
+	// 				return arr.reduce((prev, curr) => {
+	// 					return prev + curr;
+	// 				}, 0);
+	// 			}
+	// 			let addzxprice = sum(ext_zxprices) //属性总价
+	// 			console.log(choosedText,addzxprice)
+	// 			cartlistold.push({
+	// 				id: item.spbm,
+	// 				cate_id: item.category_id,
+	// 				name: item.spmc,
+	// 				number: Number.parseInt(item.quantity) || 1,
+	// 				is_single: item.is_single,
+	// 				choosedText: text || '',
+	// 				price: Number.parseInt(item.price),
+	// 				zxprice: Number.parseInt(addzxprice) + Number.parseInt(
+	// 					item.price),
+	// 				image: `http://cateapi.mzsale.cn/${item.small_img_path}`,
+	// 				addzxprice: addzxprice,
+	// 			})
+	// 		})
+	// 		console.log(cartlistold)
+	// 		}
+	// },
+	computed:{
+		priceInt() {
+		  return val => {
+		    if (val !== parseInt(val)) return val.split('.')[0];
+		    else return val;
+		  };
 		}
 	},
 	methods: {

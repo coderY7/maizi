@@ -183,7 +183,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
       var cartPrice = this.cart.reduce(function (acc, cur) {return acc + cur.number * cur.price + cur.addzxprice;}, 0);
-      //let cartPrice=this.cart.reduce((acc, cur) => acc + cur.zxprice, 0)
+      // let cartPrice=this.cart.reduce((acc, cur) => acc + cur.price, 0)
       uni.setStorageSync('cartPrice', cartPrice);
       return cartPrice;
     } },

@@ -69,6 +69,11 @@ page {
 }
 .order .item .item_left .item_left_box.data-v-127632e4 {
   margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+.order .item .item_left .item_left_box .listtext.data-v-127632e4 {
+  display: inline;
 }
 .order .total.data-v-127632e4 {
   display: flex;

@@ -15,7 +15,7 @@
     <view class="unit2">
       <view class="unit2_top">
         <text>餐品详情</text>
-        <u-button size="mini" type="warning" @click="addmenu">加菜</u-button>
+        <!-- <u-button size="mini" type="warning" @click="addmenu">加菜</u-button> -->
       </view>
       <view class="unit2_box">
         <view class="unit2_list" v-for="(item,index) in Cart.cart" :key="index">
@@ -49,7 +49,7 @@
       </view>
       <view style="color:#c2c2c2">不可使用 ></view>
     </view>
-    <view class="unit4">
+    <!-- <view class="unit4">
         <view class="unit4_top">
           <view>订单备注</view>
           <input placeholder="           请输入备注信息" @input="remark"/>
@@ -58,10 +58,10 @@
           <text>发票</text>
           <view style="color:#c2c2c2">不支持线上发票</view>
       </view>
-    </view>
+    </view> -->
     <view class="btn">
-      <u-button type="success" class="btn1" @click="pay(Cart)">确定订单</u-button>
-      <u-button type="warning" @click="addmenu">加菜</u-button>
+      <u-button type="success" class="btn1" @click="pay(Cart)">确定下单</u-button>
+      <!-- <u-button type="warning" @click="addmenu">加菜</u-button> -->
     </view>
   </view>
 </template>
@@ -107,7 +107,7 @@ addmenu(){
              vipid:uni.getStorageSync('vipid'),//会员号
              viplevel: "HYJG",//会员等级
              viprate: "1.0",//会员折扣率
-			 ordertype:'wx',
+			       ordertype:'wx',
              syyid: uni.getStorageSync('syyid'),//收银员工号
              posid: uni.getStorageSync('posid'),//pos机
              counts: uni.getStorageSync('Cart').counts,//商品总数

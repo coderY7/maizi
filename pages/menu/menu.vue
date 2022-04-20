@@ -133,6 +133,9 @@ import Search from './components/search/search.vue'
       }
     },
     onShow(){
+			if(uni.getStorageSync('popupshow')==true){
+				this.popupshow=true
+			}
 			if(uni.getStorageSync('yidian')){
 				this.clearCart()
 uni.setStorageSync('yidian',false)
@@ -180,6 +183,9 @@ uni.setStorageSync('yidian',false)
     onReady() {
       //this.getMenuItemTop()
     },
+		onHide() {
+					this.clearCart()
+		},
     methods: {
       //人数确定后，开台
       ensure() {

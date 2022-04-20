@@ -318,6 +318,9 @@ var _default =
     };
   },
   onShow: function onShow() {var _this = this;
+    if (uni.getStorageSync('popupshow') == true) {
+      this.popupshow = true;
+    }
     if (uni.getStorageSync('yidian')) {
       this.clearCart();
       uni.setStorageSync('yidian', false);
@@ -364,6 +367,9 @@ var _default =
   },
   onReady: function onReady() {
     //this.getMenuItemTop()
+  },
+  onHide: function onHide() {
+    this.clearCart();
   },
   methods: {
     //人数确定后，开台
