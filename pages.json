@@ -14,11 +14,18 @@
 		{
 			"path": "pages/menu/menu",
 			"style": {
-				"navigationBarTitleText": "点餐",
+				 "navigationBarTitleText": "点餐",
+					"navigationStyle":"custom",
 				"mp-weixin": {
 					"FontSize":"500px"
 				}
 			}
+		},
+		{
+			"path": "pages/menu/components/cart-popup/cart-popup"
+		},
+		{
+			"path": "pages/menu/components/cartbar/cartbar"
 		},
 		{
 			"path": "pages/order/order",
@@ -115,13 +122,13 @@
 				"iconPath": "static/tab/order.png",
 				"selectedIconPath": "static/tab/order1.png",
 				"text": "订单"
-			},
-			{
-				"pagePath": "pages/my/my",
-				"iconPath": "static/tab/my.png",
-				"selectedIconPath": "static/tab/my1.png",
-				"text": "我的"
 			}
+			// {
+			// 	"pagePath": "pages/my/my",
+			// 	"iconPath": "static/tab/my.png",
+			// 	"selectedIconPath": "static/tab/my1.png",
+			// 	"text": "我的"
+			// }
 		]
 	},
 	"globalStyle": {

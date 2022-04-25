@@ -220,7 +220,7 @@ export default {
     // tab栏切换
     change(index) {
       this.swiperCurrent = index;
-      this.getOrderList(index);
+      //this.getOrderList(index);
     },
     transition({ detail: { dx } }) {
       this.$refs.tabs.setDx(dx);

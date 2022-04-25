@@ -9,19 +9,26 @@
             <view>菜品列表</view>
           </view>
 				</view>
-				<view  @tap="clear" class="delete-right">
-          <view>
-            <image src="/static/common/delete.png" class="delete-btn"></image>
-          </view>
-					<view>清空菜品</view>
+				<view  class="delete-right">
+					<view class="rightbox" style="margin-right: 36rpx;"  @tap="clear">
+						<view>
+						  <image src="/static/common/delete.png" class="delete-btn"></image>
+						</view>
+						<view>清空未下单</view>
+					</view>
+         <view class="rightbox" @tap="close">
+         	<view>
+         	  <image src="/static/common/guanbi.png" class="delete-btn"></image>
+         	</view>
+         	<view>关闭</view>
+         </view>
 				</view>
+			
 			</view>
 			<scroll-view scroll-y class="content">
 				<view class="wrapper">
 					<view class="list">
-
 						<view class="item" v-for="(item, index) in cart" :key="index">
-
 							<view class="left">
 								<image :src="item.image"></image>
 							</view>
@@ -29,7 +36,7 @@
 								<view class="name-and-materials">
 									<view class="name">{{ item.name }}</view>
 									<view class="materials">{{ item.choosedText }}</view>
-									<view class="materials" v-if="item.addzxprice!='0'">辅料:¥{{item.addzxprice}}</view>
+									<view class="materials" v-if="item.addzxprice!='0'">加料:¥{{item.addzxprice}}</view>
 								</view>
 								<view class="price-and-actions">
 									<view class="price">单价￥{{ item.price }}</view>
@@ -40,12 +47,12 @@
 
 					</view>
 					<!-- 已下单的菜品 -->
-					<view class="" style="color:#DD524D;font-size: 18px;">
-						已下单的菜品
+					<view class="" style="color:#DD524D;font-size: 32rpx;" v-if="show">
+						已下单的菜品	(取消需到前台处理)
 					</view>
 					<view class="list">
 					
-						<view class="item" v-for="(item, index) in cartold" :key="index" style="background-color: #DADADA;margin-top: 10rpx;border-radius: 10rpx;">
+						<view class="item" v-for="(item, index) in cartold" :key="index" style="background-color: #eaeaea;margin-top: 10rpx;border-radius: 10rpx;">
 							<view class="left">
 								<image :src="item.image"></image>
 							</view>
@@ -84,6 +91,7 @@ export default {
   data() {
     return{
 			carts:[],
+			show:false,
       value:1,
 			cartold:uni.getStorageSync('cartold'), //已下单的菜品
 			imgurl:"http://cateapi.mzsale.cn/"
@@ -100,48 +108,15 @@ export default {
 	},
 	watch:{
 		cart(newvalue,oldvalue){
-			console.log('cortold改变')
+			console.log('cort改变')
 			this.cartold=uni.getStorageSync('cartold')
-		}
+		},
+		cartold(newvalue,oldvalue){
+			console.log('cortold改变')
+			this.show=true
+		},
 	},
-	// watch:{
-	// 	cart(val){
-	// 		console.log('列表',val)
-	// 		let cartlistold=[]
-	// 		val.forEach(item=>{
-	// 			console.log('列表数据',item.goodslist)
-	// 			let choosedText = [];
-	// 			let ext_zxprices = [];
-	// 			item.goodslist.extlist.forEach(res => {
-	// 				choosedText.push(res.ext_name)
-	// 				ext_zxprices.push(Number.parseInt(res.ext_zxprice))
-	// 			})
-	// 			let text = choosedText.join(',')
-						
-	// 			function sum(arr) {
-	// 				return arr.reduce((prev, curr) => {
-	// 					return prev + curr;
-	// 				}, 0);
-	// 			}
-	// 			let addzxprice = sum(ext_zxprices) //属性总价
-	// 			console.log(choosedText,addzxprice)
-	// 			cartlistold.push({
-	// 				id: item.spbm,
-	// 				cate_id: item.category_id,
-	// 				name: item.spmc,
-	// 				number: Number.parseInt(item.quantity) || 1,
-	// 				is_single: item.is_single,
-	// 				choosedText: text || '',
-	// 				price: Number.parseInt(item.price),
-	// 				zxprice: Number.parseInt(addzxprice) + Number.parseInt(
-	// 					item.price),
-	// 				image: `http://cateapi.mzsale.cn/${item.small_img_path}`,
-	// 				addzxprice: addzxprice,
-	// 			})
-	// 		})
-	// 		console.log(cartlistold)
-	// 		}
-	// },
+	
 	computed:{
 		priceInt() {
 		  return val => {
@@ -217,12 +192,17 @@ export default {
 		}
 	}
 	.delete-right{
-    margin-right: 20rpx;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+	.rightbox{
+		margin-right:20rpx;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 	.delete-btn {
 		width: 46rpx;
 		height: 46rpx;
@@ -240,6 +220,7 @@ export default {
 	}
 	
 	.list {
+		
 		display: flex;
 		flex-direction: column;
 		//margin-bottom: 30rpx;
@@ -247,7 +228,7 @@ export default {
 		.item {
 			display: flex;
 			align-items: stretch;
-			padding: 30rpx 0;
+			padding: 30rpx 20rpx;
 			position: relative;
 			
 			&:after {
@@ -263,6 +244,7 @@ export default {
 				//flex-shrink: 0;
 				display: flex;
 				align-items: center;
+				border-radius: 10rpx;
 				image {
           height:150rpx;
           width:200rpx;

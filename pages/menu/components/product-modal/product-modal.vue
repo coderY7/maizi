@@ -595,7 +595,7 @@ export default {
   border-radius: 8rpx;
   overflow: hidden;
   margin: 0 auto;
-  margin-top:60rpx;
+  margin-top:140rpx;
   position: relative;
   border-radius: 20rpx;
 }

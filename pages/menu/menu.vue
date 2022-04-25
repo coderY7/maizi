@@ -1,80 +1,88 @@
 <template>
-	<view class="u-wrap">
-
-		<!-- <view class="u-search-box">
-
-      <view class="search-box">
-        <view class="search-input" @tap="showSearch=true">
-          <image src="/static/common/search-icon.png" class="search-icon"></image>
-          <view>搜索</view>
-        </view>
-      </view>
-
-      		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
-		</view> -->
-<view class="shname">{{shname}}</view>
-    <view class="rolls">
-		<u-notice-bar mode="horizontal" :list="barlist"></u-notice-bar>
-      <!-- <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image> -->
-    </view>
-
-    <view class="u-menu-wrap">
-			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
-			 :scroll-into-view="itemId">
-				<view v-for="(item,index) in categorylist" :key="index" class="u-tab-item" :class="[current == index ? 'u-tab-item-active' : '']"
-				 @tap.stop="swichMenu(index)">
-					<text class="u-line-1">{{item.category_name}}</text>
+	<view class="container">
+		<!-- <nav-bar title="导航栏组件"></nav-bar> -->
+		<u-navbar :back-text="shname" back-icon-name="" :back-text-style="backstyle"></u-navbar>
+		<view class="u-wrap">
+		
+				<!-- <view class="u-search-box">
+		
+		      <view class="search-box">
+		        <view class="search-input" @tap="showSearch=true">
+		          <image src="/static/common/search-icon.png" class="search-icon"></image>
+		          <view>搜索</view>
+		        </view>
+		      </view>
+		
+		      		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>
+				</view> -->
+				<view class="shxx">
+				<!-- 	<view class="shname">{{shname}}</view> -->
+					<view class="shname">桌台名:{{tablename}}</view>
 				</view>
-			</scroll-view>
-			<scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box" @scroll="rightScroll">
-				<view class="page-view">
-						<view class="item-container">
-							<view class="thumb-box" v-for="(product, index1) in disheslist" :key="index1"
-              @tap="showProductDetailModal(product)">
-								<image class="item-menu-image" :src="imgurl+product.small_img_path" mode=""></image>
-								<view class="item-menu-text">
-                  <view style="font-size: 16px;">{{product.spmc}}</view>
-
-									<view class="price-btn">
-										<view style="font-size: 14px;color: #f4461c;">￥{{product.nsjg}}</view>
-<!--   选择-->
-                    <actions :materials-btn="!product.is_single"
-                             @materials="showProductDetailModal(product)"
-                             :number="productCartNum(product.spbm)"
-                             @add="handleAddToCart(product,index)"
-                             @minus="handleMinusFromCart(product,index)" />
+		
+		    <view class="rolls">
+				<u-notice-bar mode="horizontal" :list="barlist"></u-notice-bar>
+		      <!-- <image src="../../static/menu/activity.png" style="width:100%;height:70rpx;"></image> -->
+		    </view>
+		
+		    <view class="u-menu-wrap">
+					<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop"
+					 :scroll-into-view="itemId">
+						<view v-for="(item,index) in categorylist" :key="index" class="u-tab-item" :class="[current == index ? 'u-tab-item-active' : '']"
+						 @tap.stop="swichMenu(index)">
+							<text class="u-line-1">{{item.category_name}}</text>
+						</view>
+					</scroll-view>
+					<scroll-view :scroll-top="scrollRightTop" scroll-y scroll-with-animation class="right-box" @scroll="rightScroll">
+						<view class="page-view">
+								<view class="item-container">
+									<view class="thumb-box" v-for="(product, index1) in disheslist" :key="index1"
+		              @tap="showProductDetailModal(product)">
+										<image class="item-menu-image" :src="imgurl+product.small_img_path" mode=""></image>
+										<view class="item-menu-text">
+		                  <view style="font-size: 16px;">{{product.spmc}}</view>
+		
+											<view class="price-btn">
+												<view style="font-size: 14px;color: #f4461c;">￥{{product.nsjg}}</view>
+		<!--   选择-->
+		                    <actions :materials-btn="!product.is_single"
+		                             @materials="showProductDetailModal(product)"
+		                             :number="productCartNum(product.spbm)"
+		                             @add="handleAddToCart(product,index)"
+		                             @minus="handleMinusFromCart(product,index)" />
+											</view>
+										</view>
 									</view>
 								</view>
-							</view>
+		<!--					</view>-->
 						</view>
-<!--					</view>-->
+					</scroll-view>
 				</view>
-			</scroll-view>
-		</view>
-    <!-- 商品详情 modal begin -->
-    <u-mask :show="show" @click="shows">
-        <product-modal :product="product"
-                       @cancel="closeProductDetailModal"
-                       @add-to-cart="handleAddToCartInModal"
-        />
-    </u-mask>
-
-    <!-- 购物车栏 begin -->
-    <cart-bar :cart="cart"
-              @add="handleAddToCart"
-              @minus="handleMinusFromCart"
-              @clear="clearCart"
-              @pay="pay"
-    />
-    <u-popup v-model="popupshow" mode="center" border-radius="14"  :mask="true"  :mask-close-able="false" >
-      <view style="display:flex;flex-direction:column;justify-content:center;align-items:center;width:500rpx;height:300rpx;">
-        <text style="margin-bottom:20rpx">请选择就餐人数</text>
-        <u-number-box v-model="value" min="1" max="10" @change="valChange"></u-number-box>
-        <u-button @click="ensure" style="margin-top:30rpx;">确定</u-button>
-      </view>
-    </u-popup>
-<!--		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>-->
-
+		    <!-- 商品详情 modal begin -->
+		    <u-mask :show="show" @click="shows">
+		        <product-modal :product="product"
+		                       @cancel="closeProductDetailModal"
+		                       @add-to-cart="handleAddToCartInModal"
+		        />
+		    </u-mask>
+		
+		    <!-- 购物车栏 begin -->
+		    <cart-bar :cart="cart"
+		              @add="handleAddToCart"
+		              @minus="handleMinusFromCart"
+		              @clear="clearCart"
+		              @pay="pay"
+		    />
+		    <u-popup v-model="popupshow" mode="center" border-radius="14"  :mask="true"  :mask-close-able="false" >
+		      <view style="display:flex;flex-direction:column;justify-content:center;align-items:center;width:500rpx;height:300rpx;">
+		        <text style="margin-bottom:20rpx">请选择就餐人数</text>
+		        <u-number-box v-model="value" min="1" max="10" @change="valChange"></u-number-box>
+		        <u-button @click="ensure" style="margin-top:30rpx;">确定</u-button>
+		      </view>
+		    </u-popup>
+		<!--		<search :show="showSearch" :categories="categories" @hide="showSearch=false" @choose="showProductDetailModal"></search>-->
+		
+			</view>
 	</view>
 </template>
 <script>
@@ -84,6 +92,7 @@ import CartBar from './components/cartbar/cartbar.vue'
 import ProductModal from './components/product-modal/product-modal.vue'
 import cartPopup from './components/cart-popup/cart-popup.vue'
 import Search from './components/search/search.vue'
+import navBar from '../../components/uni-nav-bar/uni-nav-bar.vue'
 // import categories from "../../common/categories";
 
 
@@ -93,13 +102,17 @@ import Search from './components/search/search.vue'
       CartBar,
       ProductModal,
       cartPopup,
-      Search
+      Search,
+			navBar
     },
     data() {
       return {
+				backstyle:{color: '#ff9f13','font-size':'18px','margin-left':'10rpx'},
+				tablename:'',
+				tableid:uni.getStorageSync('tableid'),
 				shname:uni.getStorageSync('shmc'),
 		  barlist:['欢迎使用扫码点餐小程序','祝您用餐愉快'],//滚动
-        popupshow:uni.getStorageSync('popupshow')==false?uni.getStorageSync('popupshow'):true,
+        popupshow:'',
         show: false,
         imgurl:"http://cateapi.mzsale.cn/",
         scrollTop: 0, //tab标题的滚动条位置
@@ -133,14 +146,10 @@ import Search from './components/search/search.vue'
       }
     },
     onShow(){
-			if(uni.getStorageSync('popupshow')==true){
-				this.popupshow=true
-			}
-			if(uni.getStorageSync('yidian')){
-				this.clearCart()
-uni.setStorageSync('yidian',false)
-			}
-		
+			this.tablename=uni.getStorageSync('tablename'),
+			this.shname=uni.getStorageSync('shmc'),
+			this.tableid=uni.getStorageSync('tableid'),
+			this.popupshow=uni.getStorageSync('popupshow'),
       this.token = uni.getStorageSync('token');
       this.$u.api.categorys({
         access_token:uni.getStorageSync('token'),
@@ -168,20 +177,11 @@ uni.setStorageSync('yidian',false)
 
     },
     onLoad(options) {
-    // if(uni.getStorageSync('tablenumberold')!='0'){
-    //   this.popupshow=false
-    // }
-	
-      // uni.getStorageSync('cartold').forEach(item=>{
-      //   this.cart.push(item)
-      // })
-      // if(uni.getStorageSync('dataold')!=''){
-      //   console.log('加菜')
-      //   this.handleAddToCartInModal()
-      // }
+   
     },
     onReady() {
       //this.getMenuItemTop()
+			this.popupshow=uni.getStorageSync('popupshow')
     },
 		onHide() {
 					this.clearCart()
@@ -353,10 +353,10 @@ uni.setStorageSync('yidian',false)
 
 <style lang="scss" scoped>
 	.u-wrap {
-		height: calc(100vh);
+		height: calc(100vh - 170rpx);
 		display: flex;
 		flex-direction: column;
-    margin:10rpx 40rpx 0 40rpx;
+    margin:0rpx 40rpx 0 40rpx;
 	}
 	.u-search-box {
 
@@ -488,6 +488,10 @@ uni.setStorageSync('yidian',false)
   }
 	.shname{
 		color:#ff9f13;
-		font-size: 35rpx;
+		font-size: 32rpx;
+	}
+	.shxx{
+		display: flex;
+		justify-content:space-between;
 	}
 </style>

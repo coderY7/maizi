@@ -23,7 +23,7 @@ let orderdishes='/catering/orderdishes'
 const install = (Vue, vm) => {
 	let orderdishess=(params={})=>vm.$u.post(orderdishes,params)
 	
-	let defend=(params={})=>vm.$u.post(defend,params)
+	let defends=(params={})=>vm.$u.post(defend,params)
     //开台
     let manages=(params={})=>vm.$u.post(manage,params)
     //订单完成
@@ -53,7 +53,7 @@ const install = (Vue, vm) => {
     //退款
     let backs=(params={})=>vm.$u.post(back,params)
     // 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
-    vm.$u.api = {orderdishess,defend,manages,exts,searchs,paydones,userchecks,logins,categorys,caterings,dishess,orders,readytopays,pays,querys,backs};
+    vm.$u.api = {orderdishess,defends,manages,exts,searchs,paydones,userchecks,logins,categorys,caterings,dishess,orders,readytopays,pays,querys,backs};
 }
 
 export default {

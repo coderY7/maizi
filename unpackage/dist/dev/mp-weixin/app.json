@@ -2,6 +2,8 @@
   "pages": [
     "pages/main/main",
     "pages/menu/menu",
+    "pages/menu/components/cart-popup/cart-popup",
+    "pages/menu/components/cartbar/cartbar",
     "pages/order/order",
     "pages/my/my",
     "pages/pay/pay",
@@ -37,12 +39,6 @@
         "iconPath": "static/tab/order.png",
         "selectedIconPath": "static/tab/order1.png",
         "text": "订单"
-      },
-      {
-        "pagePath": "pages/my/my",
-        "iconPath": "static/tab/my.png",
-        "selectedIconPath": "static/tab/my1.png",
-        "text": "我的"
       }
     ]
   },
@@ -54,5 +50,6 @@
   "uniStatistics": {
     "enable": true
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

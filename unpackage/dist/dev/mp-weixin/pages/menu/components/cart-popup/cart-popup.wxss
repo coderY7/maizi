@@ -52,6 +52,11 @@
   margin-left: 10rpx;
 }
 .header .delete-right.data-v-24088e46 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .rightbox.data-v-24088e46 {
   margin-right: 20rpx;
   display: flex;
   flex-direction: column;
@@ -77,7 +82,7 @@
 .content .list .item.data-v-24088e46 {
   display: flex;
   align-items: stretch;
-  padding: 30rpx 0;
+  padding: 30rpx 20rpx;
   position: relative;
 }
 .content .list .item.data-v-24088e46:after {
@@ -91,6 +96,7 @@
 .content .list .item .left.data-v-24088e46 {
   display: flex;
   align-items: center;
+  border-radius: 10rpx;
 }
 .content .list .item .left image.data-v-24088e46 {
   height: 150rpx;

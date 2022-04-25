@@ -31,7 +31,19 @@
 			uni.setStorageSync('xsdbh', '');
 			uni.setStorageSync('token', 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd');
 			
-			
+			//根据桌台号查桌台名称
+			this.$u.api.defends({
+				access_token:uni.getStorageSync('token'),
+				fdbh:uni.getStorageSync('fdbh'),
+				companyid:uni.getStorageSync('companyid'),
+				table_id:uni.getStorageSync('tableid'),
+				vtype:'wxsel'
+			}).then((res)=>{
+				console.log('桌台信息',res.data[0].table_name)
+				uni.setStorageSync('tablename',res.data[0].table_name)
+			},err=>{
+				console.log(err)
+			})
 			
 			var snvar = uni.getStorageSync('companyid'); //商家SN
 			var fdbhvar = uni.getStorageSync('fdbh'); //分店编号
@@ -75,12 +87,6 @@
 			updateManager.onUpdateFailed(function(res) {
 				// 新的版本下载失败
 			});
-			
-			
-			
-			
-			
-			
 			
 			//查询当前桌台订单信息
 			this.$u.api.orders({
@@ -172,11 +178,12 @@
 				}
 			})
 			
-
+    //查询桌台号
+		
 		},
 		onHide: function() {
 			console.log('App Hide');
-			//uni.clearStorageSync();
+			uni.clearStorageSync();
 		},
 		//全局数据
 		globalData: {
@@ -188,4 +195,5 @@
 <style lang="scss">
 	/*每个页面公共css */
 	@import 'node_modules/uview-ui/index.scss';
+@import '@/components/uni-scss/index.scss';
 </style>
