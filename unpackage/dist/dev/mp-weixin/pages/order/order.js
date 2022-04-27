@@ -267,7 +267,7 @@ var _default =
       time: '',
       orders: '',
       goodslist: false,
-      imgurl: "http://cateapi.mzsale.cn/",
+      imgurl: "https://cat.mzsale.com/",
       cartlistold: [] };
 
   },
@@ -315,7 +315,7 @@ var _default =
           price: Number.parseInt(item.price),
           zxprice: Number.parseInt(addzxprice) + Number.parseInt(
           item.price),
-          image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),
+          image: "https://cat.mzsale.com/".concat(item.small_img_path),
           addzxprice: addzxprice,
           goodslist: {
             discount: item.discount,

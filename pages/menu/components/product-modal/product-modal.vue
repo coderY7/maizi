@@ -284,7 +284,7 @@ export default {
       shownPrice: 0,
       choosedText: '',
       addzxprice:0,
-      imgurl:"http://cateapi.mzsale.cn/",
+      imgurl:"https://cat.mzsale.com/",
       productData: {},
       zxprice:0,
       extlist:[],//附加属性

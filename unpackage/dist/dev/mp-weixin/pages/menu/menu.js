@@ -302,7 +302,7 @@ var _default =
       barlist: ['欢迎使用扫码点餐小程序', '祝您用餐愉快'], //滚动
       popupshow: '',
       show: false,
-      imgurl: "http://cateapi.mzsale.cn/",
+      imgurl: "https://cat.mzsale.com/",
       scrollTop: 0, //tab标题的滚动条位置
       oldScrollTop: 0,
       current: 0, // 预设当前项的值
@@ -1024,7 +1024,7 @@ __webpack_require__.r(__webpack_exports__);
       show: false,
       value: 1,
       cartold: uni.getStorageSync('cartold'), //已下单的菜品
-      imgurl: "http://cateapi.mzsale.cn/" };
+      imgurl: "https://cat.mzsale.com/" };
 
   },
   props: {

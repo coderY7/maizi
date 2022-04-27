@@ -485,7 +485,7 @@ __webpack_require__.r(__webpack_exports__);
       show: false,
       value: 1,
       cartold: uni.getStorageSync('cartold'), //已下单的菜品
-      imgurl: "http://cateapi.mzsale.cn/" };
+      imgurl: "https://cat.mzsale.com/" };
 
   },
   props: {

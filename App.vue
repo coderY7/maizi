@@ -154,7 +154,7 @@
 								price: Number.parseInt(item.price),
 								zxprice: Number.parseInt(addzxprice) + Number.parseInt(
 									item.price),
-								image: `http://cateapi.mzsale.cn/${item.small_img_path}`,
+								image: `https://cat.mzsale.com/${item.small_img_path}`,
 								addzxprice: addzxprice,
 								goodslist: {
 									discount: item.discount,

@@ -256,7 +256,7 @@ __webpack_require__.r(__webpack_exports__);
               price: Number.parseInt(item.price),
               zxprice: Number.parseInt(addzxprice) + Number.parseInt(
               item.price),
-              image: "http://cateapi.mzsale.cn/".concat(item.small_img_path),
+              image: "https://cat.mzsale.com/".concat(item.small_img_path),
               addzxprice: addzxprice,
               goodslist: {
                 discount: item.discount,

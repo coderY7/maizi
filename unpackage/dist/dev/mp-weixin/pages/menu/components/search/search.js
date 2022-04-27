@@ -214,7 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 
   data: function data() {
     return {
-      imgurl: "http://cateapi.mzsale.cn/",
+      imgurl: "https://cat.mzsale.com/",
       tranStyles: {
         width: '100%',
         position: 'absolute',

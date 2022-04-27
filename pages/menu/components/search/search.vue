@@ -75,7 +75,7 @@ export default {
 		},
 		data() {
 			return {
-        imgurl:"http://cateapi.mzsale.cn/",
+        imgurl:"https://cat.mzsale.com/",
         tranStyles: {
 					width: '100%',
 					position: 'absolute',

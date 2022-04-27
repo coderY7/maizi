@@ -11340,7 +11340,7 @@ var install = function install(Vue, vm) {
   // 此为自定义配置参数，具体参数见上方说明
   Vue.prototype.$u.http.setConfig(
   {
-    baseUrl: 'https://cateapi.mzsale.cn/mzsale/web', // 请求的本域名
+    baseUrl: 'https://cat.mzsale.com/mzsale/web', // 请求的本域名
     // 设置为json，返回后会对数据进行一次JSON.parse()
     dataType: 'json',
     showLoading: true, // 是否显示请求中的loading

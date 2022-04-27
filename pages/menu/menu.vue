@@ -114,7 +114,7 @@ import navBar from '../../components/uni-nav-bar/uni-nav-bar.vue'
 		  barlist:['欢迎使用扫码点餐小程序','祝您用餐愉快'],//滚动
         popupshow:'',
         show: false,
-        imgurl:"http://cateapi.mzsale.cn/",
+        imgurl:"https://cat.mzsale.com/",
         scrollTop: 0, //tab标题的滚动条位置
         oldScrollTop: 0,
         current: 0, // 预设当前项的值
