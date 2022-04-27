@@ -144,7 +144,7 @@ export default {
 		},
 		clear() {
 			uni.showModal({
-			    content: '清空菜品',
+			    content: '清空未下单菜品',
 				confirmColor: '#DBA871',
 			    success: res => {
 			        if (res.confirm) {

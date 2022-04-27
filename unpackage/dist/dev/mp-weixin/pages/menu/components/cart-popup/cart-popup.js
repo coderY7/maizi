@@ -301,7 +301,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     clear: function clear() {var _this = this;
       uni.showModal({
-        content: '清空菜品',
+        content: '清空未下单菜品',
         confirmColor: '#DBA871',
         success: function success(res) {
           if (res.confirm) {
