@@ -103,4 +103,7 @@ page {
 .swiper-item.data-v-127632e4 {
   height: 100%;
 }
+.coder.data-v-127632e4 {
+  opacity: 0;
+}
 

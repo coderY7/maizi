@@ -1,14 +1,14 @@
 <template>
 	<view id="content">
 		<!-- 店铺 -->
-		<view class="unit1">
+		<!-- <view class="unit1">
 			<image mode="" src="../../static/main/LOGO.png" style="width: 130rpx;height: 130rpx;margin-left: 40rpx">
 			</image>
 			<view class="unit1_text">
 				<view class="name">{{shmc}}</view>
 				<text style="margin-top: 20rpx;opacity: 0.6"></text>
 			</view>
-		</view>
+		</view> -->
 		<!--    会员-->
 		<!-- <view class="unit2">
 			<navigator class="unit2Nav" url="" @click="vip">
@@ -31,7 +31,7 @@
 			</navigator>
 		</view> -->
 		<!--    点餐-->
-		<view id="name">开始点餐</view>
+		<!-- <view id="name">开始点餐</view>
 		<view class="unit3">
 			<navigator class="unit3Nav" url="/pages/menu/menu" open-type="switchTab" @click="navmenu">
 				<view class="unit3_box">
@@ -47,15 +47,15 @@
 					<view class="unit3_min">取餐更便捷</view>
 				</view>
 			</navigator>
-		</view>
+		</view> -->
 		<!--    推荐-->
-		<view id="name">热门推荐</view>
+		<!-- <view id="name">热门推荐</view>
 		<view class="unit4" @click="hot()">
 			<image src="../../static/main/hot.jpg"></image>
 			<view class="unit4_text">
 				热门菜系
 			</view>
-		</view>
+		</view> -->
 		<!-- <view class="unit4">
 			<image src="../../static/main/hot.jpg"></image>
 			<view class="unit4_text">
@@ -73,52 +73,39 @@
 				shmc:uni.getStorageSync('shmc')
 			}
 		},
-		methods: {
-			//查询订单信息
-			order() {
-				//查询桌台订单信息
-				this.$u.api.orders({
-				  access_token:uni.getStorageSync('token'),
-				  vtype:'detail',
-				  tableid:uni.getStorageSync('tableid'),
-				  fdbh:uni.getStorageSync('fdbh'),
-				  xsdbh:uni.getStorageSync('xsdbh')
-				}).then(res => {
-				  console.log('查询桌台订单明细：',res)
-				})
-				
-			},
-			hot(){
-				uni.switchTab({
-					url: '/pages/menu/menu'
-				});
-			},
-			navmenu() {
-				uni.setStorageSync('mode', '堂食');
-			},
-			navbesides() {
-				uni.showToast({
-					title: '该功能暂不支持，敬请期待',
-					duration: 2000,
-					icon: 'none'
-				});
-				uni.setStorageSync('mode', '外带');
-			},
-			vip() {
-				uni.showToast({
-					title: '该功能暂不支持，敬请期待',
-					duration: 2000,
-					icon: 'none'
-				});
-			},
-			roll() {
-				uni.showToast({
-					title: '该功能暂不支持，敬请期待',
-					duration: 2000,
-					icon: 'none'
-				});
-			}
-		},
+		// methods: {
+		
+		// 	hot(){
+		// 		uni.switchTab({
+		// 			url: '/pages/menu/menu'
+		// 		});
+		// 	},
+		// 	navmenu() {
+		// 		uni.setStorageSync('mode', '堂食');
+		// 	},
+		// 	navbesides() {
+		// 		uni.showToast({
+		// 			title: '该功能暂不支持，敬请期待',
+		// 			duration: 2000,
+		// 			icon: 'none'
+		// 		});
+		// 		uni.setStorageSync('mode', '外带');
+		// 	},
+		// 	vip() {
+		// 		uni.showToast({
+		// 			title: '该功能暂不支持，敬请期待',
+		// 			duration: 2000,
+		// 			icon: 'none'
+		// 		});
+		// 	},
+		// 	roll() {
+		// 		uni.showToast({
+		// 			title: '该功能暂不支持，敬请期待',
+		// 			duration: 2000,
+		// 			icon: 'none'
+		// 		});
+		// 	}
+		// },
 		onLoad(options) {
 			//this.tableid = options.tableid
 		},

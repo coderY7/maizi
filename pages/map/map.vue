@@ -22,23 +22,23 @@ export default {
   },
   onShow() {
     console.log('显示地图1')
-    wx.chooseLocation({
-      success: (res)=> {
-         var tencentMap = new QQMapWX({
-          key: 'OYVBZ-YWJ3J-UTEFB-KILGE-2WYX6-GEB2D'
-        })
-        tencentMap.reverseGeocoder({
-          location: {
-            longitude: res.longitude,
-            latitude: res.latitude
-          },
-          success:(res)=> {
-            console.log('获取地图详细位置',res.result.address)
-          }
-        })
+    // wx.chooseLocation({
+    //   success: (res)=> {
+    //      var tencentMap = new QQMapWX({
+    //       key: 'OYVBZ-YWJ3J-UTEFB-KILGE-2WYX6-GEB2D'
+    //     })
+    //     tencentMap.reverseGeocoder({
+    //       location: {
+    //         longitude: res.longitude,
+    //         latitude: res.latitude
+    //       },
+    //       success:(res)=> {
+    //         console.log('获取地图详细位置',res.result.address)
+    //       }
+    //     })
 
-      },
-    })
+    //   },
+    // })
 
   },
   methods: {}

@@ -46,7 +46,9 @@
 		
         <swiper-item class="swiper-item">
           <scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
-            <view class="page-box">
+            <view class="coder">
+							<button @click="test()">转换成测试环境</button>
+							<button @click="off()">转换成正式环境</button>
               <!-- <u-loadmore :status="loadStatus[1]" bgColor="#f2f2f2"></u-loadmore>-->
 			  <u-divider bg-color="#f2f2f2">{{text[1]}}</u-divider>
             </view>
@@ -81,7 +83,7 @@ export default {
       time:'',
       orders:'',
       goodslist:false,
-      imgurl:"https://cat.mzsale.com/",
+      imgurl:uni.getStorageSync('offUrl'),
 			cartlistold:[]
     };
   },
@@ -129,7 +131,7 @@ export default {
 					price: Number.parseInt(item.price),
 					zxprice: Number.parseInt(addzxprice) + Number.parseInt(
 						item.price),
-					image: `https://cat.mzsale.com/${item.small_img_path}`,
+					image: `${uni.getStorageSync('offUrl')}${item.small_img_path}`,
 					addzxprice: addzxprice,
 					goodslist: {
 						discount: item.discount,
@@ -165,6 +167,39 @@ export default {
     }
   },
   methods: {
+		//转换测试环境
+		test(){
+			uni.showModal({
+				title:'切换为测试模式',
+			content:'切换后,请重新扫码打开小程序',
+			showCancel:false,
+				success:  (res)=>{
+						if (res.confirm) {
+							console.log('用户点击确定');
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+							
+						}
+					}
+			}),
+			uni.setStorageSync('offUrl','https://cateapi.mzsale.cn/')
+		},
+		off(){
+			uni.showModal({
+				title:'切换为正式模式',
+			content:'切换后,请重新扫码打开小程序',
+			showCancel:false,
+				success:  (res)=>{
+						if (res.confirm) {
+							console.log('用户点击确定');
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+							
+						}
+					}
+			}),
+				uni.setStorageSync('offUrl','https://cat.mzsale.com/')
+		},
     //跳转支付
     pay(){
       uni.navigateTo({
@@ -321,5 +356,8 @@ page {
 }
 .swiper-item {
   height: 100%;
+}
+.coder{
+	opacity: 0;
 }
 </style>

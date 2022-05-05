@@ -9,13 +9,14 @@ Vue.use(uView);
 const app = new Vue({
     ...App
 })
-import httpInterceptor from 'common/http.interceptor.js'
-// 这里需要写在最后，是为了等Vue创建对象完成，引入"app"对象(也即页面的"this"实例)
-Vue.use(httpInterceptor, app)
 
+import httpInterceptor from 'common/http.interceptor.js'
 // http接口API集中管理引入部分
 import httpApi from 'common/http.api.js'
 Vue.use(httpApi, app)
+
+// 这里需要写在最后，是为了等Vue创建对象完成，引入"app"对象(也即页面的"this"实例)
+Vue.use(httpInterceptor, app)
 
 app.$mount()
 // #endif

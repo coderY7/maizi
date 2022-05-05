@@ -1,6 +1,18 @@
+<template>
+	<view class="container">
+		
+	</view>
+</template>
 <script>
 	export default {
 		onLaunch: function(options) {
+			console.log(uni.getStorageSync('offUrl'))
+			if(uni.getStorageSync('offUrl')=='https://cateapi.mzsale.cn/'){
+				console.log9('测试环境')
+			}else{
+				//正式地址
+				uni.setStorageSync('offUrl','https://cat.mzsale.com/')
+			}
 			console.log(options)
 		},
 		onShow: function(options) {
@@ -15,8 +27,8 @@
 			})
 			console.log(codeparam)
 			//服务员ID不满6位数前面加0
-			if (codeparam[1].length < 6) {
-				codeparam[1] = codeparam[1].padStart(6, '0')
+			if (codeparam[1].length < 5) {
+				codeparam[1] = codeparam[1].padStart(5, '0')
 			}
 			console.log(codeparam)
 			
@@ -31,6 +43,35 @@
 			uni.setStorageSync('xsdbh', '');
 			uni.setStorageSync('token', 'XMUGTMwd6RihQZEWBAqvh8OSwLhT95wd');
 			
+			
+			var snvar = uni.getStorageSync('companyid'); //商家SN
+			var fdbhvar = uni.getStorageSync('fdbh'); //分店编号
+			console.log(`https://lite.ecsun.cn/api/shops/${snvar}`)
+			//获取商户信息
+			uni.request({
+				url: `https://lite.ecsun.cn/api/shops/${snvar}`,
+				method: 'GET',
+				dataType: 'json',
+				success: res => {
+					console.log('获取门店信息', res.data.shoplist)
+					res.data.shoplist.forEach(item=>{
+						if(item.shopid==uni.getStorageSync('fdbh')){
+							console.log('匹配成功',item)
+					    uni.setStorageSync('shmc', item.shopname) //商户名称
+							uni.setStorageSync('shwd', Number(item.latitude)) //商户纬度
+							uni.setStorageSync('shjd', Number(item.longitude)) //商户经度
+						}
+					})		
+				},
+				fail: error => {
+					console.log('获取门店初始化信息失败', error);
+				}
+			});
+			
+			
+			 
+			
+			
 			//根据桌台号查桌台名称
 			this.$u.api.defends({
 				access_token:uni.getStorageSync('token'),
@@ -44,28 +85,7 @@
 			},err=>{
 				console.log(err)
 			})
-			
-			var snvar = uni.getStorageSync('companyid'); //商家SN
-			var fdbhvar = uni.getStorageSync('fdbh'); //分店编号
-			console.log(`https://lite.ecsun.cn/api/init/${snvar}-${fdbhvar}`)
-			//获取商户信息
-			uni.request({
-				url: 'https://lite.ecsun.cn/api/init/' + snvar + '-' + fdbhvar,
-				method: 'GET',
-				dataType: 'json',
-				success: res => {
-					console.log('获取门店信息', res.data.wxpaylist)
-					let sh = res.data.wxpaylist
-					uni.setStorageSync('shmc', sh.shopname) //商户名称
-					uni.setStorageSync('shappid', sh.appid) //商户appID
-					uni.setStorageSync('shsubmchid', sh.submchid) //商户号
-			
-				},
-				fail: error => {
-					console.log('获取门店初始化信息失败', error);
-				}
-			});
-			
+		
 			const updateManager = uni.getUpdateManager();
 			updateManager.onCheckForUpdate(function(res) {
 				// 请求完新版本信息的回调
@@ -172,18 +192,38 @@
 						console.log('旧数据信息', cartold)
 						uni.setStorageSync('cartold', cartold)
 					})
-					uni.switchTab({
-						url: '/pages/order/order'
-					});
+					// uni.switchTab({
+					// 	url: '/pages/order/order'
+					// });
 				}
 			})
 			
-    //查询桌台号
-		
+			
+			
+			
+			
+			
+			
+			
+			
 		},
 		onHide: function() {
-			console.log('App Hide');
-			uni.clearStorageSync();
+			uni.removeStorageSync('syyid');
+			uni.removeStorageSync('posid');
+			uni.removeStorageSync('tableid');
+			uni.removeStorageSync('tablenumber');
+			uni.removeStorageSync('fdbh');
+			uni.removeStorageSync('companyid');
+			uni.removeStorageSync('xsdbh');
+			uni.removeStorageSync('shmc');
+			uni.removeStorageSync('shappid');
+			uni.removeStorageSync('popupshow');
+			uni.removeStorageSync('cartPrice');
+			uni.removeStorageSync('flownumold');
+			uni.removeStorageSync('cartold');
+			uni.removeStorageSync('cartold');
+			uni.removeStorageSync('cartPrice');
+			
 		},
 		//全局数据
 		globalData: {

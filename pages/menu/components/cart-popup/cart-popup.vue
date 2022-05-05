@@ -94,7 +94,7 @@ export default {
 			show:false,
       value:1,
 			cartold:uni.getStorageSync('cartold'), //已下单的菜品
-			imgurl:"https://cat.mzsale.com/"
+			imgurl:uni.getStorageSync('offUrl')
     }
   },
 	props: {
@@ -136,7 +136,6 @@ export default {
 			this.$emit('change', show)
 		},
 		add(item,index) {
-      console.log('item:',item, index)
 			this.$emit('add', {...item,index})
 		},
 		minus(item,index) {
@@ -152,11 +151,7 @@ export default {
 			        }
 			    }
 			})
-		},
-    valChange(e) {
-      console.log('就餐人数为: ' + e.value)
-      uni.setStorageSync('tablenumber',e.value)
-    }
+		}
 	}
 };
 </script>

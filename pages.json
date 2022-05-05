@@ -97,6 +97,16 @@
             }
             
         }
+        ,{
+            "path" : "pages/distance/distance",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+								"navigationStyle":"custom"
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#7A7E83",

@@ -1,0 +1,1 @@
+<view class="container"><u-navbar vue-id="63ad1ba0-1" is-back="{{false}}" bind:__l="__l"></u-navbar><view class="box"><view class="unit1"><image class="unit1" src="../../static/juli.png"></image></view><view class="unit2">您当前位置超过点餐距离，无法点餐</view></view></view>

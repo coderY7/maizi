@@ -75,7 +75,7 @@ export default {
 		},
 		data() {
 			return {
-        imgurl:"https://cat.mzsale.com/",
+        imgurl:uni.getStorageSync('offUrl'),
         tranStyles: {
 					width: '100%',
 					position: 'absolute',
