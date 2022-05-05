@@ -26,13 +26,11 @@
 				codeparam.push(parseInt(item, 16).toString(10))
 			})
 			console.log(codeparam)
-			//服务员ID不满6位数前面加0
+			//服务员ID不满5位数前面加0
 			if (codeparam[1].length < 5) {
 				codeparam[1] = codeparam[1].padStart(5, '0')
 			}
 			console.log(codeparam)
-			
-			
 			uni.setStorageSync('syyid', codeparam[1]);
 			uni.setStorageSync('vipid', '');
 			uni.setStorageSync('posid', codeparam[2]);
