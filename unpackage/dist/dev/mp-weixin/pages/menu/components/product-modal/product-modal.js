@@ -347,6 +347,68 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   props: {
 
@@ -391,7 +453,7 @@ __webpack_require__.r(__webpack_exports__);
     Actions: Actions },
 
   watch: {
-    product: function product(val) {var _this$productData$dis;
+    product: function product(val) {var _this$productData$dis, _this$productData$dis2;
       this.flownum = uni.getStorageSync('flownumold');
       console.log(val);
       this.productData = JSON.parse(JSON.stringify(val));
@@ -409,6 +471,26 @@ __webpack_require__.r(__webpack_exports__);
         console.log(arr);
         this.productData.dishesextlist = arr;
       }
+
+
+      this.zuofa = (_this$productData$dis2 = this.productData.dishesextlist) === null || _this$productData$dis2 === void 0 ? void 0 : _this$productData$dis2.map(function (item) {return item.groupname;}).indexOf('做法');
+      if (this.zuofa == -1) {
+        console.log('不存在多选做法');
+      } else {
+        this.Multizuofa = this.productData.dishesextlist[this.productData.dishesextlist.map(function (item) {return item.groupname;}).indexOf('做法')];
+        this.productData.dishesextlist.splice(1, 0, this.Multizuofa);
+        var hash = {};
+        var _arr = this.productData.dishesextlist.reduce(function (item, next) {
+          hash[next.groupname] ? '' : hash[next.groupname] =  true && item.push(next);
+          return item;
+        }, []);
+        console.log(_arr);
+        this.productData.dishesextlist = _arr;
+      }
+
+
+
+
       this.$set(this.productData, 'number', 1);
       console.log(this.productData.dishesextlist);
     } },
@@ -417,8 +499,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       show: true,
-      MultiSelectindex: '',
+      MultiSelectindex: '', //加料
+      zuofa: '', //做法
       MultiSelect: {},
+      Multizuofa: {},
       number: 1,
       shownPrice: 0,
       choosedText: '',
@@ -443,6 +527,20 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     checkboxChange: function checkboxChange(value, key) {
       var value = this.productData.dishesextlist[0].extitems[key];
+      console.log(value, key);
+      value.ext_quantity = 1;
+      if (value.isDefault == undefined) {
+        value.isDefault = true;
+        value.ext_zxprice = value.ext_quantity * value.ext_price;
+        this.pitch();
+      } else if (value.isDefault) {
+        value.isDefault = undefined;
+        console.log(value);
+        this.pitch();
+      }
+    },
+    checkboxzf: function checkboxzf(value, key) {
+      var value = this.productData.dishesextlist[1].extitems[key];
       console.log(value, key);
       value.ext_quantity = 1;
       if (value.isDefault == undefined) {
@@ -491,13 +589,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$set(unity, 'ext_zxprice', '0');
       unity.ext_quantity = 1;
       unity.ext_zxprice = unity.ext_price * 1;
-      if (rowIndex != 0) {
-        console.log(rowIndex, itemIndex);
-        this.productData.dishesextlist[rowIndex].extitems.map(function (item) {
-          item.isDefault = false;
-        });
-        this.$set(unity, 'isDefault', true);
-      }
+      // if(rowIndex!=0){
+      //   console.log(rowIndex,itemIndex)
+      //   this.productData.dishesextlist[rowIndex].extitems.map(item => {
+      //     item.isDefault = false;
+      //   });
+      //   this.$set(unity, 'isDefault', true);
+      // }
       this.pitch();
     },
     chooseTag2: function chooseTag2() {var rowIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;var itemIndex = arguments.length > 1 ? arguments[1] : undefined;
@@ -606,9 +704,9 @@ __webpack_require__.r(__webpack_exports__);
       this.pitch();
     },
     //更新
-    updateChoosedText: function updateChoosedText() {var _this$productData$dis2;
+    updateChoosedText: function updateChoosedText() {var _this$productData$dis3;
       var tempArr = [];
-      (_this$productData$dis2 = this.productData.dishesextlist) === null || _this$productData$dis2 === void 0 ? void 0 : _this$productData$dis2.forEach(function (item) {
+      (_this$productData$dis3 = this.productData.dishesextlist) === null || _this$productData$dis3 === void 0 ? void 0 : _this$productData$dis3.forEach(function (item) {
         item.extitems.forEach(function (item1) {
           if (item1.isDefault) {
             tempArr.push(item1.ext_name);
