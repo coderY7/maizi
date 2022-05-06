@@ -42,7 +42,7 @@
     "minifyWXML": true
   },
   "compileType": "miniprogram",
-  "libVersion": "",
+  "libVersion": "2.24.1",
   "appid": "wx6153d2442b9327bd",
   "projectname": "scan",
   "condition": {

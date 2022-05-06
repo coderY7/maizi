@@ -429,7 +429,7 @@ __webpack_require__.r(__webpack_exports__);
       extlist: [], //附加属性
       ext_zxprice: '',
       ext_quantity: '1',
-      flownum: uni.getStorageSync('flownumold') ? uni.getStorageSync('flownumold') : '0',
+      flownum: '0',
       value: '1' };
 
   },
@@ -635,6 +635,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // 加入购物车
     addToCart: function addToCart() {
+      this.flownum = Number(this.flownum) + 1;
       if (this.productData.extlist) {
         this.productData.choosedText = this.choosedText;
         var goodslist = {
@@ -643,7 +644,7 @@ __webpack_require__.r(__webpack_exports__);
           spsmm: this.productData.spsmm,
           zxprice: this.productData.zxprice,
           quantity: this.productData.number,
-          flownum: this.flownum++,
+          flownum: this.flownum,
           discount: '0',
           spbm: this.productData.spbm };
 
@@ -663,7 +664,7 @@ __webpack_require__.r(__webpack_exports__);
             spsmm: this.productData.spsmm,
             zxprice: this.productData.nsjg * this.productData.number,
             quantity: this.productData.number,
-            flownum: this.flownum++,
+            flownum: this.flownum,
             discount: '0',
             spbm: this.productData.spbm };
 
@@ -671,6 +672,7 @@ __webpack_require__.r(__webpack_exports__);
           var _product = _objectSpread({}, this.productData);
           this.$emit('add-to-cart', _product);
           console.log(_product);
+          uni.setStorageSync('flownumold', this.flownum);
         }
     } } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

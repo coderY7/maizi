@@ -290,7 +290,7 @@ export default {
       extlist:[],//附加属性
       ext_zxprice:'',
       ext_quantity:'1',
-      flownum:uni.getStorageSync('flownumold')?uni.getStorageSync('flownumold'):'0',
+      flownum:'0',
       value:'1'
     };
   },
@@ -496,6 +496,7 @@ export default {
     },
     // 加入购物车
     addToCart() {
+			this.flownum=Number(this.flownum)+1
       if(this.productData.extlist){
         this.productData.choosedText=this.choosedText
         let goodslist={
@@ -504,7 +505,7 @@ export default {
           spsmm:this.productData.spsmm,
           zxprice:this.productData.zxprice,
           quantity:this.productData.number,
-          flownum: this.flownum++,
+          flownum:this.flownum,
           discount: '0',
           spbm:this.productData.spbm,
         }
@@ -524,7 +525,7 @@ export default {
           spsmm:this.productData.spsmm,
           zxprice:this.productData.nsjg*this.productData.number,
           quantity:this.productData.number,
-          flownum: this.flownum++,
+          flownum:this.flownum,
           discount: '0',
           spbm:this.productData.spbm,
         }
@@ -532,6 +533,7 @@ export default {
         const product = {...this.productData}
         this.$emit('add-to-cart', product)
         console.log(product)
+				uni.setStorageSync('flownumold',this.flownum)
       }
     }
   }
