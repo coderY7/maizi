@@ -212,6 +212,81 @@ var _default =
             uni.setStorageSync('shmc', item.shopname); //商户名称
             uni.setStorageSync('shwd', Number(item.latitude)); //商户纬度
             uni.setStorageSync('shjd', Number(item.longitude)); //商户经度
+
+
+            uni.authorize({
+              scope: 'scope.userLocation',
+              success: function success() {
+                uni.getLocation({
+                  type: 'wgs84',
+                  success: function success(res) {
+                    console.log('当前位置的经度：' + res.longitude);
+                    uni.setStorageSync('myjd', res.longitude);
+                    uni.setStorageSync('mywd', res.latitude);
+                    console.log('当前位置的纬度：' + res.latitude);
+                    //计算距离
+                    var mywd = uni.getStorageSync('mywd');
+                    var myjd = uni.getStorageSync('myjd');
+                    var shwd = uni.getStorageSync('shwd');
+                    var shjd = uni.getStorageSync('shjd');
+                    console.log(myjd, mywd, shjd, shwd);
+                    var EARTH_RADIUS = 6378137.0; // 单位M
+                    var PI = Math.PI;
+                    function getRad(d) {
+                      return d * PI / 180.0;
+                    }
+                    function getFlatternDistance(lat1, lng1, lat2, lng2) {
+                      var f = getRad((lat1 + lat2) / 2);
+                      var g = getRad((lat1 - lat2) / 2);
+                      var l = getRad((lng1 - lng2) / 2);
+
+                      var sg = Math.sin(g);
+                      var sl = Math.sin(l);
+                      var sf = Math.sin(f);
+
+                      var s, c, w, r, d, h1, h2;
+                      var a = EARTH_RADIUS;
+                      var fl = 1 / 298.257;
+
+                      sg = sg * sg;
+                      sl = sl * sl;
+                      sf = sf * sf;
+
+                      s = sg * (1 - sl) + (1 - sf) * sl;
+                      c = (1 - sg) * (1 - sl) + sf * sl;
+
+                      w = Math.atan(Math.sqrt(s / c));
+                      r = Math.sqrt(s * c) / w;
+                      d = 2 * w * a;
+                      h1 = (3 * r - 1) / 2 / c;
+                      h2 = (3 * r + 1) / 2 / s;
+
+                      return d * (1 + fl * (h1 * sf * (1 - sg) - h2 * (1 - sf) * sg));
+                    }
+                    var juli = getFlatternDistance(shjd, shwd, myjd, mywd);
+                    console.log('距离', Number.parseInt(juli));
+                    var distance = Number.parseInt(juli);
+                    if (distance > 3000) {
+                      uni.reLaunch({
+                        url: '/pages/distance/distance' });
+
+                    }
+                  },
+                  fail: function fail(err) {
+                    uni.clearStorage();
+                    uni.clearStorageSync();
+                    uni.showToast({
+                      title: '小程序获取定位失败，无法点餐',
+                      duration: 2000,
+                      icon: 'fail' });
+
+                  } });
+
+              } });
+
+
+
+
           }
         });
       },
