@@ -8,31 +8,89 @@
           <text class="good-name">{{ productData.spmc}}</text>
           <view style="font-size: 28rpx; color: #555;margin: 10rpx 0;">产品描述</view>
           <view>{{productData.description}}</view>
-          <view class="status-item">
+<!--          <view class="status-item">-->
+<!--            <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>-->
+<!--            <view class="status-tags">-->
+<!--              <view v-for="(item1, index1) in productData.dishesextlist[1].extitems" :key="item1.ext_name + index1">-->
+<!--                <view-->
+<!--                    class="tags-item2"-->
+<!--                    :style="{-->
+<!--												color: item1.isDefault ? activeTextColor : normalTextColor,-->
+<!--												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor-->
+<!--											}"-->
+<!--                    @tap="chooseTag1(item1, index1)"-->
+<!--                >-->
+<!--                  {{ item1.ext_name }}-->
+<!--                  <text-->
+<!--                      class="tags-pri"-->
+<!--                      :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"-->
+<!--                      v-if="item1.ext_price > 0"-->
+<!--                      :class="{ 'active-text': item1.isDefault }"-->
+<!--                  >-->
+<!--                    ￥{{item1.ext_price}}-->
+<!--                  </text>-->
+<!--                </view>-->
+<!--              </view>-->
+<!--            </view>-->
+<!--          </view>-->
+
+
+          <view v-if="zuofa!=-1">
             <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
-            <view class="status-tags">
-              <view v-for="(item1, index1) in productData.dishesextlist[1].extitems" :key="item1.ext_name + index1">
-                <view
-                    class="tags-item2"
-                    :style="{
+            <view class="list" v-for="(item,key) in productData.dishesextlist[1].extitems" :key="key">
+              <checkbox-group @change="checkboxChange(item,key)">
+                <view style="display: flex;justify-content: space-between;align-items: center;">
+                  <view class="list-group">
+                    <label class="radio">
+                      <checkbox :checked="item.isDefault"/>
+                    </label> {{item.ext_name}}：<text>￥ {{item.ext_price}}</text>
+                  </view>
+                  <view class="list-list" v-if="item.isDefault">
+                    <!--                          <view class="Button" @click="reduce(item,key)">-</view>-->
+                    <image src="/static/common/round_minus.png" class="Button" @click="reduce(item,key)"></image>
+
+                    <view class="number">{{item.ext_quantity}}</view>
+                    <!--                          <view class="Button" @click="plus(item,key)">+</view>-->
+                    <image src="/static/common/round_add_normal.png" class="Button" @click="plus(item,key)"></image>
+                  </view>
+                </view>
+              </checkbox-group>
+            </view>
+          </view>
+          <view v-else>
+            <view class="status-item">
+              <view class="status-title">{{ productData.dishesextlist[1].groupname }}</view>
+              <view class="status-tags">
+                <view v-for="(item1, index1) in productData.dishesextlist[1].extitems" :key="item1.ext_name + index1">
+                  <view
+                      class="tags-item2"
+                      :style="{
 												color: item1.isDefault ? activeTextColor : normalTextColor,
 												backgroundColor: item1.isDefault ? activeBgColor : normalBgColor
 											}"
-                    @tap="chooseTag1(item1, index1)"
-                >
-                  {{ item1.ext_name }}
-                  <text
-                      class="tags-pri"
-                      :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
-                      v-if="item1.ext_price > 0"
-                      :class="{ 'active-text': item1.isDefault }"
+                      @tap="chooseTag0(item1, index1)"
                   >
-                    ￥{{item1.ext_price}}
-                  </text>
+                    {{ item1.ext_name }}
+                    <text
+                        class="tags-pri"
+                        :style="{ color: item1.isDefault ? activeTextColor : activeBgColor }"
+                        v-if="item1.ext_price > 0"
+                        :class="{ 'active-text': item1.isDefault }"
+                    >
+                      ￥{{item1.ext_price}}
+                    </text>
+                  </view>
                 </view>
               </view>
             </view>
           </view>
+
+
+
+
+
+
+
           <view class="status-item">
             <view class="status-title">{{ productData.dishesextlist[2].groupname }}</view>
             <view class="status-tags">
@@ -133,6 +191,8 @@
               </view>
             </view>
           </view>
+
+<!--          加料-->
           <view v-if="MultiSelectindex!=-1">
             <view class="status-title">{{ productData.dishesextlist[0].groupname }}</view>
             <view class="list" v-for="(item,key) in productData.dishesextlist[0].extitems" :key="key">
@@ -182,6 +242,12 @@
               </view>
             </view>
           </view>
+
+<!--          做法-->
+
+
+
+
         </view>
       </scroll-view>
       <view class="bottom-btn-box">
@@ -270,6 +336,26 @@ export default {
         console.log(arr);
         this.productData.dishesextlist=arr
       }
+
+
+      this.zuofa=this.productData.dishesextlist?.map(item=>item.groupname).indexOf('做法')
+      if(this.zuofa  ==-1){
+        console.log('不存在多选做法')
+      }else {
+        this.Multizuofa=this.productData.dishesextlist[this.productData.dishesextlist.map(item=>item.groupname).indexOf('做法')]
+        this.productData.dishesextlist.splice(1,0,this.Multizuofa)
+        var hash = {};
+        let arr = this.productData.dishesextlist.reduce(function(item, next) {
+          hash[next.groupname] ? '' : hash[next.groupname] = true && item.push(next);
+          return item
+        }, [])
+        console.log(arr);
+        this.productData.dishesextlist=arr
+      }
+
+
+
+
       this.$set(this.productData, 'number', 1);
       console.log(this.productData.dishesextlist)
     }
@@ -278,8 +364,10 @@ export default {
   data() {
     return {
       show:true,
-      MultiSelectindex:'',
+      MultiSelectindex:'',//加料
+      zuofa:'',//做法
       MultiSelect:{},
+      Multizuofa:{},
       number: 1,
       shownPrice: 0,
       choosedText: '',
