@@ -1,6 +1,5 @@
 <template>
 	<view class="container">
-		
 	</view>
 </template>
 <script>
@@ -29,6 +28,10 @@
 			//服务员ID不满5位数前面加0
 			if (codeparam[1].length < 5) {
 				codeparam[1] = codeparam[1].padStart(5, '0')
+			}
+			//flbh不满6位数前面加0
+			if (codeparam[3].length < 6) {
+				codeparam[3] = codeparam[3].padStart(6, '0')
 			}
 			console.log(codeparam)
 			uni.setStorageSync('syyid', codeparam[1]);
@@ -116,8 +119,12 @@
 				posid: uni.getStorageSync('posid'),
 				tablenumber: uni.getStorageSync('tablenumber'),
 			}).then((res) => {
+				uni.removeStorageSync('xsdbh');
+				//uni.removeStorageSync('cartold');
+				
 				console.log('查询开台信息', res)
 				if (res.error_code == '0') {
+					uni.removeStorageSync('flownumold');
 					uni.setStorageSync('xsdbh', res.xsdbh)
 					uni.setStorageSync('popupshow', true)
 					uni.switchTab({
@@ -206,21 +213,21 @@
 			
 		},
 		onHide: function() {
-			uni.removeStorageSync('syyid');
-			uni.removeStorageSync('posid');
-			uni.removeStorageSync('tableid');
-			uni.removeStorageSync('tablenumber');
-			uni.removeStorageSync('fdbh');
-			uni.removeStorageSync('companyid');
-			uni.removeStorageSync('xsdbh');
-			uni.removeStorageSync('shmc');
-			uni.removeStorageSync('shappid');
-			uni.removeStorageSync('popupshow');
-			uni.removeStorageSync('cartPrice');
-			uni.removeStorageSync('flownumold');
-			uni.removeStorageSync('cartold');
-			uni.removeStorageSync('cartold');
-			uni.removeStorageSync('cartPrice');
+			// uni.removeStorageSync('syyid');
+			// uni.removeStorageSync('posid');
+			// uni.removeStorageSync('tableid');
+			// uni.removeStorageSync('tablenumber');
+			// uni.removeStorageSync('fdbh');
+			// uni.removeStorageSync('companyid');
+			// uni.removeStorageSync('xsdbh');
+			// uni.removeStorageSync('shmc');
+			// uni.removeStorageSync('shappid');
+			// uni.removeStorageSync('popupshow');
+			// uni.removeStorageSync('cartPrice');
+			// uni.removeStorageSync('flownumold');
+			 uni.removeStorageSync('cartold');
+			// uni.removeStorageSync('cartold');
+			// uni.removeStorageSync('cartPrice');
 			
 		},
 		//全局数据

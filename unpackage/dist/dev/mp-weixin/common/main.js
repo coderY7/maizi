@@ -153,7 +153,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   onLaunch: function onLaunch(options) {
@@ -177,13 +176,15 @@ var _default =
       codeparam.push(parseInt(item, 16).toString(10));
     });
     console.log(codeparam);
-    //服务员ID不满6位数前面加0
+    //服务员ID不满5位数前面加0
     if (codeparam[1].length < 5) {
       codeparam[1] = codeparam[1].padStart(5, '0');
     }
+    //flbh不满6位数前面加0
+    if (codeparam[3].length < 6) {
+      codeparam[3] = codeparam[3].padStart(6, '0');
+    }
     console.log(codeparam);
-
-
     uni.setStorageSync('syyid', codeparam[1]);
     uni.setStorageSync('vipid', '');
     uni.setStorageSync('posid', codeparam[2]);
@@ -269,8 +270,12 @@ var _default =
       posid: uni.getStorageSync('posid'),
       tablenumber: uni.getStorageSync('tablenumber') }).
     then(function (res) {
+      uni.removeStorageSync('xsdbh');
+      //uni.removeStorageSync('cartold');
+
       console.log('查询开台信息', res);
       if (res.error_code == '0') {
+        uni.removeStorageSync('flownumold');
         uni.setStorageSync('xsdbh', res.xsdbh);
         uni.setStorageSync('popupshow', true);
         uni.switchTab({
@@ -359,21 +364,21 @@ var _default =
 
   },
   onHide: function onHide() {
-    uni.removeStorageSync('syyid');
-    uni.removeStorageSync('posid');
-    uni.removeStorageSync('tableid');
-    uni.removeStorageSync('tablenumber');
-    uni.removeStorageSync('fdbh');
-    uni.removeStorageSync('companyid');
-    uni.removeStorageSync('xsdbh');
-    uni.removeStorageSync('shmc');
-    uni.removeStorageSync('shappid');
-    uni.removeStorageSync('popupshow');
-    uni.removeStorageSync('cartPrice');
-    uni.removeStorageSync('flownumold');
+    // uni.removeStorageSync('syyid');
+    // uni.removeStorageSync('posid');
+    // uni.removeStorageSync('tableid');
+    // uni.removeStorageSync('tablenumber');
+    // uni.removeStorageSync('fdbh');
+    // uni.removeStorageSync('companyid');
+    // uni.removeStorageSync('xsdbh');
+    // uni.removeStorageSync('shmc');
+    // uni.removeStorageSync('shappid');
+    // uni.removeStorageSync('popupshow');
+    // uni.removeStorageSync('cartPrice');
+    // uni.removeStorageSync('flownumold');
     uni.removeStorageSync('cartold');
-    uni.removeStorageSync('cartold');
-    uni.removeStorageSync('cartPrice');
+    // uni.removeStorageSync('cartold');
+    // uni.removeStorageSync('cartPrice');
 
   },
   //全局数据
